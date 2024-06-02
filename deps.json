@@ -1,0 +1,2364 @@
+[
+  {
+    "registry": "npm",
+    "name": "@alloc/quick-lru",
+    "version": "5.2.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/quick-lru",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/quick-lru/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "ansi-regex",
+    "version": "6.0.1",
+    "authors": [
+      "chalk"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/chalk/ansi-regex",
+    "licenseFile": "https://raw.githubusercontent.com/chalk/ansi-regex/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "ansi-styles",
+    "version": "6.2.1",
+    "authors": [
+      "chalk"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/chalk/ansi-styles",
+    "licenseFile": "https://raw.githubusercontent.com/chalk/ansi-styles/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "any-promise",
+    "version": "1.3.0",
+    "authors": [
+      "Kevin Beaty"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/kevinbeaty/any-promise",
+    "licenseFile": "https://raw.githubusercontent.com/kevinbeaty/any-promise/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "anymatch",
+    "version": "3.1.3",
+    "authors": [
+      "micromatch"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/micromatch/anymatch",
+    "licenseFile": "https://raw.githubusercontent.com/micromatch/anymatch/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "arg",
+    "version": "5.0.2",
+    "authors": [
+      "Vercel"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/vercel/arg",
+    "licenseFile": "https://raw.githubusercontent.com/vercel/arg/main/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "autoprefixer",
+    "version": "10.4.17",
+    "authors": [
+      "PostCSS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/postcss/autoprefixer",
+    "licenseFile": "https://raw.githubusercontent.com/postcss/autoprefixer/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@babel/helper-validator-identifier",
+    "version": "7.22.20",
+    "authors": [
+      "Babel"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/babel/babel",
+    "licenseFile": "https://raw.githubusercontent.com/babel/babel/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "balanced-match",
+    "version": "1.0.2",
+    "authors": [
+      "Julian Gruber"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/juliangruber/balanced-match",
+    "licenseFile": "https://raw.githubusercontent.com/juliangruber/balanced-match/master/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "binary-extensions",
+    "version": "2.3.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/binary-extensions",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/binary-extensions/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "boolbase",
+    "version": "1.0.0",
+    "authors": [
+      "Felix Boehm"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/fb55/boolbase",
+    "licenseFile": "https://raw.githubusercontent.com/fb55/boolbase/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "brace-expansion",
+    "version": "2.0.1",
+    "authors": [
+      "Julian Gruber"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/juliangruber/brace-expansion",
+    "licenseFile": "https://raw.githubusercontent.com/juliangruber/brace-expansion/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "braces",
+    "version": "3.0.3",
+    "authors": [
+      "micromatch"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/micromatch/braces",
+    "licenseFile": "https://raw.githubusercontent.com/micromatch/braces/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "browserslist",
+    "version": "4.23.0",
+    "authors": [
+      "Browserslist"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/browserslist/browserslist",
+    "licenseFile": "https://raw.githubusercontent.com/browserslist/browserslist/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "camelcase",
+    "version": "5.3.1",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/camelcase",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/camelcase/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "camelcase-css",
+    "version": "2.0.1",
+    "authors": [
+      "Steven Vachon"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/stevenvachon/camelcase-css",
+    "licenseFile": "https://raw.githubusercontent.com/stevenvachon/camelcase-css/master/license"
+  },
+  {
+    "registry": "npm",
+    "name": "caniuse-api",
+    "version": "3.0.0",
+    "authors": [
+      "Sébastien Balayn"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/nyalab/caniuse-api",
+    "licenseFile": "https://raw.githubusercontent.com/Nyalab/caniuse-api/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "caniuse-lite",
+    "version": "1.0.30001625",
+    "authors": [
+      "Browserslist"
+    ],
+    "license": "Creative Commons Attribution 4.0 International",
+    "repository": "https://github.com/browserslist/caniuse-lite",
+    "licenseFile": "https://raw.githubusercontent.com/browserslist/caniuse-lite/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "chokidar",
+    "version": "3.6.0",
+    "authors": [
+      "Paul Miller"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/paulmillr/chokidar",
+    "licenseFile": "https://raw.githubusercontent.com/paulmillr/chokidar/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "classnames",
+    "version": "2.5.1",
+    "authors": [
+      "Jed Watson"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/JedWatson/classnames",
+    "licenseFile": "https://raw.githubusercontent.com/JedWatson/classnames/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "cliui",
+    "version": "6.0.0",
+    "authors": [
+      "yargs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/yargs/cliui"
+  },
+  {
+    "registry": "npm",
+    "name": "color-convert",
+    "version": "2.0.1",
+    "authors": [
+      "Josh Junon"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/Qix-/color-convert",
+    "licenseFile": "https://raw.githubusercontent.com/Qix-/color-convert/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "color-name",
+    "version": "1.1.4",
+    "authors": [
+      "color.js"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/colorjs/color-name",
+    "licenseFile": "https://raw.githubusercontent.com/colorjs/color-name/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "colord",
+    "version": "2.9.3",
+    "authors": [
+      "Vlad Shilov"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/omgovich/colord",
+    "licenseFile": "https://raw.githubusercontent.com/omgovich/colord/master/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "commander",
+    "version": "7.2.0",
+    "authors": [
+      "TJ Holowaychuk"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/tj/commander.js",
+    "licenseFile": "https://raw.githubusercontent.com/tj/commander.js/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "cross-spawn",
+    "version": "7.0.3",
+    "authors": [
+      "MOXY"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/moxystudio/node-cross-spawn",
+    "licenseFile": "https://raw.githubusercontent.com/moxystudio/node-cross-spawn/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "css-declaration-sorter",
+    "version": "7.2.0",
+    "authors": [
+      "Selwyn"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/Siilwyn/css-declaration-sorter",
+    "licenseFile": "https://raw.githubusercontent.com/Siilwyn/css-declaration-sorter/master/license.md"
+  },
+  {
+    "registry": "npm",
+    "name": "css-select",
+    "version": "5.1.0",
+    "authors": [
+      "Felix Boehm"
+    ],
+    "license": "BSD 2-Clause \"Simplified\" License",
+    "repository": "https://github.com/fb55/css-select",
+    "licenseFile": "https://raw.githubusercontent.com/fb55/css-select/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "css-tree",
+    "version": "2.3.1",
+    "authors": [
+      "CSSTree"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/csstree/csstree",
+    "licenseFile": "https://raw.githubusercontent.com/csstree/csstree/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "css-what",
+    "version": "6.1.0",
+    "authors": [
+      "Felix Boehm"
+    ],
+    "license": "BSD 2-Clause \"Simplified\" License",
+    "repository": "https://github.com/fb55/css-what",
+    "licenseFile": "https://raw.githubusercontent.com/fb55/css-what/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "cssesc",
+    "version": "3.0.0",
+    "authors": [
+      "Mathias Bynens"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/mathiasbynens/cssesc"
+  },
+  {
+    "registry": "npm",
+    "name": "cssnano",
+    "version": "6.0.3",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "cssnano-preset-default",
+    "version": "6.1.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "cssnano-utils",
+    "version": "4.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "csso",
+    "version": "5.0.5",
+    "authors": [
+      "css"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/css/csso",
+    "licenseFile": "https://raw.githubusercontent.com/css/csso/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "decamelize",
+    "version": "1.2.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/decamelize",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/decamelize/main/license"
+  },
+  {
+    "registry": "deno",
+    "name": "denoflate",
+    "version": "1.2.1",
+    "authors": [
+      "Haz Æ 41"
+    ],
+    "license": "The Unlicense",
+    "repository": "https://github.com/hazae41/foras",
+    "licenseFile": "https://raw.githubusercontent.com/hazae41/foras/master/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "didyoumean",
+    "version": "1.2.2",
+    "authors": [
+      "Dave Porter"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/dcporter/didyoumean.js",
+    "licenseFile": "https://raw.githubusercontent.com/dcporter/didyoumean.js/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "dijkstrajs",
+    "version": "1.0.3",
+    "authors": [
+      "Thomas Cort"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/tcort/dijkstrajs",
+    "licenseFile": "https://raw.githubusercontent.com/tcort/dijkstrajs/master/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "dlv",
+    "version": "1.1.3",
+    "authors": [
+      "Jason Miller"
+    ],
+    "license": "MIT",
+    "repository": "https://github.com/developit/dlv"
+  },
+  {
+    "registry": "npm",
+    "name": "dom-serializer",
+    "version": "2.0.0",
+    "authors": [
+      "Cheerio"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cheeriojs/dom-serializer",
+    "licenseFile": "https://raw.githubusercontent.com/cheeriojs/dom-serializer/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "domelementtype",
+    "version": "2.3.0",
+    "authors": [
+      "Felix Boehm"
+    ],
+    "license": "BSD 2-Clause \"Simplified\" License",
+    "repository": "https://github.com/fb55/domelementtype",
+    "licenseFile": "https://raw.githubusercontent.com/fb55/domelementtype/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "domhandler",
+    "version": "5.0.3",
+    "authors": [
+      "Felix Boehm"
+    ],
+    "license": "BSD 2-Clause \"Simplified\" License",
+    "repository": "https://github.com/fb55/domhandler",
+    "licenseFile": "https://raw.githubusercontent.com/fb55/domhandler/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "domutils",
+    "version": "3.1.0",
+    "authors": [
+      "Felix Boehm"
+    ],
+    "license": "BSD 2-Clause \"Simplified\" License",
+    "repository": "https://github.com/fb55/domutils",
+    "licenseFile": "https://raw.githubusercontent.com/fb55/domutils/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "eastasianwidth",
+    "version": "0.2.0",
+    "authors": [
+      "Masaki Komagata"
+    ],
+    "license": "MIT",
+    "repository": "https://github.com/komagata/eastasianwidth"
+  },
+  {
+    "registry": "npm",
+    "name": "electron-to-chromium",
+    "version": "1.4.788",
+    "authors": [
+      "Kilian Valkhof"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/kilian/electron-to-chromium",
+    "licenseFile": "https://raw.githubusercontent.com/Kilian/electron-to-chromium/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "emoji-regex",
+    "version": "9.2.2",
+    "authors": [
+      "Mathias Bynens"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/mathiasbynens/emoji-regex"
+  },
+  {
+    "registry": "npm",
+    "name": "encode-utf8",
+    "version": "1.0.3",
+    "authors": [
+      "Linus Unnebäck"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/LinusU/encode-utf8"
+  },
+  {
+    "registry": "npm",
+    "name": "entities",
+    "version": "4.5.0",
+    "authors": [
+      "Felix Boehm"
+    ],
+    "license": "BSD 2-Clause \"Simplified\" License",
+    "repository": "https://github.com/fb55/entities",
+    "licenseFile": "https://raw.githubusercontent.com/fb55/entities/master/LICENSE"
+  },
+  {
+    "registry": "deno",
+    "name": "esbuild",
+    "version": "v0.20.2",
+    "authors": [
+      "esbuild"
+    ],
+    "repository": "https://github.com/esbuild/deno-esbuild"
+  },
+  {
+    "registry": "npm",
+    "name": "escalade",
+    "version": "3.1.2",
+    "authors": [
+      "Luke Edwards"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/lukeed/escalade",
+    "licenseFile": "https://raw.githubusercontent.com/lukeed/escalade/master/license"
+  },
+  {
+    "registry": "npm",
+    "name": "fast-glob",
+    "version": "3.3.2",
+    "authors": [
+      "Denis Malinochkin"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/mrmlnc/fast-glob",
+    "licenseFile": "https://raw.githubusercontent.com/mrmlnc/fast-glob/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "fastq",
+    "version": "1.17.1",
+    "authors": [
+      "Matteo Collina"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/mcollina/fastq",
+    "licenseFile": "https://raw.githubusercontent.com/mcollina/fastq/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "fill-range",
+    "version": "7.1.1",
+    "authors": [
+      "Jon Schlinkert"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jonschlinkert/fill-range",
+    "licenseFile": "https://raw.githubusercontent.com/jonschlinkert/fill-range/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "find-up",
+    "version": "4.1.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/find-up",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/find-up/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "flowbite",
+    "version": "2.3.0",
+    "authors": [
+      "Themesberg"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/themesberg/flowbite",
+    "licenseFile": "https://raw.githubusercontent.com/themesberg/flowbite/main/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "foreground-child",
+    "version": "3.1.1",
+    "authors": [
+      "TAP in JavaScript"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/tapjs/foreground-child",
+    "licenseFile": "https://raw.githubusercontent.com/tapjs/foreground-child/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "fraction.js",
+    "version": "4.3.7",
+    "authors": [
+      "raw"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/rawify/Fraction.js",
+    "licenseFile": "https://raw.githubusercontent.com/rawify/Fraction.js/master/LICENSE"
+  },
+  {
+    "registry": "deno",
+    "name": "fresh",
+    "version": "1.6.8",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/fresh",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/fresh/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "fsevents",
+    "version": "2.3.3",
+    "authors": [
+      "fsevents - Native NodeJS module for MacOSX file system events"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/fsevents/fsevents",
+    "licenseFile": "https://raw.githubusercontent.com/fsevents/fsevents/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "function-bind",
+    "version": "1.1.2",
+    "authors": [
+      "Jake Verbaten"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/Raynos/function-bind",
+    "licenseFile": "https://raw.githubusercontent.com/Raynos/function-bind/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "get-caller-file",
+    "version": "2.0.5",
+    "authors": [
+      "Stefan Penner"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/stefanpenner/get-caller-file",
+    "licenseFile": "https://raw.githubusercontent.com/stefanpenner/get-caller-file/master/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "glob",
+    "version": "10.4.1",
+    "authors": [
+      "isaacs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/isaacs/node-glob",
+    "licenseFile": "https://raw.githubusercontent.com/isaacs/node-glob/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "glob-parent",
+    "version": "6.0.2",
+    "authors": [
+      "gulp"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/gulpjs/glob-parent",
+    "licenseFile": "https://raw.githubusercontent.com/gulpjs/glob-parent/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "hasown",
+    "version": "2.0.2",
+    "authors": [
+      "Inspect JS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/inspect-js/hasOwn",
+    "licenseFile": "https://raw.githubusercontent.com/inspect-js/hasOwn/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "is-binary-path",
+    "version": "2.1.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/is-binary-path",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/is-binary-path/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "is-core-module",
+    "version": "2.13.1",
+    "authors": [
+      "Inspect JS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/inspect-js/is-core-module",
+    "licenseFile": "https://raw.githubusercontent.com/inspect-js/is-core-module/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "is-extglob",
+    "version": "2.1.1",
+    "authors": [
+      "Jon Schlinkert"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jonschlinkert/is-extglob",
+    "licenseFile": "https://raw.githubusercontent.com/micromatch/is-extglob/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "is-fullwidth-code-point",
+    "version": "3.0.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/is-fullwidth-code-point",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/is-fullwidth-code-point/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "is-glob",
+    "version": "4.0.3",
+    "authors": [
+      "micromatch"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/micromatch/is-glob",
+    "licenseFile": "https://raw.githubusercontent.com/micromatch/is-glob/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "is-number",
+    "version": "7.0.0",
+    "authors": [
+      "Jon Schlinkert"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jonschlinkert/is-number",
+    "licenseFile": "https://raw.githubusercontent.com/jonschlinkert/is-number/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@isaacs/cliui",
+    "version": "8.0.2",
+    "authors": [
+      "yargs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/yargs/cliui"
+  },
+  {
+    "registry": "npm",
+    "name": "isexe",
+    "version": "2.0.0",
+    "authors": [
+      "isaacs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/isaacs/isexe",
+    "licenseFile": "https://raw.githubusercontent.com/isaacs/isexe/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "jackspeak",
+    "version": "3.1.2",
+    "authors": [
+      "isaacs"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/isaacs/jackspeak",
+    "licenseFile": "https://raw.githubusercontent.com/isaacs/jackspeak/main/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "jiti",
+    "version": "1.21.0",
+    "authors": [
+      "UnJS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/unjs/jiti",
+    "licenseFile": "https://raw.githubusercontent.com/unjs/jiti/v1/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@jridgewell/gen-mapping",
+    "version": "0.3.5",
+    "authors": [
+      "Justin Ridgewell"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jridgewell/gen-mapping",
+    "licenseFile": "https://raw.githubusercontent.com/jridgewell/gen-mapping/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@jridgewell/resolve-uri",
+    "version": "3.1.2",
+    "authors": [
+      "Justin Ridgewell"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jridgewell/resolve-uri",
+    "licenseFile": "https://raw.githubusercontent.com/jridgewell/resolve-uri/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@jridgewell/set-array",
+    "version": "1.2.1",
+    "authors": [
+      "Justin Ridgewell"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jridgewell/set-array",
+    "licenseFile": "https://raw.githubusercontent.com/jridgewell/set-array/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@jridgewell/sourcemap-codec",
+    "version": "1.4.15",
+    "authors": [
+      "Justin Ridgewell"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jridgewell/sourcemap-codec",
+    "licenseFile": "https://raw.githubusercontent.com/jridgewell/sourcemap-codec/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@jridgewell/trace-mapping",
+    "version": "0.3.25",
+    "authors": [
+      "Justin Ridgewell"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jridgewell/trace-mapping",
+    "licenseFile": "https://raw.githubusercontent.com/jridgewell/trace-mapping/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "js-cookie",
+    "version": "3.0.5",
+    "authors": [
+      "js-cookie"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/js-cookie/js-cookie",
+    "licenseFile": "https://raw.githubusercontent.com/js-cookie/js-cookie/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "lilconfig",
+    "version": "3.1.1",
+    "authors": [
+      "Anton Kastritskii"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/antonk52/lilconfig",
+    "licenseFile": "https://raw.githubusercontent.com/antonk52/lilconfig/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "lines-and-columns",
+    "version": "1.2.4",
+    "authors": [
+      "Brian Donovan"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/eventualbuddha/lines-and-columns",
+    "licenseFile": "https://raw.githubusercontent.com/eventualbuddha/lines-and-columns/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "locate-path",
+    "version": "5.0.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/locate-path",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/locate-path/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "lodash.memoize",
+    "version": "4.1.2",
+    "authors": [
+      "Lodash Utilities"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/lodash/lodash",
+    "licenseFile": "https://raw.githubusercontent.com/lodash/lodash/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "lodash.uniq",
+    "version": "4.5.0",
+    "authors": [
+      "Lodash Utilities"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/lodash/lodash",
+    "licenseFile": "https://raw.githubusercontent.com/lodash/lodash/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "lru-cache",
+    "version": "10.2.2",
+    "authors": [
+      "isaacs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/isaacs/node-lru-cache",
+    "licenseFile": "https://raw.githubusercontent.com/isaacs/node-lru-cache/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@luca/esbuild-deno-loader",
+    "version": "0.10.3",
+    "authors": [
+      "Luca Casonato"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/lucacasonato/esbuild_deno_loader",
+    "licenseFile": "https://raw.githubusercontent.com/lucacasonato/esbuild_deno_loader/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "mdn-data",
+    "version": "2.0.30",
+    "authors": [
+      "MDN Web Docs"
+    ],
+    "license": "Creative Commons Zero v1.0 Universal",
+    "repository": "https://github.com/mdn/data",
+    "licenseFile": "https://raw.githubusercontent.com/mdn/data/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "merge2",
+    "version": "1.4.1",
+    "authors": [
+      "Teambition"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/teambition/merge2",
+    "licenseFile": "https://raw.githubusercontent.com/teambition/merge2/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "micromatch",
+    "version": "4.0.7",
+    "authors": [
+      "micromatch"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/micromatch/micromatch",
+    "licenseFile": "https://raw.githubusercontent.com/micromatch/micromatch/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "mini-svg-data-uri",
+    "version": "1.4.4",
+    "authors": [
+      "Taylor Hunt"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/tigt/mini-svg-data-uri",
+    "licenseFile": "https://raw.githubusercontent.com/tigt/mini-svg-data-uri/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "minimatch",
+    "version": "9.0.4",
+    "authors": [
+      "isaacs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/isaacs/minimatch",
+    "licenseFile": "https://raw.githubusercontent.com/isaacs/minimatch/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "minipass",
+    "version": "7.1.2",
+    "authors": [
+      "isaacs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/isaacs/minipass",
+    "licenseFile": "https://raw.githubusercontent.com/isaacs/minipass/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "mz",
+    "version": "2.7.0",
+    "authors": [
+      "Normalize.IO"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/normalize/mz",
+    "licenseFile": "https://raw.githubusercontent.com/normalize/mz/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "nanoid",
+    "version": "3.3.7",
+    "authors": [
+      "Andrey Sitnik"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/ai/nanoid",
+    "licenseFile": "https://raw.githubusercontent.com/ai/nanoid/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@nihility-io/crypto",
+    "version": "0.1.0",
+    "authors": [
+      "Nihility.io"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/Nihility-io/Crypto",
+    "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Crypto/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@nihility-io/flowbite-icons-preact",
+    "version": "0.1.1",
+    "authors": [
+      "Nihility.io"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/Nihility-io/FlowbiteIconsPreact",
+    "licenseFile": "https://raw.githubusercontent.com/Nihility-io/FlowbiteIconsPreact/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@nihility-io/fresh-lang",
+    "version": "0.1.11",
+    "authors": [
+      "Nihility.io"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/Nihility-io/FreshLang",
+    "licenseFile": "https://raw.githubusercontent.com/Nihility-io/FreshLang/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@nihility-io/record",
+    "version": "0.1.1",
+    "authors": [
+      "Nihility.io"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/Nihility-io/Record",
+    "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Record/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@nihility-io/result",
+    "version": "0.1.7",
+    "authors": [
+      "Nihility.io"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/Nihility-io/Result",
+    "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Result/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@nihility-io/use-cookie",
+    "version": "0.1.4",
+    "authors": [
+      "Nihility.io"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/Nihility-io/UseCookie",
+    "licenseFile": "https://raw.githubusercontent.com/Nihility-io/UseCookie/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "node-releases",
+    "version": "2.0.14",
+    "authors": [
+      "Sergey Rubanov"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/chicoxyzzy/node-releases",
+    "licenseFile": "https://raw.githubusercontent.com/chicoxyzzy/node-releases/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@nodelib/fs.scandir",
+    "version": "2.1.5",
+    "authors": [
+      "NodeLib"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/nodelib/nodelib",
+    "licenseFile": "https://raw.githubusercontent.com/nodelib/nodelib/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@nodelib/fs.stat",
+    "version": "2.0.5",
+    "authors": [
+      "NodeLib"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/nodelib/nodelib",
+    "licenseFile": "https://raw.githubusercontent.com/nodelib/nodelib/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@nodelib/fs.walk",
+    "version": "1.2.8",
+    "authors": [
+      "NodeLib"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/nodelib/nodelib",
+    "licenseFile": "https://raw.githubusercontent.com/nodelib/nodelib/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "normalize-path",
+    "version": "3.0.0",
+    "authors": [
+      "Jon Schlinkert"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jonschlinkert/normalize-path",
+    "licenseFile": "https://raw.githubusercontent.com/jonschlinkert/normalize-path/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "normalize-range",
+    "version": "0.1.2",
+    "authors": [
+      "James Talmage"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jamestalmage/normalize-range",
+    "licenseFile": "https://raw.githubusercontent.com/jamestalmage/normalize-range/master/license"
+  },
+  {
+    "registry": "npm",
+    "name": "nth-check",
+    "version": "2.1.1",
+    "authors": [
+      "Felix Boehm"
+    ],
+    "license": "BSD 2-Clause \"Simplified\" License",
+    "repository": "https://github.com/fb55/nth-check",
+    "licenseFile": "https://raw.githubusercontent.com/fb55/nth-check/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "object-assign",
+    "version": "4.1.1",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/object-assign",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/object-assign/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "object-hash",
+    "version": "3.0.0",
+    "authors": [
+      "Scott Puleo"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/puleos/object-hash",
+    "licenseFile": "https://raw.githubusercontent.com/puleos/object-hash/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "p-limit",
+    "version": "2.3.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/p-limit",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/p-limit/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "p-locate",
+    "version": "4.1.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/p-locate",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/p-locate/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "p-try",
+    "version": "2.2.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/p-try",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/p-try/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "path-exists",
+    "version": "4.0.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/path-exists",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/path-exists/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "path-key",
+    "version": "3.1.1",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/path-key",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/path-key/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "path-parse",
+    "version": "1.0.7",
+    "authors": [
+      "Javier Blanco Gutiérrez"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/jbgutierrez/path-parse",
+    "licenseFile": "https://raw.githubusercontent.com/jbgutierrez/path-parse/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "path-scurry",
+    "version": "1.11.1",
+    "authors": [
+      "isaacs"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/isaacs/path-scurry",
+    "licenseFile": "https://raw.githubusercontent.com/isaacs/path-scurry/main/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "picocolors",
+    "version": "1.0.1",
+    "authors": [
+      "Oleksii"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/alexeyraspopov/picocolors",
+    "licenseFile": "https://raw.githubusercontent.com/alexeyraspopov/picocolors/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "picomatch",
+    "version": "2.3.1",
+    "authors": [
+      "micromatch"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/micromatch/picomatch",
+    "licenseFile": "https://raw.githubusercontent.com/micromatch/picomatch/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "pify",
+    "version": "2.3.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/pify",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/pify/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "pirates",
+    "version": "4.0.6",
+    "authors": [
+      "Daniel Tschinder"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/danez/pirates",
+    "licenseFile": "https://raw.githubusercontent.com/danez/pirates/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@pkgjs/parseargs",
+    "version": "0.11.0",
+    "authors": [
+      "pkgjs"
+    ],
+    "license": "Apache License 2.0",
+    "repository": "https://github.com/pkgjs/parseargs",
+    "licenseFile": "https://raw.githubusercontent.com/pkgjs/parseargs/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "pngjs",
+    "version": "5.0.0",
+    "authors": [
+      "Luke Page"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/lukeapage/pngjs",
+    "licenseFile": "https://raw.githubusercontent.com/pngjs/pngjs/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@popperjs/core",
+    "version": "2.11.8",
+    "authors": [
+      "popperjs"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/popperjs/popper-core",
+    "licenseFile": "https://raw.githubusercontent.com/floating-ui/floating-ui/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss",
+    "version": "8.4.35",
+    "authors": [
+      "PostCSS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/postcss/postcss",
+    "licenseFile": "https://raw.githubusercontent.com/postcss/postcss/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-calc",
+    "version": "9.0.1",
+    "authors": [
+      "PostCSS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/postcss/postcss-calc",
+    "licenseFile": "https://raw.githubusercontent.com/postcss/postcss-calc/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-colormin",
+    "version": "6.1.0",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-convert-values",
+    "version": "6.1.0",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-discard-comments",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-discard-duplicates",
+    "version": "6.0.3",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-discard-empty",
+    "version": "6.0.3",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-discard-overridden",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-import",
+    "version": "15.1.0",
+    "authors": [
+      "PostCSS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/postcss/postcss-import",
+    "licenseFile": "https://raw.githubusercontent.com/postcss/postcss-import/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-js",
+    "version": "4.0.1",
+    "authors": [
+      "PostCSS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/postcss/postcss-js",
+    "licenseFile": "https://raw.githubusercontent.com/postcss/postcss-js/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-load-config",
+    "version": "4.0.2",
+    "authors": [
+      "PostCSS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/postcss/postcss-load-config",
+    "licenseFile": "https://raw.githubusercontent.com/postcss/postcss-load-config/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-merge-longhand",
+    "version": "6.0.5",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-merge-rules",
+    "version": "6.1.1",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-minify-font-values",
+    "version": "6.1.0",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-minify-gradients",
+    "version": "6.0.3",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-minify-params",
+    "version": "6.1.0",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-minify-selectors",
+    "version": "6.0.4",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-nested",
+    "version": "6.0.1",
+    "authors": [
+      "PostCSS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/postcss/postcss-nested",
+    "licenseFile": "https://raw.githubusercontent.com/postcss/postcss-nested/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-normalize-charset",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-normalize-display-values",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-normalize-positions",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-normalize-repeat-style",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-normalize-string",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-normalize-timing-functions",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-normalize-unicode",
+    "version": "6.1.0",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-normalize-url",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-normalize-whitespace",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-ordered-values",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-reduce-initial",
+    "version": "6.1.0",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-reduce-transforms",
+    "version": "6.0.2",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-selector-parser",
+    "version": "6.1.0",
+    "authors": [
+      "PostCSS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/postcss/postcss-selector-parser",
+    "licenseFile": "https://raw.githubusercontent.com/postcss/postcss-selector-parser/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-svgo",
+    "version": "6.0.3",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-unique-selectors",
+    "version": "6.0.4",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "postcss-value-parser",
+    "version": "4.2.0",
+    "authors": [
+      "Bogdan Chadkin"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/TrySound/postcss-value-parser",
+    "licenseFile": "https://raw.githubusercontent.com/TrySound/postcss-value-parser/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "postgres",
+    "version": "3.4.4",
+    "authors": [
+      "Rasmus Porsager"
+    ],
+    "license": "The Unlicense",
+    "repository": "https://github.com/porsager/postgres"
+  },
+  {
+    "registry": "npm",
+    "name": "preact",
+    "version": "10.22.0",
+    "authors": [
+      "Preact"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/preactjs/preact",
+    "licenseFile": "https://raw.githubusercontent.com/preactjs/preact/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "preact-render-to-string",
+    "version": "6.3.1",
+    "authors": [
+      "Jason Miller"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/developit/preact-render-to-string",
+    "licenseFile": "https://raw.githubusercontent.com/preactjs/preact-render-to-string/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "qrcode",
+    "version": "1.5.3",
+    "authors": [
+      "Ryan Day"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/soldair/node-qrcode",
+    "licenseFile": "https://raw.githubusercontent.com/soldair/node-qrcode/master/license"
+  },
+  {
+    "registry": "npm",
+    "name": "queue-microtask",
+    "version": "1.2.3",
+    "authors": [
+      "Feross Aboukhadijeh"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/feross/queue-microtask",
+    "licenseFile": "https://raw.githubusercontent.com/feross/queue-microtask/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "read-cache",
+    "version": "1.0.0",
+    "authors": [
+      "Bogdan Chadkin"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/TrySound/read-cache",
+    "licenseFile": "https://raw.githubusercontent.com/TrySound/read-cache/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "readdirp",
+    "version": "3.6.0",
+    "authors": [
+      "Paul Miller"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/paulmillr/readdirp",
+    "licenseFile": "https://raw.githubusercontent.com/paulmillr/readdirp/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "require-directory",
+    "version": "2.1.1",
+    "authors": [
+      "Troy Goode"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/troygoode/node-require-directory",
+    "licenseFile": "https://raw.githubusercontent.com/troygoode/node-require-directory/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "require-main-filename",
+    "version": "2.0.0",
+    "authors": [
+      "yargs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/yargs/require-main-filename"
+  },
+  {
+    "registry": "npm",
+    "name": "resolve",
+    "version": "1.22.8",
+    "authors": [
+      "Browserify"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/browserify/resolve",
+    "licenseFile": "https://raw.githubusercontent.com/browserify/resolve/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "reusify",
+    "version": "1.0.4",
+    "authors": [
+      "Matteo Collina"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/mcollina/reusify",
+    "licenseFile": "https://raw.githubusercontent.com/mcollina/reusify/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "run-parallel",
+    "version": "1.2.0",
+    "authors": [
+      "Feross Aboukhadijeh"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/feross/run-parallel",
+    "licenseFile": "https://raw.githubusercontent.com/feross/run-parallel/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "set-blocking",
+    "version": "2.0.0",
+    "authors": [
+      "yargs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/yargs/set-blocking"
+  },
+  {
+    "registry": "npm",
+    "name": "shebang-command",
+    "version": "2.0.0",
+    "authors": [
+      "Kevin Mårtensson"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/kevva/shebang-command",
+    "licenseFile": "https://raw.githubusercontent.com/kevva/shebang-command/master/license"
+  },
+  {
+    "registry": "npm",
+    "name": "shebang-regex",
+    "version": "3.0.0",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/shebang-regex",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/shebang-regex/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "signal-exit",
+    "version": "4.1.0",
+    "authors": [
+      "TAP in JavaScript"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/tapjs/signal-exit"
+  },
+  {
+    "registry": "npm",
+    "name": "source-map-js",
+    "version": "1.2.0",
+    "authors": [
+      "Valentin Semirulnik"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/7rulnik/source-map-js",
+    "licenseFile": "https://raw.githubusercontent.com/7rulnik/source-map-js/patch-0.6.1/LICENSE"
+  },
+  {
+    "registry": "deno",
+    "name": "std",
+    "version": "0.216.0",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/assert",
+    "version": "0.225.3",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/async",
+    "version": "0.224.1",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/cli",
+    "version": "0.224.4",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/collections",
+    "version": "0.224.2",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/dotenv",
+    "version": "0.223.0",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/encoding",
+    "version": "0.224.3",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/fmt",
+    "version": "0.225.2",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/fs",
+    "version": "0.229.1",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/http",
+    "version": "0.224.1",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/io",
+    "version": "0.224.0",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/jsonc",
+    "version": "0.213.1",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/log",
+    "version": "0.224.1",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/path",
+    "version": "0.225.1",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/streams",
+    "version": "0.224.1",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/yaml",
+    "version": "0.224.1",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "string-width",
+    "version": "5.1.2",
+    "authors": [
+      "Sindre Sorhus"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/sindresorhus/string-width",
+    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/string-width/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "strip-ansi",
+    "version": "7.1.0",
+    "authors": [
+      "chalk"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/chalk/strip-ansi",
+    "licenseFile": "https://raw.githubusercontent.com/chalk/strip-ansi/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "stylehacks",
+    "version": "6.1.1",
+    "authors": [
+      "cssnano"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/cssnano/cssnano",
+    "licenseFile": "https://raw.githubusercontent.com/cssnano/cssnano/master/LICENSE-MIT"
+  },
+  {
+    "registry": "npm",
+    "name": "sucrase",
+    "version": "3.35.0",
+    "authors": [
+      "Alan Pierce"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/alangpierce/sucrase",
+    "licenseFile": "https://raw.githubusercontent.com/alangpierce/sucrase/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "supports-preserve-symlinks-flag",
+    "version": "1.0.0",
+    "authors": [
+      "Inspect JS"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/inspect-js/node-supports-preserve-symlinks-flag",
+    "licenseFile": "https://raw.githubusercontent.com/inspect-js/node-supports-preserve-symlinks-flag/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "svgo",
+    "version": "3.3.2",
+    "authors": [
+      "svg"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/svg/svgo",
+    "licenseFile": "https://raw.githubusercontent.com/svg/svgo/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "tailwindcss",
+    "version": "3.4.3",
+    "authors": [
+      "Tailwind Labs"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/tailwindlabs/tailwindcss",
+    "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/next/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "thenify",
+    "version": "3.3.1",
+    "authors": [
+      "Thenables"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/thenables/thenify",
+    "licenseFile": "https://raw.githubusercontent.com/thenables/thenify/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "thenify-all",
+    "version": "1.6.0",
+    "authors": [
+      "Thenables"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/thenables/thenify-all",
+    "licenseFile": "https://raw.githubusercontent.com/thenables/thenify-all/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "to-regex-range",
+    "version": "5.0.1",
+    "authors": [
+      "micromatch"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/micromatch/to-regex-range",
+    "licenseFile": "https://raw.githubusercontent.com/micromatch/to-regex-range/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@trysound/sax",
+    "version": "0.2.0",
+    "authors": [
+      "svg"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/svg/sax",
+    "licenseFile": "https://raw.githubusercontent.com/svg/sax/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "ts-interface-checker",
+    "version": "0.1.13",
+    "authors": [
+      "Grist Labs"
+    ],
+    "license": "Apache License 2.0",
+    "repository": "https://github.com/gristlabs/ts-interface-checker",
+    "licenseFile": "https://raw.githubusercontent.com/gristlabs/ts-interface-checker/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "ts-pattern",
+    "version": "5.1.2",
+    "authors": [
+      "Gabriel Vergnaud"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/gvergnaud/ts-pattern",
+    "licenseFile": "https://raw.githubusercontent.com/gvergnaud/ts-pattern/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@types/node",
+    "version": "18.16.19",
+    "authors": [
+      "DefinitelyTyped"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+    "licenseFile": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "update-browserslist-db",
+    "version": "1.0.16",
+    "authors": [
+      "Browserslist"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/browserslist/update-db",
+    "licenseFile": "https://raw.githubusercontent.com/browserslist/update-db/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "util-deprecate",
+    "version": "1.0.2",
+    "authors": [
+      "Nathan Rajlich"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/TooTallNate/util-deprecate",
+    "licenseFile": "https://raw.githubusercontent.com/TooTallNate/util-deprecate/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "which",
+    "version": "2.0.2",
+    "authors": [
+      "isaacs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/isaacs/node-which",
+    "licenseFile": "https://raw.githubusercontent.com/npm/node-which/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "which-module",
+    "version": "2.0.1",
+    "authors": [
+      "Andrew Goode"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/nexdrew/which-module",
+    "licenseFile": "https://raw.githubusercontent.com/nexdrew/which-module/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "wrap-ansi",
+    "version": "8.1.0",
+    "authors": [
+      "chalk"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/chalk/wrap-ansi",
+    "licenseFile": "https://raw.githubusercontent.com/chalk/wrap-ansi/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "y18n",
+    "version": "4.0.3",
+    "authors": [
+      "yargs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/yargs/y18n",
+    "licenseFile": "https://raw.githubusercontent.com/yargs/y18n/master/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "yaml",
+    "version": "2.4.2",
+    "authors": [
+      "Eemeli Aro"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/eemeli/yaml",
+    "licenseFile": "https://raw.githubusercontent.com/eemeli/yaml/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "yargs",
+    "version": "15.4.1",
+    "authors": [
+      "yargs"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/yargs/yargs",
+    "licenseFile": "https://raw.githubusercontent.com/yargs/yargs/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "yargs-parser",
+    "version": "18.1.3",
+    "authors": [
+      "yargs"
+    ],
+    "license": "ISC License",
+    "repository": "https://github.com/yargs/yargs-parser"
+  },
+  {
+    "registry": "npm",
+    "name": "zod",
+    "version": "3.23.8",
+    "authors": [
+      "Colin McDonnell"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/colinhacks/zod",
+    "licenseFile": "https://raw.githubusercontent.com/colinhacks/zod/main/LICENSE"
+  }
+]

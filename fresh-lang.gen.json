@@ -1,0 +1,14 @@
+{
+  "en": {
+    "NativeName": "English",
+    "EnglishName": "English",
+    "Code": "en",
+    "Author": "Nihility.io"
+  },
+  "de": {
+    "NativeName": "Deutsch",
+    "EnglishName": "German",
+    "Code": "de",
+    "Author": "Nihility.io"
+  }
+}

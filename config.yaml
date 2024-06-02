@@ -1,0 +1,47 @@
+branding:
+  appName: SecretBin # Changes the app in all places including but not limited to the title bar
+  footer: Nihility.io # Text shown in the footer on the left side e.g. the name of the service hoster
+  links: # Custom link shown in the footer on the right 
+  - link: https://github.com/Nihility-io/SecretBin # URL
+    name: #Localized display text
+      en: GitHub
+      de: GitHub
+  showLogo: true # If set the true, the app logo is shown before the app name in the navigation bar
+  showTerms: true #Sets if the ToS window should be shown when a user fist visits the app
+  terms: # ToS Dialog show when the user first visits the app
+    title:
+      en: Terms of Service
+      de: Nutzungsbedingungen
+    content: # Text that may contain HTML 
+      en: "..."
+      de: "..."
+banner:
+  en: Hello World!
+  de: Hallo Welt!
+defaults: # Just customizable defaults 
+  expires: 2w # Default expire time when creating a new secret
+  burn: true # Default burn selection
+policy:
+  sharePreselect: true # Pre-selects the link in the share view
+  requirePassword: false # Forces users to enable the burn option for new secrets
+  requireBurn: false # Forces users to specify a password for new secrets
+  denySlowBurn: false # Blocks users from enabling slow burn for new secrets
+storage:
+  maxSize: 10Mi # Max size a new secret is allowed to have
+  gcInterval: 5 # Interval in seconds in which the garbage collector should run
+  backend: # Use Deno KV as a backend
+    type: kv
+  # backend: # Use PostgreSQL as a backend
+  #   type: postgres
+  #   host: 127.0.0.1
+  #   port: 5432
+  #   database: secretbin
+  #   username: secretbin
+  #   password: abc123
+expires: #Expire options for new secrets
+  - 5min
+  - 1hr
+  - 1d
+  - 1w
+  - 2w
+  - 1m
