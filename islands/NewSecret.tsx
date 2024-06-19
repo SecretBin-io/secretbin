@@ -80,7 +80,7 @@ export const NewSecret = ({ ctx }: NewSecretProps) => {
 
 					<Section
 						title={$("Files.Title")}
-						description={$("Files.Description", { size: "" + config.storage.maxSize })}
+						description={$("Files.Description", { size: "" + (config.storage.maxSize / 1000000) })}
 					>
 						<Upload
 							multiple
