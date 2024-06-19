@@ -30,6 +30,8 @@ export class SecretPostgresStorage implements SecretStorage {
 			database: cfg.database,
 			username: cfg.username,
 			password: cfg.password,
+			max: 5,
+			idle_timeout: 30000,
 		})
 
 		// Ensure that the Postgres exists
