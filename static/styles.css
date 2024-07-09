@@ -9,3 +9,8 @@ body {
 h1, h2, h3, h4, h5, h6, p, span {
     cursor: default;
 }
+
+.invert-1 {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+}

@@ -145,7 +145,7 @@
   {
     "registry": "npm",
     "name": "browserslist",
-    "version": "4.23.0",
+    "version": "4.23.1",
     "authors": [
       "Browserslist"
     ],
@@ -189,7 +189,7 @@
   {
     "registry": "npm",
     "name": "caniuse-lite",
-    "version": "1.0.30001625",
+    "version": "1.0.30001640",
     "authors": [
       "Browserslist"
     ],
@@ -487,13 +487,13 @@
     "authors": [
       "Masaki Komagata"
     ],
-    "license": "MIT",
+    "license": "MIT License",
     "repository": "https://github.com/komagata/eastasianwidth"
   },
   {
     "registry": "npm",
     "name": "electron-to-chromium",
-    "version": "1.4.788",
+    "version": "1.4.820",
     "authors": [
       "Kilian Valkhof"
     ],
@@ -610,7 +610,7 @@
   {
     "registry": "npm",
     "name": "foreground-child",
-    "version": "3.1.1",
+    "version": "3.2.1",
     "authors": [
       "TAP in JavaScript"
     ],
@@ -676,7 +676,7 @@
   {
     "registry": "npm",
     "name": "glob",
-    "version": "10.4.1",
+    "version": "10.4.5",
     "authors": [
       "isaacs"
     ],
@@ -720,13 +720,8 @@
   {
     "registry": "npm",
     "name": "is-core-module",
-    "version": "2.13.1",
-    "authors": [
-      "Inspect JS"
-    ],
-    "license": "MIT License",
-    "repository": "https://github.com/inspect-js/is-core-module",
-    "licenseFile": "https://raw.githubusercontent.com/inspect-js/is-core-module/main/LICENSE"
+    "version": "2.14.0",
+    "repository": "npm"
   },
   {
     "registry": "npm",
@@ -796,7 +791,7 @@
   {
     "registry": "npm",
     "name": "jackspeak",
-    "version": "3.1.2",
+    "version": "3.4.2",
     "authors": [
       "isaacs"
     ],
@@ -807,13 +802,13 @@
   {
     "registry": "npm",
     "name": "jiti",
-    "version": "1.21.0",
+    "version": "1.21.6",
     "authors": [
       "UnJS"
     ],
     "license": "MIT License",
     "repository": "https://github.com/unjs/jiti",
-    "licenseFile": "https://raw.githubusercontent.com/unjs/jiti/v1/LICENSE"
+    "licenseFile": "https://raw.githubusercontent.com/unjs/jiti/main/LICENSE"
   },
   {
     "registry": "npm",
@@ -884,7 +879,7 @@
   {
     "registry": "npm",
     "name": "lilconfig",
-    "version": "3.1.1",
+    "version": "3.1.2",
     "authors": [
       "Anton Kastritskii"
     ],
@@ -939,7 +934,7 @@
   {
     "registry": "npm",
     "name": "lru-cache",
-    "version": "10.2.2",
+    "version": "10.4.3",
     "authors": [
       "isaacs"
     ],
@@ -1005,13 +1000,8 @@
   {
     "registry": "npm",
     "name": "minimatch",
-    "version": "9.0.4",
-    "authors": [
-      "isaacs"
-    ],
-    "license": "ISC License",
-    "repository": "https://github.com/isaacs/minimatch",
-    "licenseFile": "https://raw.githubusercontent.com/isaacs/minimatch/main/LICENSE"
+    "version": "9.0.5",
+    "repository": "npm"
   },
   {
     "registry": "npm",
@@ -1243,6 +1233,17 @@
     "license": "MIT License",
     "repository": "https://github.com/sindresorhus/p-try",
     "licenseFile": "https://raw.githubusercontent.com/sindresorhus/p-try/main/license"
+  },
+  {
+    "registry": "npm",
+    "name": "package-json-from-dist",
+    "version": "1.0.0",
+    "authors": [
+      "isaacs"
+    ],
+    "license": "Other",
+    "repository": "https://github.com/isaacs/package-json-from-dist",
+    "licenseFile": "https://raw.githubusercontent.com/isaacs/package-json-from-dist/main/LICENSE.md"
   },
   {
     "registry": "npm",
@@ -1936,18 +1937,7 @@
   {
     "registry": "jsr",
     "name": "@std/assert",
-    "version": "0.225.3",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "repository": "https://github.com/denoland/deno_std",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/async",
-    "version": "0.224.1",
+    "version": "0.226.0",
     "authors": [
       "Deno"
     ],
@@ -1958,7 +1948,7 @@
   {
     "registry": "jsr",
     "name": "@std/cli",
-    "version": "0.224.4",
+    "version": "0.224.7",
     "authors": [
       "Deno"
     ],
@@ -1969,7 +1959,7 @@
   {
     "registry": "jsr",
     "name": "@std/collections",
-    "version": "0.224.2",
+    "version": "1.0.3",
     "authors": [
       "Deno"
     ],
@@ -1980,7 +1970,7 @@
   {
     "registry": "jsr",
     "name": "@std/dotenv",
-    "version": "0.223.0",
+    "version": "0.224.2",
     "authors": [
       "Deno"
     ],
@@ -1991,7 +1981,7 @@
   {
     "registry": "jsr",
     "name": "@std/encoding",
-    "version": "0.224.3",
+    "version": "1.0.1",
     "authors": [
       "Deno"
     ],
@@ -2002,7 +1992,7 @@
   {
     "registry": "jsr",
     "name": "@std/fmt",
-    "version": "0.225.2",
+    "version": "0.225.6",
     "authors": [
       "Deno"
     ],
@@ -2013,7 +2003,7 @@
   {
     "registry": "jsr",
     "name": "@std/fs",
-    "version": "0.229.1",
+    "version": "0.229.3",
     "authors": [
       "Deno"
     ],
@@ -2024,7 +2014,7 @@
   {
     "registry": "jsr",
     "name": "@std/http",
-    "version": "0.224.1",
+    "version": "0.224.5",
     "authors": [
       "Deno"
     ],
@@ -2035,7 +2025,7 @@
   {
     "registry": "jsr",
     "name": "@std/io",
-    "version": "0.224.0",
+    "version": "0.224.3",
     "authors": [
       "Deno"
     ],
@@ -2057,7 +2047,29 @@
   {
     "registry": "jsr",
     "name": "@std/log",
-    "version": "0.224.1",
+    "version": "0.224.4",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/media-types",
+    "version": "1.0.1",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "repository": "https://github.com/denoland/deno_std",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno_std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/net",
+    "version": "0.224.5",
     "authors": [
       "Deno"
     ],
@@ -2068,7 +2080,7 @@
   {
     "registry": "jsr",
     "name": "@std/path",
-    "version": "0.225.1",
+    "version": "0.225.2",
     "authors": [
       "Deno"
     ],
@@ -2079,7 +2091,7 @@
   {
     "registry": "jsr",
     "name": "@std/streams",
-    "version": "0.224.1",
+    "version": "0.224.5",
     "authors": [
       "Deno"
     ],
@@ -2090,7 +2102,7 @@
   {
     "registry": "jsr",
     "name": "@std/yaml",
-    "version": "0.224.1",
+    "version": "0.224.3",
     "authors": [
       "Deno"
     ],
@@ -2167,7 +2179,7 @@
   {
     "registry": "npm",
     "name": "tailwindcss",
-    "version": "3.4.3",
+    "version": "3.4.4",
     "authors": [
       "Tailwind Labs"
     ],
@@ -2233,7 +2245,7 @@
   {
     "registry": "npm",
     "name": "ts-pattern",
-    "version": "5.1.2",
+    "version": "5.2.0",
     "authors": [
       "Gabriel Vergnaud"
     ],
@@ -2255,7 +2267,7 @@
   {
     "registry": "npm",
     "name": "update-browserslist-db",
-    "version": "1.0.16",
+    "version": "1.1.0",
     "authors": [
       "Browserslist"
     ],
@@ -2321,7 +2333,7 @@
   {
     "registry": "npm",
     "name": "yaml",
-    "version": "2.4.2",
+    "version": "2.4.5",
     "authors": [
       "Eemeli Aro"
     ],

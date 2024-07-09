@@ -1,8 +1,9 @@
 import { asset } from "$fresh/runtime.ts"
 import { LanguageMenu, Show, ThemeToggle } from "components"
 import { config } from "config"
-import { Context } from "context"
+import { Context, Theme } from "context"
 import { supportedLanguages, useLanguage } from "lang"
+import classNames from "classnames"
 
 export interface NavbarProps {
 	ctx: Context
@@ -18,7 +19,7 @@ export const Navbar = ({ ctx }: NavbarProps) => {
 			<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 				<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
 					<Show if={config.branding.showLogo}>
-						<img src={asset("/images/Icon.png")} class="h-8" />
+						<img class={classNames("h-8", { "invert-1": ctx.theme === Theme.Dark && config.branding.invertLogo })} src={asset("/images/Icon.png")} />
 					</Show>
 					<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
 						{config.branding.appName}

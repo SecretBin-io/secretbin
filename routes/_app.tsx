@@ -1,5 +1,5 @@
 import { asset, Partial } from "$fresh/runtime.ts"
-import { Banner, Show } from "components"
+import { Message, Show } from "components"
 import { config } from "config"
 import { PagePropsWithContext, Theme } from "context"
 import { Footer, Navbar, Terms } from "islands"
@@ -60,18 +60,27 @@ export default ({ Component, state: ctx }: PagePropsWithContext) => {
 				<Terms ctx={ctx} />
 				<Navbar ctx={ctx} />
 
-				{/* Show banner e.g. for planned maintenance message if configured */}
-				<Show if={!!(config.banner[lang] ?? config.banner.en)}>
-					<Banner
-						top
-						title={config.branding.appName}
-						message={config.banner[lang] ?? config.banner.en}
-					/>
-				</Show>
 
 				<div class="pt-20 pb-20 sm:pt-10 sm:pb-10">
 					<Partial name="content">
-						<Component />
+
+						<div class="px-4 py-8 mx-auto">
+							{/* Show banner e.g. for planned maintenance message if configured */}
+							<Show if={!!(config.banner[lang] ?? config.banner.en)}>
+								<div class="mx-auto">
+									<div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
+										<div class="w-full p-4">
+											<Message
+												type="info"
+												title={config.branding.appName}
+												message={config.banner[lang] ?? config.banner.en}
+											/>
+										</div>
+									</div>
+								</div>
+							</Show>
+							<Component />
+						</div>
 					</Partial>
 				</div>
 
@@ -81,7 +90,7 @@ export default ({ Component, state: ctx }: PagePropsWithContext) => {
 					links={[
 						...config.branding.links.map((link) => ({
 							name: link.name[lang] ?? link.name.en,
-							link: link.link,
+							link: link.link[lang] ?? link.link.en,
 							newTab: true,
 						})),
 						{ name: $("Credits.Title"), link: "/credits", newTab: false },

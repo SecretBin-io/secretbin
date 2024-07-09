@@ -33,12 +33,12 @@ export interface Link {
 	name: TranslatedString
 
 	/** Link URL */
-	link: string
+	link: TranslatedString
 }
 
 export const Link = z.object({
 	name: TranslatedString,
-	link: z.string(),
+	link: TranslatedString,
 }).strict()
 
 /**
@@ -62,6 +62,9 @@ export interface Branding {
 	/** If set the true, the app logo is shown before the app name in the navigation bar */
 	showLogo: boolean
 
+	/** Invert the colors of the app logo in dark mode */
+	invertLogo: boolean
+
 	/** Sets if the ToS window should be shown when a user fist visits the app */
 	showTerms: boolean
 }
@@ -70,8 +73,9 @@ export const Branding = z.object({
 	appName: z.string().default("SecretBin"),
 	footer: z.string().default("Nihility.io"),
 	terms: Terms.optional(),
-	links: Link.array().default([{ name: { en: "GitHub" }, link: "https://github.com/Nihility-io/SecretBin" }]),
+	links: Link.array().default([{ name: { en: "GitHub" }, link: { en: "https://github.com/Nihility-io/SecretBin" } }]),
 	showLogo: z.boolean().default(true),
+	invertLogo: z.boolean().default(false),
 	showTerms: z.boolean().default(true),
 }).strict()
 
@@ -82,6 +86,9 @@ export interface Defaults {
 
 	/** Default burn selection */
 	burn: boolean
+
+	/** Show password box by default */
+	showPassword: boolean
 }
 
 export const Defaults = z.object({
@@ -90,6 +97,7 @@ export const Defaults = z.object({
 		"Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min",
 	).default("2w"),
 	burn: z.boolean().default(true),
+	showPassword: z.boolean().default(false),
 }).strict()
 
 /**

@@ -78,11 +78,13 @@ branding:
   appName: SecretBin # Changes the app in all places including but not limited to the title bar
   footer: Nihility.io # Text shown in the footer on the left side e.g. the name of the service hoster
   links: # Custom link shown in the footer on the right 
-  - link: https://github.com/Nihility-io/SecretBin # URL
-    name: #Localized display text
+  - name: #Localized display text
       en: GitHub
       de: GitHub
+    link:
+      en: https://github.com/Nihility-io/SecretBin # URL
   showLogo: true # If set the true, the app logo is shown before the app name in the navigation bar
+  invertLogo: false # Invert the colors of the app logo in dark mode
   showTerms: true #Sets if the ToS window should be shown when a user fist visits the app
   terms: # ToS Dialog show when the user first visits the app
     title:
@@ -97,6 +99,7 @@ banner:
 defaults: # Just customizable defaults 
   expires: 2w # Default expire time when creating a new secret
   burn: true # Default burn selection
+  showPassword: false # Show password box by default
 policy:
   sharePreselect: true # Pre-selects the link in the share view
   requirePassword: false # Forces users to enable the burn option for new secrets

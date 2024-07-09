@@ -32,7 +32,7 @@ const DEMO_MODE = false
 export const NewSecret = ({ ctx }: NewSecretProps) => {
 	const [message, setMessage] = useState(DEMO_MODE ? "Hello World 🥳" : "")
 	const [files, setFiles] = useState<File[]>([])
-	const [usePassword, setUsePassword] = useState(true)
+	const [usePassword, setUsePassword] = useState(config.defaults.showPassword)
 	const [password, setPassword] = useState(DEMO_MODE ? "abc123" : "")
 	const [passwordRepeat, setPasswordRepeat] = useState(DEMO_MODE ? "abc123" : "")
 	const [expires, setExpires] = useState(config.defaults.expires)
@@ -94,8 +94,7 @@ export const NewSecret = ({ ctx }: NewSecretProps) => {
 						<Select
 							options={Record.mapToArray(config.expires, (key, value) => ({
 								name: $(
-									`Expiration.Expire.${value.unit as string}.${
-										value.count === 1 ? "One" : "Many"
+									`Expiration.Expire.${value.unit as string}.${value.count === 1 ? "One" : "Many"
 									}` as unknown as TrimPrefix<"NewSecret", TranslationKey>,
 									{ count: "" + value.count },
 								),
