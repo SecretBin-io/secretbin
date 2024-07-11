@@ -1,5 +1,4 @@
 import { FreshContext, PageProps } from "$fresh/server.ts"
-import { getCookies } from "@std/http"
 import { Language } from "lang"
 
 export enum Theme {
@@ -19,7 +18,9 @@ export interface PagePropsWithContext<Data = unknown> extends PageProps<Data, Co
  * @param req Incoming request
  * @param ctx Fresh Context
  */
-export const addContext = (req: Request, ctx: FreshContext<Context>) => {
+export const addContext = async (req: Request, ctx: FreshContext<Context>) => {
+	const { getCookies } = await import("@std/http")
+
 	ctx.state.theme = (() => {
 		switch (getCookies(req.headers)["color-theme"] ?? "dark") {
 			case "light":

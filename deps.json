@@ -1061,7 +1061,7 @@
   {
     "registry": "jsr",
     "name": "@nihility-io/fresh-lang",
-    "version": "0.1.11",
+    "version": "0.1.12",
     "authors": [
       "Nihility.io"
     ],

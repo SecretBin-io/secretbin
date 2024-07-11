@@ -52,7 +52,7 @@ Translations:
         Title: Burn after reading
         Description: Automatically delete the secret once it has been opened (recommended in most cases)
       SlowBurn:
-        Title: Enable slow Burn
+        Title: Enable slow burn
         Description: >-
           Allow a number of re-reads within 5 minutes of opening the secret. For example, this option is useful if you want to send a secret to several people in a meeting.
         Status: 'Allow secret to be read {{count}} time(s) within 5 minutes of opening the secret for the first time.'

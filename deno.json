@@ -47,7 +47,7 @@
 		"$fresh/": "https://deno.land/x/fresh@1.6.8/",
 		"@nihility-io/crypto": "jsr:@nihility-io/crypto@0.1.0",
 		"@nihility-io/flowbite-icons-preact": "jsr:@nihility-io/flowbite-icons-preact@0.1.1",
-		"@nihility-io/fresh-lang": "jsr:@nihility-io/fresh-lang@0.1.11",
+		"@nihility-io/fresh-lang": "jsr:@nihility-io/fresh-lang@0.1.12",
 		"@nihility-io/record": "jsr:@nihility-io/record@0.1.1",
 		"@nihility-io/result": "jsr:@nihility-io/result@0.1.7",
 		"@nihility-io/use-cookie": "jsr:@nihility-io/use-cookie@0.1.4",

@@ -85,17 +85,7 @@ export default ({ Component, state: ctx }: PagePropsWithContext) => {
 				</div>
 
 				{/* Add footer with configured links */}
-				<Footer
-					text={config.branding.footer}
-					links={[
-						...config.branding.links.map((link) => ({
-							name: link.name[lang] ?? link.name.en,
-							link: link.link[lang] ?? link.link.en,
-							newTab: true,
-						})),
-						{ name: $("Credits.Title"), link: "/credits", newTab: false },
-					]}
-				/>
+				<Footer ctx={ctx} />
 				{/* <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script> */}
 			</body>
 		</html>
