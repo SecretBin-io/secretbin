@@ -117,7 +117,7 @@ export const NewSecret = ({ ctx }: NewSecretProps) => {
 							checked={burn}
 							onChange={setBurn}
 						/>
-						<Show if={!config.policy.denySlowBurn}>
+						<Show if={!config.policy.denySlowBurn && burn}>
 							<>
 								<Checkbox
 									mode="toggle"
