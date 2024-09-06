@@ -1,4 +1,4 @@
-import { asset } from "$fresh/runtime.ts"
+import { asset } from "fresh/runtime"
 import { useCookie } from "@nihility-io/use-cookie"
 import classNames from "classnames"
 import { LanguageMenu, Show, ThemeToggle } from "components"

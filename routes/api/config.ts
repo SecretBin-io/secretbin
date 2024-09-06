@@ -1,6 +1,6 @@
-import { Handlers } from "$fresh/server.ts"
 import { serveClientConfig } from "config"
+import { HandlerByMethod } from "fresh"
 
-export const handler: Handlers = {
+export const handler: HandlerByMethod<unknown, unknown> = {
 	GET: serveClientConfig,
 }

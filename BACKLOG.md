@@ -7,3 +7,5 @@ This is a list of features I might implement in future versions
 - Keep Metadata
 - Captcha
 - Quantum Encryption
+- Preview secret on share page
+- Copy as link

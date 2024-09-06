@@ -1,11 +1,7 @@
-import { type Config } from "tailwindcss"
-import Flowbite from "flowbite/plugin.js"
+import type { Config } from "tailwindcss";
 
 export default {
-	darkMode: "class",
-	content: [
-		"./node_modules/flowbite/**/*.js",
-		"{routes,islands,components}/**/*.{ts,tsx}",
-	],
-	plugins: [Flowbite],
-} satisfies Config
+  content: [
+    "{routes,islands,components}/**/*.{ts,tsx}",
+  ],
+} satisfies Config;

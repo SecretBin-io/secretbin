@@ -1,4 +1,4 @@
-import { FreshContext, PageProps } from "$fresh/server.ts"
+import { FreshContext, PageProps } from "fresh"
 import { Language } from "lang"
 
 export enum Theme {

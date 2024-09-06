@@ -1,13 +1,13 @@
-import { asset } from "$fresh/runtime.ts"
-import { FreshContext, Handlers } from "$fresh/server.ts"
+import { asset } from "fresh/runtime"
+import { FreshContext, HandlerByMethod } from "fresh"
 import { config } from "config"
 import { Context, Theme } from "context"
 
 /**
  * Renders the branded manifest.json for PWA usage
  */
-export const handler: Handlers<unknown, Context> = {
-	GET(_req: Request, { state: ctx }: FreshContext<Context>) {
+export const handler: HandlerByMethod<unknown, Context> = {
+	GET({ state: ctx }: FreshContext<Context>) {
 		return new Response(JSON.stringify({
 			"name": config.branding.appName,
 			"short_name": config.branding.appName,

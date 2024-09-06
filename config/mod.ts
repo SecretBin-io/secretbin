@@ -1,4 +1,3 @@
-import { IS_BROWSER } from "$fresh/runtime.ts"
 import z from "zod"
 import { Config } from "./model.ts"
 export type * from "./model.ts"
@@ -8,7 +7,7 @@ export type * from "./storage.ts"
  * Load the config.yaml file server side
  */
 const serverCfg: Config = await (async () => {
-	if (IS_BROWSER) {
+	if (typeof document !== "undefined") {
 		return undefined!
 	}
 
@@ -42,7 +41,7 @@ const serverCfg: Config = await (async () => {
  * Censor the config by removing data which should not be exposed to the client
  */
 export const clientCfg: Config = (() => {
-	if (IS_BROWSER) {
+	if (typeof document !== "undefined") {
 		return undefined!
 	}
 	// deno-lint-ignore no-undef
@@ -65,7 +64,7 @@ export const serveClientConfig = () =>
  * Application configuration (config.yaml). This config is available to the server and client
  */
 export const config: Config = await (async () => {
-	if (!IS_BROWSER) {
+	if (typeof document === "undefined") {
 		return serverCfg
 	}
 

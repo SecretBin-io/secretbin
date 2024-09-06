@@ -2,15 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    user-select: none;
+.fresh-gradient {
+  background-color: rgb(134, 239, 172);
+  background-image: linear-gradient(
+    to right bottom,
+    rgb(219, 234, 254),
+    rgb(187, 247, 208),
+    rgb(254, 249, 195)
+  );
 }
 
-h1, h2, h3, h4, h5, h6, p, span {
-    cursor: default;
+body {
+  user-select: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  cursor: default;
 }
 
 .invert-1 {
-    -webkit-filter: invert(1);
-    filter: invert(1);
+  -webkit-filter: invert(1);
+  filter: invert(1);
 }

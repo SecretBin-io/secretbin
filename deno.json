@@ -1,121 +1,129 @@
 {
-	"lock": false,
-	"tasks": {
-		"check": "deno fmt --check && deno lint && deno check main.ts",
-		"cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
-		"manifest": "deno task cli manifest $(pwd)",
-		"start": "deno run -A --watch=static/,routes/ dev.ts",
-		"build": "rm -rf _fresh && deno run -A dev.ts build",
-		"preview": "deno run -A main.ts",
-		"update": "deno run -A -r https://fresh.deno.dev/update .",
-		"deps": "deno run -A jsr:@nihility-io/deno-deps --entrypoint main.ts --output deps.json",
-		"deploy": "deno task build && deployctl deploy --project=nihility-secretbin main.ts"
-	},
-	"lint": {
-		"rules": {
-			"tags": [
-				"fresh",
-				"recommended"
-			],
-			"include": [
-				"adjacent-overload-signatures",
-				"default-param-last",
-				"eqeqeq",
-				"no-const-assign",
-				"no-eval",
-				"no-external-import",
-				"no-inferrable-types",
-				"no-self-compare",
-				"no-sparse-arrays",
-				"no-sync-fn-in-async-fn",
-				"no-throw-literal",
-				"no-undef",
-				"single-var-declarator"
-			]
-		},
-		"exclude": [
-			".vscode/**",
-			"*.json",
-			"**/*.json",
-			"*.gen.ts*"
-		]
-	},
-	"exclude": [
-		"**/_fresh/*"
-	],
-	"imports": {
-		"$fresh/": "https://deno.land/x/fresh@1.6.8/",
-		"@nihility-io/crypto": "jsr:@nihility-io/crypto@0.1.1",
-		"@nihility-io/flowbite-icons-preact": "jsr:@nihility-io/flowbite-icons-preact@0.1.1",
-		"@nihility-io/fresh-lang": "jsr:@nihility-io/fresh-lang@0.1.12",
-		"@nihility-io/record": "jsr:@nihility-io/record@0.1.1",
-		"@nihility-io/result": "jsr:@nihility-io/result@0.1.7",
-		"@nihility-io/use-cookie": "jsr:@nihility-io/use-cookie@0.1.4",
-		"@preact/signals": "npm:@preact/signals@1.2.3",
-		"@std/collections": "jsr:@std/collections@1.0.3",
-		"@std/dotenv": "jsr:@std/dotenv@0.224.2",
-		"@std/encoding": "jsr:@std/encoding@1.0.1",
-		"@std/fs": "jsr:@std/fs@0.229.3",
-		"@std/http": "jsr:@std/http@0.224.5",
-		"@std/log": "jsr:@std/log@0.224.4",
-		"@std/path": "jsr:@std/path@0.225.2",
-		"@std/yaml": "jsr:@std/yaml@0.224.3",
-		"classnames": "npm:classnames@2.5.1",
-		"components": "./components/mod.ts",
-		"config": "./config/mod.ts",
-		"config/plugin": "./config/plugin.ts",
-		"context": "./context.ts",
-		"deps.json": "./deps.json",
-		"flowbite": "npm:flowbite@2.3.0",
-		"flowbite/": "npm:/flowbite@2.3.0/",
-		"helpers": "./helpers/mod.ts",
-		"islands": "./islands/mod.ts",
-		"lang": "./fresh-lang.gen.ts",
-		"log": "./log/mod.ts",
-		"models": "./models/mod.ts",
-		"postgres": "npm:postgres@3.4.4",
-		"preact": "npm:preact@10.22.0",
-		"preact/": "npm:/preact@10.22.0/",
-		"qrcode": "npm:qrcode@1.5.3",
-		"secret/client": "./secret/client/mod.ts",
-		"secret/models": "./secret/models/mod.ts",
-		"secret/server": "./secret/server/mod.ts",
-		"tailwindcss": "npm:tailwindcss@3.4.4",
-		"ts-pattern": "npm:ts-pattern@5.2.0",
-		"zod": "npm:zod@3.23.8"
-	},
-	"compilerOptions": {
-		"jsx": "react-jsx",
-		"jsxImportSource": "preact",
-		"lib": [
-			"deno.window",
-			"deno.unstable"
-		]
-	},
-	"nodeModulesDir": true,
-	"unstable": [
-		"kv"
-	],
-	"fmt": {
-		"useTabs": true,
-		"lineWidth": 120,
-		"indentWidth": 4,
-		"semiColons": false,
-		"singleQuote": false,
-		"proseWrap": "preserve",
-		"exclude": [
-			".vscode/**",
-			"*.json",
-			"**/*.json",
-			"*.gen.ts*"
-		]
-	},
-	"deploy": {
-		"project": "db7b39eb-7b70-4b24-8bcf-8f6e10a579de",
-		"exclude": [
-			"**/node_modules"
-		],
-		"include": [],
-		"entrypoint": "main.ts"
-	}
+  "tasks": {
+    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
+    "dev": "deno run -A --watch=static/,routes/ dev.ts",
+    "build": "deno run -A dev.ts build",
+    "start": "deno run -A main.ts",
+    "update": "deno run -A -r jsr:@fresh/update .",
+    "deps": "deno run -A jsr:@nihility-io/deno-deps --entrypoint main.ts --output deps.json",
+    "deploy": "deno task build && deployctl deploy --project=nihility-secretbin main.ts"
+  },
+  "lint": {
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ],
+      "include": [
+        "adjacent-overload-signatures",
+        "default-param-last",
+        "eqeqeq",
+        "no-const-assign",
+        "no-eval",
+        "no-external-import",
+        "no-inferrable-types",
+        "no-self-compare",
+        "no-sparse-arrays",
+        "no-sync-fn-in-async-fn",
+        "no-throw-literal",
+        "no-undef",
+        "single-var-declarator"
+      ]
+    },
+    "exclude": [
+      ".vscode/**",
+      "*.json",
+      "**/*.json",
+      "*.gen.ts*"
+    ]
+  },
+  "exclude": [
+    "**/_fresh/*"
+  ],
+  "imports": {
+    "fresh": "jsr:@fresh/core@^2.0.0-alpha.20",
+    "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
+    "preact": "npm:preact@^10.23.2",
+    "@preact/signals": "npm:@preact/signals@^1.3.0",
+    "tailwindcss": "npm:tailwindcss@3.4.3",
+    "tailwindcss/plugin": "npm:tailwindcss@3.4.3/plugin.js",
+    "@nihility-io/crypto": "jsr:@nihility-io/crypto@0.1.1",
+    "@nihility-io/flowbite-icons-preact": "jsr:@nihility-io/flowbite-icons-preact@0.1.1",
+    "@nihility-io/fresh-lang": "jsr:@nihility-io/fresh-lang@0.1.12",
+    "@nihility-io/record": "jsr:@nihility-io/record@0.1.1",
+    "@nihility-io/result": "jsr:@nihility-io/result@0.1.7",
+    "@nihility-io/use-cookie": "jsr:@nihility-io/use-cookie@0.1.4",
+    "@std/collections": "jsr:@std/collections@1.0.3",
+    "@std/dotenv": "jsr:@std/dotenv@0.224.2",
+    "@std/encoding": "jsr:@std/encoding@1.0.1",
+    "@std/fs": "jsr:@std/fs@0.229.3",
+    "@std/http": "jsr:@std/http@0.224.5",
+    "@std/log": "jsr:@std/log@0.224.4",
+    "@std/path": "jsr:@std/path@0.225.2",
+    "@std/yaml": "jsr:@std/yaml@0.224.3",
+    "classnames": "npm:classnames@2.5.1",
+    "components": "./components/mod.ts",
+    "config": "./config/mod.ts",
+    "config/plugin": "./config/plugin.ts",
+    "context": "./context.ts",
+    "deps.json": "./deps.json",
+    "flowbite": "npm:flowbite@2.3.0",
+    "flowbite/": "npm:/flowbite@2.3.0/",
+    "helpers": "./helpers/mod.ts",
+    "islands": "./islands/mod.ts",
+    "lang": "./fresh-lang.gen.ts",
+    "log": "./log/mod.ts",
+    "models": "./models/mod.ts",
+    "postgres": "npm:postgres@3.4.4",
+    "qrcode": "npm:qrcode@1.5.3",
+    "secret/client": "./secret/client/mod.ts",
+    "secret/models": "./secret/models/mod.ts",
+    "secret/server": "./secret/server/mod.ts",
+    "ts-pattern": "npm:ts-pattern@5.2.0",
+    "zod": "npm:zod@3.23.8"
+  },
+  "unstable": [
+    "kv"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.asynciterable",
+      "deno.ns",
+      "deno.window",
+      "deno.unstable"
+    ],
+    "jsx": "precompile",
+    "jsxImportSource": "preact",
+    "jsxPrecompileSkipElements": [
+      "a",
+      "img",
+      "source",
+      "body",
+      "html",
+      "head"
+    ]
+  },
+  "fmt": {
+    "useTabs": true,
+    "lineWidth": 120,
+    "indentWidth": 4,
+    "semiColons": false,
+    "singleQuote": false,
+    "proseWrap": "preserve",
+    "exclude": [
+      ".vscode/**",
+      "*.json",
+      "**/*.json",
+      "*.gen.ts*"
+    ]
+  },
+  "deploy": {
+    "project": "db7b39eb-7b70-4b24-8bcf-8f6e10a579de",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "main.ts"
+  }
 }

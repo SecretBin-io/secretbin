@@ -1,7 +1,7 @@
 import { PageContent, Table } from "components"
 import { config } from "config"
 import { PagePropsWithContext } from "context"
-import deps from "deps.json" with { type: "json" }
+import deps from "../deps.json" with { type: "json" }
 import { useTranslation } from "lang"
 
 /**

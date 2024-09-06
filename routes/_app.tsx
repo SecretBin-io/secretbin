@@ -1,4 +1,4 @@
-import { asset, Partial } from "$fresh/runtime.ts"
+import { asset, Partial } from "fresh/runtime"
 import { Message, Show } from "components"
 import { config } from "config"
 import { PagePropsWithContext, Theme } from "context"

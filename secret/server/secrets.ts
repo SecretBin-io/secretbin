@@ -1,4 +1,3 @@
-import { IS_BROWSER } from "$fresh/runtime.ts"
 import Result from "@nihility-io/result"
 import { config } from "config"
 import { logCG, logSecrets } from "log"
@@ -34,7 +33,7 @@ export class Secrets {
 	 * Get the singleton instance of the secret manager
 	 */
 	static get shared(): Secrets {
-		if (IS_BROWSER) {
+		if (typeof document !== "undefined") {
 			throw new Error("[BUG]: The secrets class is not meant to be called by the browser.")
 		}
 
