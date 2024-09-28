@@ -1,7 +1,7 @@
-import { TrimPrefix } from "@nihility-io/fresh-lang"
+import { TrimPrefix, useTranslation } from "lang"
 import Result from "@nihility-io/result"
 import { humanReadableSize } from "helpers"
-import { getTranslation, Language, TranslationKey } from "lang"
+import { Language, TranslationKey } from "lang"
 import { ZodIssue } from "zod"
 
 /**
@@ -43,7 +43,7 @@ export class LocalizedError extends Error {
 	 * @param params Optional parameters for the translated message
 	 */
 	public constructor(key: TrimPrefix<"Errors", TranslationKey>, params: Record<string, string> = {}) {
-		super(getTranslation(Language.English, "Errors." + key as unknown as TranslationKey, params))
+		super(useTranslation(Language.English)("Errors." + key as unknown as TranslationKey, params))
 		this.name = key
 		this.#key = key
 		this.#params = params
@@ -55,7 +55,7 @@ export class LocalizedError extends Error {
 	 * @returns Translated error message
 	 */
 	public getLocalizedMessage(lang: Language) {
-		return getTranslation(lang, "Errors." + this.#key as unknown as TranslationKey, this.#params)
+		return useTranslation(lang)("Errors." + this.#key as unknown as TranslationKey, this.#params)
 	}
 
 	/**

@@ -1,21 +1,20 @@
 import { asset } from "fresh/runtime"
-import { useCookie } from "@nihility-io/use-cookie"
+import Cookies, { useCookie } from "@nihility-io/use-cookie"
 import classNames from "classnames"
 import { LanguageMenu, Show, ThemeToggle } from "components"
 import { config } from "config"
-import { Context, Theme } from "context"
-import { supportedLanguages, useLanguage } from "lang"
+import { supportedLanguages } from "lang"
+import { State, Theme } from "state"
 
 export interface NavbarProps {
-	ctx: Context
+	state: State
 }
 
 /**
  * Creates a fixed navigation bar at the top of the page
  */
-export const Navbar = ({ ctx }: NavbarProps) => {
-	const [lang, setLang] = useLanguage(ctx.lang)
-	const [theme] = useCookie("color-theme", ctx.theme)
+export const Navbar = ({ state }: NavbarProps) => {
+	const [theme] = useCookie("color-theme", state.theme)
 
 	return (
 		<nav class="fixed z-20 w-full top-0 start-0 bg-gray-50 shadow dark:bg-gray-900">
@@ -30,7 +29,10 @@ export const Navbar = ({ ctx }: NavbarProps) => {
 				</a>
 				<div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
 					<ThemeToggle />
-					<LanguageMenu language={lang} setLanguage={setLang} languages={supportedLanguages} />
+					<LanguageMenu language={state.lang} setLanguage={lang => {
+						Cookies.set("lang", lang, {})
+						window.location.reload()
+					}} languages={supportedLanguages} />
 				</div>
 			</div>
 		</nav>

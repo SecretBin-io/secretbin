@@ -49,6 +49,9 @@ export interface ButtonProps extends BaseProps {
 	/** ID of the dropdown element if the button is a dropdown toggle */
 	dropdown?: string
 
+	/** Changes to button type to submit */
+	submit?: boolean
+
 	/**
 	 * Function which will be called when button is press
 	 * (Note: you can only set either `link` or `onSubmit` and not both)
@@ -60,7 +63,7 @@ export interface ButtonProps extends BaseProps {
  * Creates a clickable button
  */
 export const Button = (
-	{ label, theme = "default", svg, overrideClass, onClick, link, dropdown, ...props }: ButtonProps,
+	{ label, theme = "default", svg, overrideClass, onClick, link, submit, dropdown, ...props }: ButtonProps,
 ) => {
 	const classes = overrideClass ? props.class : classNames(
 		"focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mb-2",
@@ -88,6 +91,7 @@ export const Button = (
 				)
 				: (
 					<button
+						type={submit ? "submit" : undefined}
 						style={props.style}
 						disabled={props.disabled}
 						class={classes}

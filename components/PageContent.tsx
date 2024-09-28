@@ -9,7 +9,7 @@ export interface PageContentProps extends BaseProps {
 	/** Description of what the page is for */
 	description?: string
 
-	children: ComponentChildren
+	children?: ComponentChildren
 }
 
 /**

@@ -1,18 +1,18 @@
-import { FreshContext, HandlerByMethod } from "fresh"
 import { responseFromResult } from "helpers"
 import { Secrets } from "secret/server"
+import { define } from "utils"
 
 /**
  * Secret API: /secret/<some_id>
  */
-export const handler: HandlerByMethod<unknown, unknown> = {
-	async GET(ctx: FreshContext) {
-		return responseFromResult(await Secrets.shared.getSecretMetadata(ctx.params.id))
+export const handler = define.handlers({
+	async GET({ params }) {
+		return responseFromResult(await Secrets.shared.getSecretMetadata(params.id))
 	},
-	async POST(ctx: FreshContext) {
-		return responseFromResult(await Secrets.shared.getSecret(ctx.params.id))
+	async POST({ params }) {
+		return responseFromResult(await Secrets.shared.getSecret(params.id))
 	},
-	async DELETE(ctx: FreshContext) {
-		return responseFromResult(await Secrets.shared.deleteSecret(ctx.params.id))
+	async DELETE({ params }) {
+		return responseFromResult(await Secrets.shared.deleteSecret(params.id))
 	},
-}
+})

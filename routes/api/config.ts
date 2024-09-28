@@ -1,6 +1,6 @@
 import { serveClientConfig } from "config"
-import { HandlerByMethod } from "fresh"
+import { define } from "utils"
 
-export const handler: HandlerByMethod<unknown, unknown> = {
+export const handler = define.handlers({
 	GET: serveClientConfig,
-}
+})

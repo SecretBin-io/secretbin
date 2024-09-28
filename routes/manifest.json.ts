@@ -1,18 +1,18 @@
-import { asset } from "fresh/runtime"
-import { FreshContext, HandlerByMethod } from "fresh"
 import { config } from "config"
-import { Context, Theme } from "context"
+import { type HandlerByMethod } from "fresh"
+import { asset } from "fresh/runtime"
+import { State, Theme } from "state"
 
 /**
  * Renders the branded manifest.json for PWA usage
  */
-export const handler: HandlerByMethod<unknown, Context> = {
-	GET({ state: ctx }: FreshContext<Context>) {
+export const handler: HandlerByMethod<unknown, State> = {
+	GET({ state }) {
 		return new Response(JSON.stringify({
 			"name": config.branding.appName,
 			"short_name": config.branding.appName,
-			"theme_color": ctx.theme === Theme.Dark ? "#121826" : "#ffffff",
-			"background_color": ctx.theme === Theme.Dark ? "#121826" : "#ffffff",
+			"theme_color": state.theme === Theme.Dark ? "#121826" : "#ffffff",
+			"background_color": state.theme === Theme.Dark ? "#121826" : "#ffffff",
 			"display": "fullscreen",
 			"scope": "/",
 			"start_url": "/",

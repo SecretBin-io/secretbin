@@ -1,5 +1,3 @@
-export * from "./DeleteSecret.tsx"
-export * from "./Footer.tsx"
 export * from "./Navbar.tsx"
 export * from "./NewSecret.tsx"
 export * from "./ShareSecret.tsx"

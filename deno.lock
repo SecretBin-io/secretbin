@@ -7,17 +7,13 @@
       "jsr:@luca/esbuild-deno-loader@^0.10.3": "jsr:@luca/esbuild-deno-loader@0.10.3",
       "jsr:@nihility-io/crypto@0.1.1": "jsr:@nihility-io/crypto@0.1.1",
       "jsr:@nihility-io/flowbite-icons-preact@0.1.1": "jsr:@nihility-io/flowbite-icons-preact@0.1.1",
-      "jsr:@nihility-io/fresh-lang@0.1.12": "jsr:@nihility-io/fresh-lang@0.1.12",
       "jsr:@nihility-io/record@0.1.1": "jsr:@nihility-io/record@0.1.1",
-      "jsr:@nihility-io/record@^0.1.1": "jsr:@nihility-io/record@0.1.1",
       "jsr:@nihility-io/result@0.1.7": "jsr:@nihility-io/result@0.1.7",
-      "jsr:@nihility-io/result@^0.1.5": "jsr:@nihility-io/result@0.1.7",
       "jsr:@nihility-io/use-cookie@0.1.4": "jsr:@nihility-io/use-cookie@0.1.4",
-      "jsr:@nihility-io/use-cookie@^0.1.4": "jsr:@nihility-io/use-cookie@0.1.4",
       "jsr:@std/assert@^0.213.1": "jsr:@std/assert@0.213.1",
       "jsr:@std/assert@^0.221.0": "jsr:@std/assert@0.221.0",
       "jsr:@std/assert@^0.226.0": "jsr:@std/assert@0.226.0",
-      "jsr:@std/async@^1.0.0-rc.1": "jsr:@std/async@1.0.3",
+      "jsr:@std/async@^1.0.0-rc.1": "jsr:@std/async@1.0.5",
       "jsr:@std/cli@^0.224.7": "jsr:@std/cli@0.224.7",
       "jsr:@std/collections@1.0.3": "jsr:@std/collections@1.0.3",
       "jsr:@std/crypto@1.0.0-rc.1": "jsr:@std/crypto@1.0.0-rc.1",
@@ -25,21 +21,21 @@
       "jsr:@std/encoding@0.213": "jsr:@std/encoding@0.213.1",
       "jsr:@std/encoding@1.0.0-rc.2": "jsr:@std/encoding@1.0.0-rc.2",
       "jsr:@std/encoding@1.0.1": "jsr:@std/encoding@1.0.1",
-      "jsr:@std/encoding@^1.0.0-rc.1": "jsr:@std/encoding@1.0.1",
-      "jsr:@std/encoding@^1.0.1": "jsr:@std/encoding@1.0.1",
+      "jsr:@std/encoding@^1.0.0-rc.1": "jsr:@std/encoding@1.0.4",
+      "jsr:@std/encoding@^1.0.1": "jsr:@std/encoding@1.0.4",
       "jsr:@std/fmt@^0.225.3": "jsr:@std/fmt@0.225.6",
       "jsr:@std/fmt@^0.225.4": "jsr:@std/fmt@0.225.6",
       "jsr:@std/fmt@^0.225.5": "jsr:@std/fmt@0.225.6",
       "jsr:@std/fs@0.229.3": "jsr:@std/fs@0.229.3",
       "jsr:@std/fs@^0.229.1": "jsr:@std/fs@0.229.3",
-      "jsr:@std/fs@^1.0.0-rc.3": "jsr:@std/fs@1.0.1",
+      "jsr:@std/fs@^1.0.0-rc.3": "jsr:@std/fs@1.0.3",
       "jsr:@std/html@^0.224.2": "jsr:@std/html@0.224.2",
       "jsr:@std/http@0.224.5": "jsr:@std/http@0.224.5",
-      "jsr:@std/io@^0.224.3": "jsr:@std/io@0.224.4",
+      "jsr:@std/io@^0.224.3": "jsr:@std/io@0.224.7",
       "jsr:@std/jsonc@0.213": "jsr:@std/jsonc@0.213.1",
       "jsr:@std/jsonc@^0.224.1": "jsr:@std/jsonc@0.224.3",
       "jsr:@std/log@0.224.4": "jsr:@std/log@0.224.4",
-      "jsr:@std/media-types@^1.0.0-rc.1": "jsr:@std/media-types@1.0.2",
+      "jsr:@std/media-types@^1.0.0-rc.1": "jsr:@std/media-types@1.0.3",
       "jsr:@std/net@^0.224.3": "jsr:@std/net@0.224.5",
       "jsr:@std/path@0.213": "jsr:@std/path@0.213.1",
       "jsr:@std/path@0.225.2": "jsr:@std/path@0.225.2",
@@ -50,11 +46,10 @@
       "jsr:@std/semver@^0.224.3": "jsr:@std/semver@0.224.3",
       "jsr:@std/streams@^0.224.5": "jsr:@std/streams@0.224.5",
       "jsr:@std/yaml@0.224.3": "jsr:@std/yaml@0.224.3",
-      "jsr:@std/yaml@^0.224.1": "jsr:@std/yaml@0.224.3",
-      "npm:@preact/signals@1.3.0": "npm:@preact/signals@1.3.0_preact@10.22.0",
-      "npm:@preact/signals@^1.2.3": "npm:@preact/signals@1.3.0_preact@10.22.0",
-      "npm:@preact/signals@^1.3.0": "npm:@preact/signals@1.3.0_preact@10.22.0",
+      "npm:@preact/signals@1.3.0": "npm:@preact/signals@1.3.0_preact@10.20.2",
+      "npm:@preact/signals@^1.2.3": "npm:@preact/signals@1.3.0_preact@10.20.2",
       "npm:@types/js-cookie@3.0.6": "npm:@types/js-cookie@3.0.6",
+      "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:@types/qrcode@1.5.5": "npm:@types/qrcode@1.5.5",
       "npm:autoprefixer@10.4.17": "npm:autoprefixer@10.4.17_postcss@8.4.35",
       "npm:classnames@2.5.1": "npm:classnames@2.5.1",
@@ -68,13 +63,12 @@
       "npm:postgres@3.4.4": "npm:postgres@3.4.4",
       "npm:preact-render-to-string@^6.4.2": "npm:preact-render-to-string@6.5.10_preact@10.23.2",
       "npm:preact@10.20.2": "npm:preact@10.20.2",
-      "npm:preact@10.22.0": "npm:preact@10.22.0",
       "npm:preact@10.23.2": "npm:preact@10.23.2",
       "npm:preact@^10.22.0": "npm:preact@10.23.2",
       "npm:preact@^10.23.2": "npm:preact@10.23.2",
       "npm:qrcode@1.5.3": "npm:qrcode@1.5.3",
-      "npm:tailwindcss@3.4.3": "npm:tailwindcss@3.4.3_postcss@8.4.45",
-      "npm:tailwindcss@^3.4.1": "npm:tailwindcss@3.4.3_postcss@8.4.45",
+      "npm:tailwindcss@3.4.3": "npm:tailwindcss@3.4.3_postcss@8.4.35",
+      "npm:tailwindcss@^3.4.1": "npm:tailwindcss@3.4.10_postcss@8.4.35",
       "npm:ts-pattern@5.2.0": "npm:ts-pattern@5.2.0",
       "npm:zod@3.23.8": "npm:zod@3.23.8",
       "npm:zod@^3.23.8": "npm:zod@3.23.8"
@@ -98,7 +92,6 @@
           "npm:esbuild-wasm@0.20.2",
           "npm:esbuild@0.20.2",
           "npm:preact-render-to-string@^6.4.2",
-          "npm:preact@10.22.0",
           "npm:preact@^10.22.0",
           "npm:preact@^10.23.2"
         ]
@@ -134,16 +127,6 @@
           "npm:preact@^10.23.2"
         ]
       },
-      "@nihility-io/fresh-lang@0.1.12": {
-        "integrity": "c28e533b838c873b5eb883b573cee1ad8ff06909fa8dda79a759dc5f97cbe962",
-        "dependencies": [
-          "jsr:@nihility-io/record@^0.1.1",
-          "jsr:@nihility-io/result@^0.1.5",
-          "jsr:@nihility-io/use-cookie@^0.1.4",
-          "jsr:@std/yaml@^0.224.1",
-          "npm:zod@^3.23.8"
-        ]
-      },
       "@nihility-io/record@0.1.1": {
         "integrity": "04035cddd472f049a4ecf078432216bd1c105cca9ef3b203f44e02970e46a5a0"
       },
@@ -170,8 +153,8 @@
       "@std/assert@0.226.0": {
         "integrity": "0dfb5f7c7723c18cec118e080fec76ce15b4c31154b15ad2bd74822603ef75b3"
       },
-      "@std/async@1.0.3": {
-        "integrity": "6ed64678db43451683c6c176a21426a2ccd21ba0269ebb2c36133ede3f165792"
+      "@std/async@1.0.5": {
+        "integrity": "31d68214bfbb31bd4c6022401d484e3964147c76c9220098baa703a39b6c2da6"
       },
       "@std/cli@0.224.7": {
         "integrity": "654ca6477518e5e3a0d3fabafb2789e92b8c0febf1a1d24ba4b567aba94b5977"
@@ -194,6 +177,9 @@
       "@std/encoding@1.0.1": {
         "integrity": "5955c6c542ebb4ce6587c3b548dc71e07a6c27614f1976d1d3887b1196cf4e65"
       },
+      "@std/encoding@1.0.4": {
+        "integrity": "2266cd516b32369e3dc5695717c96bf88343a1f761d6e6187a02a2bbe2af86ae"
+      },
       "@std/fmt@0.225.6": {
         "integrity": "aba6aea27f66813cecfd9484e074a9e9845782ab0685c030e453a8a70b37afc8"
       },
@@ -203,8 +189,8 @@
           "jsr:@std/path@1.0.0-rc.1"
         ]
       },
-      "@std/fs@1.0.1": {
-        "integrity": "d6914ca2c21abe591f733b31dbe6331e446815e513e2451b3b9e472daddfefcb"
+      "@std/fs@1.0.3": {
+        "integrity": "3cb839b1360b0a42d8b367c3093bfe4071798e6694fa44cf1963e04a8edba4fe"
       },
       "@std/html@0.224.2": {
         "integrity": "2f7bfd71081fad988af9ce991750ed1574917dc8e6fae0e151987ea020d1e21a"
@@ -222,8 +208,8 @@
           "jsr:@std/streams@^0.224.5"
         ]
       },
-      "@std/io@0.224.4": {
-        "integrity": "bce1151765e4e70e376039fd72c71672b4d4aae363878a5ee3e58361b81197ec"
+      "@std/io@0.224.7": {
+        "integrity": "a70848793c44a7c100926571a8c9be68ba85487bfcd4d0540d86deabe1123dc9"
       },
       "@std/jsonc@0.213.1": {
         "integrity": "5578f21aa583b7eb7317eed077ffcde47b294f1056bdbb9aacec407758637bfe",
@@ -242,8 +228,8 @@
           "jsr:@std/io@^0.224.3"
         ]
       },
-      "@std/media-types@1.0.2": {
-        "integrity": "abb78dc8f7d88141cba8c4d60fc1e8b421e5c7b0d7c84f2f708bc666cad46784"
+      "@std/media-types@1.0.3": {
+        "integrity": "b12d30a7852f7578f4d210622df713bbfd1cbdd9b4ec2eaf5c1845ab70bab159"
       },
       "@std/net@0.224.5": {
         "integrity": "9c2ae90a5c3dc7771da5ae5e13b6f7d5d0b316c1954c5d53f2bfc1129fb757ff"
@@ -447,18 +433,11 @@
         "integrity": "sha512-OBvUsRZqNmjzCZXWLxkZfhcgT+Fk8DDcT/8vD6a1xhDemodyy87UJRJfASMuSD8FaAIeGgGm85ydXhm7lr4fyA==",
         "dependencies": {}
       },
-      "@preact/signals@1.3.0_preact@10.22.0": {
+      "@preact/signals@1.3.0_preact@10.20.2": {
         "integrity": "sha512-EOMeg42SlLS72dhoq6Vjq08havnLseWmPQ8A0YsgIAqMgWgx7V1a39+Pxo6i7SY5NwJtH4849JogFq3M67AzWg==",
         "dependencies": {
           "@preact/signals-core": "@preact/signals-core@1.8.0",
-          "preact": "preact@10.22.0"
-        }
-      },
-      "@preact/signals@1.3.0_preact@10.23.2": {
-        "integrity": "sha512-EOMeg42SlLS72dhoq6Vjq08havnLseWmPQ8A0YsgIAqMgWgx7V1a39+Pxo6i7SY5NwJtH4849JogFq3M67AzWg==",
-        "dependencies": {
-          "@preact/signals-core": "@preact/signals-core@1.8.0",
-          "preact": "preact@10.23.2"
+          "preact": "preact@10.20.2"
         }
       },
       "@trysound/sax@0.2.0": {
@@ -483,8 +462,8 @@
         "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==",
         "dependencies": {}
       },
-      "ansi-regex@6.0.1": {
-        "integrity": "sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==",
+      "ansi-regex@6.1.0": {
+        "integrity": "sha512-7HSX4QQb4CspciLpVFwyRe79O3xsIZDDLER21kERQ71oaPodF8jL725AgJMFAYbooIqolJoRLuM81SpeUkpkvA==",
         "dependencies": {}
       },
       "ansi-styles@4.3.0": {
@@ -516,7 +495,7 @@
         "integrity": "sha512-/cpVNRLSfhOtcGflT13P2794gVSgmPgTR+erw5ifnMLZb0UnSlkK4tquLmkd3BhA+nLo5tX8Cu0upUsGKvKbmg==",
         "dependencies": {
           "browserslist": "browserslist@4.23.3",
-          "caniuse-lite": "caniuse-lite@1.0.30001658",
+          "caniuse-lite": "caniuse-lite@1.0.30001659",
           "fraction.js": "fraction.js@4.3.7",
           "normalize-range": "normalize-range@0.1.2",
           "picocolors": "picocolors@1.1.0",
@@ -551,8 +530,8 @@
       "browserslist@4.23.3": {
         "integrity": "sha512-btwCFJVjI4YWDNfau8RhZ+B1Q/VLoUITrm3RlP6y1tYGWIOa+InuYiRGXUBXo8nA1qKmHMyLB/iVQg5TT4eFoA==",
         "dependencies": {
-          "caniuse-lite": "caniuse-lite@1.0.30001658",
-          "electron-to-chromium": "electron-to-chromium@1.5.17",
+          "caniuse-lite": "caniuse-lite@1.0.30001659",
+          "electron-to-chromium": "electron-to-chromium@1.5.18",
           "node-releases": "node-releases@2.0.18",
           "update-browserslist-db": "update-browserslist-db@1.1.0_browserslist@4.23.3"
         }
@@ -569,13 +548,13 @@
         "integrity": "sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==",
         "dependencies": {
           "browserslist": "browserslist@4.23.3",
-          "caniuse-lite": "caniuse-lite@1.0.30001658",
+          "caniuse-lite": "caniuse-lite@1.0.30001659",
           "lodash.memoize": "lodash.memoize@4.1.2",
           "lodash.uniq": "lodash.uniq@4.5.0"
         }
       },
-      "caniuse-lite@1.0.30001658": {
-        "integrity": "sha512-N2YVqWbJELVdrnsW5p+apoQyYt51aBMSsBZki1XZEfeBCexcM/sf4xiAHcXQBkuOwJBXtWF7aW1sYX6tKebPHw==",
+      "caniuse-lite@1.0.30001659": {
+        "integrity": "sha512-Qxxyfv3RdHAfJcXelgf0hU4DFUVXBGTjqrBUZLUh8AtlGnsDo+CnncYtTd95+ZKfnANUOzxyIQCuU/UeBZBYoA==",
         "dependencies": {}
       },
       "chokidar@3.6.0": {
@@ -653,14 +632,14 @@
         "integrity": "sha512-OA0mILzGc1kCOCSJerOeqDxDQ4HOh+G8NbOJFOTgOCzpw7fCBubk0fEyxp8AgOL/jvLgYA/uV0cMbe43ElF1JA==",
         "dependencies": {
           "mdn-data": "mdn-data@2.0.28",
-          "source-map-js": "source-map-js@1.2.0"
+          "source-map-js": "source-map-js@1.2.1"
         }
       },
       "css-tree@2.3.1": {
         "integrity": "sha512-6Fv1DV/TYw//QF5IzQdqsNDjx/wc8TrMBZsqjL9eW01tWb7R7k/mq+/VXfJCl7SoD5emsJop9cOByJZfs8hYIw==",
         "dependencies": {
           "mdn-data": "mdn-data@2.0.30",
-          "source-map-js": "source-map-js@1.2.0"
+          "source-map-js": "source-map-js@1.2.1"
         }
       },
       "css-what@6.1.0": {
@@ -773,8 +752,8 @@
         "integrity": "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==",
         "dependencies": {}
       },
-      "electron-to-chromium@1.5.17": {
-        "integrity": "sha512-Q6Q+04tjC2KJ8qsSOSgovvhWcv5t+SmpH6/YfAWmhpE5/r+zw6KQy1/yWVFFNyEBvy68twTTXr2d5eLfCq7QIw==",
+      "electron-to-chromium@1.5.18": {
+        "integrity": "sha512-1OfuVACu+zKlmjsNdcJuVQuVE61sZOLbNM4JAQ1Rvh6EOj0/EUKhMJjRH73InPlXSh8HIJk1cVZ8pyOV/FMdUQ==",
         "dependencies": {}
       },
       "emoji-regex@8.0.0": {
@@ -1176,27 +1155,27 @@
           "postcss": "postcss@8.4.35"
         }
       },
-      "postcss-import@15.1.0_postcss@8.4.45": {
+      "postcss-import@15.1.0_postcss@8.4.35": {
         "integrity": "sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==",
         "dependencies": {
-          "postcss": "postcss@8.4.45",
+          "postcss": "postcss@8.4.35",
           "postcss-value-parser": "postcss-value-parser@4.2.0",
           "read-cache": "read-cache@1.0.0",
           "resolve": "resolve@1.22.8"
         }
       },
-      "postcss-js@4.0.1_postcss@8.4.45": {
+      "postcss-js@4.0.1_postcss@8.4.35": {
         "integrity": "sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==",
         "dependencies": {
           "camelcase-css": "camelcase-css@2.0.1",
-          "postcss": "postcss@8.4.45"
+          "postcss": "postcss@8.4.35"
         }
       },
-      "postcss-load-config@4.0.2_postcss@8.4.45": {
+      "postcss-load-config@4.0.2_postcss@8.4.35": {
         "integrity": "sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ==",
         "dependencies": {
           "lilconfig": "lilconfig@3.1.2",
-          "postcss": "postcss@8.4.45",
+          "postcss": "postcss@8.4.35",
           "yaml": "yaml@2.5.1"
         }
       },
@@ -1250,10 +1229,10 @@
           "postcss-selector-parser": "postcss-selector-parser@6.1.2"
         }
       },
-      "postcss-nested@6.2.0_postcss@8.4.45": {
+      "postcss-nested@6.2.0_postcss@8.4.35": {
         "integrity": "sha512-HQbt28KulC5AJzG+cZtj9kvKB93CFCdLvog1WFLf1D+xmMvPGlBstkpTEZfK5+AN9hfJocyBFCNiqyS48bpgzQ==",
         "dependencies": {
-          "postcss": "postcss@8.4.45",
+          "postcss": "postcss@8.4.35",
           "postcss-selector-parser": "postcss-selector-parser@6.1.2"
         }
       },
@@ -1374,15 +1353,7 @@
         "dependencies": {
           "nanoid": "nanoid@3.3.7",
           "picocolors": "picocolors@1.1.0",
-          "source-map-js": "source-map-js@1.2.0"
-        }
-      },
-      "postcss@8.4.45": {
-        "integrity": "sha512-7KTLTdzdZZYscUc65XmjFiB73vBhBfbPztCYdUNvlaso9PrzjzcmjqBPR0lNGkcVlcO4BjiO5rK/qNz+XAen1Q==",
-        "dependencies": {
-          "nanoid": "nanoid@3.3.7",
-          "picocolors": "picocolors@1.1.0",
-          "source-map-js": "source-map-js@1.2.0"
+          "source-map-js": "source-map-js@1.2.1"
         }
       },
       "postgres@3.4.4": {
@@ -1397,10 +1368,6 @@
       },
       "preact@10.20.2": {
         "integrity": "sha512-S1d1ernz3KQ+Y2awUxKakpfOg2CEmJmwOP+6igPx6dgr6pgDvenqYviyokWso2rhHvGtTlWWnJDa7RaPbQerTg==",
-        "dependencies": {}
-      },
-      "preact@10.22.0": {
-        "integrity": "sha512-RRurnSjJPj4rp5K6XoP45Ui33ncb7e4H7WiOHVpjbkvqvA3U+N8Z6Qbo0AE6leGYBV66n8EhEaFixvIu3SkxFw==",
         "dependencies": {}
       },
       "preact@10.23.2": {
@@ -1476,8 +1443,8 @@
         "integrity": "sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==",
         "dependencies": {}
       },
-      "source-map-js@1.2.0": {
-        "integrity": "sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==",
+      "source-map-js@1.2.1": {
+        "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==",
         "dependencies": {}
       },
       "string-width@4.2.3": {
@@ -1505,7 +1472,7 @@
       "strip-ansi@7.1.0": {
         "integrity": "sha512-iq6eVVI64nQQTRYq2KtEg2d2uU7LElhTJwsH4YzIHZshxlgZms/wIc4VoDQTlG/IvVIrBKG06CrZnp0qv7hkcQ==",
         "dependencies": {
-          "ansi-regex": "ansi-regex@6.0.1"
+          "ansi-regex": "ansi-regex@6.1.0"
         }
       },
       "stylehacks@6.1.1_postcss@8.4.35": {
@@ -1544,7 +1511,34 @@
           "picocolors": "picocolors@1.1.0"
         }
       },
-      "tailwindcss@3.4.3_postcss@8.4.45": {
+      "tailwindcss@3.4.10_postcss@8.4.35": {
+        "integrity": "sha512-KWZkVPm7yJRhdu4SRSl9d4AK2wM3a50UsvgHZO7xY77NQr2V+fIrEuoDGQcbvswWvFGbS2f6e+jC/6WJm1Dl0w==",
+        "dependencies": {
+          "@alloc/quick-lru": "@alloc/quick-lru@5.2.0",
+          "arg": "arg@5.0.2",
+          "chokidar": "chokidar@3.6.0",
+          "didyoumean": "didyoumean@1.2.2",
+          "dlv": "dlv@1.1.3",
+          "fast-glob": "fast-glob@3.3.2",
+          "glob-parent": "glob-parent@6.0.2",
+          "is-glob": "is-glob@4.0.3",
+          "jiti": "jiti@1.21.6",
+          "lilconfig": "lilconfig@2.1.0",
+          "micromatch": "micromatch@4.0.8",
+          "normalize-path": "normalize-path@3.0.0",
+          "object-hash": "object-hash@3.0.0",
+          "picocolors": "picocolors@1.1.0",
+          "postcss": "postcss@8.4.35",
+          "postcss-import": "postcss-import@15.1.0_postcss@8.4.35",
+          "postcss-js": "postcss-js@4.0.1_postcss@8.4.35",
+          "postcss-load-config": "postcss-load-config@4.0.2_postcss@8.4.35",
+          "postcss-nested": "postcss-nested@6.2.0_postcss@8.4.35",
+          "postcss-selector-parser": "postcss-selector-parser@6.1.2",
+          "resolve": "resolve@1.22.8",
+          "sucrase": "sucrase@3.35.0"
+        }
+      },
+      "tailwindcss@3.4.3_postcss@8.4.35": {
         "integrity": "sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==",
         "dependencies": {
           "@alloc/quick-lru": "@alloc/quick-lru@5.2.0",
@@ -1561,11 +1555,11 @@
           "normalize-path": "normalize-path@3.0.0",
           "object-hash": "object-hash@3.0.0",
           "picocolors": "picocolors@1.1.0",
-          "postcss": "postcss@8.4.45",
-          "postcss-import": "postcss-import@15.1.0_postcss@8.4.45",
-          "postcss-js": "postcss-js@4.0.1_postcss@8.4.45",
-          "postcss-load-config": "postcss-load-config@4.0.2_postcss@8.4.45",
-          "postcss-nested": "postcss-nested@6.2.0_postcss@8.4.45",
+          "postcss": "postcss@8.4.35",
+          "postcss-import": "postcss-import@15.1.0_postcss@8.4.35",
+          "postcss-js": "postcss-js@4.0.1_postcss@8.4.35",
+          "postcss-load-config": "postcss-load-config@4.0.2_postcss@8.4.35",
+          "postcss-nested": "postcss-nested@6.2.0_postcss@8.4.35",
           "postcss-selector-parser": "postcss-selector-parser@6.1.2",
           "resolve": "resolve@1.22.8",
           "sucrase": "sucrase@3.35.0"
@@ -1687,7 +1681,6 @@
       "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
       "jsr:@nihility-io/crypto@0.1.1",
       "jsr:@nihility-io/flowbite-icons-preact@0.1.1",
-      "jsr:@nihility-io/fresh-lang@0.1.12",
       "jsr:@nihility-io/record@0.1.1",
       "jsr:@nihility-io/result@0.1.7",
       "jsr:@nihility-io/use-cookie@0.1.4",

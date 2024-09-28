@@ -49,7 +49,7 @@
     "tailwindcss/plugin": "npm:tailwindcss@3.4.3/plugin.js",
     "@nihility-io/crypto": "jsr:@nihility-io/crypto@0.1.1",
     "@nihility-io/flowbite-icons-preact": "jsr:@nihility-io/flowbite-icons-preact@0.1.1",
-    "@nihility-io/fresh-lang": "jsr:@nihility-io/fresh-lang@0.1.12",
+    "lang": "./lang/mod.ts",
     "@nihility-io/record": "jsr:@nihility-io/record@0.1.1",
     "@nihility-io/result": "jsr:@nihility-io/result@0.1.7",
     "@nihility-io/use-cookie": "jsr:@nihility-io/use-cookie@0.1.4",
@@ -65,13 +65,11 @@
     "components": "./components/mod.ts",
     "config": "./config/mod.ts",
     "config/plugin": "./config/plugin.ts",
-    "context": "./context.ts",
     "deps.json": "./deps.json",
     "flowbite": "npm:flowbite@2.3.0",
     "flowbite/": "npm:/flowbite@2.3.0/",
     "helpers": "./helpers/mod.ts",
     "islands": "./islands/mod.ts",
-    "lang": "./fresh-lang.gen.ts",
     "log": "./log/mod.ts",
     "models": "./models/mod.ts",
     "postgres": "npm:postgres@3.4.4",
@@ -80,7 +78,9 @@
     "secret/models": "./secret/models/mod.ts",
     "secret/server": "./secret/server/mod.ts",
     "ts-pattern": "npm:ts-pattern@5.2.0",
-    "zod": "npm:zod@3.23.8"
+    "zod": "npm:zod@3.23.8",
+    "state": "./state.ts",
+    "utils": "./utils.ts"
   },
   "unstable": [
     "kv"

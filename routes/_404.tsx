@@ -1,9 +1,10 @@
 import { PageContent } from "components"
-import { PagePropsWithContext } from "context"
+import { type PageProps } from "fresh"
 import { useTranslationWithPrefix } from "lang"
+import { State } from "state"
 
-export default ({ state: ctx }: PagePropsWithContext) => {
-	const $ = useTranslationWithPrefix(ctx.lang, "ErrorPage.NotFound")
+export default ({ state }: PageProps<unknown, State>) => {
+	const $ = useTranslationWithPrefix(state.lang, "ErrorPage.NotFound")
 	return (
 		<PageContent title={$("Title")} description={$("Description")}>
 			<a href="/" class="underline">{$("GoHome")}</a>

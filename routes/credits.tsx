@@ -1,14 +1,15 @@
 import { PageContent, Table } from "components"
 import { config } from "config"
-import { PagePropsWithContext } from "context"
 import deps from "../deps.json" with { type: "json" }
 import { useTranslation } from "lang"
+import { type PageProps } from "fresh"
+import { State } from "state"
 
 /**
  * Page for show copyright and credit information
  */
-export default ({ state: ctx }: PagePropsWithContext) => {
-	const $ = useTranslation(ctx.lang)
+export default ({ state }: PageProps<unknown, State>) => {
+	const $ = useTranslation(state.lang)
 	return (
 		<PageContent title={$("Credits.Title")}>
 			<p
