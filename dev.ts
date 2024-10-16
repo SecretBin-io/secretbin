@@ -9,7 +9,7 @@ const builder = new Builder()
 tailwind(builder, app, {})
 
 if (Deno.args.includes("build")) {
-  await builder.build(app)
+	await builder.build(app)
 } else {
-  await builder.listen(app)
+	await builder.listen(app)
 }

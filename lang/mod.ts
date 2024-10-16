@@ -8,25 +8,25 @@ export { type TrimPrefix } from "./helpers.ts"
  * Currently supported languages
  */
 export enum Language {
-    English = "en",
-    German = "de",
+	English = "en",
+	German = "de",
 }
 
 const translations = { [Language.English]: en, [Language.German]: de }
 
 export interface SupportedLanguage {
-    name: Language
-    label: string
-    native: string
-    author: string
+	name: Language
+	label: string
+	native: string
+	author: string
 }
 
 /**
  * Metadata of the supported languages
  */
 export const supportedLanguages: SupportedLanguage[] = [
-    { name: Language.English, label: "English", native: "English", author: "Nihility.io" },
-    { name: Language.German, label: "German", native: "Deutsch", author: "Nihility.io" },
+	{ name: Language.English, label: "English", native: "English", author: "Nihility.io" },
+	{ name: Language.German, label: "German", native: "Deutsch", author: "Nihility.io" },
 ]
 
 /**
@@ -41,27 +41,27 @@ export const isLanguageSupported = (lang: string): boolean => !!supportedLanguag
 export type TranslationKey = FlattenObjectKeys<typeof en.Translations>
 
 export const useTranslation = (lang: Language) => (path: TranslationKey, params?: Record<string, string>): string => {
-    let o: any = translations[lang].Translations
-    for (const key of path.split(".")) {
-        if (o === undefined) {
-            break
-        }
+	let o: any = translations[lang].Translations
+	for (const key of path.split(".")) {
+		if (o === undefined) {
+			break
+		}
 
-        o = o[key]
-    }
+		o = o[key]
+	}
 
-    if (typeof o !== "string") {
-        if (lang !== Language.English) {
-            return useTranslation(Language.English)(path, params)
-        }
-        return `{${path}}`
-    }
+	if (typeof o !== "string") {
+		if (lang !== Language.English) {
+			return useTranslation(Language.English)(path, params)
+		}
+		return `{${path}}`
+	}
 
-    if (params === undefined) {
-        return o
-    }
+	if (params === undefined) {
+		return o
+	}
 
-    return formatString(o, params)
+	return formatString(o, params)
 }
 
 /**
@@ -77,6 +77,6 @@ export const useTranslation = (lang: Language) => (path: TranslationKey, params?
  * }
  */
 export const useTranslationWithPrefix =
-    <P extends string>(initialLanguage: Language, prefix: P) =>
-    (key: TrimPrefix<P, TranslationKey>, params?: Record<string, string>) =>
-        useTranslation(initialLanguage)(prefix + "." + key as unknown as TranslationKey, params)
+	<P extends string>(initialLanguage: Language, prefix: P) =>
+	(key: TrimPrefix<P, TranslationKey>, params?: Record<string, string>) =>
+		useTranslation(initialLanguage)(prefix + "." + key as unknown as TranslationKey, params)

@@ -46,12 +46,13 @@ export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 					label={$("Actions.CopyLink")}
 					svg={<Icon.FileCopySolid />}
 					// onClick={() => navigator.clipboard.writeText(link)}
-					onClick={() => navigator.clipboard.write([
-						new ClipboardItem({
-							"text/plain": Promise.resolve(link),
-							"text/html": Promise.resolve(`<a href="${link}">${link}`),
-						}),
-					])}
+					onClick={() =>
+						navigator.clipboard.write([
+							new ClipboardItem({
+								"text/plain": Promise.resolve(link),
+								"text/html": Promise.resolve(`<a href="${link}">${link}`),
+							}),
+						])}
 				/>
 				<Button
 					label={$("Actions.GenerateQR")}

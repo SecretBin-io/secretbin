@@ -9,23 +9,23 @@ app.use(stateMiddleware)
 
 // this can also be defined via a file. feel free to delete this!
 const exampleLoggerMiddleware = define.middleware((ctx) => {
-  console.log(`${ctx.req.method} ${ctx.req.url}`)
-  return ctx.next()
+	console.log(`${ctx.req.method} ${ctx.req.url}`)
+	return ctx.next()
 })
 app.use(exampleLoggerMiddleware)
 
 await fsRoutes(app, {
-  dir: "./",
-  loadIsland: (path) => import(`./islands/${path}`),
-  loadRoute: (path) => import(`./routes/${path}`),
+	dir: "./",
+	loadIsland: (path) => import(`./islands/${path}`),
+	loadRoute: (path) => import(`./routes/${path}`),
 })
 
 if (import.meta.main) {
-  const isBuildMode = Deno.args.includes("build")
-  if (!isBuildMode) {
-    // Trigger the garbage collector on startup but not when building
-    Secrets.shared.garbageCollection()
-  }
+	const isBuildMode = Deno.args.includes("build")
+	if (!isBuildMode) {
+		// Trigger the garbage collector on startup but not when building
+		Secrets.shared.garbageCollection()
+	}
 
-  await app.listen()
+	await app.listen()
 }

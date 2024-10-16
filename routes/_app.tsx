@@ -61,10 +61,8 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 
 				<Navbar state={state} />
 
-
 				<div class="pt-20 pb-20 sm:pt-10 sm:pb-10">
 					<Partial name="content">
-
 						<div class="px-4 py-8 mx-auto">
 							{/* Show banner e.g. for planned maintenance message if configured */}
 							<Show if={!!(config.banner[state.lang] ?? config.banner.en)}>
@@ -93,7 +91,11 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 					<ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
 						{config.branding.links.map((link) => (
 							<li>
-								<a class="hover:underline me-4 md:me-6" target="_blank" href={link.link[state.lang] ?? link.link.en}>
+								<a
+									class="hover:underline me-4 md:me-6"
+									target="_blank"
+									href={link.link[state.lang] ?? link.link.en}
+								>
 									{link.name[state.lang] ?? link.name.en}
 								</a>
 							</li>
