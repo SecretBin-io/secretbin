@@ -1,6 +1,6 @@
 import classNames from "classnames"
 import { Button, ButtonTheme } from "components"
-import { Modal as FlowbiteModal, ModalInterface } from "flowbite"
+import { type ModalInterface } from "flowbite"
 import { ComponentChildren } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
 import { BaseProps, elementID } from "./helpers.ts"
@@ -49,20 +49,23 @@ export const Modal = ({ id, title, actions, modelRef, children, ...props }: Moda
 		}
 
 		// Create a modal instance using flowbite
-		const m: ModalInterface = new FlowbiteModal(modalRef.current, {
-			placement: "bottom-right",
-			backdrop: "static",
-			backdropClasses: "bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40",
-			closable: true,
-		}, {
-			id: elementID("modal", id),
-			override: true,
+		import("flowbite").then(({ Modal: FlowbiteModal }) => {
+			const m: ModalInterface = new FlowbiteModal(modalRef.current, {
+				placement: "bottom-right",
+				backdrop: "static",
+				backdropClasses: "bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40",
+				closable: true,
+			}, {
+				id: elementID("modal", id),
+				override: true,
+			})
+
+			setModal(m)
+
+			// Send the model instance to the parent
+			modelRef?.(m)
 		})
 
-		setModal(m)
-
-		// Send the model instance to the parent
-		modelRef?.(m)
 	}, [])
 
 	return (

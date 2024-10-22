@@ -22,8 +22,6 @@ export const Options = ({ state, options, setOptions, setPassword }: OptionsProp
 	const [usePass, setUsePass] = useState(config.defaults.showPassword)
 
 	useEffect(() => {
-		console.log({ pass1, pass2 })
-
 		if (!usePass) {
 			setPassword("")
 		}
@@ -46,8 +44,7 @@ export const Options = ({ state, options, setOptions, setPassword }: OptionsProp
 				<Select
 					options={Record.mapToArray(config.expires, (key, value) => ({
 						name: $(
-							`Expiration.Expire.${value.unit as string}.${
-								value.count === 1 ? "One" : "Many"
+							`Expiration.Expire.${value.unit as string}.${value.count === 1 ? "One" : "Many"
 							}` as unknown as TrimPrefix<"NewSecret", TranslationKey>,
 							{ count: "" + value.count },
 						),

@@ -1,5 +1,4 @@
 import { Button, Icon } from "components"
-import { initDropdowns } from "flowbite"
 import { useEffect, useRef } from "preact/hooks"
 
 export interface Language<LanguageName> {
@@ -22,7 +21,7 @@ export const LanguageMenu = <LanguageName,>({ language, setLanguage, languages }
 
 	useEffect(() => {
 		// This is necessary since my primary web browser, Safari, is weird and didn't load Flowbite correctly
-		initDropdowns()
+		import("flowbite").then(({ initDropdowns }) => initDropdowns())
 	}, [])
 
 	return (

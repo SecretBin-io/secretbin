@@ -1,7 +1,7 @@
 import { Cookies } from "@nihility-io/use-cookie"
 import { Modal } from "components"
 import { config } from "config"
-import { ModalInterface } from "flowbite"
+import { type ModalInterface } from "flowbite"
 import { useTranslationWithPrefix } from "lang"
 import { State } from "state"
 
@@ -25,8 +25,8 @@ export const Terms = ({ state }: TermsProps) => {
 			}}
 			title={
 				config.branding.terms?.title[state.lang] ?? // Get title from config in the desired language
-					config.branding.terms?.title.en ?? // If not found try to get title from config in English
-					$("Title") // If not found either use default from translation files
+				config.branding.terms?.title.en ?? // If not found try to get title from config in English
+				$("Title") // If not found either use default from translation files
 			}
 			actions={[
 				{
