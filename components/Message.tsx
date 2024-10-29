@@ -14,7 +14,7 @@ const colorMessageType: Record<MessageType, string> = {
 
 const iconMessageType: Record<MessageType, () => JSX.Element> = {
 	info: () => <></>,
-	error: () => <Icon.ExclamationCircleSolid />,
+	error: () => <Icon name="Exclamation" />,
 }
 
 export interface MessageProps extends BaseProps {

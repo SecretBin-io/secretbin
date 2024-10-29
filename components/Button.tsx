@@ -1,7 +1,7 @@
 import classNames from "classnames"
-import { cloneElement, JSX, VNode } from "preact"
+import { Icon, IconName } from "components"
+import { JSX } from "preact"
 import { BaseProps } from "./helpers.ts"
-import { MutableRef } from "preact/hooks"
 
 /**
  * Button themes
@@ -30,7 +30,7 @@ export interface ButtonProps extends BaseProps {
 	theme?: ButtonTheme
 
 	/** Optional button icon */
-	svg?: VNode<JSX.HTMLAttributes<SVGSVGElement>>
+	icon?: IconName
 
 	/**
 	 * Overrides button styling (cannot be used with `theme`)
@@ -63,7 +63,7 @@ export interface ButtonProps extends BaseProps {
  * Creates a clickable button
  */
 export const Button = (
-	{ label, theme = "default", svg, overrideClass, onClick, link, submit, dropdown, ...props }: ButtonProps,
+	{ label, theme = "default", overrideClass, onClick, link, submit, dropdown, icon, ...props }: ButtonProps,
 ) => {
 	const classes = overrideClass ? props.class : classNames(
 		"focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mb-2",
@@ -73,10 +73,7 @@ export const Button = (
 
 	const Label = () => (
 		<>
-			{/* Overwrite SVG size */}
-			{svg
-				? cloneElement(svg, { ...svg.props, class: classNames({ "w-4 h-4": !overrideClass, "me-2": label }) })
-				: <></>}
+			{icon ? <Icon name={icon} class={classNames({ "w-4 h-4": !overrideClass, "me-2": label })} /> : <></>}
 			{label ? label : <></>}
 		</>
 	)

@@ -26,7 +26,7 @@ export const FileItem = ({ file, downloadable, onDelete, ...props }: FileItemPro
 	>
 		<div class="flex items-center space-x-4 rtl:space-x-reverse">
 			<div class="flex-shrink-0">
-				<Icon.FileSolid className="w-6 h-6 text-gray-800 dark:text-white" />
+				<Icon name="File" className="w-6 h-6 text-gray-800 dark:text-white" />
 			</div>
 			<div class="flex-1 min-w-0">
 				<p class="text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -39,7 +39,7 @@ export const FileItem = ({ file, downloadable, onDelete, ...props }: FileItemPro
 			<Show if={onDelete}>
 				<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
 					<button onClick={onDelete}>
-						<Icon.TrashBinOutline class="w-6 h-6 text-gray-800 dark:text-white" />
+						<Icon name="Trash" class="w-6 h-6 text-gray-800 dark:text-white" />
 					</button>
 				</div>
 			</Show>

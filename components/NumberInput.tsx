@@ -34,8 +34,8 @@ const NumberButton = ({ inputId, mode, disabled, onClick }: NumberButtonProps) =
 		onClick={onClick}
 	>
 		{mode === "+"
-			? <Icon.PlusOutline class="w-4 h-4 text-gray-900 dark:text-white" />
-			: <Icon.MinusOutline class="w-4 h-4 text-gray-900 dark:text-white" />}
+			? <Icon name="Plus" class="w-4 h-4 text-gray-900 dark:text-white" />
+			: <Icon name="Minus" class="w-4 h-4 text-gray-900 dark:text-white" />}
 	</button>
 )
 

@@ -48,7 +48,7 @@ export const Upload = ({ text = "Click to upload or drag and drop", multiple, on
 				class="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
 			>
 				<div class="flex flex-col items-center justify-center pt-5 pb-6">
-					<Icon.CloudArrowUpOutline class="w-11 h-11 text-gray-500 dark:text-gray-400" />
+					<Icon name="Upload" class="w-11 h-11 text-gray-500 dark:text-gray-400" />
 					<p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
 						<span class="font-semibold">{text}</span>
 					</p>

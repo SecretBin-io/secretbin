@@ -43,7 +43,6 @@
 	"imports": {
 		"@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
 		"@nihility-io/crypto": "jsr:@nihility-io/crypto@0.1.1",
-		"@nihility-io/flowbite-icons-preact": "jsr:@nihility-io/flowbite-icons-preact@0.1.1",
 		"@nihility-io/record": "jsr:@nihility-io/record@0.1.1",
 		"@nihility-io/result": "jsr:@nihility-io/result@0.1.7",
 		"@nihility-io/use-cookie": "jsr:@nihility-io/use-cookie@0.1.4",

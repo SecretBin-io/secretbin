@@ -10,4 +10,5 @@ export interface State {
 	theme: Theme
 	locale: string
 	locales: string[]
+	termsAccepted: boolean
 }

@@ -1,5 +1,6 @@
-export * from "./Navbar.tsx"
+export * from "./LanguageMenu.tsx"
 export * from "./NewSecret.tsx"
 export * from "./ShareSecret.tsx"
 export * from "./Terms.tsx"
+export * from "./ThemeToggle.tsx"
 export * from "./ViewSecret.tsx"

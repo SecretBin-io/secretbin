@@ -55,7 +55,7 @@ export const Banner = ({ id, title, message, top, bottom, ...props }: BannerProp
 					type="button"
 					class="flex-shrink-0 inline-flex justify-center w-7 h-7 items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white"
 				>
-					<Icon.CloseOutline class="w-7 h-7" />
+					<Icon name="Close" class="w-7 h-7" />
 				</button>
 			</div>
 		</div>

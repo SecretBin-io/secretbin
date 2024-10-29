@@ -34,17 +34,17 @@ export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 			<ButtonGroup class="py-3">
 				<Button
 					label={$("Actions.New")}
-					svg={<Icon.PlusOutline />}
+					icon="Plus"
 					link="/"
 				/>
 				<Button
 					label={$("Actions.Open")}
-					svg={<Icon.GlobeOutline />}
+					icon="Internet"
 					link={link}
 				/>
 				<Button
 					label={$("Actions.CopyLink")}
-					svg={<Icon.FileCopySolid />}
+					icon="File"
 					// onClick={() => navigator.clipboard.writeText(link)}
 					onClick={() =>
 						navigator.clipboard.write([
@@ -56,17 +56,17 @@ export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 				/>
 				<Button
 					label={$("Actions.GenerateQR")}
-					svg={<Icon.CameraPhotoSolid />}
+					icon="QRCode"
 					onClick={() => setShowQrCode(true)}
 				/>
 				<Button
 					label={$("Actions.Email")}
-					svg={<Icon.EnvelopeSolid />}
+					icon="Mail"
 					onClick={sendEmail}
 				/>
 				<Button
 					label={$("Actions.Delete")}
-					svg={<Icon.TrashBinSolid />}
+					icon="Trash"
 					link={`/secret/${id}/delete`}
 				/>
 			</ButtonGroup>

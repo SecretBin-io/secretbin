@@ -69,7 +69,7 @@ export default {
 				CopyLink: "Copy Link",
 				GenerateQR: "Generate QR Code",
 				Email: "Email Link",
-				Delete: "Delete Link",
+				Delete: "Delete Secret",
 			},
 		},
 		ViewSecret: {

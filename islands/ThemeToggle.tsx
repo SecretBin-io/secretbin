@@ -1,5 +1,6 @@
 import { Cookies } from "@nihility-io/use-cookie"
-import { Button, Icon } from "components"
+import { Button } from "components"
+import { asset } from "fresh/runtime"
 import { useEffect, useState } from "preact/hooks"
 
 export interface ThemeToggleProps {
@@ -32,13 +33,13 @@ export const ThemeToggle = ({ cookie = "color-theme" }: ThemeToggleProps) => {
 	}, [isDark])
 
 	return (
-		<Button
-			overrideClass
-			class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-			onClick={() => setIsDark(!isDark)}
-			svg={isDark
-				? <Icon.SunSolid class="w-3 h-3" fill="currentColor" />
-				: <Icon.MoonSolid class="w-3 h-3" fill="currentColor" />}
-		/>
+		<>
+			<Button
+				overrideClass
+				class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+				onClick={() => setIsDark(!isDark)}
+				icon={isDark ? "Day" : "Night"}
+			/>
+		</>
 	)
 }

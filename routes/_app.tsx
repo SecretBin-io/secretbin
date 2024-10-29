@@ -1,9 +1,10 @@
-import { asset, Partial } from "fresh/runtime"
+import classNames from "classnames"
 import { Message, Show } from "components"
 import { config } from "config"
-import { Navbar, Terms } from "islands"
-import { useTranslation } from "lang"
 import { type PageProps } from "fresh"
+import { asset, Partial } from "fresh/runtime"
+import { ThemeToggle, LanguageMenu, Terms } from "islands"
+import { useTranslation } from "lang"
 import { State, Theme } from "state"
 
 /**
@@ -57,12 +58,33 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 				<meta property="og:image:width" content="180" />
 			</head>
 			<body class="bg-white dark:bg-gray-800 text-black dark:text-white" f-client-nav>
-				<Terms state={state} />
+				<Show if={!state.termsAccepted}>
+					<Terms state={state} />
+				</Show>
 
-				<Navbar state={state} />
+				<nav class="fixed z-20 w-full top-0 start-0 bg-gray-50 shadow dark:bg-gray-900">
+					<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+						<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+							<Show if={config.branding.showLogo}>
+								<img
+									class={classNames("h-8", { "dark:invert": config.branding.invertLogo })}
+									src={asset("/images/Icon.png")}
+								/>
+							</Show>
+							<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+								{config.branding.appName}
+							</span>
+						</a>
+						<div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
+							<ThemeToggle />
+							<LanguageMenu language={state.lang} />
+						</div>
+					</div>
+				</nav>
+
 
 				<div class="pt-20 pb-20 sm:pt-10 sm:pb-10">
-					<Partial name="content">
+					<div name="content">
 						<div class="px-4 py-8 mx-auto">
 							{/* Show banner e.g. for planned maintenance message if configured */}
 							<Show if={!!(config.banner[state.lang] ?? config.banner.en)}>
@@ -78,9 +100,12 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 									</div>
 								</div>
 							</Show>
-							<Component />
+
+							<Partial name="content">
+								<Component />
+							</Partial>
 						</div>
-					</Partial>
+					</div>
 				</div>
 
 				{/* Add footer with configured links */}

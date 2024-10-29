@@ -5,7 +5,6 @@
     "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7": "0.0.1-alpha.7",
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.0",
     "jsr:@nihility-io/crypto@0.1.1": "0.1.1",
-    "jsr:@nihility-io/flowbite-icons-preact@0.1.1": "0.1.1",
     "jsr:@nihility-io/record@0.1.1": "0.1.1",
     "jsr:@nihility-io/result@0.1.7": "0.1.7",
     "jsr:@nihility-io/use-cookie@0.1.4": "0.1.4",
@@ -50,7 +49,6 @@
     "npm:postcss@8.4.35": "8.4.35",
     "npm:postgres@^3.4.4": "3.4.4",
     "npm:preact-render-to-string@^6.5.11": "6.5.11_preact@10.24.3",
-    "npm:preact@10.20.2": "10.20.2",
     "npm:preact@^10.22.0": "10.24.3",
     "npm:preact@^10.24.1": "10.24.3",
     "npm:preact@^10.24.3": "10.24.3",
@@ -106,13 +104,6 @@
       "integrity": "612f6550e6834429232376531ea652953b2f51005babb3f07f86bbe8f7fc74ca",
       "dependencies": [
         "jsr:@std/encoding@^1.0.1"
-      ]
-    },
-    "@nihility-io/flowbite-icons-preact@0.1.1": {
-      "integrity": "92e577c82d39b310cc316ea35cd31f1873aabaa24523cfbd2f780e3a217229a0",
-      "dependencies": [
-        "npm:preact@10.20.2",
-        "npm:preact@^10.24.3"
       ]
     },
     "@nihility-io/record@0.1.1": {
@@ -357,7 +348,7 @@
       "integrity": "sha512-EOMeg42SlLS72dhoq6Vjq08havnLseWmPQ8A0YsgIAqMgWgx7V1a39+Pxo6i7SY5NwJtH4849JogFq3M67AzWg==",
       "dependencies": [
         "@preact/signals-core",
-        "preact@10.24.3"
+        "preact"
       ]
     },
     "@rollup/plugin-node-resolve@15.3.0": {
@@ -1260,11 +1251,8 @@
     "preact-render-to-string@6.5.11_preact@10.24.3": {
       "integrity": "sha512-ubnauqoGczeGISiOh6RjX0/cdaF8v/oDXIjO85XALCQjwQP+SB4RDXXtvZ6yTYSjG+PC1QRP2AhPgCEsM2EvUw==",
       "dependencies": [
-        "preact@10.24.3"
+        "preact"
       ]
-    },
-    "preact@10.20.2": {
-      "integrity": "sha512-S1d1ernz3KQ+Y2awUxKakpfOg2CEmJmwOP+6igPx6dgr6pgDvenqYviyokWso2rhHvGtTlWWnJDa7RaPbQerTg=="
     },
     "preact@10.24.3": {
       "integrity": "sha512-Z2dPnBnMUfyQfSQ+GBdsGa16hz35YmLmtTLhM169uW944hYL6xzTYkJjC07j+Wosz733pMWx0fgON3JNw1jJQA=="
@@ -1532,7 +1520,6 @@
       "jsr:@fresh/core@^2.0.0-alpha.23",
       "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
       "jsr:@nihility-io/crypto@0.1.1",
-      "jsr:@nihility-io/flowbite-icons-preact@0.1.1",
       "jsr:@nihility-io/record@0.1.1",
       "jsr:@nihility-io/result@0.1.7",
       "jsr:@nihility-io/use-cookie@0.1.4",

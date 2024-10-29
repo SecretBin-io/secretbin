@@ -6,6 +6,7 @@ import { getCookies } from "@std/http"
 export const define = createDefine<State>()
 
 export const stateMiddleware = define.middleware(async (ctx) => {
+	const cookies = getCookies(ctx.req.headers)
 	ctx.state.locales = (ctx.req.headers.get("Accept-Language") ?? "")
 		.split(",")
 		.map((lang): [number, string] => {
@@ -19,7 +20,7 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 
 	ctx.state.locale = ctx.state.locales.find(() => true) ?? "en-US"
 
-	const cookieLang = getCookies(ctx.req.headers)["lang"]
+	const cookieLang = cookies["lang"]
 	if (cookieLang && isLanguageSupported(cookieLang)) {
 		ctx.state.lang = cookieLang as Language
 	} else {
@@ -27,7 +28,7 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 	}
 
 	ctx.state.theme = (() => {
-		switch (getCookies(ctx.req.headers)["color-theme"] ?? "dark") {
+		switch (cookies["color-theme"] ?? "dark") {
 			case "light":
 				return Theme.Light
 			case "dark":
@@ -36,6 +37,8 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 				return Theme.Light
 		}
 	})()
+
+	ctx.state.termsAccepted = cookies["terms"] === "accepted"
 
 	return await ctx.next()
 })

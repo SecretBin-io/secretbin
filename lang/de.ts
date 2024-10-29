@@ -70,7 +70,7 @@ export default {
 				CopyLink: "Link kopieren",
 				GenerateQR: "QR-Code generieren",
 				Email: "Link per E-Mail senden",
-				Delete: "Link löschen",
+				Delete: "Geheimnis löschen",
 			},
 		},
 		ViewSecret: {
