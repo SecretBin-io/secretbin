@@ -1,4 +1,4 @@
-import { Cookies } from "@nihility-io/use-cookie"
+import { Cookies } from "@nihility-io/cookies"
 import { Modal } from "components"
 import { config } from "config"
 import { type ModalInterface } from "flowbite"

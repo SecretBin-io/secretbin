@@ -1,6 +1,5 @@
-import { Cookies } from "@nihility-io/use-cookie"
+import { Cookies } from "@nihility-io/cookies"
 import { Button } from "components"
-import { asset } from "fresh/runtime"
 import { useEffect, useState } from "preact/hooks"
 
 export interface ThemeToggleProps {

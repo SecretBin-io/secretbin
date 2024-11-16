@@ -43,5 +43,9 @@ Temporary Items
 /_fresh
 
 # End of https://www.toptal.com/developers/gitignore/api/deno
+
+### Testing ###
+coverage
+
 /target
 /test.ts

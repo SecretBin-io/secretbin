@@ -65,7 +65,6 @@ export const Modal = ({ id, title, actions, modelRef, children, ...props }: Moda
 			// Send the model instance to the parent
 			modelRef?.(m)
 		})
-
 	}, [])
 
 	return (

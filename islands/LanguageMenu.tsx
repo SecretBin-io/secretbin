@@ -1,7 +1,7 @@
-import { Button, Icon } from "components"
+import { Button } from "components"
 import { useEffect, useRef } from "preact/hooks"
-import { supportedLanguages, Language } from "lang"
-import Cookies from "@nihility-io/use-cookie"
+import { Language, supportedLanguages } from "lang"
+import Cookies from "@nihility-io/cookies"
 
 export interface LanguageMenuProps {
 	language: Language

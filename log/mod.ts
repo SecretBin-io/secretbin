@@ -1,5 +1,5 @@
 import * as log from "@std/log"
-import { LogRecord } from "@std/log"
+import { type LogRecord } from "@std/log"
 import { config } from "config"
 
 const flattenArgs = (args: unknown[]): unknown => {

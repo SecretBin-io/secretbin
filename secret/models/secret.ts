@@ -2,9 +2,8 @@
  * This file defines all the models used by SecretBin. Models are validated using Zod
  */
 
-import { EncryptedData, EncryptionAlgorithm } from "@nihility-io/crypto"
+import { EncryptedData, EncryptionAlgorithm } from "./crypto.ts"
 import { z } from "zod"
-export { type EncryptedData } from "@nihility-io/crypto"
 
 const EncryptedDataModel = z.object({
 	data: z.string(),

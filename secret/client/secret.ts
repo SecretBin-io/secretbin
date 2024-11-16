@@ -1,4 +1,4 @@
-import { decrypt, encrypt, randomBytes } from "@nihility-io/crypto"
+import { decrypt, encrypt, randomBytes } from "./crypto.ts"
 import { decodeBase58, encodeBase58 } from "@std/encoding/base58"
 import { encodeBase64 } from "@std/encoding/base64"
 import { Secret, SecretAttachment, SecretData } from "secret/models"

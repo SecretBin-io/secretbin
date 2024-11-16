@@ -3,7 +3,7 @@ import { Message, Show } from "components"
 import { config } from "config"
 import { type PageProps } from "fresh"
 import { asset, Partial } from "fresh/runtime"
-import { ThemeToggle, LanguageMenu, Terms } from "islands"
+import { LanguageMenu, Terms, ThemeToggle } from "islands"
 import { useTranslation } from "lang"
 import { State, Theme } from "state"
 
@@ -81,7 +81,6 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 						</div>
 					</div>
 				</nav>
-
 
 				<div class="pt-20 pb-20 sm:pt-10 sm:pb-10">
 					<div name="content">

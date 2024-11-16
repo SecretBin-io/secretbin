@@ -1,41 +1,47 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@fresh/core@^2.0.0-alpha.23": "2.0.0-alpha.23",
+    "jsr:@fresh/core@^2.0.0-alpha.22": "2.0.0-alpha.25",
     "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7": "0.0.1-alpha.7",
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.0",
-    "jsr:@nihility-io/crypto@0.1.1": "0.1.1",
-    "jsr:@nihility-io/record@0.1.1": "0.1.1",
-    "jsr:@nihility-io/result@0.1.7": "0.1.7",
-    "jsr:@nihility-io/use-cookie@0.1.4": "0.1.4",
+    "jsr:@nihility-io/cookies@1": "1.0.0",
+    "jsr:@nihility-io/record@1": "1.0.0",
+    "jsr:@nihility-io/result@1": "1.0.0",
     "jsr:@std/assert@0.221": "0.221.0",
-    "jsr:@std/bytes@^1.0.2": "1.0.2",
+    "jsr:@std/assert@^1.0.8": "1.0.8",
+    "jsr:@std/bytes@^1.0.2": "1.0.4",
     "jsr:@std/cli@^1.0.6": "1.0.6",
-    "jsr:@std/collections@^1.0.8": "1.0.8",
+    "jsr:@std/collections@^1.0.8": "1.0.9",
     "jsr:@std/crypto@1": "1.0.3",
     "jsr:@std/datetime@~0.225.2": "0.225.2",
+    "jsr:@std/dotenv@~0.225.2": "0.225.2",
     "jsr:@std/encoding@1": "1.0.5",
     "jsr:@std/encoding@^1.0.1": "1.0.5",
     "jsr:@std/encoding@^1.0.5": "1.0.5",
-    "jsr:@std/fmt@1": "1.0.2",
-    "jsr:@std/fmt@^1.0.2": "1.0.2",
-    "jsr:@std/fs@1": "1.0.4",
-    "jsr:@std/fs@^1.0.4": "1.0.4",
+    "jsr:@std/fmt@1": "1.0.3",
+    "jsr:@std/fmt@^1.0.3": "1.0.3",
+    "jsr:@std/fs@1": "1.0.5",
+    "jsr:@std/fs@^1.0.4": "1.0.5",
+    "jsr:@std/fs@^1.0.5": "1.0.5",
     "jsr:@std/html@1": "1.0.3",
-    "jsr:@std/http@^1.0.8": "1.0.8",
+    "jsr:@std/http@^1.0.8": "1.0.10",
+    "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@0.225": "0.225.0",
     "jsr:@std/jsonc@1": "1.0.1",
-    "jsr:@std/log@~0.224.9": "0.224.9",
-    "jsr:@std/media-types@1": "1.0.3",
-    "jsr:@std/media-types@^1.0.3": "1.0.3",
+    "jsr:@std/log@~0.224.9": "0.224.10",
+    "jsr:@std/media-types@1": "1.1.0",
+    "jsr:@std/media-types@^1.1.0": "1.1.0",
     "jsr:@std/net@^1.0.4": "1.0.4",
     "jsr:@std/path@0.221": "0.221.0",
-    "jsr:@std/path@1": "1.0.6",
-    "jsr:@std/path@^1.0.6": "1.0.6",
+    "jsr:@std/path@1": "1.0.8",
+    "jsr:@std/path@^1.0.6": "1.0.8",
+    "jsr:@std/path@^1.0.7": "1.0.8",
+    "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/semver@1": "1.0.3",
-    "jsr:@std/streams@^1.0.7": "1.0.7",
+    "jsr:@std/streams@^1.0.8": "1.0.8",
     "jsr:@std/yaml@^1.0.5": "1.0.5",
     "npm:@preact/signals@^1.2.3": "1.3.0_preact@10.24.3",
+    "npm:@preact/signals@^1.3.0": "1.3.0_preact@10.24.3",
     "npm:@types/js-cookie@3.0.6": "3.0.6",
     "npm:@types/node@*": "22.5.4",
     "npm:@types/qrcode@1.5.5": "1.5.5",
@@ -47,10 +53,10 @@
     "npm:flowbite@2.5.2": "2.5.2",
     "npm:js-cookie@^3.0.5": "3.0.5",
     "npm:postcss@8.4.35": "8.4.35",
-    "npm:postgres@^3.4.4": "3.4.4",
+    "npm:postgres@^3.4.4": "3.4.5",
     "npm:preact-render-to-string@^6.5.11": "6.5.11_preact@10.24.3",
-    "npm:preact@^10.22.0": "10.24.3",
     "npm:preact@^10.24.1": "10.24.3",
+    "npm:preact@^10.24.2": "10.24.3",
     "npm:preact@^10.24.3": "10.24.3",
     "npm:qrcode@^1.5.4": "1.5.4",
     "npm:tailwindcss@3.4.14": "3.4.14_postcss@8.4.47",
@@ -60,8 +66,8 @@
     "npm:zod@^3.23.8": "3.23.8"
   },
   "jsr": {
-    "@fresh/core@2.0.0-alpha.23": {
-      "integrity": "531122329cde29b21c527dd04c5e04e5d4882ffc292302378c218ef0d4ab5f03",
+    "@fresh/core@2.0.0-alpha.25": {
+      "integrity": "1069232989c4bc7f69ad424f6b97cdba1a7631d1307e1c2964aed748cd0cf74b",
       "dependencies": [
         "jsr:@luca/esbuild-deno-loader",
         "jsr:@std/crypto",
@@ -74,12 +80,12 @@
         "jsr:@std/media-types@1",
         "jsr:@std/path@1",
         "jsr:@std/semver",
-        "npm:@preact/signals",
+        "npm:@preact/signals@^1.2.3",
         "npm:esbuild",
         "npm:esbuild-wasm",
         "npm:preact-render-to-string",
         "npm:preact@^10.24.1",
-        "npm:preact@^10.24.3"
+        "npm:preact@^10.24.2"
       ]
     },
     "@fresh/plugin-tailwind@0.0.1-alpha.7": {
@@ -100,40 +106,40 @@
         "jsr:@std/path@^1.0.6"
       ]
     },
-    "@nihility-io/crypto@0.1.1": {
-      "integrity": "612f6550e6834429232376531ea652953b2f51005babb3f07f86bbe8f7fc74ca",
-      "dependencies": [
-        "jsr:@std/encoding@^1.0.1"
-      ]
-    },
-    "@nihility-io/record@0.1.1": {
-      "integrity": "04035cddd472f049a4ecf078432216bd1c105cca9ef3b203f44e02970e46a5a0"
-    },
-    "@nihility-io/result@0.1.7": {
-      "integrity": "456dfe0ab264af0d1a52c72c2462b3e7207b841bad3d222f7e5eff4affa76762",
-      "dependencies": [
-        "npm:zod@^3.23.8"
-      ]
-    },
-    "@nihility-io/use-cookie@0.1.4": {
-      "integrity": "0ad141676e861727390179cb999f5bf6957d579e6cd9e47d18ab538a67437e9c",
+    "@nihility-io/cookies@1.0.0": {
+      "integrity": "3c0c9c8f808d66b5f84c2e5d966b6f8d21fab5a518b4b20240e9c5faed66e8ac",
       "dependencies": [
         "npm:@types/js-cookie",
         "npm:js-cookie",
-        "npm:preact@^10.22.0"
+        "npm:preact@^10.24.3"
+      ]
+    },
+    "@nihility-io/record@1.0.0": {
+      "integrity": "67f3bf8fc9b6014645a92a7ebec9b2c1ec5cacb16c036b86ced6b7d350208408"
+    },
+    "@nihility-io/result@1.0.0": {
+      "integrity": "a1365fa6b5e68121f24803f7082a9098682de8f7aaf0965baffbc48614dd9a00",
+      "dependencies": [
+        "npm:zod@^3.23.8"
       ]
     },
     "@std/assert@0.221.0": {
       "integrity": "a5f1aa6e7909dbea271754fd4ab3f4e687aeff4873b4cef9a320af813adb489a"
     },
-    "@std/bytes@1.0.2": {
-      "integrity": "fbdee322bbd8c599a6af186a1603b3355e59a5fb1baa139f8f4c3c9a1b3e3d57"
+    "@std/assert@1.0.8": {
+      "integrity": "ebe0bd7eb488ee39686f77003992f389a06c3da1bbd8022184804852b2fa641b",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/bytes@1.0.4": {
+      "integrity": "11a0debe522707c95c7b7ef89b478c13fb1583a7cfb9a85674cd2cc2e3a28abc"
     },
     "@std/cli@1.0.6": {
       "integrity": "d22d8b38c66c666d7ad1f2a66c5b122da1704f985d3c47f01129f05abb6c5d3d"
     },
-    "@std/collections@1.0.8": {
-      "integrity": "de76692f9121838711b1d2fb5042619c074db26905a87b58cff56cfe1bd6d6d0"
+    "@std/collections@1.0.9": {
+      "integrity": "4f58104ead08a04a2199374247f07befe50ba01d9cca8cbb23ab9a0419921e71"
     },
     "@std/crypto@1.0.3": {
       "integrity": "a2a32f51ddef632d299e3879cd027c630dcd4d1d9a5285d6e6788072f4e51e7f"
@@ -141,32 +147,38 @@
     "@std/datetime@0.225.2": {
       "integrity": "45f0100554a912cd65f48089ef0a33aa1eb6ea21f08090840b539ab582827eaa"
     },
+    "@std/dotenv@0.225.2": {
+      "integrity": "e2025dce4de6c7bca21dece8baddd4262b09d5187217e231b033e088e0c4dd23"
+    },
     "@std/encoding@1.0.5": {
       "integrity": "ecf363d4fc25bd85bd915ff6733a7e79b67e0e7806334af15f4645c569fefc04"
     },
-    "@std/fmt@1.0.2": {
-      "integrity": "87e9dfcdd3ca7c066e0c3c657c1f987c82888eb8103a3a3baa62684ffeb0f7a7"
+    "@std/fmt@1.0.3": {
+      "integrity": "97765c16aa32245ff4e2204ecf7d8562496a3cb8592340a80e7e554e0bb9149f"
     },
-    "@std/fs@1.0.4": {
-      "integrity": "2907d32d8d1d9e540588fd5fe0ec21ee638134bd51df327ad4e443aaef07123c",
+    "@std/fs@1.0.5": {
+      "integrity": "41806ad6823d0b5f275f9849a2640d87e4ef67c51ee1b8fb02426f55e02fd44e",
       "dependencies": [
-        "jsr:@std/path@^1.0.6"
+        "jsr:@std/path@^1.0.7"
       ]
     },
     "@std/html@1.0.3": {
       "integrity": "7a0ac35e050431fb49d44e61c8b8aac1ebd55937e0dc9ec6409aa4bab39a7988"
     },
-    "@std/http@1.0.8": {
-      "integrity": "6ea1b2e8d33929967754a3b6d6c6f399ad6647d7bbb5a466c1eaf9b294a6ebcd",
+    "@std/http@1.0.10": {
+      "integrity": "4e32d11493ab04e3ef09f104f0cb9beb4228b1d4b47c5469573c2c294c0d3692",
       "dependencies": [
         "jsr:@std/cli",
         "jsr:@std/encoding@^1.0.5",
-        "jsr:@std/fmt@^1.0.2",
-        "jsr:@std/media-types@^1.0.3",
+        "jsr:@std/fmt@^1.0.3",
+        "jsr:@std/media-types@^1.1.0",
         "jsr:@std/net",
-        "jsr:@std/path@^1.0.6",
+        "jsr:@std/path@^1.0.8",
         "jsr:@std/streams"
       ]
+    },
+    "@std/internal@1.0.5": {
+      "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     },
     "@std/io@0.225.0": {
       "integrity": "c1db7c5e5a231629b32d64b9a53139445b2ca640d828c26bf23e1c55f8c079b3"
@@ -174,16 +186,16 @@
     "@std/jsonc@1.0.1": {
       "integrity": "6b36956e2a7cbb08ca5ad7fbec72e661e6217c202f348496ea88747636710dda"
     },
-    "@std/log@0.224.9": {
-      "integrity": "419d04e4d93e6b1a0205ac3f94809621cfec3d328d09fec9ec59cafa3b3fcaee",
+    "@std/log@0.224.10": {
+      "integrity": "8190cdec3759ce1d21ea3b0864fc561d8515bce591f30a4b9d26c68430c1b9d9",
       "dependencies": [
-        "jsr:@std/fmt@^1.0.2",
-        "jsr:@std/fs@^1.0.4",
+        "jsr:@std/fmt@^1.0.3",
+        "jsr:@std/fs@^1.0.5",
         "jsr:@std/io"
       ]
     },
-    "@std/media-types@1.0.3": {
-      "integrity": "b12d30a7852f7578f4d210622df713bbfd1cbdd9b4ec2eaf5c1845ab70bab159"
+    "@std/media-types@1.1.0": {
+      "integrity": "c9d093f0c05c3512932b330e3cc1fe1d627b301db33a4c2c2185c02471d6eaa4"
     },
     "@std/net@1.0.4": {
       "integrity": "2f403b455ebbccf83d8a027d29c5a9e3a2452fea39bb2da7f2c04af09c8bc852"
@@ -191,17 +203,17 @@
     "@std/path@0.221.0": {
       "integrity": "0a36f6b17314ef653a3a1649740cc8db51b25a133ecfe838f20b79a56ebe0095",
       "dependencies": [
-        "jsr:@std/assert"
+        "jsr:@std/assert@0.221"
       ]
     },
-    "@std/path@1.0.6": {
-      "integrity": "ab2c55f902b380cf28e0eec501b4906e4c1960d13f00e11cfbcd21de15f18fed"
+    "@std/path@1.0.8": {
+      "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
     },
     "@std/semver@1.0.3": {
       "integrity": "7c139c6076a080eeaa4252c78b95ca5302818d7eafab0470d34cafd9930c13c8"
     },
-    "@std/streams@1.0.7": {
-      "integrity": "1a93917ca0c58c01b2bfb93647189229b1702677f169b6fb61ad6241cd2e499b"
+    "@std/streams@1.0.8": {
+      "integrity": "b41332d93d2cf6a82fe4ac2153b930adf1a859392931e2a19d9fabfb6f154fb3"
     },
     "@std/yaml@1.0.5": {
       "integrity": "71ba3d334305ee2149391931508b2c293a8490f94a337eef3a09cade1a2a2742"
@@ -361,12 +373,12 @@
         "resolve"
       ]
     },
-    "@rollup/pluginutils@5.1.2": {
-      "integrity": "sha512-/FIdS3PyZ39bjZlwqFnWqCOVnW7o963LtKMwQOD0NhQqw22gSr2YY1afu3FxRip4ZCZNsD5jq6Aaz6QV3D/Njw==",
+    "@rollup/pluginutils@5.1.3": {
+      "integrity": "sha512-Pnsb6f32CD2W3uCaLZIzDmeFyQ2b8UWMFI7xtwUezpcGBDVDW6y9XgAWIlARiGAo6eNF5FK5aQTr0LFyNyqq5A==",
       "dependencies": [
         "@types/estree",
         "estree-walker",
-        "picomatch"
+        "picomatch@4.0.2"
       ]
     },
     "@trysound/sax@0.2.0": {
@@ -415,7 +427,7 @@
       "integrity": "sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==",
       "dependencies": [
         "normalize-path",
-        "picomatch"
+        "picomatch@2.3.1"
       ]
     },
     "arg@5.0.2": {
@@ -454,8 +466,8 @@
         "fill-range"
       ]
     },
-    "browserslist@4.24.0": {
-      "integrity": "sha512-Rmb62sR1Zpjql25eSanFGEhAxcFwfA1K0GuQcLoaJBAcENegrQut3hYdhXFF1obQfiDyqIW/cLM5HSJ/9k884A==",
+    "browserslist@4.24.2": {
+      "integrity": "sha512-ZIc+Q62revdMcqC6aChtW4jz3My3klmCO1fEmINZY/8J3EpBg5/A/D0AKmBveUh6pgoeycoMkVMko84tuYS+Gg==",
       "dependencies": [
         "caniuse-lite",
         "electron-to-chromium",
@@ -478,8 +490,8 @@
         "lodash.uniq"
       ]
     },
-    "caniuse-lite@1.0.30001669": {
-      "integrity": "sha512-DlWzFDJqstqtIVx1zeSpIMLjunf5SmwOw0N2Ck/QSQdS8PLS4+9HrLaYei4w8BIAL7IB/UEDu889d8vhCTPA0w=="
+    "caniuse-lite@1.0.30001674": {
+      "integrity": "sha512-jOsKlZVRnzfhLojb+Ykb+gyUSp9Xb57So+fAiFlLzzTKpqg8xxSav0e40c8/4F/v9N8QSvrRRaLeVzQbLqomYw=="
     },
     "chokidar@3.6.0": {
       "integrity": "sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==",
@@ -666,8 +678,8 @@
     "eastasianwidth@0.2.0": {
       "integrity": "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA=="
     },
-    "electron-to-chromium@1.5.39": {
-      "integrity": "sha512-4xkpSR6CjuiaNyvwiWDI85N9AxsvbPawB8xc7yzLPonYTuP19BVgYweKyUMFtHEZgIcHWMt1ks5Cqx2m+6/Grg=="
+    "electron-to-chromium@1.5.49": {
+      "integrity": "sha512-ZXfs1Of8fDb6z7WEYZjXpgIRF6MEu8JdeGA0A40aZq6OQbS+eJpnnV49epZRna2DU/YsEjSQuGtQPPtvt6J65A=="
     },
     "emoji-regex@8.0.0": {
       "integrity": "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="
@@ -891,7 +903,7 @@
       "integrity": "sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==",
       "dependencies": [
         "braces",
-        "picomatch"
+        "picomatch@2.3.1"
       ]
     },
     "mini-svg-data-uri@1.4.4": {
@@ -977,6 +989,9 @@
     },
     "picomatch@2.3.1": {
       "integrity": "sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA=="
+    },
+    "picomatch@4.0.2": {
+      "integrity": "sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg=="
     },
     "pify@2.3.0": {
       "integrity": "sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog=="
@@ -1245,8 +1260,8 @@
         "source-map-js"
       ]
     },
-    "postgres@3.4.4": {
-      "integrity": "sha512-IbyN+9KslkqcXa8AO9fxpk97PA4pzewvpi2B3Dwy9u4zpV32QicaEdgmF3eSQUzdRk7ttDHQejNgAEr4XoeH4A=="
+    "postgres@3.4.5": {
+      "integrity": "sha512-cDWgoah1Gez9rN3H4165peY9qfpEo+SA61oQv65O3cRUE1pOEoJWwddwcqKE8XZYjbblOJlYDlLV4h67HrEVDg=="
     },
     "preact-render-to-string@6.5.11_preact@10.24.3": {
       "integrity": "sha512-ubnauqoGczeGISiOh6RjX0/cdaF8v/oDXIjO85XALCQjwQP+SB4RDXXtvZ6yTYSjG+PC1QRP2AhPgCEsM2EvUw==",
@@ -1277,7 +1292,7 @@
     "readdirp@3.6.0": {
       "integrity": "sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==",
       "dependencies": [
-        "picomatch"
+        "picomatch@2.3.1"
       ]
     },
     "require-directory@2.1.1": {
@@ -1438,7 +1453,7 @@
     "undici-types@6.19.8": {
       "integrity": "sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw=="
     },
-    "update-browserslist-db@1.1.1_browserslist@4.24.0": {
+    "update-browserslist-db@1.1.1_browserslist@4.24.2": {
       "integrity": "sha512-R8UzCaa9Az+38REPiJ1tXlImTJXlVfgHZsglwBD/k6nj76ctsH1E3q4doGrukiLQd3sGQYu56r5+lo5r94l29A==",
       "dependencies": [
         "browserslist",
@@ -1517,12 +1532,12 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@fresh/core@^2.0.0-alpha.23",
+      "jsr:@fresh/core@^2.0.0-alpha.22",
       "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
-      "jsr:@nihility-io/crypto@0.1.1",
-      "jsr:@nihility-io/record@0.1.1",
-      "jsr:@nihility-io/result@0.1.7",
-      "jsr:@nihility-io/use-cookie@0.1.4",
+      "jsr:@nihility-io/cookies@1",
+      "jsr:@nihility-io/record@1",
+      "jsr:@nihility-io/result@1",
+      "jsr:@std/assert@^1.0.8",
       "jsr:@std/collections@^1.0.8",
       "jsr:@std/dotenv@~0.225.2",
       "jsr:@std/encoding@^1.0.5",
@@ -1535,7 +1550,7 @@
       "npm:classnames@2.5.1",
       "npm:flowbite@2.5.2",
       "npm:postgres@^3.4.4",
-      "npm:preact@^10.24.3",
+      "npm:preact@^10.24.2",
       "npm:qrcode@^1.5.4",
       "npm:tailwindcss@3.4.14",
       "npm:ts-pattern@5.2.0",
