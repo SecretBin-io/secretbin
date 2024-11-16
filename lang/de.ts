@@ -64,6 +64,11 @@ export default {
 			Title: "Geheimnis teilen",
 			Description:
 				"Sende den unten stehenden Link an die Person, mit der du das Geheimnis teilen möchtest. Jeder, der den Link hat, ist in der Lage, sich das Geheimnis anzusehen.",
+			Preview: {
+				Title: "Geheimnisvorschau",
+				Description:
+					"Hier ist eine Vorschau des von dir uebermittelten Geheimnis. Die Vorschau wird verworfen sobald du diese Seite neu lädst oder sie verlässt.",
+			},
 			Actions: {
 				New: "Neu",
 				Open: "Open Link",

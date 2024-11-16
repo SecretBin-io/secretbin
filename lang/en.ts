@@ -63,6 +63,11 @@ export default {
 			Title: "Share Secret",
 			Description:
 				"Send the link below to the person you want to share the secret with. Any person with this link will be able to view the secret.",
+			Preview: {
+				Title: "Secret Preview",
+				Description:
+					"Below is a preview of secret you submitted. The preview is gone once you refresh or leave this page.",
+			},
 			Actions: {
 				New: "New",
 				Open: "Open Link",

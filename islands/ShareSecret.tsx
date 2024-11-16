@@ -1,8 +1,9 @@
-import { Button, ButtonGroup, Icon, Input, QRCode, Show } from "components"
+import { Button, ButtonGroup, Input, QRCode, Section, Show, TextArea } from "components"
 import { config } from "config"
 import { useTranslationWithPrefix } from "lang"
 import { useEffect, useState } from "preact/hooks"
 import { State } from "state"
+import { MessagePreview, setMessagePreview } from "./preview.ts"
 
 export interface ShareSecretProps {
 	state: State
@@ -12,6 +13,7 @@ export interface ShareSecretProps {
 export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 	const [showQrCode, setShowQrCode] = useState(false)
 	const [link, setLink] = useState("")
+	const [preview, setPreview] = useState("")
 	const $ = useTranslationWithPrefix(state.lang, "ShareSecret")
 
 	/**
@@ -20,12 +22,14 @@ export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 	const sendEmail = () => {
 		const subject = `${config.branding.appName}`
 		const text = `${link}`
-		window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`
+		globalThis.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`
 	}
 
 	useEffect(() => {
+		setPreview(MessagePreview)
+		setMessagePreview("")
 		// The link needs to be set here because the URL fragment (hash) is not sent to the server
-		setLink(`${window.location.origin}/secret/${id}${window.location.hash}`)
+		setLink(`${globalThis.location.origin}/secret/${id}${globalThis.location.hash}`)
 	}, [])
 
 	return (
@@ -72,6 +76,11 @@ export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 			</ButtonGroup>
 			<Show if={showQrCode}>
 				<QRCode content={link} />
+			</Show>
+			<Show if={preview !== ""}>
+				<Section title={$("Preview.Title")} description={$("Preview.Description")}>
+					<TextArea readOnly lines={10} value={preview} />
+				</Section>
 			</Show>
 		</>
 	)

@@ -53,7 +53,7 @@ export const Input = (
 			}
 
 			ref.current.focus()
-			setInterval(() => {
+			setTimeout(() => {
 				if (!ref.current) {
 					return
 				}

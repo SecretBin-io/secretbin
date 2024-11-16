@@ -8,6 +8,7 @@ import { LocalizedError } from "secret/models"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
 import { State } from "state"
+import { setMessagePreview } from "./preview.ts"
 
 export interface NewSecretProps {
 	state: State
@@ -32,6 +33,8 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 		if (password === undefined) {
 			return
 		}
+
+		setMessagePreview(message)
 
 		// Submit the secret to the backend
 		await submitSecret(message, files, password, options).then(Result.match({
