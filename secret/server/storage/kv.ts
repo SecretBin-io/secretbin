@@ -79,8 +79,8 @@ export class SecretKVStorage implements SecretStorage {
 		try {
 			return Result.success(await Secret.parseAsync(res.value.value))
 		} catch (e) {
-			logDB.error(`Failed to read secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to read secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 			return Result.failure(new SecretReadError(id))
 		}
@@ -104,8 +104,8 @@ export class SecretKVStorage implements SecretStorage {
 				return Result.failure(new SecretWriteError(secret.id))
 			}
 		} catch (e) {
-			logDB.error(`Failed to write secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to write secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 		}
 
@@ -134,8 +134,8 @@ export class SecretKVStorage implements SecretStorage {
 				return Result.failure(new SecretWriteError(secret.id))
 			}
 		} catch (e) {
-			logDB.error(`Failed to write secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to write secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 		}
 
@@ -157,8 +157,8 @@ export class SecretKVStorage implements SecretStorage {
 				.then((kv) => kv.delete(["secrets", id]))
 			return Result.success(id)
 		} catch (e) {
-			logDB.error(`Failed to delete secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to delete secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 			return Result.failure(new SecretDeleteError(id))
 		}

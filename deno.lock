@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@fresh/core@^2.0.0-alpha.1": "2.0.0-alpha.25",
     "jsr:@fresh/core@^2.0.0-alpha.22": "2.0.0-alpha.25",
     "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7": "0.0.1-alpha.7",
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.0",
@@ -27,6 +28,7 @@
     "jsr:@std/http@^1.0.8": "1.0.10",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@0.225": "0.225.0",
+    "jsr:@std/json@1": "1.0.1",
     "jsr:@std/jsonc@1": "1.0.1",
     "jsr:@std/log@~0.224.9": "0.224.10",
     "jsr:@std/media-types@1": "1.1.0",
@@ -91,6 +93,7 @@
     "@fresh/plugin-tailwind@0.0.1-alpha.7": {
       "integrity": "b940991bdb76f0995dc58b25183f1001d72c4020e049d384ad3fb751556aa2a9",
       "dependencies": [
+        "jsr:@fresh/core@^2.0.0-alpha.1",
         "jsr:@std/path@0.221",
         "npm:autoprefixer",
         "npm:cssnano",
@@ -183,8 +186,14 @@
     "@std/io@0.225.0": {
       "integrity": "c1db7c5e5a231629b32d64b9a53139445b2ca640d828c26bf23e1c55f8c079b3"
     },
+    "@std/json@1.0.1": {
+      "integrity": "1f0f70737e8827f9acca086282e903677bc1bb0c8ffcd1f21bca60039563049f"
+    },
     "@std/jsonc@1.0.1": {
-      "integrity": "6b36956e2a7cbb08ca5ad7fbec72e661e6217c202f348496ea88747636710dda"
+      "integrity": "6b36956e2a7cbb08ca5ad7fbec72e661e6217c202f348496ea88747636710dda",
+      "dependencies": [
+        "jsr:@std/json"
+      ]
     },
     "@std/log@0.224.10": {
       "integrity": "8190cdec3759ce1d21ea3b0864fc561d8515bce591f30a4b9d26c68430c1b9d9",

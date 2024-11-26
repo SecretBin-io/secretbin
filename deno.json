@@ -7,7 +7,8 @@
 		"update": "deno run -A -r jsr:@fresh/update@2.0.0-alpha.22 .",
 		"test": "deno test --coverage=coverage && deno coverage coverage --html && deno coverage coverage --detailed && deno coverage coverage",
 		"deps": "deno run -A jsr:@nihility-io/deno-deps --entrypoint main.ts --output deps.json",
-		"deploy": "deno task build && deployctl deploy --project=nihility-secretbin main.ts"
+		"deploy": "deno task build && deployctl deploy --project=nihility-secretbin main.ts",
+		"docker_build": "docker build --platform linux/arm64,linux/amd64  -t secretbin:2.0.0 ."
 	},
 	"lint": {
 		"rules": {

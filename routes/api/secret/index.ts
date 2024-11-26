@@ -13,8 +13,8 @@ export const handler = define.handlers({
 			// Note: data is validated inside createSecret
 			const m: NewSecret = await ctx.req.json()
 			return responseFromResult(await Secrets.shared.createSecret(m))
-		} catch (e) {
-			return responseFromResult(Result.failure<string>(e))
+		} catch (e: unknown) {
+			return responseFromResult(Result.failure<unknown>(e as Error))
 		}
 	},
 })

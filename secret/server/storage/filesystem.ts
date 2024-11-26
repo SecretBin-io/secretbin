@@ -48,8 +48,8 @@ export class SecretFileSystemStorage implements SecretStorage {
 				yield await this.getSecret(name)
 			}
 		} catch (e) {
-			logDB.error(`Failed to list secrets. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to list secrets. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 			yield Result.failure<Secret>(new SecretListExistsError())
 		}
@@ -82,8 +82,8 @@ export class SecretFileSystemStorage implements SecretStorage {
 					.then(Secret.parseAsync),
 			)
 		} catch (e) {
-			logDB.error(`Failed to read secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to read secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 			return Result.failure(new SecretReadError(id))
 		}
@@ -106,8 +106,8 @@ export class SecretFileSystemStorage implements SecretStorage {
 					.then(() => secret),
 			)
 		} catch (e) {
-			logDB.error(`Failed to write secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to write secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 			return Result.failure(new SecretWriteError(secret.id))
 		}
@@ -134,8 +134,8 @@ export class SecretFileSystemStorage implements SecretStorage {
 					.then(() => secret),
 			)
 		} catch (e) {
-			logDB.error(`Failed to write secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to write secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 			return Result.failure(new SecretWriteError(secret.id))
 		}
@@ -156,8 +156,8 @@ export class SecretFileSystemStorage implements SecretStorage {
 			await Deno.remove(f)
 			return Result.success(id)
 		} catch (e) {
-			logDB.error(`Failed to delete secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to delete secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 			return Result.failure(new SecretDeleteError(id))
 		}

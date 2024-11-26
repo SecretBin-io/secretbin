@@ -106,8 +106,8 @@ export class SecretPostgresStorage implements SecretStorage {
 		try {
 			return Result.success(await Secret.parseAsync([...res.value.values()][0].secret))
 		} catch (e) {
-			logDB.error(`Failed to read secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to read secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 			return Result.failure(new SecretReadError(id))
 		}
@@ -179,8 +179,8 @@ export class SecretPostgresStorage implements SecretStorage {
 			await this.#sql`delete from Secrets where id = ${id}`
 			return Result.success(id)
 		} catch (e) {
-			logDB.error(`Failed to read secret. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+			logDB.error(`Failed to read secret. Reason: ${(e as Error).message}`, {
+				error: { name: (e as Error).name, message: (e as Error).message },
 			})
 			return Result.failure(new SecretDeleteError(id))
 		}
