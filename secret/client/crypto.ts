@@ -31,37 +31,37 @@ export const fromBytes = (b: Uint8Array): string => new TextDecoder().decode(b)
  * @returns Encrypted data
  */
 export const encrypt = async (
-    key: Uint8Array,
-    password: string,
-    message: string,
-    algorithm = EncryptionAlgorithm.AES256GCM,
+	key: Uint8Array,
+	password: string,
+	message: string,
+	algorithm = EncryptionAlgorithm.AES256GCM,
 ): Promise<EncryptedData> => {
-    if (algorithm !== EncryptionAlgorithm.AES256GCM) {
-        throw new Error("unsupported encryption algorithm")
-    }
+	if (algorithm !== EncryptionAlgorithm.AES256GCM) {
+		throw new Error("unsupported encryption algorithm")
+	}
 
-    if (algorithm === EncryptionAlgorithm.AES256GCM && key.length !== 32) {
-        throw new Error("invalid key length for AES256-GCM")
-    }
+	if (algorithm === EncryptionAlgorithm.AES256GCM && key.length !== 32) {
+		throw new Error("invalid key length for AES256-GCM")
+	}
 
-    const iv = randomBytes(12)
-    const salt = randomBytes(8)
+	const iv = randomBytes(12)
+	const salt = randomBytes(8)
 
-    const k = await deriveAESKey(key, password, salt)
-    const data = new Uint8Array(
-        await globalThis.crypto.subtle.encrypt(
-            { name: "AES-GCM", iv: iv, additionalData: new Uint8Array() },
-            k,
-            toBytes(message),
-        ),
-    )
+	const k = await deriveAESKey(key, password, salt)
+	const data = new Uint8Array(
+		await globalThis.crypto.subtle.encrypt(
+			{ name: "AES-GCM", iv: iv, additionalData: new Uint8Array() },
+			k,
+			toBytes(message),
+		),
+	)
 
-    return {
-        data: encodeBase64(data),
-        iv: encodeBase64(iv),
-        salt: encodeBase64(salt),
-        algorithm,
-    } as EncryptedData
+	return {
+		data: encodeBase64(data),
+		iv: encodeBase64(iv),
+		salt: encodeBase64(salt),
+		algorithm,
+	} as EncryptedData
 }
 
 /**
@@ -72,26 +72,26 @@ export const encrypt = async (
  * @returns Decrypted data string
  */
 export const decrypt = async (key: Uint8Array, password: string, encrypted: EncryptedData): Promise<string> => {
-    const { data, iv, salt, algorithm } = encrypted
+	const { data, iv, salt, algorithm } = encrypted
 
-    if (algorithm !== EncryptionAlgorithm.AES256GCM) {
-        throw new Error("unsupported encryption algorithm")
-    }
+	if (algorithm !== EncryptionAlgorithm.AES256GCM) {
+		throw new Error("unsupported encryption algorithm")
+	}
 
-    if (algorithm === EncryptionAlgorithm.AES256GCM && key.length !== 32) {
-        throw new Error("invalid key length for AES256-GCM")
-    }
+	if (algorithm === EncryptionAlgorithm.AES256GCM && key.length !== 32) {
+		throw new Error("invalid key length for AES256-GCM")
+	}
 
-    const k = await deriveAESKey(key, password, decodeBase64(salt))
-    const res = new Uint8Array(
-        await globalThis.crypto.subtle.decrypt(
-            { name: "AES-GCM", iv: decodeBase64(iv), additionalData: new Uint8Array() },
-            k,
-            decodeBase64(data),
-        ),
-    )
+	const k = await deriveAESKey(key, password, decodeBase64(salt))
+	const res = new Uint8Array(
+		await globalThis.crypto.subtle.decrypt(
+			{ name: "AES-GCM", iv: decodeBase64(iv), additionalData: new Uint8Array() },
+			k,
+			decodeBase64(data),
+		),
+	)
 
-    return fromBytes(res)
+	return fromBytes(res)
 }
 
 /**
@@ -102,32 +102,32 @@ export const decrypt = async (key: Uint8Array, password: string, encrypted: Encr
  * @returns AES crypto key
  */
 const deriveAESKey = async (key: Uint8Array, password: string, salt: Uint8Array): Promise<CryptoKey> => {
-    const iterations = 100000
+	const iterations = 100000
 
-    // If password is set, append it to the key
-    const pwData = toBytes(password)
-    if (pwData.length > 0) {
-        const newKeyArray = new Uint8Array(key.length + password.length)
-        newKeyArray.set(key, 0)
-        newKeyArray.set(pwData, key.length)
-        key = newKeyArray
-    }
+	// If password is set, append it to the key
+	const pwData = toBytes(password)
+	if (pwData.length > 0) {
+		const newKeyArray = new Uint8Array(key.length + password.length)
+		newKeyArray.set(key, 0)
+		newKeyArray.set(pwData, key.length)
+		key = newKeyArray
+	}
 
-    // Import raw key
-    const importedKey = await globalThis.crypto.subtle.importKey(
-        "raw", // Only 'raw' is allowed
-        key, // Encryption key
-        { name: "PBKDF2" }, // Use PBKDF2 for key derivation
-        false, // The key may not be exported
-        ["deriveKey"], // We may only use it for key derivation
-    )
+	// Import raw key
+	const importedKey = await globalThis.crypto.subtle.importKey(
+		"raw", // Only 'raw' is allowed
+		key, // Encryption key
+		{ name: "PBKDF2" }, // Use PBKDF2 for key derivation
+		false, // The key may not be exported
+		["deriveKey"], // We may only use it for key derivation
+	)
 
-    // derive a stronger key for use with AES
-    return globalThis.crypto.subtle.deriveKey(
-        { name: "PBKDF2", salt, iterations, hash: { name: "SHA-256" } }, // Key algorithm
-        importedKey,
-        { name: "AES-GCM", length: 256 }, // Set what the key is intended to be used for
-        true, // The key may be exported
-        ["encrypt", "decrypt"], // We may only use it for en- and decryption
-    )
+	// derive a stronger key for use with AES
+	return globalThis.crypto.subtle.deriveKey(
+		{ name: "PBKDF2", salt, iterations, hash: { name: "SHA-256" } }, // Key algorithm
+		importedKey,
+		{ name: "AES-GCM", length: 256 }, // Set what the key is intended to be used for
+		true, // The key may be exported
+		["encrypt", "decrypt"], // We may only use it for en- and decryption
+	)
 }

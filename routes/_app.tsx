@@ -83,7 +83,7 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 				</nav>
 
 				<div class="pt-20 pb-20 sm:pt-10 sm:pb-10">
-					<div name="content">
+					<div class="content">
 						<div class="px-4 py-8 mx-auto">
 							{/* Show banner e.g. for planned maintenance message if configured */}
 							<Show if={!!(config.banner[state.lang] ?? config.banner.en)}>
