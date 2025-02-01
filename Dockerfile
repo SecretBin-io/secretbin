@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM denoland/deno:2.1.1 
+FROM --platform=$BUILDPLATFORM denoland/deno:2.1.9
 ARG TARGETOS
 ARG TARGETARCH
 

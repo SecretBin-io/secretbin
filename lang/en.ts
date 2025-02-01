@@ -1,5 +1,3 @@
-import { Success } from "@nihility-io/result"
-
 export default {
 	Metadata: {
 		NativeName: "English",
