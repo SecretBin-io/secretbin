@@ -10,13 +10,13 @@ branding:
   showLogo: true # If set the true, the app logo is shown before the app name in the navigation bar
   invertLogo: false # Invert the colors of the app logo in dark mode
   showTerms: true #Sets if the ToS window should be shown when a user fist visits the app
-  terms: # ToS Dialog show when the user first visits the app
-    title:
-      en: Terms of Service
-      de: Nutzungsbedingungen
-    content: # Text that may contain HTML 
-      en: "..."
-      de: "..."
+  # terms: # ToS Dialog show when the user first visits the app
+  #   title:
+  #     en: Terms of Service
+  #     de: Nutzungsbedingungen
+  #   content: # Text that may contain HTML 
+  #     en: ""
+  #     de: ""
 banner:
   en: Hello World!
   de: Hallo Welt!
