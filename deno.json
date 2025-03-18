@@ -30,7 +30,8 @@
 				"no-sync-fn-in-async-fn",
 				"no-throw-literal",
 				"no-undef",
-				"single-var-declarator"
+				"single-var-declarator",
+				"explicit-function-return-type"
 			]
 		},
 		"exclude": [
