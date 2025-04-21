@@ -1,0 +1,10 @@
+[
+    {
+        "name": "heroicons",
+		"repository": "https://github.com/tailwindlabs/heroicons",
+		"version": "2.2.0",
+		"authors": ["Tailwind Labs, Inc."],
+		"license": "MIT License",
+		"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
+    }
+]

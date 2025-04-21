@@ -1,5 +1,5 @@
 import { NewSecret } from "islands"
-import { Button, PageContent } from "components"
+import { PageContent } from "components"
 import { useTranslationWithPrefix } from "lang"
 import { type PageProps } from "fresh"
 import { State } from "state"

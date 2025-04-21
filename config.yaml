@@ -41,6 +41,8 @@ storage:
     database: secretbin
     username: secretbin
     password: abc123
+logging:
+  level: DEBUG
 expires: #Expire options for new secrets
   - 5min
   - 1hr

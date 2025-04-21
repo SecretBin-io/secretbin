@@ -86,7 +86,7 @@ export const Button = (
 
 	const Label = () => (
 		<>
-			{icon ? <Icon name={icon} class={classNames({ "w-4 h-4": !overrideClass })} /> : null}
+			{icon ? <Icon name={icon} class="w-6 h-6 me-2" /> : null}
 			{label}
 		</>
 	)

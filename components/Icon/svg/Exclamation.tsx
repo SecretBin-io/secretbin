@@ -6,11 +6,13 @@ export default (
 		height="24"
 		fill="currentColor"
 		viewBox="0 0 24 24"
+		stroke-width="1.5"
+		stroke="currentColor"
 	>
 		<path
-			fill-rule="evenodd"
-			d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
-			clip-rule="evenodd"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
 		/>
 	</svg>
 )

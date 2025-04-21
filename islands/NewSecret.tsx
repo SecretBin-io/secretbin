@@ -51,6 +51,7 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 	return (
 		<>
 			<TextArea id="note" tabs lines={10} placeholder="" value={message} onChange={setMessage} />
+			<Button label="Generate Password" icon="Key" theme="plainDefault" />
 			<br />
 			<FilesUpload state={state} files={files} setFiles={setFiles} />
 			<Options state={state} options={options} setOptions={setOptions} setPassword={setPassword} />

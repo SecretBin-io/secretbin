@@ -28,7 +28,7 @@ export const LanguageMenu = ({ language }: LanguageMenuProps) => {
 			<Button
 				overrideClass
 				class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-				icon="Message"
+				icon="Language"
 				label={supportedLanguages.find((x) => x.name === language)?.native}
 				dropdown="language-dropdown-menu"
 			/>

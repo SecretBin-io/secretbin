@@ -21,12 +21,26 @@ export class Secrets {
 
 	constructor() {
 		this.#backend = initStorage(config.storage.backend)
+	}
+
+	/**
+	 * Initializes the secret manager
+	 */
+	async init(): Promise<boolean> {
+		// Initialize the backend
+		if (!(await this.#backend.init())) {
+			return false
+		}
 
 		// Schedule the garbage collector to run every hour in the background.
 		// The garbage collector deletes expired secrets
 		setInterval(() => {
 			this.garbageCollection()
 		}, 1000 * config.storage.gcInterval)
+
+		this.garbageCollection()
+
+		return true
 	}
 
 	/**

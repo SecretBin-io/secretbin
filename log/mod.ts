@@ -13,20 +13,23 @@ const flattenArgs = (args: unknown[]): unknown => {
 log.setup({
 	handlers: {
 		console: new log.ConsoleHandler(config.logging.level, {
-			formatter: (logRecord: LogRecord): string => {
-				return JSON.stringify({
+			formatter: (logRecord: LogRecord): string =>
+				JSON.stringify({
 					level: logRecord.levelName,
 					timestamp: logRecord.datetime.toISOString(),
 					logger: logRecord.loggerName,
 					message: logRecord.msg,
 					args: flattenArgs(logRecord.args),
-				})
-			},
+				}),
 			useColors: false,
 		}),
 	},
 	loggers: {
 		default: {
+			level: config.logging.level,
+			handlers: ["console"],
+		},
+		web: {
 			level: config.logging.level,
 			handlers: ["console"],
 		},
@@ -44,6 +47,9 @@ log.setup({
 		},
 	},
 })
+
+/** Web logs */
+export const logWeb = log.getLogger("web")
 
 /** Secrets logs */
 export const logSecrets = log.getLogger("secrets")

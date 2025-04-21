@@ -9,12 +9,8 @@ import { define } from "utils"
  */
 export const handler = define.handlers({
 	async POST(ctx) {
-		try {
-			// Note: data is validated inside createSecret
-			const m: NewSecret = await ctx.req.json()
-			return responseFromResult(await Secrets.shared.createSecret(m))
-		} catch (e: unknown) {
-			return responseFromResult(Result.failure<unknown>(e as Error))
-		}
+		// Note: data is validated inside createSecret
+		const m = await Result.fromPromise<NewSecret>(ctx.req.json())
+		return m.mapAsync((x) => Secrets.shared.createSecret(x)).then(responseFromResult)
 	},
 })

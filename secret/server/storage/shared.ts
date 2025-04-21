@@ -1,9 +1,13 @@
 import Result from "@nihility-io/result"
 import { deepMerge as deepMergeInternal } from "@std/collections"
 import { Secret } from "secret/models"
-import { logDB } from "log"
 
 export interface SecretStorage {
+	/**
+	 * Initializes the storage. This is called when the server starts.
+	 */
+	init(): Promise<boolean>
+
 	/**
 	 * Creates an iterator which goes over all stored secrets
 	 */

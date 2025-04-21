@@ -44,7 +44,6 @@ export const clientCfg: Config = (() => {
 	if (typeof document !== "undefined") {
 		return undefined!
 	}
-	// deno-lint-ignore no-undef
 	const res = structuredClone(serverCfg)
 	res.storage.backend = undefined as never
 	return res

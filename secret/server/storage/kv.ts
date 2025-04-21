@@ -17,7 +17,7 @@ import { logDB } from "log"
  */
 export class SecretKVStorage implements SecretStorage {
 	#location?: string
-	#kv: Promise<Deno.Kv>
+	#kv!: Deno.Kv
 
 	/**
 	 * Creates and secret storage instance which stores secrets in Deno KV (local or network)
@@ -25,29 +25,43 @@ export class SecretKVStorage implements SecretStorage {
 	 */
 	constructor(cfg: KVBackend) {
 		this.#location = cfg.location
-		this.#kv = Deno.openKv(this.#location)
+	}
+
+	/**
+	 * Initializes the storage. This is called when the server starts.
+	 */
+	async init(): Promise<boolean> {
+		try {
+			this.#kv = await Deno.openKv(this.#location)
+		} catch (e: unknown) {
+			const err = e as Error
+			logDB.error(`Failed to initialize Deno KV backend. Reason: ${err.message}`, {
+				error: { name: err.name, message: err.message },
+			})
+			return false
+		}
+
+		return true
 	}
 
 	/**
 	 * Creates an iterator which goes over all stored secrets
 	 */
 	async *getSecrets(): AsyncGenerator<Result<Secret>, void, unknown> {
-		const kv = await Result.fromPromise(this.#kv)
-		if (!kv.isSuccess()) {
-			logDB.error(`Failed to list secrets. Reason: ${kv.unwrapError().message}`, {
-				error: { name: kv.unwrapError().name, message: kv.unwrapError().message },
-			})
-
-			yield Result.failure<Secret>(new SecretListExistsError())
-			return
-		}
-
-		for await (const e of kv.value.list({ prefix: ["secrets"] })) {
-			try {
-				yield Result.success(await Secret.parseAsync(e.value))
-			} catch (_e) {
-				yield Result.failure(new SecretListExistsError())
+		try {
+			for await (const e of this.#kv.list({ prefix: ["secrets"] })) {
+				try {
+					yield Result.success(await Secret.parseAsync(e.value))
+				} catch (_e) {
+					yield Result.failure(new SecretListExistsError())
+				}
 			}
+		} catch (e: unknown) {
+			const err = e as Error
+			logDB.error(`Failed to list secrets. Reason: ${err.message}`, {
+				error: { name: err.name, message: err.message },
+			})
+			yield Result.failure(new SecretListExistsError())
 		}
 	}
 
@@ -57,8 +71,7 @@ export class SecretKVStorage implements SecretStorage {
 	 */
 	async exists(id: string): Promise<boolean> {
 		const res = await Result.fromPromise(
-			this.#kv
-				.then((kv) => kv.get(["secrets", id]))
+			this.#kv.get(["secrets", id])
 				.then((res) => res.value !== null),
 		)
 		return res.isSuccess() && res.value
@@ -69,8 +82,7 @@ export class SecretKVStorage implements SecretStorage {
 	 * @param id Secret ID
 	 */
 	async getSecret(id: string): Promise<Result<Secret>> {
-		const res = await Result.fromPromise(this.#kv
-			.then((kv) => kv.get<Secret>(["secrets", id])))
+		const res = await Result.fromPromise(this.#kv.get<Secret>(["secrets", id]))
 
 		if (!res.isSuccess() || res.value.value === null) {
 			return Result.failure(new SecretNotFoundError(id))
@@ -96,8 +108,7 @@ export class SecretKVStorage implements SecretStorage {
 		}
 
 		try {
-			const success = await this.#kv
-				.then((kv) => kv.set(["secrets", secret.id], secret))
+			const success = await this.#kv.set(["secrets", secret.id], secret)
 				.then((x) => x.ok)
 
 			if (!success) {
@@ -126,8 +137,7 @@ export class SecretKVStorage implements SecretStorage {
 		const secret = patchObject(res.value, patch)
 
 		try {
-			const success = await this.#kv
-				.then((kv) => kv.set(["secrets", secret.id], secret))
+			const success = await this.#kv.set(["secrets", secret.id], secret)
 				.then((x) => x.ok)
 
 			if (!success) {
@@ -153,8 +163,7 @@ export class SecretKVStorage implements SecretStorage {
 		}
 
 		try {
-			await this.#kv
-				.then((kv) => kv.delete(["secrets", id]))
+			await this.#kv.delete(["secrets", id])
 			return Result.success(id)
 		} catch (e) {
 			logDB.error(`Failed to delete secret. Reason: ${(e as Error).message}`, {

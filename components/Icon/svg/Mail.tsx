@@ -6,12 +6,13 @@ export default (
 		height="24"
 		fill="none"
 		viewBox="0 0 24 24"
+		stroke-width="1.5"
+		stroke="currentColor"
 	>
 		<path
-			stroke="currentColor"
 			stroke-linecap="round"
-			stroke-width="2"
-			d="m3.5 5.5 7.893 6.036a1 1 0 0 0 1.214 0L20.5 5.5M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"
+			stroke-linejoin="round"
+			d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
 		/>
 	</svg>
 )

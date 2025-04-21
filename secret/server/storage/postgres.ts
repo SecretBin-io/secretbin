@@ -12,6 +12,7 @@ import {
 } from "secret/models"
 import { patchObject, SecretStorage } from "./shared.ts"
 import { logDB } from "log"
+import { truncate } from "node:fs"
 
 /**
  * Secret storage implementation which stores secrets in PostgreSQL using jsonb
@@ -33,17 +34,27 @@ export class SecretPostgresStorage implements SecretStorage {
 			max: 5,
 			idle_timeout: 30000,
 		})
+	}
 
-		// Ensure that the Postgres exists
-		this.#sql`create table if not exists Secrets (
+	/**
+	 * Initializes the storage. This is called when the server starts.
+	 */
+	async init(): Promise<boolean> {
+		try {
+			await this.#sql`create table if not exists Secrets (
 			ID uuid primary key,
 			Secret jsonb not null,
 			CreatedAt timestamp not null default now()
-		)`.catch((e) => {
-			logDB.error(`Init error. Reason: ${e.message}`, {
-				error: { name: e.name, message: e.message },
+		)`
+		} catch (e: unknown) {
+			const err = e as Error
+			logDB.error(`Failed to initialize Postgres backend. Reason: ${err.message}`, {
+				error: { name: err.name, message: err.message },
 			})
-		})
+			return false
+		}
+
+		return true
 	}
 
 	/**

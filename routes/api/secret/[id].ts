@@ -6,13 +6,7 @@ import { define } from "utils"
  * Secret API: /secret/<some_id>
  */
 export const handler = define.handlers({
-	async GET({ params }) {
-		return responseFromResult(await Secrets.shared.getSecretMetadata(params.id))
-	},
-	async POST({ params }) {
-		return responseFromResult(await Secrets.shared.getSecret(params.id))
-	},
-	async DELETE({ params }) {
-		return responseFromResult(await Secrets.shared.deleteSecret(params.id))
-	},
+	GET: ({ params }) => Secrets.shared.getSecretMetadata(params.id).then(responseFromResult),
+	POST: ({ params }) => Secrets.shared.getSecret(params.id).then(responseFromResult),
+	DELETE: ({ params }) => Secrets.shared.deleteSecret(params.id).then(responseFromResult),
 })

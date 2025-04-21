@@ -19,12 +19,18 @@ export const handler = define.handlers<DeleteSecretData>({
 	},
 	async POST({ params, state }) {
 		const res = await Secrets.shared.deleteSecret(params.id)
-		if (res.isFailure()) {
-			return {
-				data: { id: params.id, done: true, error: LocalizedError.getLocalizedMessage(state.lang, res.error) },
-			} satisfies PageResponse<DeleteSecretData>
-		}
-		return { data: { id: params.id, done: true } } satisfies PageResponse<DeleteSecretData>
+		return res.match<PageResponse<DeleteSecretData>>({
+			success: () => ({
+				data: { id: params.id, done: true },
+			}),
+			failure: (error) => ({
+				data: {
+					id: params.id,
+					done: true,
+					error: LocalizedError.getLocalizedMessage(state.lang, error),
+				},
+			}),
+		})
 	},
 })
 

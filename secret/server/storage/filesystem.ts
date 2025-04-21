@@ -1,5 +1,5 @@
 import Result from "@nihility-io/result"
-import { exists, existsSync } from "@std/fs"
+import { exists } from "@std/fs"
 import * as path from "@std/path"
 import { FileSystemBackend } from "config"
 import {
@@ -25,10 +25,26 @@ export class SecretFileSystemStorage implements SecretStorage {
 	 * @param cfg Config
 	 */
 	constructor(cfg: FileSystemBackend) {
-		if ((existsSync(cfg.path))) {
-			Deno.mkdirSync(cfg.path, { recursive: true })
-		}
 		this.#path = cfg.path
+	}
+
+	/**
+	 * Initializes the storage. This is called when the server starts.
+	 */
+	async init(): Promise<boolean> {
+		try {
+			if (await exists(this.#path)) {
+				await Deno.mkdir(this.#path, { recursive: true })
+			}
+		} catch (e: unknown) {
+			const err = e as Error
+			logDB.error(`Failed to initialize file system backend. Reason: ${err.message}`, {
+				error: { name: err.name, message: err.message },
+			})
+			return false
+		}
+
+		return true
 	}
 
 	/**

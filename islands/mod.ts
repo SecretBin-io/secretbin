@@ -1,3 +1,4 @@
+export * from "./components/mod.ts"
 export * from "./LanguageMenu.tsx"
 export * from "./NewSecret.tsx"
 export * from "./ShareSecret.tsx"

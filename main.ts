@@ -2,17 +2,27 @@ import { App, fsRoutes, staticFiles } from "fresh"
 import { define, stateMiddleware } from "./utils.ts"
 import { Secrets } from "secret/server"
 import { type State } from "state"
+import { logWeb } from "log"
+import { config } from "config"
 
 export const app = new App<State>()
 app.use(staticFiles())
 app.use(stateMiddleware)
 
-// this can also be defined via a file. feel free to delete this!
-const exampleLoggerMiddleware = define.middleware((ctx) => {
-	console.log(`${ctx.req.method} ${ctx.req.url}`)
-	return ctx.next()
-})
-app.use(exampleLoggerMiddleware)
+if (config.logging.level === "DEBUG") {
+	// this can also be defined via a file. feel free to delete this!
+	const loggerMiddleware = define.middleware(async (ctx) => {
+		const res = await ctx.next()
+		logWeb.debug(`${ctx.req.method} [${res.status}] ${ctx.req.url}`, {
+			method: ctx.req.method,
+			url: ctx.req.url,
+			status: res.status,
+		})
+		return res
+	})
+
+	app.use(loggerMiddleware)
+}
 
 await fsRoutes(app, {
 	dir: "./",
@@ -20,12 +30,14 @@ await fsRoutes(app, {
 	loadRoute: (path) => import(`./routes/${path}`),
 })
 
-if (import.meta.main) {
-	const isBuildMode = Deno.args.includes("build")
-	if (!isBuildMode) {
-		// Trigger the garbage collector on startup but not when building
-		Secrets.shared.garbageCollection()
+const isBuildMode = Deno.args.includes("build")
+if (!isBuildMode) {
+	// Trigger the secret provider on startup but not when building
+	if (!(await Secrets.shared.init())) {
+		Deno.exit(-1)
 	}
+}
 
+if (import.meta.main) {
 	await app.listen()
 }
