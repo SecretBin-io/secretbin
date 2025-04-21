@@ -9,6 +9,7 @@ import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
 import { State } from "state"
 import { setMessagePreview } from "./preview.ts"
+import { generatePassword } from "secret/client"
 
 export interface NewSecretProps {
 	state: State
@@ -48,10 +49,14 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 		}))
 	}
 
+	const genPassword = () => {
+		setMessage(generatePassword(config.policy.passwordLength, config.policy.passwordCharacters))
+	}
+
 	return (
 		<>
 			<TextArea id="note" tabs lines={10} placeholder="" value={message} onChange={setMessage} />
-			<Button label="Generate Password" icon="Key" theme="plainDefault" />
+			<Button label={$("GeneratePassword.Title")} icon="Key" theme="plainDefault" onClick={genPassword} />
 			<br />
 			<FilesUpload state={state} files={files} setFiles={setFiles} />
 			<Options state={state} options={options} setOptions={setOptions} setPassword={setPassword} />

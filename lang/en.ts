@@ -1,3 +1,5 @@
+import { title } from "node:process"
+
 export default {
 	Metadata: {
 		NativeName: "English",
@@ -55,6 +57,10 @@ export default {
 					Status:
 						"Allow secret to be read {{count}} time(s) within 5 minutes of opening the secret for the first time.",
 				},
+			},
+			GeneratePassword: {
+				Title: "Generate Password",
+				Description: "Generate a random password for the secret.",
 			},
 		},
 		ShareSecret: {

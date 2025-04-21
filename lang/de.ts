@@ -59,6 +59,10 @@ export default {
 						"Erlaube {{count}} Lesezugriffe innerhalb von 5 Minuten nach dem ersten Öffnen des Geheimnisses.",
 				},
 			},
+			GeneratePassword: {
+				Title: "Passwort Generieren",
+				Description: "Generate ein zufälliges Passwort für das Geheimnis.",
+			},
 		},
 		ShareSecret: {
 			Title: "Geheimnis teilen",

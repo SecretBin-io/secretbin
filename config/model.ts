@@ -115,6 +115,12 @@ export interface Policy {
 
 	/** Blocks users from enabling slow burn for new secrets */
 	denySlowBurn: boolean
+
+	/** Minimum password length for generated passwords */
+	passwordLength: number
+
+	/** Allowed characters for generated passwords */
+	passwordCharacters: string
 }
 
 export const Policy = z.object({
@@ -122,6 +128,10 @@ export const Policy = z.object({
 	requireBurn: z.boolean().default(false),
 	requirePassword: z.boolean().default(false),
 	denySlowBurn: z.boolean().default(false),
+	passwordLength: z.number().positive().default(16),
+	passwordCharacters: z.string().default(
+		"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%&*_-+=,.?<>",
+	),
 }).strict()
 
 /**

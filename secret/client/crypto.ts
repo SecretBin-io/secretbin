@@ -131,3 +131,17 @@ const deriveAESKey = async (key: Uint8Array, password: string, salt: Uint8Array)
 		["encrypt", "decrypt"], // We may only use it for en- and decryption
 	)
 }
+
+/**
+ * Generates a random password at a given length using a given set of characters
+ * @param length Length of the password
+ * @param characters Characters to use for the password
+ * @returns
+ */
+export const generatePassword = (
+	length = 20,
+	characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%&*_-+=,.?<>",
+): string =>
+	Array.from(randomBytes(length))
+		.map((x) => characters[x % characters.length])
+		.join("")
