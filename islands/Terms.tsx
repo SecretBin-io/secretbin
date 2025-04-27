@@ -40,6 +40,8 @@ export const Terms = ({ state }: TermsProps) => {
 			]}
 		>
 			<div
+				class="max-h-80 overflow-y-scroll"
+				// deno-lint-ignore react-no-danger
 				dangerouslySetInnerHTML={{
 					__html: config.branding.terms?.content[state.lang] ?? // Get content from config in the desired language
 						config.branding.terms?.content.en ?? // If not found try to get title from config in English

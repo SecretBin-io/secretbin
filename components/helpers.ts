@@ -6,4 +6,4 @@ export interface BaseProps {
 }
 
 export const randomID = (prefix?: string) => `${prefix ? prefix + "-" : ""}${Math.floor(Math.random() * 100)}`
-export const elementID = (type: string, id: string | undefined) => id ? id : randomID(type)
+export const elementID = (type: string, id?: string) => id ? id : randomID(type)

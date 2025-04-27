@@ -34,10 +34,10 @@ export const ThemeToggle = ({ cookie = "color-theme" }: ThemeToggleProps) => {
 	return (
 		<>
 			<Button
-				overrideClass
-				class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-				onClick={() => setIsDark(!isDark)}
+				class="justify-center !px-4 !py-2 !mb-0 !me-0"
+				theme="clear"
 				icon={isDark ? "Day" : "Night"}
+				onClick={() => setIsDark(!isDark)}
 			/>
 		</>
 	)

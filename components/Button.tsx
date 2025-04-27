@@ -9,6 +9,7 @@ import { BaseProps } from "./helpers.ts"
 export type ButtonTheme = keyof typeof buttonThemes
 
 const buttonThemes = {
+	clear: "text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white",
 	default:
 		"text-white dark:text-white bg-blue-700 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-700 focus:ring-blue-300 dark:focus:ring-blue-800",
 	alternative:
@@ -86,7 +87,7 @@ export const Button = (
 
 	const Label = () => (
 		<>
-			{icon ? <Icon name={icon} class="w-6 h-6 me-2" /> : null}
+			{icon ? <Icon name={icon} class={classNames("w-6 h-6", { "me-2": !!label })} /> : null}
 			{label}
 		</>
 	)

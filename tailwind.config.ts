@@ -9,8 +9,8 @@ export default {
 	],
 	plugins: [
 		Flowbite,
-		plugin(({ addVariant }) => {
-			addVariant("third", "&:nth-child(3)")
-		}),
+		// plugin(({ addVariant }) => {
+		// 	addVariant("third", "&:nth-child(3)")
+		// }),
 	],
 } satisfies Config
