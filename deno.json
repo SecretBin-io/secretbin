@@ -44,6 +44,7 @@
 		"**/_fresh/*"
 	],
 	"imports": {
+		"@libs/qrcode": "jsr:@libs/qrcode@^2.0.1",
 		"@nihility-io/cookies": "jsr:@nihility-io/cookies@^1.0.3",
 		"@nihility-io/record": "jsr:@nihility-io/record@^1.0.3",
 		"@nihility-io/result": "jsr:@nihility-io/result@^1.0.2",
@@ -71,7 +72,6 @@
 		"postgres": "npm:postgres@^3.4.4",
 		"preact": "npm:preact@^10.25.4",
 		"@preact/signals": "npm:@preact/signals@^2.0.2",
-		"qrcode": "npm:qrcode@^1.5.4",
 		"secret/client": "./secret/client/mod.ts",
 		"secret/models": "./secret/models/mod.ts",
 		"secret/server": "./secret/server/mod.ts",

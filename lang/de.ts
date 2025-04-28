@@ -80,6 +80,7 @@ export default {
 				GenerateQR: "QR-Code generieren",
 				Email: "Link per E-Mail senden",
 				Delete: "Geheimnis löschen",
+				DownloadQR: "Herunterladen",
 			},
 		},
 		ViewSecret: {

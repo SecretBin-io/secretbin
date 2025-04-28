@@ -79,6 +79,7 @@ export default {
 				GenerateQR: "Generate QR Code",
 				Email: "Email Link",
 				Delete: "Delete Secret",
+				DownloadQR: "Download",
 			},
 		},
 		ViewSecret: {

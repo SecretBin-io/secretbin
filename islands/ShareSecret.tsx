@@ -75,7 +75,7 @@ export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 				/>
 			</ButtonGroup>
 			<Show if={showQrCode}>
-				<QRCode content={link} />
+				<QRCode downloadLabel={$("Actions.DownloadQR")} content={link} />
 			</Show>
 			<Show if={preview !== ""}>
 				<Section title={$("Preview.Title")} description={$("Preview.Description")}>
