@@ -109,10 +109,10 @@ export default {
 		Credits: {
 			Title: "Credits",
 			Description:
-				'{{name}} ist von <a href="https://privatebin.info">PrivateBin</a> inspiriert. PrivateBin wird unter anderem von <a href="https://github.com/PrivateBin/PrivateBin/graphs/contributors">El RIDO</a> entwickelt und wird unter der <a href="https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md">Zlib Lizenz</a> bereitgestellt. <br/> {{name}} wurde vollkommen neu entwickelt und vereint die Basisfunktionalität von PrivateBin mit sinnvollen Erweiterungen.',
+				'{{name}} ist von <u><a href="https://privatebin.info">PrivateBin</a></u> inspiriert. PrivateBin wird unter anderem von <u><a href="https://github.com/PrivateBin/PrivateBin/graphs/contributors">El RIDO</a></u> entwickelt und wird unter der <u><a href="https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md">Zlib Lizenz</a></u> bereitgestellt. <br/> {{name}} wurde vollkommen neu entwickelt und vereint die Basisfunktionalität von PrivateBin mit sinnvollen Erweiterungen.',
 			BrandedNotice: "{{name}} basiert auf Nihility.io SecretBin.",
 			SourceNotice:
-				'Nihility.io SecretBin ist Open Source und steht unter MIT-Lizenz zur Verfügung. Wenn du deine eigene Version von SecretBin hosten möchtest, findest du den Quellcode auf <a href="https://github.com/Nihility-io/SecretBin">GitHub</a>.',
+				'Nihility.io SecretBin ist Open Source und steht unter MIT-Lizenz zur Verfügung. Wenn du deine eigene Version von SecretBin hosten möchtest, findest du den Quellcode auf <u><a href="https://github.com/Nihility-io/SecretBin">GitHub</a></u>.',
 			Translations: {
 				Title: "Übersetzungen",
 				Description: "Unten findest du eine Liste von allen Übersetzungen und deren Autoren.",
@@ -131,7 +131,7 @@ export default {
 			},
 		},
 		TermsOfService: {
-			Accept: "Ich akzeptiere",
+			Title: "Nutzungsbedingungen",
 			Content: `<h2>Usage Policy</h2>
                 <p class="text-base text-gray-500 dark:text-gray-400">
                   Dieser Dienst wird ohne Gewähr angeboten. <b>{{name}} ist kein öffentlicher Service</b>. Es handelt sich um ein privates Projekt,
@@ -154,8 +154,8 @@ export default {
                 <p class="text-base text-gray-500 dark:text-gray-400">
                   <b><i>Wenn du mit diesen Bedingungen nicht einverstanden bist, verlasse bitte diese Seite.</i></b>
                 </p>`,
+			Accept: "Akzeptieren",
 			Decline: "Ablehnen",
-			Title: "Nutzungsbedingungen",
 		},
 		Errors: {
 			SecretNotFoundError: "Ein Geheimnis mit der ID {{id}} wurde nicht gefunden.",

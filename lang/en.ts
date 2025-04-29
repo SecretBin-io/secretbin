@@ -1,5 +1,3 @@
-import { title } from "node:process"
-
 export default {
 	Metadata: {
 		NativeName: "English",
@@ -107,10 +105,10 @@ export default {
 		Credits: {
 			Title: "Credits",
 			Description:
-				'{{name}} is inspired by <a href="https://privatebin.info">PrivateBin</a>. PrivateBin is developed by <a href="https://github.com/PrivateBin/PrivateBin/graphs/contributors">El RIDO</a> among others and released under the <a href="https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md">Zlib License</a>. <br/> {{name}} has been completely redeveloped and combines the basic functionality of PrivateBin with useful extensions.',
+				'{{name}} is inspired by <u><a href="https://privatebin.info">PrivateBin</a></u>. PrivateBin is developed by <u><a href="https://github.com/PrivateBin/PrivateBin/graphs/contributors">El RIDO</a></u> among others and released under the <u><a href="https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md">Zlib License</a></u>. <br/> {{name}} has been completely redeveloped and combines the basic functionality of PrivateBin with useful extensions.',
 			BrandedNotice: "{{name}} is based on Nihility.io SecretBin.",
 			SourceNotice:
-				"Nihility.io SecretBin is open source and licensed under MIT. If you want to host your own version of SecretBin, head over to GitHub.",
+				'Nihility.io SecretBin is open source and licensed under MIT. If you want to host your own version of SecretBin, head over to <u><a href="https://github.com/Nihility-io/SecretBin">GitHub</a></u>.',
 			Translations: {
 				Title: "Translations",
 				Description: "Below you will find a list of all supported translations and their authors.",
@@ -155,7 +153,7 @@ export default {
         <p class="text-base text-gray-500 dark:text-gray-400">
           <b><i>If you disagree with these terms, please close this page.</i></b>
         </p>`,
-			Accept: "I accept",
+			Accept: "Accept",
 			Decline: "Decline",
 		},
 		Errors: {

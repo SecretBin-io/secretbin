@@ -1,7 +1,6 @@
-import { Cookies } from "@nihility-io/cookies"
+import { useCookie } from "@nihility-io/cookies"
 import { Modal } from "components"
 import { config } from "config"
-import { type ModalInterface } from "flowbite"
 import { useTranslationWithPrefix } from "lang"
 import { State } from "state"
 
@@ -14,15 +13,11 @@ export interface TermsProps {
  */
 export const Terms = ({ state }: TermsProps) => {
 	const $ = useTranslationWithPrefix(state.lang, "TermsOfService")
+	const [terms, setTerms] = useCookie("terms", "", { expires: 3650 })
 
 	return (
 		<Modal
-			modelRef={(modal: ModalInterface) => {
-				// Show terms if not already excepted
-				if (Cookies.get<string>("terms", "") !== "accepted") {
-					modal.show()
-				}
-			}}
+			show={terms !== "accepted"}
 			title={
 				config.branding.terms?.title[state.lang] ?? // Get title from config in the desired language
 					config.branding.terms?.title.en ?? // If not found try to get title from config in English
@@ -30,11 +25,12 @@ export const Terms = ({ state }: TermsProps) => {
 			}
 			actions={[
 				{
-					name: $("Accept"),
-					onClick: (m) => {
+					label: $("Accept"),
+					icon: "Check",
+					theme: "plainSuccess",
+					onClick: () => {
 						// If terms were accepted, dismiss modal and remember that the terms were accepted using a cookie
-						Cookies.set("terms", "accepted", { expires: 3650 })
-						m.hide()
+						setTerms("accepted")
 					},
 				},
 			]}

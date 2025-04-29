@@ -1,20 +1,22 @@
 import classNames from "classnames"
-import { Icon } from "components"
-import { JSX } from "preact"
+import { Icon, IconName } from "components"
 import { BaseProps } from "./helpers.ts"
 
-export type MessageType = "error" | "info"
+export type MessageType = "error" | "warning" | "info"
 
 const colorMessageType: Record<MessageType, string> = {
 	info:
 		"text-grey-800 border-grey-300 border-grey-300 bg-grey-50 dark:bg-gray-800 dark:text-grey-400 dark:border-grey-800",
+	warning:
+		"text-yellow-800 border-yellow-900 border-yellow-900 bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400 dark:border-yellow-400",
 	error:
 		"text-red-800 border-red-300 border-red-300 bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800",
 }
 
-const iconMessageType: Record<MessageType, () => JSX.Element> = {
-	info: () => <></>,
-	error: () => <Icon name="Exclamation" />,
+const iconMessageType: Record<MessageType, IconName> = {
+	info: "Info",
+	warning: "Exclamation",
+	error: "Error",
 }
 
 export interface MessageProps extends BaseProps {
@@ -55,7 +57,7 @@ export const Message = ({ title, type, message, ...props }: MessageProps) => {
 				</p>
 			</div> */
 			}
-			{iconMessageType[type]()}
+			<Icon name={iconMessageType[type]} />
 			<span class="sr-only">{title}</span>
 			<div class="pl-2">
 				<span class="font-medium">{title}:</span> {message}

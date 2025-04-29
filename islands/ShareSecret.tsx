@@ -43,12 +43,12 @@ export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 				/>
 				<Button
 					label={$("Actions.Open")}
-					icon="Internet"
+					icon="Link"
 					link={link}
 				/>
 				<Button
 					label={$("Actions.CopyLink")}
-					icon="File"
+					icon="Copy"
 					// onClick={() => navigator.clipboard.writeText(link)}
 					onClick={() =>
 						navigator.clipboard.write([

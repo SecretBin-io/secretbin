@@ -1,13 +1,14 @@
-import { cloneElement, JSX } from "preact"
-import * as svgs from "./svg/mod.ts"
+import * as Icons from "./Icons.tsx"
+import { SVGIconProps } from "./Base.tsx"
+export * as Icons from "./Icons.tsx"
 
-export type IconName = keyof typeof svgs
+export type IconName = keyof typeof Icons
 
-export interface IconProps {
+export interface IconProps extends SVGIconProps {
 	name: IconName
 }
 
-export const Icon = ({ name, ...props }: IconProps & Omit<JSX.IntrinsicElements["svg"], "name">) => {
-	const svg = svgs[name] ?? svgs.Close
-	return cloneElement(svg, { ...svg.props, ...props })
+export const Icon = ({ name, ...props }: IconProps) => {
+	const NamedIcon = Icons[name] ?? Icons.Close
+	return <NamedIcon {...props} />
 }

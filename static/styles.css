@@ -1,16 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-.fresh-gradient {
-  background-color: rgb(134, 239, 172);
-  background-image: linear-gradient(
-    to right bottom,
-    rgb(219, 234, 254),
-    rgb(187, 247, 208),
-    rgb(254, 249, 195)
-  );
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
   user-select: none;
@@ -25,4 +15,72 @@ h6,
 p,
 span {
   cursor: default;
+}
+
+@theme {
+  --animate-appear: appear 0.25s ease-in-out forwards 0s;
+
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      scale: 90%;
+    }
+    50% {
+      opacity: 1;
+      scale: 110%;
+    }
+    100% {
+      opacity: 1;
+      scale: 100%;
+    }
+  }
+}
+
+@theme {
+  --animate-disappear: disappear 0.25s ease-in-out forwards 0s;
+
+  @keyframes disappear {
+    0% {
+      opacity: 1;
+      scale: 110%;
+    }
+    50% {
+      opacity: 1;
+      scale: 110%;
+    }
+    100% {
+      opacity: 0;
+      scale: 90%;
+    }
+  }
+}
+
+@theme {
+  --animate-slide-down: slide-down 5.25s ease-in-out forwards 0s;
+
+  @keyframes slide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY();
+    }
+  }
+}
+
+@theme {
+  --animate-slice-up: slice-up 0.25s ease-in-out forwards 0s;
+
+  @keyframes slice-up {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

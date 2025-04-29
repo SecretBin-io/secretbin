@@ -36,7 +36,7 @@ export const ThemeToggle = ({ cookie = "color-theme" }: ThemeToggleProps) => {
 			<Button
 				class="justify-center !px-4 !py-2 !mb-0 !me-0"
 				theme="clear"
-				icon={isDark ? "Day" : "Night"}
+				icon={isDark ? "Sun" : "Moon"}
 				onClick={() => setIsDark(!isDark)}
 			/>
 		</>

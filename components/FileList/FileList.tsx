@@ -18,12 +18,17 @@ export const FileList = ({ files, downloadable, onDelete, ...props }: FileListPr
 			)}
 		>
 			<ul class="divide-y divide-gray-200 dark:divide-gray-700">
-				{files.map((x) => (
-					<FileItem
-						file={x}
-						downloadable={downloadable}
-						onDelete={onDelete ? () => onDelete(x) : undefined}
-					/>
+				{files.map((x, i) => (
+					<>
+						<Show if={i > 0}>
+							<hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+						</Show>
+						<FileItem
+							file={x}
+							downloadable={downloadable}
+							onDelete={onDelete ? () => onDelete(x) : undefined}
+						/>
+					</>
 				))}
 			</ul>
 		</div>
