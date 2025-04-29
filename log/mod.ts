@@ -1,61 +1,132 @@
-import * as log from "@std/log"
-import { type LogRecord } from "@std/log"
 import { config } from "config"
 
-const flattenArgs = (args: unknown[]): unknown => {
-	if (args.length === 1) {
-		return args[0]
-	} else if (args.length > 1) {
-		return args
+export type LogLevel = "DEBUG" | "INFO" | "WARN" | "ERROR" | "CRITICAL"
+
+export class Logger {
+	name: string
+
+	/**
+	 * Creates a new logger instance
+	 * @param name Name of the logger
+	 */
+	constructor(name: string) {
+		this.name = name
+	}
+
+	/**
+	 * Sets the logging level for all loggers
+	 * @param level Logging level
+	 */
+	public static level: LogLevel = config.logging.level === "NOTSET" ? "INFO" : config.logging.level
+
+	/**
+	 * Returns the number of the log level
+	 * @param level Log level
+	 * @returns Log level number (DEBUG = 4, INFO = 3, WARN = 2, ERROR = 1, CRITICAL = 0)
+	 */
+	public static levelNumber(level: LogLevel): number {
+		return Logger.#logLevels[level]
+	}
+
+	/**
+	 * Logs a message to the console
+	 * @param level Log level
+	 * @param message Message to log
+	 * @param args Optional arguments to include in the log
+	 */
+	#log(level: LogLevel, message: string, ...args: unknown[]): void {
+		if (Logger.#logLevels[level] > Logger.#logLevels[Logger.level]) {
+			return
+		}
+
+		console.log(JSON.stringify({
+			level: level,
+			timestamp: new Date().toISOString(),
+			logger: this.name,
+			message: message,
+			args: Logger.#flattenArgs(args),
+		}))
+	}
+
+	/**
+	 * Logs a message to the console (debug level)
+	 * @param message Message to log
+	 * @param args Optional arguments to include in the log
+	 */
+	public debug(message: string, ...args: unknown[]): void {
+		this.#log("DEBUG", message, ...args)
+	}
+
+	/**
+	 * Logs a message to the console (info level)
+	 * @param message Message to log
+	 * @param args Optional arguments to include in the log
+	 */
+	public info(message: string, ...args: unknown[]): void {
+		this.#log("INFO", message, ...args)
+	}
+
+	/**
+	 * Logs a message to the console (warn level)
+	 * @param message Message to log
+	 * @param args Optional arguments to include in the log
+	 */
+	public warn(message: string, ...args: unknown[]): void {
+		this.#log("WARN", message, ...args)
+	}
+
+	/**
+	 * Logs a message to the console (error level)
+	 * @param message Message to log
+	 * @param args Optional arguments to include in the log
+	 */
+	public error(message: string, ...args: unknown[]): void {
+		this.#log("ERROR", message, ...args)
+	}
+
+	/**
+	 * Logs a message to the console (critical level)
+	 * @param message Message to log
+	 * @param args Optional arguments to include in the log
+	 */
+	public critical(message: string, ...args: unknown[]): void {
+		this.#log("CRITICAL", message, ...args)
+	}
+
+	/**
+	 * Returns the first argument if there is only one,
+	 * otherwise returns the entire array.
+	 * @param args List of arguments
+	 * @returns Flattened argument(s)
+	 */
+	static #flattenArgs(args: unknown[]): unknown {
+		if (args.length === 1) {
+			return args[0]
+		} else if (args.length > 1) {
+			return args
+		}
+	}
+
+	/**
+	 * Maps log level names to the log level number
+	 */
+	static readonly #logLevels: Record<LogLevel, number> = {
+		DEBUG: 4,
+		INFO: 3,
+		WARN: 2,
+		ERROR: 1,
+		CRITICAL: 0,
 	}
 }
 
-log.setup({
-	handlers: {
-		console: new log.ConsoleHandler(config.logging.level, {
-			formatter: (logRecord: LogRecord): string =>
-				JSON.stringify({
-					level: logRecord.levelName,
-					timestamp: logRecord.datetime.toISOString(),
-					logger: logRecord.loggerName,
-					message: logRecord.msg,
-					args: flattenArgs(logRecord.args),
-				}),
-			useColors: false,
-		}),
-	},
-	loggers: {
-		default: {
-			level: config.logging.level,
-			handlers: ["console"],
-		},
-		web: {
-			level: config.logging.level,
-			handlers: ["console"],
-		},
-		secrets: {
-			level: config.logging.level,
-			handlers: ["console"],
-		},
-		gc: {
-			level: config.logging.level,
-			handlers: ["console"],
-		},
-		db: {
-			level: config.logging.level,
-			handlers: ["console"],
-		},
-	},
-})
-
 /** Web logs */
-export const logWeb = log.getLogger("web")
+export const logWeb = new Logger("web")
 
 /** Secrets logs */
-export const logSecrets = log.getLogger("secrets")
+export const logSecrets = new Logger("secrets")
 
 /** Garbage collector logs */
-export const logCG = log.getLogger("gc")
+export const logCG = new Logger("gc")
 
 /** Database logs */
-export const logDB = log.getLogger("db")
+export const logDB = new Logger("db")
