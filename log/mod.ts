@@ -80,8 +80,26 @@ export class Logger {
 	 * @param message Message to log
 	 * @param args Optional arguments to include in the log
 	 */
-	public error(message: string, ...args: unknown[]): void {
-		this.#log("ERROR", message, ...args)
+	public error(message: string, ...args: unknown[]): void
+
+	/**
+	 * Logs a message to the console (error level)
+	 * @param err Error to log
+	 * @param args Optional arguments to include in the log
+	 */
+	public error(err: Error, ...args: unknown[]): void
+
+	/**
+	 * Logs a message to the console (error level)
+	 * @param arg Error or message to log
+	 * @param args Optional arguments to include in the log
+	 */
+	public error(arg: string | Error, ...args: unknown[]): void {
+		if (typeof arg === "string") {
+			this.#log("ERROR", arg, ...args)
+		} else {
+			this.#log("ERROR", `${arg.name}: ${arg.message}`, ...args)
+		}
 	}
 
 	/**

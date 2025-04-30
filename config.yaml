@@ -37,7 +37,7 @@ storage:
   # backend: # Use Deno KV as a backend
   #   type: kv
   backend: # Use PostgreSQL as a backend
-    type: postgres
+    type: postgres2
     host: 127.0.0.1
     port: 5432
     database: secretbin

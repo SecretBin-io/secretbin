@@ -45,6 +45,7 @@
 		"**/_fresh/*"
 	],
 	"imports": {
+		"@db/postgres": "jsr:@db/postgres@^0.19.5",
 		"@libs/qrcode": "jsr:@libs/qrcode@^2.0.1",
 		"@nihility-io/cookies": "jsr:@nihility-io/cookies@^1.0.3",
 		"@nihility-io/record": "jsr:@nihility-io/record@^1.0.3",

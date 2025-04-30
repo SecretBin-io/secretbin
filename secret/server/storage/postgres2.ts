@@ -1,6 +1,6 @@
 import Result from "@nihility-io/result"
-import { PostgresBackend } from "config"
-import postgres, { Sql } from "postgres"
+import { Postgres2Backend } from "config"
+import {  Pool, QueryArrayResult, QueryObjectResult } from "@db/postgres"
 import {
 	Secret,
 	SecretAlreadyExistsError,
@@ -13,26 +13,60 @@ import {
 import { patchObject, SecretStorage } from "./shared.ts"
 import { logDB } from "log"
 
+interface SecretRow {
+	id: string
+	secret: Secret
+}
+
 /**
  * Secret storage implementation which stores secrets in PostgreSQL using jsonb
  */
-export class SecretPostgresStorage implements SecretStorage {
-	#sql: Sql
+export class SecretPostgres2Storage implements SecretStorage {
+	#sql: Pool
 
 	/**
 	 * Creates and secret storage instance which stores secrets in PostgreSQL using jsonb
 	 * @param cfg Config
 	 */
-	constructor(cfg: PostgresBackend) {
-		this.#sql = postgres({
-			host: cfg.host,
+	constructor(cfg: Postgres2Backend) {
+		this.#sql = new Pool({
+			hostname: cfg.host,
 			port: cfg.port,
 			database: cfg.database,
-			username: cfg.username,
+			user: cfg.username,
 			password: cfg.password,
-			max: 5,
-			idle_timeout: 30,
-		})
+			connection: {
+				attempts: 5,
+			},
+		}, 5)
+	}
+
+	/**
+	 * Executed queries and retrieve the data as object entries. It supports
+	 * a generic in order to type the entries retrieved by the query.
+	 * @param query Query
+	 * @returns Result returned by Postgres
+	 */
+	async #queryObject<T = Record<string, unknown>>(
+		strings: TemplateStringsArray,
+		...args: unknown[]
+	): Promise<QueryObjectResult<T>> {
+		using client = await this.#sql.connect()
+		return await client.queryObject(strings, ...args)
+	}
+
+	/**
+	 * Execute queries and retrieve the data as array entries. It supports
+	 * a generic in order to type the entries retrieved by the query.
+	 * @param query Query
+	 * @returns Result returned by Postgres
+	 */
+	async #queryArray<T extends Array<unknown>>(
+		strings: TemplateStringsArray,
+		...args: unknown[]
+	): Promise<QueryArrayResult<T>> {
+		using client = await this.#sql.connect()
+		return await client.queryArray(strings, ...args)
 	}
 
 	/**
@@ -40,11 +74,13 @@ export class SecretPostgresStorage implements SecretStorage {
 	 */
 	async init(): Promise<boolean> {
 		try {
-			await this.#sql`create table if not exists Secrets (
-			ID uuid primary key,
-			Secret jsonb not null,
-			CreatedAt timestamp not null default now()
-		)`
+			await this.#queryArray`
+				create table if not exists Secrets (
+					ID uuid primary key,
+					Secret jsonb not null,
+					CreatedAt timestamp not null default now()
+				)
+			`
 		} catch (e: unknown) {
 			const err = e as Error
 			logDB.error(`Failed to initialize Postgres backend. Reason: ${err.message}`, {
@@ -61,7 +97,7 @@ export class SecretPostgresStorage implements SecretStorage {
 	 */
 	async *getSecrets(): AsyncGenerator<Result<Secret>, void, unknown> {
 		const res = await Result.fromPromise(
-			this.#sql`select ${this.#sql("secret")} from Secrets`,
+			this.#queryObject<SecretRow>`select secret from Secrets`,
 		)
 
 		if (!res.isSuccess()) {
@@ -73,7 +109,7 @@ export class SecretPostgresStorage implements SecretStorage {
 			return
 		}
 
-		for (const e of res.value.values()) {
+		for (const e of res.value.rows) {
 			try {
 				yield Result.success(await Secret.parseAsync(e.secret))
 			} catch (_e) {
@@ -88,10 +124,10 @@ export class SecretPostgresStorage implements SecretStorage {
 	 */
 	async exists(id: string): Promise<boolean> {
 		const res = await Result.fromPromise(
-			this.#sql`select 1 from Secrets where id = ${id}`,
+			this.#queryObject<SecretRow>`select 1 from Secrets where id = ${id}`,
 		)
 
-		return res.isSuccess() && res.value.count === 1
+		return res.isSuccess() && res.value.rowCount === 1
 	}
 
 	/**
@@ -100,7 +136,7 @@ export class SecretPostgresStorage implements SecretStorage {
 	 */
 	async getSecret(id: string): Promise<Result<Secret>> {
 		const res = await Result.fromPromise(
-			this.#sql`select ${this.#sql("secret")} from Secrets where id = ${id}`,
+			this.#queryObject<SecretRow>`select secret from Secrets where id = ${id}`,
 		)
 
 		if (res.isFailure()) {
@@ -109,12 +145,12 @@ export class SecretPostgresStorage implements SecretStorage {
 			})
 		}
 
-		if (!res.isSuccess() || res.value.count === 0) {
+		if (!res.isSuccess() || res.value.rowCount === 0) {
 			return Result.failure(new SecretNotFoundError(id))
 		}
 
 		try {
-			return Result.success(await Secret.parseAsync([...res.value.values()][0].secret))
+			return Result.success(await Secret.parseAsync([...res.value.rows][0].secret))
 		} catch (e) {
 			logDB.error(`Failed to read secret. Reason: ${(e as Error).message}`, {
 				error: { name: (e as Error).name, message: (e as Error).message },
@@ -134,7 +170,7 @@ export class SecretPostgresStorage implements SecretStorage {
 		}
 
 		const success = await Result.fromPromise(
-			this.#sql`insert into Secrets ${this.#sql([{ id: secret.id, secret: secret as never }])}`,
+			this.#queryArray`insert into Secrets (id, secret) values (${secret.id}, ${secret})`,
 		)
 
 		if (success.isFailure()) {
@@ -162,7 +198,7 @@ export class SecretPostgresStorage implements SecretStorage {
 		const secret = patchObject(res.value, patch)
 
 		const success = await Result.fromPromise(
-			this.#sql`update Secrets set ${this.#sql({ secret }, ["secret"])} where id = ${id}`,
+			this.#queryObject<SecretRow>`update Secrets set secret = ${secret} where id = ${id}`,
 		)
 
 		if (success.isFailure()) {
@@ -186,7 +222,7 @@ export class SecretPostgresStorage implements SecretStorage {
 		}
 
 		try {
-			await this.#sql`delete from Secrets where id = ${id}`
+			await this.#queryArray`delete from Secrets where id = ${id}`
 			return Result.success(id)
 		} catch (e) {
 			logDB.error(`Failed to read secret. Reason: ${(e as Error).message}`, {

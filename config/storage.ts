@@ -18,6 +18,24 @@ export const PostgresBackend = z.object({
 	password: z.string().default("postgres"),
 }).strict()
 
+export interface Postgres2Backend {
+	type: "postgres2"
+	host: string
+	port: number
+	database: string
+	username: string
+	password: string
+}
+
+export const Postgres2Backend = z.object({
+	type: z.literal("postgres2"),
+	host: z.string().default("127.0.0.1"),
+	port: z.number().default(5432),
+	database: z.string().default("postgres"),
+	username: z.string().default("postgres"),
+	password: z.string().default("postgres"),
+}).strict()
+
 export interface FileSystemBackend {
 	type: "filesystem"
 	path: string
@@ -38,8 +56,14 @@ export const KVBackend = z.object({
 	location: z.string().optional(),
 }).strict()
 
-export const BackendConfig = z.discriminatedUnion("type", [PostgresBackend, FileSystemBackend, KVBackend])
+export const BackendConfig = z.discriminatedUnion("type", [
+	PostgresBackend,
+	Postgres2Backend,
+	FileSystemBackend,
+	KVBackend,
+])
 export type BackendConfig =
 	| PostgresBackend
+	| Postgres2Backend
 	| FileSystemBackend
 	| KVBackend
