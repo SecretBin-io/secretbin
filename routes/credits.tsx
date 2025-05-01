@@ -1,10 +1,10 @@
 import { PageContent, Table } from "components"
 import { config } from "config"
+import { type PageProps } from "fresh"
+import { useTranslation } from "lang"
+import { State } from "state"
 import deps from "../deps.json" with { type: "json" }
 import depsManual from "../deps_manual.json" with { type: "json" }
-import { useTranslation } from "lang"
-import { type PageProps } from "fresh"
-import { State } from "state"
 
 interface Dependency {
 	name: string

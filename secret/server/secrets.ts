@@ -205,6 +205,14 @@ export class Secrets {
 	}
 
 	/**
+	 * Checks if a secret with the provided ID exists
+	 * @param id Secret ID
+	 */
+	secretExists(id: string): Promise<boolean> {
+		return this.#backend.secretExists(id)
+	}
+
+	/**
 	 * Loads the secret (including the encrypted data). It also deletes the
 	 * secret if it is burned.
 	 * @param id Secret ID

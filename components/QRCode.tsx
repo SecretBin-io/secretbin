@@ -1,8 +1,8 @@
-import classNames from "classnames"
-import { useEffect, useRef, useState } from "preact/hooks"
 import { qrcode } from "@libs/qrcode"
-import { BaseProps, downloadDataURL, imageDataURL } from "./helpers.ts"
+import classNames from "classnames"
 import { Button } from "components"
+import { useEffect, useRef, useState } from "preact/hooks"
+import { BaseProps, downloadDataURL, imageDataURL } from "./helpers.ts"
 
 export interface QRCodeProps extends BaseProps {
 	/** QRCode content */

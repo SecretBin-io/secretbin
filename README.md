@@ -93,9 +93,12 @@ branding:
     content: # Text that may contain HTML 
       en: "..."
       de: "..."
-banner:
-  en: Hello World!
-  de: Hallo Welt!
+banner: # Banner shown at the top of the app. You may use this option for e.g. announcements.
+  enabled: true # Show the banner if true
+  type: info # Banner type (info, warning or error)
+  text: # Text shown in the banner
+    en: Hello World!
+    de: Hallo Welt!
 defaults: # Just customizable defaults 
   expires: 2w # Default expire time when creating a new secret
   burn: true # Default burn selection

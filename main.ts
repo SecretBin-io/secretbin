@@ -1,9 +1,9 @@
+import { config } from "config"
 import { App, fsRoutes, staticFiles } from "fresh"
-import { define, stateMiddleware } from "./utils.ts"
+import { logWeb } from "log"
 import { Secrets } from "secret/server"
 import { type State } from "state"
-import { logWeb } from "log"
-import { config } from "config"
+import { define, stateMiddleware } from "./utils.ts"
 
 export const app = new App<State>()
 app.use(staticFiles())

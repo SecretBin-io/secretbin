@@ -17,7 +17,7 @@ export interface SecretStorage {
 	 * Checks if a secret with the provided ID exists
 	 * @param id Secret ID
 	 */
-	exists(id: string): Promise<boolean>
+	secretExists(id: string): Promise<boolean>
 
 	/**
 	 * Gets the secret with the specified ID

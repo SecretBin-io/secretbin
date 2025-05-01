@@ -132,16 +132,27 @@ const deriveAESKey = async (key: Uint8Array, password: string, salt: Uint8Array)
 	)
 }
 
+export interface PasswordGeneratorOptions {
+	useUppercase: boolean
+	useLowercase: boolean
+	useDigits: boolean
+	useSymbols: boolean
+	length: number
+}
+
 /**
  * Generates a random password at a given length using a given set of characters
- * @param length Length of the password
- * @param characters Characters to use for the password
- * @returns
+ * @param options Specify the password length and characters
+ * @returns Random password
  */
-export const generatePassword = (
-	length = 20,
-	characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%&*_-+=,.?<>",
-): string =>
-	Array.from(randomBytes(length))
+export const generatePassword = (options: PasswordGeneratorOptions): string => {
+	const characters = [
+		options.useUppercase ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "",
+		options.useLowercase ? "abcdefghijklmnopqrstuvwxyz" : "",
+		options.useDigits ? "0123456789" : "",
+		options.useSymbols ? "~!@#%&*_-+=,.?<>" : "",
+	].join("")
+	return Array.from(randomBytes(options.length))
 		.map((x) => characters[x % characters.length])
 		.join("")
+}

@@ -6,7 +6,7 @@ export interface TextAreaProps extends BaseProps {
 	/** Element ID (Default: Random ID) */
 	id?: string
 
-	/** Enable the use of tabs inside the textarea */
+	/** Enable the use of tabs inside the text area */
 	tabs?: boolean
 
 	/** Current text value */
@@ -18,8 +18,11 @@ export interface TextAreaProps extends BaseProps {
 	/** Hint shown when no text is set */
 	placeholder?: string
 
-	/** Makes textarea readonly */
+	/** Makes text area readonly */
 	readOnly?: boolean
+
+	/** Makes the text area resizable */
+	resizable?: boolean
 
 	/** Function called when the text changed */
 	onChange?: (value: string) => void
@@ -54,14 +57,19 @@ const enableTabs = (onChange?: (value: string) => void) => (e: JSX.TargetedKeybo
 }
 
 /**
- * Creates a multiple text field
+ * Creates a text field
  */
-export const TextArea = ({ id, value, tabs, lines, placeholder, readOnly, onChange, ...props }: TextAreaProps) => (
+export const TextArea = (
+	{ id, value, tabs, lines, placeholder, resizable, readOnly, onChange, ...props }: TextAreaProps,
+) => (
 	<textarea
 		id={elementID("text", id)}
 		style={props.style}
 		class={classNames(
 			"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+			{
+				"resize-none": !resizable,
+			},
 			props.class,
 		)}
 		value={value}

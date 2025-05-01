@@ -2,6 +2,7 @@ import Result from "@nihility-io/result"
 import { exists } from "@std/fs"
 import * as path from "@std/path"
 import { FileSystemBackend } from "config"
+import { logDB } from "log"
 import {
 	Secret,
 	SecretAlreadyExistsError,
@@ -12,7 +13,6 @@ import {
 	SecretWriteError,
 } from "secret/models"
 import { patchObject, SecretStorage } from "./shared.ts"
-import { logDB } from "log"
 
 /**
  * Secret storage implementation which stores secrets in JSON files
@@ -75,7 +75,7 @@ export class SecretFileSystemStorage implements SecretStorage {
 	 * Checks if a secret with the provided ID exists
 	 * @param id Secret ID
 	 */
-	async exists(id: string): Promise<boolean> {
+	async secretExists(id: string): Promise<boolean> {
 		const f = path.join(this.#path, `${id}.json`)
 		return await exists(f)
 	}

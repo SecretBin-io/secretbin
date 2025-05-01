@@ -1,15 +1,15 @@
 import Result from "@nihility-io/result"
 import { Button, Message, Show, TextArea } from "components"
 import { config } from "config"
+import { PasswordGenerator } from "islands"
 import { useTranslationWithPrefix } from "lang"
 import { useRef, useState } from "preact/hooks"
 import { SecretOptions, submitSecret } from "secret/client"
 import { LocalizedError } from "secret/models"
+import { State } from "state"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
-import { State } from "state"
 import { setMessagePreview } from "./preview.ts"
-import { generatePassword } from "secret/client"
 
 export interface NewSecretProps {
 	state: State
@@ -26,6 +26,7 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 		rereads: 2,
 	})
 	const [error, setError] = useState("")
+	const [showGenerator, setShowGenerator] = useState(false)
 	const aRef = useRef<HTMLAnchorElement | null>(null)
 
 	const $ = useTranslationWithPrefix(state.lang, "NewSecret")
@@ -49,14 +50,25 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 		}))
 	}
 
-	const genPassword = () => {
-		setMessage(generatePassword(config.policy.passwordLength, config.policy.passwordCharacters))
-	}
-
 	return (
 		<>
-			<TextArea id="note" tabs lines={10} placeholder="" value={message} onChange={setMessage} />
-			<Button label={$("GeneratePassword.Title")} icon="Key" theme="plainDefault" onClick={genPassword} />
+			<TextArea id="note" tabs lines={10} resizable placeholder="" value={message} onChange={setMessage} />
+			<Button
+				label={$("Options.GeneratePassword")}
+				icon="Key"
+				theme="plainAlternative"
+				class="mt-2"
+				onClick={() => setShowGenerator(true)}
+			/>
+			<PasswordGenerator
+				state={state}
+				show={showGenerator}
+				onPassword={(x) => {
+					setMessage(message + x)
+					setShowGenerator(false)
+				}}
+				onDismiss={() => setShowGenerator(false)}
+			/>
 			<br />
 			<FilesUpload state={state} files={files} setFiles={setFiles} />
 			<Options state={state} options={options} setOptions={setOptions} setPassword={setPassword} />

@@ -1,6 +1,6 @@
-import { Checkbox, Input, NumberInput, Section, Select, Show } from "components"
-import { config } from "config"
 import Record from "@nihility-io/record"
+import { Input, NumberInput, Section, Select, Show, Toggle } from "components"
+import { config } from "config"
 import { TranslationKey, TrimPrefix, useTranslationWithPrefix } from "lang"
 import { useEffect, useState } from "preact/hooks"
 import { SecretOptions } from "secret/client"
@@ -56,58 +56,53 @@ export const Options = ({ state, options, setOptions, setPassword }: OptionsProp
 				/>
 			</Section>
 			<Section title={$("Options.Title")} description={$("Options.Description")}>
-				<Checkbox
-					mode="toggle"
+				<Toggle
 					label={$("Options.Burn.Title")}
 					subLabel={$("Options.Burn.Description")}
 					disabled={config.policy.requireBurn}
 					tooltip={config.policy.requireBurn
 						? $("RequiredByPolicy", { name: config.branding.appName })
 						: undefined}
-					checked={options.burn}
+					on={options.burn}
 					onChange={setOpts("burn")}
 				/>
 				<Show if={!config.policy.denySlowBurn && options.burn}>
-					<>
-						<Checkbox
-							mode="toggle"
-							label={$("Options.SlowBurn.Title")}
-							subLabel={$("Options.SlowBurn.Description")}
-							checked={options.slowBurn}
-							onChange={setOpts("slowBurn")}
-						/>
+					<Toggle
+						label={$("Options.SlowBurn.Title")}
+						subLabel={$("Options.SlowBurn.Description")}
+						on={options.slowBurn}
+						onChange={setOpts("slowBurn")}
+					/>
 
-						<Show if={options.slowBurn}>
-							<div class="flex mb-3">
-								<div class="flex">
-									<div class="w-11" />
-								</div>
-								<div class="ms-2 text-sm">
-									<NumberInput
-										min={2}
-										max={10}
-										value={options.rereads}
-										onChange={setOpts("rereads")}
-									/>
-								</div>
-								<div class="ms-2 text-sm">
-									<p class="text-sm text-gray-500 dark:text-gray-400">
-										{$("Options.SlowBurn.Status", { count: `${options.rereads}` })}
-									</p>
-								</div>
+					<Show if={options.slowBurn}>
+						<div class="flex mb-3">
+							<div class="flex">
+								<div class="w-11" />
 							</div>
-						</Show>
-					</>
+							<div class="ms-2 text-sm">
+								<NumberInput
+									min={2}
+									max={10}
+									value={options.rereads}
+									onChange={setOpts("rereads")}
+								/>
+							</div>
+							<div class="ms-2 text-sm">
+								<p class="text-sm text-gray-500 dark:text-gray-400">
+									{$("Options.SlowBurn.Status", { count: `${options.rereads}` })}
+								</p>
+							</div>
+						</div>
+					</Show>
 				</Show>
-				<Checkbox
-					mode="toggle"
+				<Toggle
 					label={$("Options.Password.Title")}
 					subLabel={$("Options.Password.Description")}
 					disabled={config.policy.requirePassword}
 					tooltip={config.policy.requirePassword
 						? $("RequiredByPolicy", { name: config.branding.appName })
 						: undefined}
-					checked={usePass}
+					on={usePass}
 					onChange={setUsePass}
 				/>
 				<Show if={usePass}>

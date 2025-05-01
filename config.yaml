@@ -17,9 +17,12 @@ branding:
   #   content: # Text that may contain HTML 
   #     en: ""
   #     de: ""
-banner:
-  en: Hello World!
-  de: Hallo Welt!
+banner: # Banner shown at the top of the app. You may use this option for e.g. announcements.
+  enabled: true # Show the banner if true
+  type: warning # Banner type (info, warning or error)
+  text: # Text shown in the banner
+    en: This is a preview version. Do not use in production!
+    de: Dies ist eine Vorabversion. Keine produktive Nutzung!
 defaults: # Just customizable defaults 
   expires: 2w # Default expire time when creating a new secret
   burn: true # Default burn selection
@@ -29,8 +32,6 @@ policy:
   requirePassword: false # Forces users to enable the burn option for new secrets
   requireBurn: false # Forces users to specify a password for new secrets
   denySlowBurn: false # Blocks users from enabling slow burn for new secrets
-  passwordLength: 12 # Minimum password length for generated passwords
-  passwordCharacters: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%&*_-+=,.?<> # Allowed characters for generated passwords
 storage:
   maxSize: 10Mi # Max size a new secret is allowed to have
   gcInterval: 5 # Interval in seconds in which the garbage collector should run

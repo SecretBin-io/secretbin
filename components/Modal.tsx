@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { Button, ButtonProps } from "components"
+import { Button, ButtonProps, Show } from "components"
 import { ComponentChildren, JSX } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
 import { BaseProps, elementID } from "./helpers.ts"
@@ -82,6 +82,14 @@ export const Modal = ({ id, title, actions, show, onDismiss, children, ...props 
 						<h3 class="text-xl font-semibold text-gray-900 dark:text-white">
 							{title}
 						</h3>
+						<Show if={onDismiss}>
+							<Button
+								icon="Close"
+								overrideClass
+								class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+								onClick={onDismiss}
+							/>
+						</Show>
 					</div>
 					<div class="p-4 md:p-5 space-y-4">
 						{children}

@@ -14,9 +14,6 @@ export interface ViewSecretProps {
 }
 
 export const ViewSecret = ({ id, state, remainingReads, passwordProtected }: ViewSecretProps) => {
-	// TODO Workaround for bug in metadata prop decoding
-	remainingReads = +remainingReads
-
 	const [requirePassword, setRequirePassword] = useState(passwordProtected)
 	const [requireConfirm, setRequireConfirm] = useState(remainingReads !== -1)
 	const [password, setPassword] = useState("")

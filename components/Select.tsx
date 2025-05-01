@@ -40,6 +40,6 @@ export const Select = ({ id, options, value, onChange, ...props }: SelectProps) 
 		value={value}
 		onInput={(e) => onChange?.(e.currentTarget.value)}
 	>
-		{options.map(({ name, value }) => <option value={value}>{name}</option>)}
+		{options.map(({ name, value }) => <option key={name} value={value}>{name}</option>)}
 	</select>
 )

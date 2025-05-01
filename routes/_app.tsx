@@ -86,14 +86,14 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 					<div class="content">
 						<div class="px-4 py-8 mx-auto">
 							{/* Show banner e.g. for planned maintenance message if configured */}
-							<Show if={!!(config.banner[state.lang] ?? config.banner.en)}>
+							<Show if={config.banner.enabled}>
 								<div class="mx-auto">
 									<div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
 										<div class="w-full p-4">
 											<Message
-												type="info"
+												type={config.banner.type}
 												title={config.branding.appName}
-												message={config.banner[state.lang] ?? config.banner.en}
+												message={config.banner.text[state.lang] ?? config.banner.text.en}
 											/>
 										</div>
 									</div>

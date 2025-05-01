@@ -1,5 +1,6 @@
 import Result from "@nihility-io/result"
 import { PostgresBackend } from "config"
+import { logDB } from "log"
 import postgres, { Sql } from "postgres"
 import {
 	Secret,
@@ -11,7 +12,6 @@ import {
 	SecretWriteError,
 } from "secret/models"
 import { patchObject, SecretStorage } from "./shared.ts"
-import { logDB } from "log"
 
 /**
  * Secret storage implementation which stores secrets in PostgreSQL using jsonb
@@ -86,7 +86,7 @@ export class SecretPostgresStorage implements SecretStorage {
 	 * Checks if a secret with the provided ID exists
 	 * @param id Secret ID
 	 */
-	async exists(id: string): Promise<boolean> {
+	async secretExists(id: string): Promise<boolean> {
 		const res = await Result.fromPromise(
 			this.#sql`select 1 from Secrets where id = ${id}`,
 		)
@@ -128,7 +128,7 @@ export class SecretPostgresStorage implements SecretStorage {
 	 * @param secret Encrypted secret
 	 */
 	async insertSecret(secret: Secret): Promise<Result<Secret>> {
-		const exists = await this.exists(secret.id)
+		const exists = await this.secretExists(secret.id)
 		if (exists) {
 			return Result.failure(new SecretAlreadyExistsError(secret.id))
 		}
@@ -180,7 +180,7 @@ export class SecretPostgresStorage implements SecretStorage {
 	 * @param id Secret ID
 	 */
 	async deleteSecret(id: string): Promise<Result<string>> {
-		const exists = await this.exists(id)
+		const exists = await this.secretExists(id)
 		if (!exists) {
 			return Result.failure(new SecretNotFoundError(id))
 		}

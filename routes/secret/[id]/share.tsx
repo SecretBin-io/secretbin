@@ -1,9 +1,8 @@
 import { Message, PageContent } from "components"
-import { ShareSecret } from "islands"
+import { type PageProps } from "fresh"
+import { Expires, ShareSecret } from "islands"
 import { useTranslationWithPrefix } from "lang"
 import { Secrets } from "secret/server"
-import { Expires } from "../../../islands/components/Expires.tsx"
-import { type PageProps } from "fresh"
 import { State } from "state"
 
 /**

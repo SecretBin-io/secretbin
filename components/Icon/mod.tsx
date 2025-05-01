@@ -1,5 +1,5 @@
-import * as Icons from "./Icons.tsx"
 import { SVGIconProps } from "./Base.tsx"
+import * as Icons from "./Icons.tsx"
 export * as Icons from "./Icons.tsx"
 
 export type IconName = keyof typeof Icons

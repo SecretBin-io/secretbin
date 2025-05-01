@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { Button, PageContent } from "components"
+import { Button, Message, PageContent } from "components"
 import { type PageProps, PageResponse } from "fresh"
 import { useTranslationWithPrefix } from "lang"
 import { LocalizedError } from "secret/models"
@@ -14,8 +14,12 @@ interface DeleteSecretData {
 }
 
 export const handler = define.handlers<DeleteSecretData>({
-	GET({ params }) {
-		return { data: { id: params.id } } satisfies PageResponse<DeleteSecretData>
+	async GET({ params }) {
+		const res = await Secrets.shared.getSecretMetadata(params.id)
+
+		return {
+			data: { id: params.id, error: res.isFailure() ? res.error.message : undefined, done: res.isFailure() },
+		} satisfies PageResponse<DeleteSecretData>
 	},
 	async POST({ params, state }) {
 		const res = await Secrets.shared.deleteSecret(params.id)

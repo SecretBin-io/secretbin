@@ -79,6 +79,27 @@ export const Branding = z.object({
 	showTerms: z.boolean().default(true),
 }).strict()
 
+/**
+ * Banner shown at the top of the app. You may use this option for e.g.
+ * announcements.
+ */
+export interface Banner {
+	/** Show the banner if true */
+	enabled: boolean
+
+	/** Banner type */
+	type: "info" | "warning" | "error"
+
+	/** Text shown in the banner */
+	text: TranslatedString
+}
+
+export const Banner = z.object({
+	enabled: z.boolean().default(false),
+	type: z.enum(["info", "warning", "error"]).default("info"),
+	text: TranslatedString.default({ en: "Hello World!" }),
+}).strict()
+
 /** Just customizable defaults */
 export interface Defaults {
 	/** Default expire time when creating a new secret */
@@ -115,12 +136,6 @@ export interface Policy {
 
 	/** Blocks users from enabling slow burn for new secrets */
 	denySlowBurn: boolean
-
-	/** Minimum password length for generated passwords */
-	passwordLength: number
-
-	/** Allowed characters for generated passwords */
-	passwordCharacters: string
 }
 
 export const Policy = z.object({
@@ -128,10 +143,6 @@ export const Policy = z.object({
 	requireBurn: z.boolean().default(false),
 	requirePassword: z.boolean().default(false),
 	denySlowBurn: z.boolean().default(false),
-	passwordLength: z.number().positive().default(16),
-	passwordCharacters: z.string().default(
-		"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%&*_-+=,.?<>",
-	),
 }).strict()
 
 /**
@@ -194,8 +205,9 @@ export interface Config {
 
 	/**
 	 * Banner shown at the top of the app. You may use this option for e.g.
-	 * announcements. */
-	banner: TranslatedString
+	 * announcements.
+	 */
+	banner: Banner
 
 	/** Just customizable defaults */
 	defaults: Defaults
@@ -215,7 +227,7 @@ export interface Config {
 
 export const Config = z.object({
 	branding: Branding.default({}),
-	banner: TranslatedString.default({}),
+	banner: Banner.default({}),
 	defaults: Defaults.default({}),
 	policy: Policy.default({}),
 	logging: Logging.default({}),

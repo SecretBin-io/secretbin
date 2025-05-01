@@ -1,8 +1,8 @@
 import { Message, PageContent } from "components"
+import { type PageProps } from "fresh"
 import { Expires, ViewSecret } from "islands"
 import { useTranslationWithPrefix } from "lang"
 import { Secrets } from "secret/server"
-import { type PageProps } from "fresh"
 import { State } from "state"
 
 /**
@@ -21,11 +21,9 @@ export default async ({ params, state }: PageProps<unknown, State>) => {
 						<ViewSecret
 							state={state}
 							id={params.id}
-							remainingReads={"" + metadata.remainingReads as any}
+							remainingReads={metadata.remainingReads}
 							passwordProtected={metadata.passwordProtected}
 						/>
-						<pre>{JSON.stringify(metadata, null, 2)}</pre>
-						<pre>{JSON.stringify(state, null, 2)}</pre>
 					</div>
 				</div>
 			</PageContent>

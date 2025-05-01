@@ -11,7 +11,7 @@
 		"docker_build": "docker build --platform linux/arm64,linux/amd64  -t secretbin:2.0.0 ."
 	},
 	"lock": false,
-	"nodeModulesDir": "auto",
+	"nodeModulesDir": "none",
 	"lint": {
 		"rules": {
 			"tags": [

@@ -55,10 +55,34 @@ export default {
 					Status:
 						"Allow secret to be read {{count}} time(s) within 5 minutes of opening the secret for the first time.",
 				},
+				GeneratePassword: "Generate Password",
 			},
-			GeneratePassword: {
-				Title: "Generate Password",
-				Description: "Generate a random password for the secret.",
+		},
+		PasswordGenerator: {
+			Title: "Generate Password",
+			Description: "Generate a random cryptographic password.",
+			Generate: "Generate",
+			Insert: "Insert",
+			Length: "Password Length",
+			Characters: {
+				Title: "Characters",
+				Description: "Specify which characters should be included when the password is generated.",
+				Uppercase: {
+					Title: "Uppercase",
+					Description: "Include all uppercase letters from A to Z",
+				},
+				Lowercase: {
+					Title: "Lowercase",
+					Description: "Include all lowercase letters from a to z",
+				},
+				Digits: {
+					Title: "Digits",
+					Description: "Include all digits from 0 to 9",
+				},
+				Symbols: {
+					Title: "Symbols",
+					Description: "Include the following symbols: ~!@#$%&*_-+=,.?<>",
+				},
 			},
 		},
 		ShareSecret: {

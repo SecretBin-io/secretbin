@@ -1,7 +1,7 @@
-import { NewSecret } from "islands"
 import { PageContent } from "components"
-import { useTranslationWithPrefix } from "lang"
 import { type PageProps } from "fresh"
+import { NewSecret } from "islands"
+import { useTranslationWithPrefix } from "lang"
 import { State } from "state"
 
 /**

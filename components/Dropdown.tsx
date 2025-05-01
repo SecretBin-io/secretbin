@@ -1,8 +1,8 @@
-import { Button, ButtonTheme, IconName } from "components"
-import { BaseProps } from "./helpers.ts"
-import { JSX } from "preact/jsx-runtime"
-import { useEffect, useState } from "preact/hooks"
 import classNames from "classnames"
+import { Button, ButtonTheme, IconName } from "components"
+import { useEffect, useState } from "preact/hooks"
+import { JSX } from "preact/jsx-runtime"
+import { BaseProps } from "./helpers.ts"
 
 export interface DropdownProps extends BaseProps {
 	/** Text displayed on the button */

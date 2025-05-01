@@ -58,10 +58,34 @@ export default {
 					Status:
 						"Erlaube {{count}} Lesezugriffe innerhalb von 5 Minuten nach dem ersten Öffnen des Geheimnisses.",
 				},
+				GeneratePassword: "Passwort Generieren",
 			},
-			GeneratePassword: {
-				Title: "Passwort Generieren",
-				Description: "Generate ein zufälliges Passwort für das Geheimnis.",
+		},
+		PasswordGenerator: {
+			Title: "Passwort Generieren",
+			Description: "Generate ein zufälliges kryptografisches Passwort.",
+			Generate: "Generieren",
+			Insert: "Einfügen",
+			Length: "Passwortlänge",
+			Characters: {
+				Title: "Zeichen",
+				Description: "Lege fest welche Zeichen beim Generieren verwendet werden sollen.",
+				Uppercase: {
+					Title: "Großbuchstaben",
+					Description: "Verwende alle Großbuchstaben von A bis Z",
+				},
+				Lowercase: {
+					Title: "Kleinbuchstaben",
+					Description: "Verwende alle Kleinbuchstaben von a bis z",
+				},
+				Digits: {
+					Title: "Ziffern",
+					Description: "Verwende alle Ziffern von 0 bis 9",
+				},
+				Symbols: {
+					Title: "Symbole",
+					Description: "Verwende die folgenden Symbole: ~!@#$%&*_-+=,.?<>",
+				},
 			},
 		},
 		ShareSecret: {

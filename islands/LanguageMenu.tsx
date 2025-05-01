@@ -1,6 +1,6 @@
-import { Language, supportedLanguages } from "lang"
 import Cookies from "@nihility-io/cookies"
 import { Dropdown } from "components"
+import { Language, supportedLanguages } from "lang"
 
 export interface LanguageMenuProps {
 	language: Language
