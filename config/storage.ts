@@ -25,6 +25,7 @@ export interface Postgres2Backend {
 	database: string
 	username: string
 	password: string
+	tls: "enforced" | "on" | "off"
 }
 
 export const Postgres2Backend = z.object({
@@ -34,6 +35,7 @@ export const Postgres2Backend = z.object({
 	database: z.string().default("postgres"),
 	username: z.string().default("postgres"),
 	password: z.string().default("postgres"),
+	tls: z.enum(["enforced", "on", "off"]),
 }).strict()
 
 export interface FileSystemBackend {

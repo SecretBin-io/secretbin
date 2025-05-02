@@ -44,6 +44,7 @@ storage:
     database: secretbin
     username: secretbin
     password: abc123
+    tls: on
 logging:
   level: DEBUG
 expires: #Expire options for new secrets

@@ -35,6 +35,10 @@ export class SecretPostgres2Storage implements SecretStorage {
 			database: cfg.database,
 			user: cfg.username,
 			password: cfg.password,
+			tls: {
+				enabled: cfg.tls === "on" || cfg.tls === "enforced",
+				enforce: cfg.tls === "enforced",
+			},
 			connection: {
 				attempts: 5,
 			},
