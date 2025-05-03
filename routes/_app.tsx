@@ -3,7 +3,7 @@ import { Message, Show } from "components"
 import { config } from "config"
 import { type PageProps } from "fresh"
 import { asset, Partial } from "fresh/runtime"
-import { LanguageMenu, Terms, ThemeToggle } from "islands"
+import { NavMenu, Terms } from "islands"
 import { useTranslation } from "lang"
 import { State, Theme } from "state"
 
@@ -76,8 +76,7 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 							</span>
 						</a>
 						<div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
-							<ThemeToggle />
-							<LanguageMenu language={state.lang} />
+							<NavMenu state={state} />
 						</div>
 					</div>
 				</nav>

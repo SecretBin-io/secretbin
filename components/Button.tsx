@@ -60,11 +60,8 @@ export interface ButtonProps extends BaseProps {
 	 */
 	link?: string
 
-	/** ID of the dropdown element if the button is a dropdown toggle */
-	dropdown?: string
-
-	/** Changes to button type to submit */
-	submit?: boolean
+	/** Specify the button type (default: button) */
+	type?: "button" | "submit" | "reset"
 
 	/**
 	 * Function which will be called when button is press
@@ -77,7 +74,7 @@ export interface ButtonProps extends BaseProps {
  * Creates a clickable button
  */
 export const Button = (
-	{ label, theme = "default", disabled, overrideClass, onClick, link, submit, dropdown, icon, ...props }: ButtonProps,
+	{ label, icon, theme = "default", type = "button", disabled, overrideClass, link, onClick, ...props }: ButtonProps,
 ) => {
 	const classes = overrideClass ? props.class : classNames(
 		"inline-flex items-center focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-2.5 py-2.5 mb-2 me-2",
@@ -105,12 +102,11 @@ export const Button = (
 				)
 				: (
 					<button
-						type={submit ? "submit" : "button"}
+						type={type}
 						style={props.style}
 						disabled={disabled}
 						class={classes}
 						onClick={(e) => onClick?.(e)}
-						{...(dropdown ? { "data-dropdown-toggle": dropdown } : {})}
 					>
 						<Label />
 					</button>

@@ -112,7 +112,7 @@ export const Options = ({ state, options, setOptions, setPassword }: OptionsProp
 						</div>
 						<Input
 							class="ms-2"
-							hidden
+							password
 							value={pass1}
 							invalid={passInvalid}
 							placeholder={$("Options.Password.Placeholder")}
@@ -120,7 +120,7 @@ export const Options = ({ state, options, setOptions, setPassword }: OptionsProp
 						/>
 						<Input
 							class="ms-2 ml-2"
-							hidden
+							password
 							value={pass2}
 							invalid={passInvalid}
 							placeholder={$("Options.Password.RepeatPlaceholder")}

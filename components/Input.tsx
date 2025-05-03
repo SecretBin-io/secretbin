@@ -7,7 +7,7 @@ export interface InputProps extends BaseProps {
 	id?: string
 
 	/** Hides input text for e.g. passwords */
-	hidden?: boolean
+	password?: boolean
 
 	/** Makes input text readonly */
 	readOnly?: boolean
@@ -41,8 +41,20 @@ export interface InputProps extends BaseProps {
  * Creates a text input field
  */
 export const Input = (
-	{ id, hidden, readOnly, value, disabled, invalid, valid, placeholder, autoPreselect, onChange, onSubmit, ...props }:
-		InputProps,
+	{
+		id,
+		password,
+		readOnly,
+		value,
+		disabled,
+		invalid,
+		valid,
+		placeholder,
+		autoPreselect,
+		onChange,
+		onSubmit,
+		...props
+	}: InputProps,
 ) => {
 	const ref = useRef<HTMLInputElement | null>(null)
 
@@ -74,7 +86,7 @@ export const Input = (
 				},
 				props.class,
 			)}
-			type={hidden ? "password" : "text"}
+			type={password ? "password" : "text"}
 			readOnly={readOnly}
 			value={value}
 			placeholder={placeholder}

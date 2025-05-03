@@ -20,20 +20,24 @@ const iconMessageType: Record<MessageType, IconName> = {
 }
 
 export interface MessageProps extends BaseProps {
-	/** Message type */
-	title: string
+	/** Message title (default: Message) */
+	title?: string
 
-	/** Type of messages, which determines the style */
-	type: MessageType
+	/** Type of messages, which determines the style (default: info) */
+	type?: MessageType
 
-	/** Message text */
-	message: string
+	/** Message text (Note: If no message is set, the message box will not be rendered) */
+	message?: string
 }
 
 /**
  * Creates a message with a title wrapped in a colored box
  */
-export const Message = ({ title, type, message, ...props }: MessageProps) => {
+export const Message = ({ title = "Message", type = "info", message, ...props }: MessageProps) => {
+	if (message) {
+		return undefined
+	}
+
 	return (
 		<div
 			style={props.style}
@@ -44,21 +48,7 @@ export const Message = ({ title, type, message, ...props }: MessageProps) => {
 			)}
 			role="alert"
 		>
-			{
-				/* <div class="flex flex-col items-start mb-3 me-4 md:items-center md:flex-row md:mb-0">
-				<div class="flex items-center mb-2 border-gray-200 md:pe-4 md:me-4 md:border-e md:mb-0 dark:border-gray-600">
-					<span class="self-center text-lg font-semibold whitespace-nowrap dark:text-white">
-						{iconMessageType[type]()}
-						<span class="sr-only">{title}</span>
-					</span>
-				</div>
-				<p class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
-					{message}
-				</p>
-			</div> */
-			}
 			<Icon name={iconMessageType[type]} />
-			<span class="sr-only">{title}</span>
 			<div class="pl-2">
 				<span class="font-medium">{title}:</span> {message}
 			</div>

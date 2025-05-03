@@ -72,9 +72,7 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 			<br />
 			<FilesUpload state={state} files={files} setFiles={setFiles} />
 			<Options state={state} options={options} setOptions={setOptions} setPassword={setPassword} />
-			<Show if={error !== ""}>
-				<Message type="error" title="Error" message={error} />
-			</Show>
+			<Message type="error" title="Error" message={error} />
 			<Button class="float-right" label={$("Create")} onClick={submit} />
 			{/* This line is necessary in order to use Deno Fresh Partials. Partials only work when navigating using links. */}
 			<a class="hidden" ref={aRef} href="" />

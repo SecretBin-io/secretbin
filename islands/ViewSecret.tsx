@@ -86,7 +86,7 @@ export const ViewSecret = ({ id, state, remainingReads, passwordProtected }: Vie
 				<Section title={$("Password.Title")} description={$("Password.Description")}>
 					<Input
 						class="mb-2"
-						hidden
+						password
 						invalid={passwordInvalid}
 						value={password}
 						onChange={setPassword}
@@ -100,9 +100,7 @@ export const ViewSecret = ({ id, state, remainingReads, passwordProtected }: Vie
 					</Show>
 				</Section>
 			</Show>
-			<Show if={error !== ""}>
-				<Message type="error" title="Error" message={error} />
-			</Show>
+			<Message type="error" title="Error" message={error} />
 			<Show if={!!secretData}>
 				<TextArea class="resize-none" lines={15} readOnly value={secretData?.message} />
 				<Show if={(secretData?.attachments ?? []).length !== 0}>

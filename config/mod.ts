@@ -59,6 +59,8 @@ export const serveClientConfig = () =>
 		},
 	})
 
+let cachedClientConfig: Config | undefined = undefined
+
 /**
  * Application configuration (config.yaml). This config is available to the server and client
  */
@@ -67,5 +69,9 @@ export const config: Config = await (async () => {
 		return serverCfg
 	}
 
-	return await fetch("/api/config").then((x) => x.json())
+	if (!cachedClientConfig) {
+		cachedClientConfig = await fetch("/api/config").then((x) => x.json())
+	}
+
+	return cachedClientConfig!
 })()

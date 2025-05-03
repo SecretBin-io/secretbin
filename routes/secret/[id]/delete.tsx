@@ -64,7 +64,7 @@ export default ({ data, state }: PageProps<DeleteSecretData, State>) => {
 			<form method="post">
 				<div class="items-left justify-left space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
 					<div class="mx-auto">
-						<Button label={$("Delete")} submit />
+						<Button type="submit" label={$("Delete")} />
 					</div>
 				</div>
 			</form>
