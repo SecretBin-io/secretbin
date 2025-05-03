@@ -6,7 +6,7 @@
 		"start": "deno run -A main.ts",
 		"update": "deno run -A -r jsr:@fresh/update@2.0.0-alpha.29 .",
 		"test": "deno test --coverage=coverage && deno coverage coverage --html && deno coverage coverage --detailed && deno coverage coverage",
-		"deps": "deno run -A jsr:@nihility-io/deno-deps --entrypoint main.ts --output deps.json",
+		"deps": "deno run -A jsr:@nihility-io/deno-deps@1.1.5",
 		"deploy": "deno task build && deployctl deploy --project=nihility-secretbin main.ts",
 		"docker_build": "docker build --platform linux/arm64,linux/amd64  -t secretbin:2.0.0 ."
 	},
@@ -114,6 +114,24 @@
 			"*.json",
 			"**/*.json",
 			"*.gen.ts*"
+		]
+	},
+	"denoDeps": {
+		"entrypoint": "dev.ts",
+		"output": "credits.json",
+		"dependencies": [{
+			"name": "heroicons",
+			"repository": "https://github.com/tailwindlabs/heroicons",
+			"version": "2.2.0",
+			"authors": ["Tailwind Labs, Inc."],
+			"license": "MIT License",
+			"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
+		}],
+		"excludeDependencies": [
+			"@esbuild/.*",
+			"lightningcss-.*",
+			"@tailwindcss/oxide-.*",
+			"@types/.*"
 		]
 	},
 	"deploy": {

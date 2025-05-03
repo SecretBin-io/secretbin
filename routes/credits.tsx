@@ -3,17 +3,7 @@ import { config } from "config"
 import { type PageProps } from "fresh"
 import { useTranslation } from "lang"
 import { State } from "state"
-import deps from "../deps.json" with { type: "json" }
-import depsManual from "../deps_manual.json" with { type: "json" }
-
-interface Dependency {
-	name: string
-	repository?: string
-	version: string
-	authors: string[]
-	license: string
-	licenseFile?: string
-}
+import credits from "../credits.json" with { type: "json" }
 
 /**
  * Removes a given prefix from a string if the string has it
@@ -29,18 +19,13 @@ export const trimPrefix = (s: string, prefix: string): string => s.startsWith(pr
 export default ({ state }: PageProps<unknown, State>) => {
 	const $ = useTranslation(state.lang)
 
-	const dependencies: Dependency[] = [
-		...deps,
-		...depsManual,
-	].sort((a, b) => trimPrefix(a.name, "@").localeCompare(trimPrefix(b.name, "@")))
-
 	return (
 		<PageContent title={$("Credits.Title")}>
 			<p
 				// deno-lint-ignore react-no-danger
 				dangerouslySetInnerHTML={{
 					__html: (config.branding.footer !== "Nihility.io"
-						? $("Credits.BrandedNotice", { name: config.branding.appName })
+						? $("Credits.BrandedNotice", { name: config.branding.appName }) + " "
 						: "") +
 						$("Credits.SourceNotice"),
 				}}
@@ -97,15 +82,13 @@ export default ({ state }: PageProps<unknown, State>) => {
 						license: $("Credits.Components.Headers.License"),
 						author: $("Credits.Components.Headers.Author"),
 					}}
-					rows={dependencies.map((dependency) => ({
-						component: dependency.repository
-							? <a href={dependency.repository} target="_blank">{dependency.name}</a>
-							: <>{dependency.name}</>,
-						version: dependency.version,
-						license: dependency.licenseFile
-							? <a href={dependency.licenseFile} target="_blank">{dependency.license}</a>
-							: <>{dependency.license}</>,
-						author: dependency.authors?.join(", ") ?? "",
+					rows={credits.map((d) => ({
+						component: d.repository ? <a href={d.repository} target="_blank">{d.name}</a> : <>{d.name}</>,
+						version: d.version,
+						license: d.licenseFile
+							? <a href={d.licenseFile} target="_blank">{d.license}</a>
+							: <>{d.license}</>,
+						author: d.authors?.join(", ") ?? "",
 					}))}
 				/>
 			</div>

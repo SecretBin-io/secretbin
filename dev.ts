@@ -5,7 +5,7 @@ import type { App } from "fresh"
 import tailwindCss from "@tailwindcss/postcss"
 import postcss from "postcss"
 
-export function tailwind<T>(builder: Builder, app: App<T>): void {
+const tailwind = <T>(builder: Builder, app: App<T>): void => {
 	let processor: postcss.Processor | null
 
 	builder.onTransformStaticFile(

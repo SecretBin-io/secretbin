@@ -3,7 +3,6 @@ export default {
 		NativeName: "English",
 		EnglishName: "English",
 		Code: "en",
-		Author: "Nihility.io",
 	},
 	Translations: {
 		Common: {
@@ -117,7 +116,9 @@ export default {
 			Read: "Read",
 			ReadConfirm:
 				'This secret will be automatically deleted after opening it. By clicking on "Read", you acknowledge that you cannot open this secret a second time after you have closed this window.',
-			Files: { Title: "Attached Files" },
+			Files: {
+				Title: "Attached Files",
+			},
 			DecryptionError: "Unable to decrypt the secret. This is likely due to a wrong password. PLease try again.",
 		},
 		DeleteSecret: {
@@ -133,11 +134,6 @@ export default {
 			BrandedNotice: "{{name}} is based on Nihility.io SecretBin.",
 			SourceNotice:
 				'Nihility.io SecretBin is open source and licensed under MIT. If you want to host your own version of SecretBin, head over to <u><a href="https://github.com/Nihility-io/SecretBin">GitHub</a></u>.',
-			Translations: {
-				Title: "Translations",
-				Description: "Below you will find a list of all supported translations and their authors.",
-				Headers: { Author: "Author", Translation: "Translation" },
-			},
 			Components: {
 				Title: "Components",
 				Description:

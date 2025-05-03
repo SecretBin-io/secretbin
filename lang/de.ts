@@ -5,7 +5,6 @@ export default {
 		NativeName: "Deutsch",
 		EnglishName: "German",
 		Code: "de",
-		Author: "Nihility.io",
 	},
 	Translations: {
 		Common: {
@@ -120,7 +119,9 @@ export default {
 			Read: "Lesen",
 			ReadConfirm:
 				'Dieses Geheimnis wird nach dem Öffnen automatisch gelöscht. Mit dem Klick auf "Lesen" nimmst du zur Kenntnis, dass du dieses Geheimnis kein zweites Mal öffnen kannst, nachdem du dieses Fenster geschlossen hast.',
-			Files: { Title: "Angehängte Dateien" },
+			Files: {
+				Title: "Angehängte Dateien",
+			},
 			DecryptionError:
 				"Das Geheimnis konnte nicht entschlüsselt werden. Dies kann z.B. an einem falschen Passwort liegen. Bitte versuche es erneut.\n",
 		},
@@ -137,11 +138,6 @@ export default {
 			BrandedNotice: "{{name}} basiert auf Nihility.io SecretBin.",
 			SourceNotice:
 				'Nihility.io SecretBin ist Open Source und steht unter MIT-Lizenz zur Verfügung. Wenn du deine eigene Version von SecretBin hosten möchtest, findest du den Quellcode auf <u><a href="https://github.com/Nihility-io/SecretBin">GitHub</a></u>.',
-			Translations: {
-				Title: "Übersetzungen",
-				Description: "Unten findest du eine Liste von allen Übersetzungen und deren Autoren.",
-				Headers: { Author: "Autor", Translation: "Übersetzung" },
-			},
 			Components: {
 				Title: "Komponenten",
 				Description:

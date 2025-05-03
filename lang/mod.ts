@@ -18,15 +18,14 @@ export interface SupportedLanguage {
 	name: Language
 	label: string
 	native: string
-	author: string
 }
 
 /**
  * Metadata of the supported languages
  */
 export const supportedLanguages: SupportedLanguage[] = [
-	{ name: Language.English, label: "English", native: "English", author: "Nihility.io" },
-	{ name: Language.German, label: "German", native: "Deutsch", author: "Nihility.io" },
+	{ name: Language.English, label: "English", native: "English" },
+	{ name: Language.German, label: "German", native: "Deutsch" },
 ]
 
 /**
@@ -41,6 +40,7 @@ export const isLanguageSupported = (lang: string): boolean => !!supportedLanguag
 export type TranslationKey = FlattenObjectKeys<typeof en.Translations>
 
 export const useTranslation = (lang: Language) => (path: TranslationKey, params?: Record<string, string>): string => {
+	// deno-lint-ignore no-explicit-any
 	let o: any = translations[lang].Translations
 	for (const key of path.split(".")) {
 		if (o === undefined) {
@@ -52,6 +52,7 @@ export const useTranslation = (lang: Language) => (path: TranslationKey, params?
 
 	if (typeof o !== "string") {
 		if (lang !== Language.English) {
+			// deno-lint-ignore react-rules-of-hooks
 			return useTranslation(Language.English)(path, params)
 		}
 		return `{${path}}`
