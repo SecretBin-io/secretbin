@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { Button, Message, PageContent } from "components"
+import { Button, PageContent } from "components"
 import { type PageProps, PageResponse } from "fresh"
 import { useTranslationWithPrefix } from "lang"
 import { LocalizedError } from "secret/models"

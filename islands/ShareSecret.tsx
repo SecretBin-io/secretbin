@@ -52,7 +52,7 @@ export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 					// onClick={() => navigator.clipboard.writeText(link)}
 					onClick={() =>
 						navigator.clipboard.write([
-							new ClipboardItem({
+							new globalThis.ClipboardItem({
 								"text/plain": Promise.resolve(link),
 								"text/html": Promise.resolve(`<a href="${link}">${link}`),
 							}),

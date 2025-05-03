@@ -34,7 +34,7 @@ export interface MessageProps extends BaseProps {
  * Creates a message with a title wrapped in a colored box
  */
 export const Message = ({ title = "Message", type = "info", message, ...props }: MessageProps) => {
-	if (message) {
+	if (!message) {
 		return undefined
 	}
 

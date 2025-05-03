@@ -1,5 +1,5 @@
 import Result from "@nihility-io/result"
-import { Button, Message, Show, TextArea } from "components"
+import { Button, Message, TextArea } from "components"
 import { config } from "config"
 import { PasswordGenerator } from "islands"
 import { useTranslationWithPrefix } from "lang"

@@ -53,7 +53,7 @@ export const submitSecret = async (message: string, files: File[], password: str
  * @returns Decrypted Secret
  */
 export const decryptSecret = async (secret: Secret, password: string): Promise<SecretData> => {
-	const masterKey = decodeBase58(window.location.hash.slice(1))
+	const masterKey = decodeBase58(globalThis.location.hash.slice(1))
 	const msg = await decrypt(masterKey, password, {
 		data: secret.data.data,
 		iv: secret.data.iv,

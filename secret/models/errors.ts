@@ -43,6 +43,7 @@ export class LocalizedError extends Error {
 	 * @param params Optional parameters for the translated message
 	 */
 	public constructor(key: TrimPrefix<"Errors", TranslationKey>, params: Record<string, string> = {}) {
+		// deno-lint-ignore react-rules-of-hooks
 		super(useTranslation(Language.English)("Errors." + key as unknown as TranslationKey, params))
 		this.name = key
 		this.#key = key
@@ -55,6 +56,7 @@ export class LocalizedError extends Error {
 	 * @returns Translated error message
 	 */
 	public getLocalizedMessage(lang: Language) {
+		// deno-lint-ignore react-rules-of-hooks
 		return useTranslation(lang)("Errors." + this.#key as unknown as TranslationKey, this.#params)
 	}
 
