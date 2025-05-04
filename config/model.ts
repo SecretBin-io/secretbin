@@ -20,10 +20,10 @@ export interface Terms {
 	content: TranslatedString
 }
 
-export const Terms = z.object({
+export const Terms = z.strictInterface({
 	title: TranslatedString,
 	content: TranslatedString,
-}).strict()
+})
 
 /**
  * Custom link shown in the footer on the right
@@ -36,10 +36,10 @@ export interface Link {
 	link: TranslatedString
 }
 
-export const Link = z.object({
+export const Link = z.strictInterface({
 	name: TranslatedString,
 	link: TranslatedString,
-}).strict()
+})
 
 /**
  * Branding allows you to brand SecretBin for service hoster.
@@ -77,7 +77,7 @@ export const Branding = z.object({
 	showLogo: z.boolean().default(true),
 	invertLogo: z.boolean().default(false),
 	showTerms: z.boolean().default(true),
-}).strict()
+})
 
 /**
  * Banner shown at the top of the app. You may use this option for e.g.
@@ -94,11 +94,11 @@ export interface Banner {
 	text: TranslatedString
 }
 
-export const Banner = z.object({
+export const Banner = z.strictInterface({
 	enabled: z.boolean().default(false),
 	type: z.enum(["info", "warning", "error"]).default("info"),
 	text: TranslatedString.default({ en: "Hello World!" }),
-}).strict()
+})
 
 /** Just customizable defaults */
 export interface Defaults {
@@ -112,14 +112,13 @@ export interface Defaults {
 	showPassword: boolean
 }
 
-export const Defaults = z.object({
-	expires: z.string().regex(
-		/^(\d+)(min|hr|d|w|m|y)$/,
-		"Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min",
-	).default("2w"),
+export const Defaults = z.strictInterface({
+	expires: z.string().regex(/^(\d+)(min|hr|d|w|m|y)$/, {
+		error: "Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min",
+	}).default("2w"),
 	burn: z.boolean().default(true),
 	showPassword: z.boolean().default(false),
-}).strict()
+})
 
 /**
  * Set enforced usage policy for new secrets
@@ -138,12 +137,12 @@ export interface Policy {
 	denySlowBurn: boolean
 }
 
-export const Policy = z.object({
+export const Policy = z.strictInterface({
 	sharePreselect: z.boolean().default(false),
 	requireBurn: z.boolean().default(false),
 	requirePassword: z.boolean().default(false),
 	denySlowBurn: z.boolean().default(false),
-}).strict()
+})
 
 /**
  * Expire option for new secrets
@@ -173,14 +172,13 @@ export interface Storage {
 	backend: BackendConfig
 }
 
-export const Storage = z.object({
-	maxSize: z.string().regex(
-		/^(\d+)(Ki|Mi|Gi|K|M|G)$/,
-		"Invalid size. Expected: positive integer or string with format <num>(Ki|Mi|Gi|K|M|G) e.g 10Gi",
-	).transform(transformSize).or(z.number().int().positive()).default("10Mi"),
+export const Storage = z.strictInterface({
+	maxSize: z.string().regex(/^(\d+)(Ki|Mi|Gi|K|M|G)$/, {
+		error: "Invalid size. Expected: positive integer or string with format <num>(Ki|Mi|Gi|K|M|G) e.g 10Gi",
+	}).default("10Mi").transform(transformSize).or(z.number().int().positive()),
 	gcInterval: z.number().int().default(60 * 60),
-	backend: BackendConfig.default({ type: "kv" }),
-}).strict()
+	backend: BackendConfig.default(BackendConfig.parse({ type: "kv" })),
+})
 
 /**
  * Configs logging behavior
@@ -190,9 +188,9 @@ export interface Logging {
 	level: "NOTSET" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "CRITICAL"
 }
 
-export const Logging = z.object({
+export const Logging = z.strictInterface({
 	level: z.enum(["NOTSET", "DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"]).default("INFO"),
-}).strict()
+})
 
 /** SecretBin config */
 export interface Config {
@@ -225,18 +223,17 @@ export interface Config {
 	storage: Storage
 }
 
-export const Config = z.object({
-	branding: Branding.default({}),
-	banner: Banner.default({}),
-	defaults: Defaults.default({}),
-	policy: Policy.default({}),
-	logging: Logging.default({}),
-	expires: z.string().regex(
-		/^(\d+)(min|hr|d|w|m|y)$/,
-		"Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min",
-	).array().default(["5min", "1hr", "1d", "1w", "2w", "1m"])
+export const Config = z.strictInterface({
+	branding: Branding.default(Branding.parse({})),
+	banner: Banner.default(Banner.parse({})),
+	defaults: Defaults.default(Defaults.parse({})),
+	policy: Policy.default(Policy.parse({})),
+	logging: Logging.default(Logging.parse({})),
+	expires: z.string().regex(/^(\d+)(min|hr|d|w|m|y)$/, {
+		error: "Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min",
+	}).array().default(["5min", "1hr", "1d", "1w", "2w", "1m"])
 		.transform((x) =>
 			x.reduce((res, name) => ({ ...res, [name]: transformExpires(name) }), {} as Record<string, Expires>)
 		),
-	storage: Storage.default({}),
-}).strict()
+	storage: Storage.default(Storage.parse({})),
+})

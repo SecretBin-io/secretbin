@@ -5,12 +5,12 @@
 import { EncryptedData, EncryptionAlgorithm } from "./crypto.ts"
 import { z } from "zod"
 
-const EncryptedDataModel = z.object({
+const EncryptedDataModel = z.strictInterface({
 	data: z.string(),
 	iv: z.string(),
 	salt: z.string(),
 	algorithm: z.nativeEnum(EncryptionAlgorithm),
-}).strict()
+})
 
 export interface NewSecret {
 	data: EncryptedData
@@ -19,12 +19,12 @@ export interface NewSecret {
 	passwordProtected: boolean
 }
 
-export const NewSecret = z.object({
+export const NewSecret = z.strictInterface({
 	data: EncryptedDataModel,
 	expires: z.string().regex(/^(\d+)(min|hr|d|w|m)$/),
 	burnAfter: z.number().default(-1),
 	passwordProtected: z.boolean().default(false),
-}).strict()
+})
 export interface SecretMetadata {
 	id: string
 	expires: Date
@@ -32,12 +32,12 @@ export interface SecretMetadata {
 	passwordProtected: boolean
 }
 
-export const SecretMetadata = z.object({
+export const SecretMetadata = z.strictInterface({
 	id: z.string(),
 	expires: z.string().or(z.date()).transform((str) => new Date(str)),
 	remainingReads: z.number(),
 	passwordProtected: z.boolean().default(false),
-}).strict()
+})
 
 export interface Secret extends SecretMetadata {
 	data: EncryptedData
@@ -45,7 +45,7 @@ export interface Secret extends SecretMetadata {
 
 export const Secret = SecretMetadata.extend({
 	data: EncryptedDataModel,
-}).strict()
+})
 
 export interface SecretAttachment {
 	name: string
@@ -53,18 +53,18 @@ export interface SecretAttachment {
 	data: string
 }
 
-export const SecretAttachment = z.object({
+export const SecretAttachment = z.strictInterface({
 	name: z.string(),
 	contentType: z.string(),
 	data: z.string(),
-}).strict()
+})
 
 export interface SecretData {
 	message: string
 	attachments: SecretAttachment[]
 }
 
-export const SecretData = z.object({
+export const SecretData = z.strictInterface({
 	message: z.string(),
 	attachments: z.array(SecretAttachment),
-}).strict()
+})
