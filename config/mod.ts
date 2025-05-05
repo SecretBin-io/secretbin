@@ -66,7 +66,6 @@ let cachedClientConfig: Config | undefined = undefined
  */
 export const config: Config = await (async () => {
 	if (typeof document === "undefined") {
-		console.log(serverCfg)
 		return serverCfg
 	}
 

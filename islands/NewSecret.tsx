@@ -1,10 +1,11 @@
 import Result from "@nihility-io/result"
 import { Button, Message, TextArea } from "components"
 import { config } from "config"
+import { useSetting } from "helpers"
 import { PasswordGenerator } from "islands"
 import { useTranslationWithPrefix } from "lang"
 import { useRef, useState } from "preact/hooks"
-import { SecretOptions, submitSecret } from "secret/client"
+import { submitSecret } from "secret/client"
 import { LocalizedError } from "secret/models"
 import { State } from "state"
 import { FilesUpload } from "./components/FileUpload.tsx"
@@ -19,12 +20,10 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 	const [message, setMessage] = useState("")
 	const [files, setFiles] = useState<File[]>([])
 	const [password, setPassword] = useState<string | undefined>("")
-	const [options, setOptions] = useState<SecretOptions>({
-		expires: config.defaults.expires,
-		burn: config.policy.requireBurn ? true : config.defaults.burn,
-		slowBurn: false,
-		rereads: 2,
-	})
+	const [expires, setExpires] = useSetting("options.expires", config.defaults.expires, state)
+	const [burn, setBurn] = useSetting("options.burn", config.policy.requireBurn ? true : config.defaults.burn, state)
+	const [slowBurn, setSlowBurn] = useSetting("options.slowBurn", false, state)
+	const [rereads, setRereads] = useSetting("options.rereads", 2, state)
 	const [error, setError] = useState("")
 	const [showGenerator, setShowGenerator] = useState(false)
 	const aRef = useRef<HTMLAnchorElement | null>(null)
@@ -39,7 +38,7 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 		setMessagePreview(message)
 
 		// Submit the secret to the backend
-		await submitSecret(message, files, password, options).then(Result.match({
+		await submitSecret(message, files, password, { expires, burn, slowBurn, rereads }).then(Result.match({
 			success: (value) => {
 				// If successful automatically redirect to the share page
 				setError("")
@@ -71,7 +70,18 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 			/>
 			<br />
 			<FilesUpload state={state} files={files} setFiles={setFiles} />
-			<Options state={state} options={options} setOptions={setOptions} setPassword={setPassword} />
+			<Options
+				state={state}
+				expires={expires}
+				setExpires={setExpires}
+				burn={burn}
+				setBurn={setBurn}
+				slowBurn={slowBurn}
+				setSlowBurn={setSlowBurn}
+				rereads={rereads}
+				setRereads={setRereads}
+				setPassword={setPassword}
+			/>
 			<Message type="error" title="Error" message={error} />
 			<Button class="float-right" label={$("Create")} onClick={submit} />
 			{/* This line is necessary in order to use Deno Fresh Partials. Partials only work when navigating using links. */}

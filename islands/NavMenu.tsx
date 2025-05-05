@@ -1,20 +1,21 @@
-import { Cookies, useCookie } from "@nihility-io/cookies"
+import { Cookies } from "@nihility-io/cookies"
 import { Button, Dropdown } from "components"
+import { useSetting } from "helpers"
+import { Language, supportedLanguages } from "lang"
 import { useEffect } from "preact/hooks"
 import { State, Theme } from "state"
-import { Language, supportedLanguages } from "lang"
 
 export interface NavMenuProps {
 	state: State
 }
 
 export const NavMenu = ({ state }: NavMenuProps) => {
-	const [theme, setTheme] = useCookie(
+	const [theme, setTheme] = useSetting(
 		"theme",
 		typeof document !== "undefined"
 			? globalThis.matchMedia("(prefers-color-scheme: dark)").matches ? Theme.Dark : Theme.Light
 			: Theme.Light,
-		{ expires: 3650 },
+		state,
 	)
 
 	useEffect(() => {

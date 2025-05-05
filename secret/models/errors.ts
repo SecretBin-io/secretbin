@@ -2,7 +2,7 @@ import { TrimPrefix, useTranslation } from "lang"
 import Result from "@nihility-io/result"
 import { humanReadableSize } from "helpers"
 import { Language, TranslationKey } from "lang"
-import { ZodIssue } from "zod"
+import { z } from "zod"
 
 /**
  * Register error types with @nihility-io/result in order to parse Results containing
@@ -19,7 +19,7 @@ Result.registerErrorType("SecretWriteError", (_message, { id }: { id: string }) 
 Result.registerErrorType("SecretDeleteError", (_message, { id }: { id: string }) => new SecretDeleteError(id))
 Result.registerErrorType(
 	"SecretParseError",
-	(_message, { issues }: { issues: ZodIssue[] }) => new SecretParseError(issues),
+	(_message, { issues }: { issues: z.core.$ZodIssue[] }) => new SecretParseError(issues),
 )
 Result.registerErrorType(
 	"SecretPolicyError",
@@ -117,7 +117,7 @@ export class SecretDeleteError extends LocalizedError {
 }
 
 export class SecretParseError extends LocalizedError {
-	public constructor(public issues: ZodIssue[]) {
+	public constructor(public issues: z.core.$ZodIssue[]) {
 		super("SecretParseError", { reasons: issues.map((x) => x.message).join(", ") })
 	}
 }

@@ -1,7 +1,7 @@
-import { createDefine } from "fresh"
-import { State, Theme } from "state"
-import { isLanguageSupported, Language } from "lang"
 import { getCookies } from "@std/http"
+import { createDefine } from "fresh"
+import { isLanguageSupported, Language } from "lang"
+import { State, Theme } from "state"
 
 export const define = createDefine<State>()
 
@@ -28,7 +28,7 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 	}
 
 	ctx.state.theme = (() => {
-		switch (cookies["color-theme"] ?? "dark") {
+		switch (cookies["theme"] ?? "dark") {
 			case "light":
 				return Theme.Light
 			case "dark":
@@ -37,6 +37,8 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 				return Theme.Light
 		}
 	})()
+
+	ctx.state.cookies = cookies
 
 	ctx.state.termsAccepted = cookies["terms"] === "accepted"
 

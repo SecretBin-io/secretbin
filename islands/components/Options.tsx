@@ -3,17 +3,38 @@ import { Input, NumberInput, Section, Select, Show, Toggle } from "components"
 import { config } from "config"
 import { TranslationKey, TrimPrefix, useTranslationWithPrefix } from "lang"
 import { useEffect, useState } from "preact/hooks"
-import { SecretOptions } from "secret/client"
 import { State } from "state"
 
 export interface OptionsProps {
 	state: State
-	options: SecretOptions
-	setOptions: (value: SecretOptions) => void
+
+	expires: string
+	setExpires: (value: string) => void
+
+	burn: boolean
+	setBurn: (value: boolean) => void
+
+	slowBurn: boolean
+	setSlowBurn: (value: boolean) => void
+
+	rereads: number
+	setRereads: (value: number) => void
+
 	setPassword: (value: string | undefined) => void
 }
 
-export const Options = ({ state, options, setOptions, setPassword }: OptionsProps) => {
+export const Options = ({
+	state,
+	expires,
+	setExpires,
+	burn,
+	setBurn,
+	slowBurn,
+	setSlowBurn,
+	rereads,
+	setRereads,
+	setPassword,
+}: OptionsProps) => {
 	const $ = useTranslationWithPrefix(state.lang, "NewSecret")
 
 	const [pass1, setPass1] = useState("")
@@ -34,9 +55,9 @@ export const Options = ({ state, options, setOptions, setPassword }: OptionsProp
 		}
 	}, [pass1, pass2, usePass])
 
-	const setOpts = <K extends keyof SecretOptions>(key: K) => (value: SecretOptions[K]) => {
-		setOptions({ ...options, [key]: value })
-	}
+	// const setOpts = <K extends keyof SecretOptions>(key: K) => (value: SecretOptions[K]) => {
+	// 	setOptions({ ...options, [key]: value })
+	// }
 
 	return (
 		<>
@@ -51,8 +72,8 @@ export const Options = ({ state, options, setOptions, setPassword }: OptionsProp
 						),
 						value: key,
 					}))}
-					value={options.expires}
-					onChange={setOpts("expires")}
+					value={expires}
+					onChange={setExpires}
 				/>
 			</Section>
 			<Section title={$("Options.Title")} description={$("Options.Description")}>
@@ -63,18 +84,18 @@ export const Options = ({ state, options, setOptions, setPassword }: OptionsProp
 					tooltip={config.policy.requireBurn
 						? $("RequiredByPolicy", { name: config.branding.appName })
 						: undefined}
-					on={options.burn}
-					onChange={setOpts("burn")}
+					on={burn}
+					onChange={setBurn}
 				/>
-				<Show if={!config.policy.denySlowBurn && options.burn}>
+				<Show if={!config.policy.denySlowBurn && burn}>
 					<Toggle
 						label={$("Options.SlowBurn.Title")}
 						subLabel={$("Options.SlowBurn.Description")}
-						on={options.slowBurn}
-						onChange={setOpts("slowBurn")}
+						on={slowBurn}
+						onChange={setSlowBurn}
 					/>
 
-					<Show if={options.slowBurn}>
+					<Show if={slowBurn}>
 						<div class="flex mb-3">
 							<div class="flex">
 								<div class="w-11" />
@@ -83,13 +104,13 @@ export const Options = ({ state, options, setOptions, setPassword }: OptionsProp
 								<NumberInput
 									min={2}
 									max={10}
-									value={options.rereads}
-									onChange={setOpts("rereads")}
+									value={rereads}
+									onChange={setRereads}
 								/>
 							</div>
 							<div class="ms-2 text-sm">
 								<p class="text-sm text-gray-500 dark:text-gray-400">
-									{$("Options.SlowBurn.Status", { count: `${options.rereads}` })}
+									{$("Options.SlowBurn.Status", { count: `${rereads}` })}
 								</p>
 							</div>
 						</div>

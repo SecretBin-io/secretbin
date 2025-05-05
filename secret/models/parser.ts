@@ -10,7 +10,7 @@ import z from "zod"
 export const parseModel = <T extends z.ZodType, R extends z.infer<T>>(m: T, obj: unknown): Result<R> =>
 	Result.fromTry<R>(() => {
 		try {
-			return m.parse(obj)
+			return m.parse(obj) as R
 		} catch (err) {
 			throw new SecretParseError((err as unknown as z.ZodError).issues)
 		}

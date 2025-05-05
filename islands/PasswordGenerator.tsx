@@ -1,5 +1,5 @@
-import { useCookie } from "@nihility-io/cookies"
 import { Button, Input, Modal, NumberInput, Section, Toggle } from "components"
+import { useSetting } from "helpers"
 import { useTranslationWithPrefix } from "lang"
 import { useState } from "preact/hooks"
 import { generatePassword } from "secret/client"
@@ -21,11 +21,11 @@ export interface PasswordGeneratorProps {
 export const PasswordGenerator = ({ show, onDismiss, onPassword, state }: PasswordGeneratorProps) => {
 	const $ = useTranslationWithPrefix(state.lang, "PasswordGenerator")
 	const [password, setPassword] = useState("")
-	const [useUppercase, setUseUppercase] = useCookie("password-use-uppercase", true, { expires: 3650 })
-	const [useLowercase, setUseLowercase] = useCookie("password-use-lowercase", true, { expires: 3650 })
-	const [useDigits, setUseDigits] = useCookie("password-use-digits", true, { expires: 3650 })
-	const [useSymbols, setUseSymbols] = useCookie("password-use-symbols", true, { expires: 3650 })
-	const [passwordLength, setPasswordLength] = useCookie("password-length", 12, { expires: 3650 })
+	const [useUppercase, setUseUppercase] = useSetting("passwords.useUppercase", true, state)
+	const [useLowercase, setUseLowercase] = useSetting("passwords.useLowercase", true, state)
+	const [useDigits, setUseDigits] = useSetting("passwords.useDigits", true, state)
+	const [useSymbols, setUseSymbols] = useSetting("passwords.useSymbols", true, state)
+	const [passwordLength, setPasswordLength] = useSetting("passwords.length", 12, state)
 
 	const onGenerate = () => {
 		setPassword(generatePassword({ useUppercase, useLowercase, useDigits, useSymbols, length: passwordLength }))

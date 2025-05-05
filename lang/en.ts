@@ -80,7 +80,7 @@ export default {
 				},
 				Symbols: {
 					Title: "Symbols",
-					Description: "Include the following symbols: ~!@#$%&*_-+=,.?<>",
+					Description: "Include the following symbols: ~!@#%&*_-+=,.?<>",
 				},
 			},
 		},

@@ -67,7 +67,6 @@ export class Secrets {
 		for await (const s of Secrets.#instance!.#backend.getSecrets()) {
 			if (!s.isSuccess()) {
 				logCG.error(s.unwrapError())
-				console.log(s.unwrapError())
 				continue
 			}
 
@@ -136,6 +135,7 @@ export class Secrets {
 					return Result.failure(
 						new SecretParseError([{
 							code: "custom",
+							input: m.expires,
 							path: ["expires"],
 							message: `${m.expires} is not a valid value. Use one of the following: ${
 								Object.keys(config.expires).join(", ")

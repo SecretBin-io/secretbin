@@ -1,4 +1,5 @@
 import Result from "@nihility-io/result"
+export * from "./useSetting.ts"
 
 /**
  * Converts a result into a HTTP response

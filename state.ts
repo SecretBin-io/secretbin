@@ -11,4 +11,5 @@ export interface State {
 	locale: string
 	locales: string[]
 	termsAccepted: boolean
+	cookies: Record<string, string>
 }

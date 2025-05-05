@@ -83,7 +83,7 @@ export default {
 				},
 				Symbols: {
 					Title: "Symbole",
-					Description: "Verwende die folgenden Symbole: ~!@#$%&*_-+=,.?<>",
+					Description: "Verwende die folgenden Symbole: ~!@#%&*_-+=,.?<>",
 				},
 			},
 		},
