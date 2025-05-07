@@ -384,17 +384,6 @@
   },
   {
     "registry": "jsr",
-    "name": "@std/collections",
-    "version": "1.0.11",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
     "name": "@std/crypto",
     "version": "1.0.4",
     "repository": "https://github.com/denoland/std",

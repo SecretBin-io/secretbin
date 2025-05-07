@@ -1,3 +1,5 @@
+import { z } from "zod"
+
 export enum EncryptionAlgorithm {
 	AES256GCM = "AES256-GCM",
 }
@@ -15,3 +17,10 @@ export interface EncryptedData {
 	/** Actual encrypted data */
 	data: string
 }
+
+export const EncryptedData = z.strictInterface({
+	algorithm: z.enum(EncryptionAlgorithm),
+	iv: z.string(),
+	salt: z.string(),
+	data: z.string(),
+})

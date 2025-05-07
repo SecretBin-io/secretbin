@@ -13,7 +13,7 @@ Result.registerErrorType(
 	"SecretAlreadyExistsError",
 	(_message, { id }: { id: string }) => new SecretAlreadyExistsError(id),
 )
-Result.registerErrorType("SecretListExistsError", () => new SecretListExistsError())
+Result.registerErrorType("SecretListError", () => new SecretListError())
 Result.registerErrorType("SecretReadError", (_message, { id }: { id: string }) => new SecretReadError(id))
 Result.registerErrorType("SecretWriteError", (_message, { id }: { id: string }) => new SecretWriteError(id))
 Result.registerErrorType("SecretDeleteError", (_message, { id }: { id: string }) => new SecretDeleteError(id))
@@ -92,9 +92,9 @@ export class SecretAlreadyExistsError extends LocalizedError {
 	}
 }
 
-export class SecretListExistsError extends LocalizedError {
+export class SecretListError extends LocalizedError {
 	public constructor() {
-		super("SecretListExistsError")
+		super("SecretListError")
 	}
 }
 

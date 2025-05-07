@@ -49,3 +49,7 @@ coverage
 
 /target
 /test.ts
+
+*.db
+*.db-shm
+*.db-wal

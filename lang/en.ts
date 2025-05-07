@@ -179,7 +179,7 @@ export default {
 		Errors: {
 			SecretNotFoundError: "A secret with the ID {{id}} does not exist.",
 			SecretAlreadyExistsError: "A secret with the ID {{id}} already exists.",
-			SecretListExistsError: "Failed to get secrets.",
+			SecretListError: "Failed to get secrets.",
 			SecretReadError: "Unable to read secret with ID {{id}}.",
 			SecretWriteError: "Unable to write secret with ID {{id}}.",
 			SecretDeleteError: "Unable to delete secret with ID {{id}}.",

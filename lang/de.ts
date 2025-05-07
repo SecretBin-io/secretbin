@@ -180,7 +180,7 @@ export default {
 		Errors: {
 			SecretNotFoundError: "Ein Geheimnis mit der ID {{id}} wurde nicht gefunden.",
 			SecretAlreadyExistsError: "Ein Geheimnis mit der ID {{id}} existiert bereits.",
-			SecretListExistsError: "Es ist ein Fehler beim Landen der Geheimnisse aufgetreten.",
+			SecretListError: "Es ist ein Fehler beim Landen der Geheimnisse aufgetreten.",
 			SecretReadError: "Es ist ein Fehler beim Lesen des Geheimnisses mit der ID {{id}} aufgetreten.",
 			SecretWriteError: "Es ist ein Fehler beim Schreiben des Geheimnisses mit der ID {{id}} aufgetreten.",
 			SecretDeleteError: "Es ist ein Fehler beim Löschen des Geheimnisses mit der ID {{id}} aufgetreten.",

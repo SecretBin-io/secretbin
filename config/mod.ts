@@ -1,7 +1,7 @@
 import z from "zod"
 import { Config } from "./model.ts"
 export type * from "./model.ts"
-export type * from "./storage.ts"
+export type * from "./db.ts"
 
 /**
  * Load the config.yaml file server side
@@ -45,7 +45,7 @@ export const clientCfg: Config = (() => {
 		return undefined!
 	}
 	const res = structuredClone(serverCfg)
-	res.storage.backend = undefined as never
+	res.storage.database = undefined as never
 	return res
 })()
 

@@ -111,9 +111,9 @@ policy:
 storage:
   maxSize: 10Mi # Max size a new secret is allowed to have
   gcInterval: 5 # Interval in seconds in which the garbage collector should run
-  backend: # Use Deno KV as a backend
+  database: # Use Deno KV as a database
     type: kv
-  backend: # Use PostgreSQL as a backend
+  database: # Use PostgreSQL as a database
     type: postgres
     host: 127.0.0.1
     port: 5432

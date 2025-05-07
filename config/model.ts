@@ -1,6 +1,6 @@
 import { z } from "zod"
 import { transformExpires, transformSize } from "./helpers.ts"
-import { BackendConfig } from "./storage.ts"
+import { DatabaseConfig } from "./db.ts"
 
 /**
  * Record where the keys are the languages codes and the value are the
@@ -168,16 +168,16 @@ export interface Storage {
 	/** Interval in seconds in which the garbage collector should run */
 	gcInterval: number
 
-	/** Configure the backend where secrets are actually stored */
-	backend: BackendConfig
+	/** Configure the database where secrets are actually stored */
+	database: DatabaseConfig
 }
 
 export const Storage = z.strictInterface({
 	maxSize: z.string().regex(/^(\d+)(Ki|Mi|Gi|K|M|G)$/, {
 		error: "Invalid size. Expected: positive integer or string with format <num>(Ki|Mi|Gi|K|M|G) e.g 10Gi",
-	}).default("10Mi").transform(transformSize).or(z.number().int().positive()),
-	gcInterval: z.number().int().default(60 * 60),
-	backend: BackendConfig.default(BackendConfig.parse({ type: "kv" })),
+	}).default("10Mi").transform(transformSize).or(z.uint32()),
+	gcInterval: z.uint32().default(60 * 60),
+	database: DatabaseConfig.default(DatabaseConfig.parse({ type: "kv" })),
 })
 
 /**

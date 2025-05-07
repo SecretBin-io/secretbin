@@ -6,21 +6,22 @@ import {
 	parseModel,
 	Secret,
 	SecretMetadata,
+	SecretMutableMetadata,
 	SecretParseError,
 	SecretPolicyError,
 	SecretSizeLimitError,
 } from "secret/models"
-import { initStorage, SecretStorage } from "./storage/mod.ts"
+import { Database, initDatabase } from "./db/mod.ts"
 
 /**
  * Singleton class for managing secret in the backend
  */
 export class Secrets {
-	#backend: SecretStorage
+	#db: Database
 	static #instance?: Secrets = undefined
 
 	constructor() {
-		this.#backend = initStorage(config.storage.backend)
+		this.#db = initDatabase(config.storage.database)
 	}
 
 	/**
@@ -28,7 +29,7 @@ export class Secrets {
 	 */
 	async init(): Promise<boolean> {
 		// Initialize the backend
-		if (!(await this.#backend.init())) {
+		if (!(await this.#db.init())) {
 			return false
 		}
 
@@ -63,24 +64,26 @@ export class Secrets {
 	 * every hour in the background but it can also be called manually.
 	 */
 	async garbageCollection() {
-		// Go through all secrets
-		for await (const s of Secrets.#instance!.#backend.getSecrets()) {
-			if (!s.isSuccess()) {
-				logCG.error(s.unwrapError())
-				continue
-			}
-
-			// Check if the secret has expired or is burned
-			if (s.value.expires < new Date() || s.value.remainingReads === 0) {
-				const res = await this.#backend.deleteSecret(s.value.id)
-				if (!res.isSuccess()) {
-					logCG.error(`Unable to delete secret #${s.value.id}. Reason: ${res.unwrapError().message}`, {
-						id: s.value.id,
-					})
-				} else {
-					logCG.info(`Deleted secret #${s.value.id}`, { id: s.value.id })
+		try {
+			// Go through all secrets
+			for await (const s of Secrets.#instance!.#db.getSecrets()) {
+				// Check if the secret has expired or is burned
+				if (s.expires < new Date() || s.remainingReads === 0) {
+					try {
+						await this.#db.deleteSecret(s.id)
+						logCG.info(`Deleted secret #${s.id}`, { id: s.id })
+					} catch (e) {
+						logCG.error(
+							`Unable to delete secret #${s.id}. Reason: ${(e as Error).message}`,
+							{
+								id: s.id,
+							},
+						)
+					}
 				}
 			}
+		} catch (e) {
+			logCG.error(e as Error)
 		}
 	}
 
@@ -147,13 +150,13 @@ export class Secrets {
 				const id: string = crypto.randomUUID()
 
 				// Store the secret
-				const res = await this.#backend.insertSecret({
+				const res = await Result.fromPromise(this.#db.insertSecret({
 					id,
 					data: m.data,
 					expires,
 					remainingReads: m.burnAfter,
 					passwordProtected: m.passwordProtected,
-				}).then(Result.map((x) => x.id))
+				}))
 
 				if (res.isFailure()) {
 					logSecrets.info(`Failed to create a new secret #${id}. Reason: ${res.error.message}`, {
@@ -169,8 +172,22 @@ export class Secrets {
 					})
 				}
 
-				return res
+				return Result.success(id)
 			})
+	}
+
+	removeIfInvalid<T extends SecretMetadata>(): (r: Result<T>) => Result<T> {
+		return Result.map((secret: T) => {
+			if (secret.expires < new Date() || secret.remainingReads === 0) {
+				// Deletion can be done in the background. No reason to wait.
+				this.deleteSecret(secret.id)
+				return Result.failure<T>(
+					`A secret with the ID ${secret.id} does not exist.`,
+				)
+			}
+
+			return Result.success(secret)
+		})
 	}
 
 	/**
@@ -179,18 +196,18 @@ export class Secrets {
 	 * @param id Secret ID
 	 * @returns Result with secret
 	 */
-	getSecretIfValid(id: string) {
-		return this.#backend.getSecret(id).then(Result.map((secret) => {
-			if (secret.expires < new Date() || secret.remainingReads === 0) {
-				// Deletion can be done in the background. No reason to wait.
-				this.deleteSecret(secret.id)
-				return Result.failure<Secret>(
-					`A secret with the ID ${secret.id} does not exist.`,
-				)
-			}
+	getSecretIfValid(id: string): Promise<Result<Secret>> {
+		return Result.fromPromise(this.#db.getSecret(id)).then(this.removeIfInvalid())
+	}
 
-			return Result.success(secret)
-		}))
+	/**
+	 * Loads the given secret metadata if it's still valid. If not delete it
+	 * immediately.
+	 * @param id Secret ID
+	 * @returns Result with secret
+	 */
+	getSecretMetadataIfValid(id: string): Promise<Result<SecretMetadata>> {
+		return Result.fromPromise(this.#db.getSecretMetadata(id)).then(this.removeIfInvalid())
 	}
 
 	/**
@@ -199,9 +216,7 @@ export class Secrets {
 	 * @returns Secret metadata
 	 */
 	async getSecretMetadata(id: string): Promise<Result<SecretMetadata>> {
-		return (await this.getSecretIfValid(id))
-			// Remove the data from the secret
-			.map(({ data: _, ...x }) => ({ ...x }))
+		return (await this.getSecretMetadataIfValid(id))
 	}
 
 	/**
@@ -209,7 +224,7 @@ export class Secrets {
 	 * @param id Secret ID
 	 */
 	secretExists(id: string): Promise<boolean> {
-		return this.#backend.secretExists(id)
+		return this.#db.secretExists(id)
 	}
 
 	/**
@@ -231,19 +246,19 @@ export class Secrets {
 		}
 
 		if (s.value.remainingReads !== -1) {
-			this.updateSecret(id, { remainingReads: s.value.remainingReads - 1 })
+			this.updateSecretMetadata(id, { remainingReads: s.value.remainingReads - 1 })
 		}
 
 		return s
 	}
 
 	/**
-	 * Updates the pre-existing secret with the given ID
+	 * Updates the pre-existing secret's metadata with the given ID
 	 * @param id Secret ID
 	 * @param secret Properties that should be updated
 	 */
-	async updateSecret(id: string, secret: Partial<Secret>) {
-		const res = await this.#backend.updateSecret(id, secret)
+	async updateSecretMetadata(id: string, secret: Partial<SecretMutableMetadata>) {
+		const res = await Result.fromPromise(this.#db.updateSecretMetadata(id, secret))
 		if (res.isFailure()) {
 			logSecrets.error(`Failed to update secret #${id}. Reason: ${res.error.message}`, {
 				id,
@@ -258,7 +273,7 @@ export class Secrets {
 	 * @param id Secret ID
 	 */
 	async deleteSecret(id: string) {
-		const res = await this.#backend.deleteSecret(id)
+		const res = await Result.fromPromise(this.#db.deleteSecret(id)).then(Result.map(() => id))
 		if (res.isFailure()) {
 			logSecrets.error(`Failed to delete secret #${id}. Reason: ${res.error.message}`, {
 				id,

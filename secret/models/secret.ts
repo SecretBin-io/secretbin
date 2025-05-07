@@ -2,15 +2,8 @@
  * This file defines all the models used by SecretBin. Models are validated using Zod
  */
 
-import { EncryptedData, EncryptionAlgorithm } from "./crypto.ts"
 import { z } from "zod"
-
-const EncryptedDataModel = z.strictInterface({
-	data: z.string(),
-	iv: z.string(),
-	salt: z.string(),
-	algorithm: z.nativeEnum(EncryptionAlgorithm),
-})
+import { EncryptedData } from "./crypto.ts"
 
 export interface NewSecret {
 	data: EncryptedData
@@ -20,32 +13,45 @@ export interface NewSecret {
 }
 
 export const NewSecret = z.strictInterface({
-	data: EncryptedDataModel,
+	data: EncryptedData,
 	expires: z.string().regex(/^(\d+)(min|hr|d|w|m)$/),
 	burnAfter: z.number().default(-1),
 	passwordProtected: z.boolean().default(false),
 })
-export interface SecretMetadata {
-	id: string
+
+export interface SecretMutableMetadata {
 	expires: Date
 	remainingReads: number
+}
+
+export const SecretMutableMetadata = z.strictInterface({
+	expires: z.string().or(z.date()).transform((str) => new Date(str)),
+	remainingReads: z.number(),
+})
+
+export interface SecretMetadata extends SecretMutableMetadata {
+	id: string
 	passwordProtected: boolean
 }
 
-export const SecretMetadata = z.strictInterface({
-	id: z.string(),
-	expires: z.string().or(z.date()).transform((str) => new Date(str)),
-	remainingReads: z.number(),
-	passwordProtected: z.boolean().default(false),
-})
+export const SecretMetadata = z.extend(
+	SecretMutableMetadata,
+	z.strictInterface({
+		id: z.string(),
+		passwordProtected: z.boolean().default(false),
+	}),
+).strict()
 
 export interface Secret extends SecretMetadata {
 	data: EncryptedData
 }
 
-export const Secret = SecretMetadata.extend({
-	data: EncryptedDataModel,
-})
+export const Secret = z.extend(
+	SecretMetadata,
+	z.strictInterface({
+		data: EncryptedData,
+	}),
+).strict()
 
 export interface SecretAttachment {
 	name: string
