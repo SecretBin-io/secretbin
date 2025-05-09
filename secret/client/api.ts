@@ -26,6 +26,7 @@ export const getSecretMetadata = (id: string): Promise<Result<SecretMetadata>> =
 	fetch(`/api/secret/${id}`)
 		.then((x) => x.text())
 		.then((x) => Result.fromJson(x, SecretMetadata))
+		.catch((e) => Result.failure(e as Error))
 
 /**
  * Fetches the secret (including the encrypted data).
@@ -38,6 +39,7 @@ export const getSecret = (id: string): Promise<Result<Secret>> =>
 	fetch(`/api/secret/${id}`, { method: "POST" })
 		.then((x) => x.text())
 		.then((x) => Result.fromJson(x, Secret))
+		.catch((e) => Result.failure(e as Error))
 
 /**
  * Deletes the secret from the backend
@@ -48,3 +50,4 @@ export const deleteSecret = (id: string): Promise<Result<void>> =>
 		.then((x) => x.text())
 		.then((x) => Result.fromJson(x, z.string()))
 		.then(Result.map(() => {}))
+		.catch((e) => Result.failure(e as Error))

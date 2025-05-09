@@ -182,7 +182,8 @@ export default {
 			SecretAlreadyExistsError: "Ein Geheimnis mit der ID {{id}} existiert bereits.",
 			SecretListError: "Es ist ein Fehler beim Landen der Geheimnisse aufgetreten.",
 			SecretReadError: "Es ist ein Fehler beim Lesen des Geheimnisses mit der ID {{id}} aufgetreten.",
-			SecretWriteError: "Es ist ein Fehler beim Schreiben des Geheimnisses mit der ID {{id}} aufgetreten.",
+			SecretCreateError: "Es ist ein Fehler beim Erstellen des Geheimnisses mit der ID {{id}} aufgetreten.",
+			SecretUpdateError: "Es ist ein Fehler beim aktualisieren des Geheimnisses mit der ID {{id}} aufgetreten.",
 			SecretDeleteError: "Es ist ein Fehler beim Löschen des Geheimnisses mit der ID {{id}} aufgetreten.",
 			SecretParseError: "Das Geheimnis hat ein ungültiges Format. Details: {{reason}}",
 			SecretPolicyError:

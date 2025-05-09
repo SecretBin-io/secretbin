@@ -10,10 +10,9 @@ import { State } from "state"
  */
 export default async ({ params, state }: PageProps<unknown, State>) => {
 	const $ = useTranslationWithPrefix(state.lang, "ShareSecret")
-	const metadata = await Secrets.shared.getSecretMetadata(params.id)
-
-	return metadata.match({
-		success: (metadata) => (
+	try {
+		const metadata = await Secrets.shared.getSecretMetadata(params.id)
+		return (
 			<PageContent title={$("Title")} description={$("Description")}>
 				<div class="items-left justify-left space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
 					<div class="mx-auto">
@@ -22,11 +21,12 @@ export default async ({ params, state }: PageProps<unknown, State>) => {
 					</div>
 				</div>
 			</PageContent>
-		),
-		failure: (error) => (
+		)
+	} catch (e) {
+		return (
 			<PageContent title={$("Title")}>
-				<Message type="error" title="Error" message={error.message} />
+				<Message type="error" title="Error" message={(e as Error).message} />
 			</PageContent>
-		),
-	})
+		)
+	}
 }

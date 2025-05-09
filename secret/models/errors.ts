@@ -1,94 +1,32 @@
-import { TrimPrefix, useTranslation } from "lang"
+import Record from "@nihility-io/record"
 import Result from "@nihility-io/result"
+import { STATUS_CODE } from "@std/http/status"
 import { humanReadableSize } from "helpers"
-import { Language, TranslationKey } from "lang"
+import { LocalizedError } from "lang"
 import { z } from "zod"
-
-/**
- * Register error types with @nihility-io/result in order to parse Results containing
- * these errors may be parsed correctly.
- */
-Result.registerErrorType("SecretNotFoundError", (_message, { id }: { id: string }) => new SecretNotFoundError(id))
-Result.registerErrorType(
-	"SecretAlreadyExistsError",
-	(_message, { id }: { id: string }) => new SecretAlreadyExistsError(id),
-)
-Result.registerErrorType("SecretListError", () => new SecretListError())
-Result.registerErrorType("SecretReadError", (_message, { id }: { id: string }) => new SecretReadError(id))
-Result.registerErrorType("SecretWriteError", (_message, { id }: { id: string }) => new SecretWriteError(id))
-Result.registerErrorType("SecretDeleteError", (_message, { id }: { id: string }) => new SecretDeleteError(id))
-Result.registerErrorType(
-	"SecretParseError",
-	(_message, { issues }: { issues: z.core.$ZodIssue[] }) => new SecretParseError(issues),
-)
-Result.registerErrorType(
-	"SecretPolicyError",
-	(_message, { reason }: { reason: string }) => new SecretPolicyError(reason),
-)
-Result.registerErrorType(
-	"SecretSizeLimitError",
-	(_message, { maxSize, size }: { maxSize: number; size: number }) => new SecretSizeLimitError(size, maxSize),
-)
-
-/**
- * Error type which enables localized translated error messages
- */
-export class LocalizedError extends Error {
-	#key: TrimPrefix<"Errors", TranslationKey>
-	#params: Record<string, string>
-
-	/**
-	 * Create a new localized error. Note: The error name is set to the translation key name by default
-	 * @param key Translation key for the error
-	 * @param params Optional parameters for the translated message
-	 */
-	public constructor(key: TrimPrefix<"Errors", TranslationKey>, params: Record<string, string> = {}) {
-		// deno-lint-ignore react-rules-of-hooks
-		super(useTranslation(Language.English)("Errors." + key as unknown as TranslationKey, params))
-		this.name = key
-		this.#key = key
-		this.#params = params
-	}
-
-	/**
-	 * Gets the error message in the desired language
-	 * @param lang Requested language
-	 * @returns Translated error message
-	 */
-	public getLocalizedMessage(lang: Language) {
-		// deno-lint-ignore react-rules-of-hooks
-		return useTranslation(lang)("Errors." + this.#key as unknown as TranslationKey, this.#params)
-	}
-
-	/**
-	 * Gets the error message in the desired language. If the error is not an localized error, the normal
-	 * message is returned instead.
-	 * @param lang Requested language
-	 * @param err Error
-	 * @returns Translated error message
-	 */
-	public static getLocalizedMessage(lang: Language, err: Error) {
-		if (err instanceof LocalizedError) {
-			return err.getLocalizedMessage(lang)
-		} else {
-			return err.message
-		}
-	}
-}
 
 /**
  * Implement a error sub-class for each error
  */
-
 export class SecretNotFoundError extends LocalizedError {
+	public override code = STATUS_CODE.NotFound
 	public constructor(public id: string) {
 		super("SecretNotFoundError", { id })
+	}
+
+	public static fromResultFailure(_message: string, params: Record<string, unknown>): Error {
+		return new SecretNotFoundError(params.id as string)
 	}
 }
 
 export class SecretAlreadyExistsError extends LocalizedError {
+	public override code = STATUS_CODE.Conflict
 	public constructor(public id: string) {
 		super("SecretAlreadyExistsError", { id })
+	}
+
+	public static fromResultFailure(_message: string, params: Record<string, unknown>): Error {
+		return new SecretAlreadyExistsError(params.id as string)
 	}
 }
 
@@ -96,17 +34,39 @@ export class SecretListError extends LocalizedError {
 	public constructor() {
 		super("SecretListError")
 	}
+
+	public static fromResultFailure(_message: string, _params: Record<string, unknown>): Error {
+		return new SecretListError()
+	}
 }
 
 export class SecretReadError extends LocalizedError {
 	public constructor(public id: string) {
 		super("SecretReadError", { id })
 	}
+
+	public static fromResultFailure(_message: string, params: Record<string, unknown>): Error {
+		return new SecretReadError(params.id as string)
+	}
 }
 
-export class SecretWriteError extends LocalizedError {
+export class SecretCreateError extends LocalizedError {
 	public constructor(public id: string) {
-		super("SecretWriteError", { id })
+		super("SecretCreateError", { id })
+	}
+
+	public static fromResultFailure(_message: string, params: Record<string, unknown>): Error {
+		return new SecretCreateError(params.id as string)
+	}
+}
+
+export class SecretUpdateError extends LocalizedError {
+	public constructor(public id: string) {
+		super("SecretUpdateError", { id })
+	}
+
+	public static fromResultFailure(_message: string, params: Record<string, unknown>): Error {
+		return new SecretUpdateError(params.id as string)
 	}
 }
 
@@ -114,22 +74,57 @@ export class SecretDeleteError extends LocalizedError {
 	public constructor(public id: string) {
 		super("SecretDeleteError", { id })
 	}
+
+	public static fromResultFailure(_message: string, params: Record<string, unknown>): Error {
+		return new SecretDeleteError(params.id as string)
+	}
 }
 
 export class SecretParseError extends LocalizedError {
 	public constructor(public issues: z.core.$ZodIssue[]) {
 		super("SecretParseError", { reasons: issues.map((x) => x.message).join(", ") })
 	}
+
+	public static fromResultFailure(_message: string, params: Record<string, unknown>): Error {
+		return new SecretParseError(params.issues as z.core.$ZodIssue[])
+	}
 }
 
 export class SecretPolicyError extends LocalizedError {
+	public override code = STATUS_CODE.Forbidden
 	public constructor(public reason: string) {
 		super("SecretPolicyError", { reason })
+	}
+
+	public static fromResultFailure(_message: string, params: Record<string, unknown>): Error {
+		return new SecretPolicyError(params.reason as string)
 	}
 }
 
 export class SecretSizeLimitError extends LocalizedError {
+	public override code = STATUS_CODE.ContentTooLarge
 	public constructor(public size: number, public maxSize: number) {
 		super("SecretSizeLimitError", { size: humanReadableSize(size), maxSize: humanReadableSize(maxSize) })
 	}
+
+	public static fromResultFailure(_message: string, params: Record<string, unknown>): Error {
+		return new SecretSizeLimitError(params.size as number, params.maxSize as number)
+	}
 }
+
+/**
+ * Register error types with @nihility-io/result in order to parse Results containing
+ * these errors may be parsed correctly.
+ */
+Result.registerErrorTypes(
+	SecretNotFoundError,
+	SecretAlreadyExistsError,
+	SecretListError,
+	SecretReadError,
+	SecretCreateError,
+	SecretUpdateError,
+	SecretDeleteError,
+	SecretParseError,
+	SecretPolicyError,
+	SecretSizeLimitError,
+)

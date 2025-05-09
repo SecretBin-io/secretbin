@@ -1,9 +1,9 @@
 import { decodeBase64 } from "@std/encoding/base64"
 import { Button, FileList, Input, Message, Section, Show, TextArea } from "components"
-import { useTranslationWithPrefix } from "lang"
+import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { useEffect, useState } from "preact/hooks"
 import { decryptSecret, getSecret } from "secret/client"
-import { LocalizedError, Secret, SecretData } from "secret/models"
+import { Secret, SecretData } from "secret/models"
 import { State } from "state"
 
 export interface ViewSecretProps {

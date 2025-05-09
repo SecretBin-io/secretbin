@@ -1,8 +1,7 @@
 import classNames from "classnames"
 import { Button, PageContent } from "components"
 import { type PageProps, PageResponse } from "fresh"
-import { useTranslationWithPrefix } from "lang"
-import { LocalizedError } from "secret/models"
+import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { Secrets } from "secret/server"
 import { State } from "state"
 import { define } from "utils"
@@ -14,27 +13,28 @@ interface DeleteSecretData {
 }
 
 export const handler = define.handlers<DeleteSecretData>({
-	async GET({ params }) {
-		const res = await Secrets.shared.getSecretMetadata(params.id)
+	async GET({ params }): Promise<PageResponse<DeleteSecretData>> {
+		try {
+			await Secrets.shared.getSecretMetadata(params.id)
 
-		return {
-			data: { id: params.id, error: res.isFailure() ? res.error.message : undefined, done: res.isFailure() },
-		} satisfies PageResponse<DeleteSecretData>
+			return { data: { id: params.id, done: false } }
+		} catch (e) {
+			return { data: { id: params.id, error: (e as Error).message, done: true } }
+		}
 	},
 	async POST({ params, state }) {
-		const res = await Secrets.shared.deleteSecret(params.id)
-		return res.match<PageResponse<DeleteSecretData>>({
-			success: () => ({
-				data: { id: params.id, done: true },
-			}),
-			failure: (error) => ({
+		try {
+			await Secrets.shared.deleteSecret(params.id)
+			return { data: { id: params.id, done: true } }
+		} catch (e) {
+			return {
 				data: {
 					id: params.id,
 					done: true,
-					error: LocalizedError.getLocalizedMessage(state.lang, error),
+					error: LocalizedError.getLocalizedMessage(state.lang, e as Error),
 				},
-			}),
-		})
+			}
+		}
 	},
 })
 

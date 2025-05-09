@@ -1,4 +1,4 @@
-import { responseFromResult } from "helpers"
+import { promiseResponse } from "helpers"
 import { Secrets } from "secret/server"
 import { define } from "utils"
 
@@ -6,7 +6,7 @@ import { define } from "utils"
  * Secret API: /secret/<some_id>
  */
 export const handler = define.handlers({
-	GET: ({ params }) => Secrets.shared.getSecretMetadata(params.id).then(responseFromResult),
-	POST: ({ params }) => Secrets.shared.getSecret(params.id).then(responseFromResult),
-	DELETE: ({ params }) => Secrets.shared.deleteSecret(params.id).then(responseFromResult),
+	GET: ({ params }) => promiseResponse(Secrets.shared.getSecretMetadata(params.id)),
+	POST: ({ params }) => promiseResponse(Secrets.shared.getSecret(params.id)),
+	DELETE: ({ params }) => promiseResponse(Secrets.shared.deleteSecret(params.id).then(() => params.id)),
 })

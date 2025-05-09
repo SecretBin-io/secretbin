@@ -1,12 +1,12 @@
-import Result from "@nihility-io/result"
 import { config } from "config"
-import { logCG, logSecrets } from "log"
+import { logCG, logDB, logSecrets } from "log"
 import {
 	NewSecret,
 	parseModel,
 	Secret,
 	SecretMetadata,
 	SecretMutableMetadata,
+	SecretNotFoundError,
 	SecretParseError,
 	SecretPolicyError,
 	SecretSizeLimitError,
@@ -28,8 +28,11 @@ export class Secrets {
 	 * Initializes the secret manager
 	 */
 	async init(): Promise<boolean> {
-		// Initialize the backend
-		if (!(await this.#db.init())) {
+		try {
+			// Initialize the backend
+			await this.#db.init()
+		} catch (e) {
+			logDB.error(`Failed to initialize database.`, e)
 			return false
 		}
 
@@ -63,7 +66,7 @@ export class Secrets {
 	 * Deletes expired secrets. The garbage collector is schedule to run
 	 * every hour in the background but it can also be called manually.
 	 */
-	async garbageCollection() {
+	async garbageCollection(): Promise<void> {
 		try {
 			// Go through all secrets
 			for await (const s of Secrets.#instance!.#db.getSecrets()) {
@@ -71,19 +74,14 @@ export class Secrets {
 				if (s.expires < new Date() || s.remainingReads === 0) {
 					try {
 						await this.#db.deleteSecret(s.id)
-						logCG.info(`Deleted secret #${s.id}`, { id: s.id })
+						logCG.info(`Deleted secret #${s.id}.`, { id: s.id })
 					} catch (e) {
-						logCG.error(
-							`Unable to delete secret #${s.id}. Reason: ${(e as Error).message}`,
-							{
-								id: s.id,
-							},
-						)
+						logCG.error(`Unable to delete secret #${s.id}.`, { id: s.id, error: e })
 					}
 				}
 			}
 		} catch (e) {
-			logCG.error(e as Error)
+			logCG.error(`Failed to collect garbage.`, e)
 		}
 	}
 
@@ -109,85 +107,72 @@ export class Secrets {
 	 * @param secret Secret
 	 * @returns ID of the created secret
 	 */
-	createSecret(secret: NewSecret): Promise<Result<string>> {
-		if (secret.data.data.length > config.storage.maxSize) {
-			return Promise.resolve(Result.failure(
-				new SecretSizeLimitError(secret.data.data.length, config.storage.maxSize),
-			))
+	async createSecret(secret: NewSecret): Promise<string> {
+		// Validate the secret again the Zod model
+		const m = await parseModel<typeof NewSecret, NewSecret>(NewSecret, secret)
+
+		if (m.data.data.length > config.storage.maxSize) {
+			throw new SecretSizeLimitError(m.data.data.length, config.storage.maxSize)
 		}
 
-		// Validate the secret again the Zod model
-		return parseModel<typeof NewSecret, NewSecret>(NewSecret, secret)
-			.mapAsync(async (m) => {
-				// Ensure that the secrets fulfills the configured policies
-				if (config.policy.denySlowBurn && m.burnAfter > 1) {
-					return Result.failure(new SecretPolicyError(`Slow burn is not allowed.`))
-				}
+		// Ensure that the secrets fulfills the configured policies
+		if (config.policy.denySlowBurn && m.burnAfter > 1) {
+			throw new SecretPolicyError(`Slow burn is not allowed.`)
+		}
 
-				if (config.policy.requireBurn && m.burnAfter === -1) {
-					return Result.failure(new SecretPolicyError(`Burn is required.`))
-				}
+		if (config.policy.requireBurn && m.burnAfter === -1) {
+			throw new SecretPolicyError(`Burn is required.`)
+		}
 
-				if (config.policy.requirePassword && !m.passwordProtected) {
-					return Result.failure(new SecretPolicyError(`Password is required.`))
-				}
+		if (config.policy.requirePassword && !m.passwordProtected) {
+			throw new SecretPolicyError(`Password is required.`)
+		}
 
-				// Validate the expires duration and turn it into an expiration date
-				const expires = Secrets.getExpireDate(m.expires)
-				if (!expires) {
-					return Result.failure(
-						new SecretParseError([{
-							code: "custom",
-							input: m.expires,
-							path: ["expires"],
-							message: `${m.expires} is not a valid value. Use one of the following: ${
-								Object.keys(config.expires).join(", ")
-							}`,
-						}]),
-					)
-				}
+		// Validate the expires duration and turn it into an expiration date
+		const expires = Secrets.getExpireDate(m.expires)
+		if (!expires) {
+			throw new SecretParseError([{
+				code: "custom",
+				input: m.expires,
+				path: ["expires"],
+				message: `${m.expires} is not a valid value. Use one of the following: ${
+					Object.keys(config.expires).join(", ")
+				}`,
+			}])
+		}
 
-				const id: string = crypto.randomUUID()
+		const id: string = crypto.randomUUID()
 
-				// Store the secret
-				const res = await Result.fromPromise(this.#db.insertSecret({
-					id,
-					data: m.data,
-					expires,
-					remainingReads: m.burnAfter,
-					passwordProtected: m.passwordProtected,
-				}))
-
-				if (res.isFailure()) {
-					logSecrets.info(`Failed to create a new secret #${id}. Reason: ${res.error.message}`, {
-						id,
-						action: "create",
-						error: { name: res.error.name, message: res.error.message },
-					})
-				} else {
-					logSecrets.info(`Create a new secret #${id} that expires ${expires.toISOString()}`, {
-						id,
-						expires,
-						action: "create",
-					})
-				}
-
-				return Result.success(id)
+		try {
+			// Store the secret
+			await this.#db.insertSecret({
+				id,
+				data: m.data,
+				expires,
+				remainingReads: m.burnAfter,
+				passwordProtected: m.passwordProtected,
 			})
+			logSecrets.info(
+				`Create a new secret #${id} that expires ${expires.toISOString()}`,
+				{ id, expires, action: "create" },
+			)
+		} catch (e) {
+			logSecrets.error(`Failed to create a new secret #${id}.`, { id, action: "create", error: e })
+			throw e
+		}
+
+		return id
 	}
 
-	removeIfInvalid<T extends SecretMetadata>(): (r: Result<T>) => Result<T> {
-		return Result.map((secret: T) => {
+	removeIfInvalid<T extends SecretMetadata>(): (secret: T) => T {
+		return (secret: T): T => {
 			if (secret.expires < new Date() || secret.remainingReads === 0) {
 				// Deletion can be done in the background. No reason to wait.
 				this.deleteSecret(secret.id)
-				return Result.failure<T>(
-					`A secret with the ID ${secret.id} does not exist.`,
-				)
+				throw new SecretNotFoundError(secret.id)
 			}
-
-			return Result.success(secret)
-		})
+			return secret
+		}
 	}
 
 	/**
@@ -196,8 +181,8 @@ export class Secrets {
 	 * @param id Secret ID
 	 * @returns Result with secret
 	 */
-	getSecretIfValid(id: string): Promise<Result<Secret>> {
-		return Result.fromPromise(this.#db.getSecret(id)).then(this.removeIfInvalid())
+	getSecretIfValid(id: string): Promise<Secret> {
+		return this.#db.getSecret(id).then(this.removeIfInvalid())
 	}
 
 	/**
@@ -206,8 +191,8 @@ export class Secrets {
 	 * @param id Secret ID
 	 * @returns Result with secret
 	 */
-	getSecretMetadataIfValid(id: string): Promise<Result<SecretMetadata>> {
-		return Result.fromPromise(this.#db.getSecretMetadata(id)).then(this.removeIfInvalid())
+	getSecretMetadataIfValid(id: string): Promise<SecretMetadata> {
+		return this.#db.getSecretMetadata(id).then(this.removeIfInvalid())
 	}
 
 	/**
@@ -215,8 +200,8 @@ export class Secrets {
 	 * @param id Secret ID
 	 * @returns Secret metadata
 	 */
-	async getSecretMetadata(id: string): Promise<Result<SecretMetadata>> {
-		return (await this.getSecretMetadataIfValid(id))
+	async getSecretMetadata(id: string): Promise<SecretMetadata> {
+		return await this.getSecretMetadataIfValid(id)
 	}
 
 	/**
@@ -233,20 +218,17 @@ export class Secrets {
 	 * @param id Secret ID
 	 * @returns Secret metadata
 	 */
-	async getSecret(id: string): Promise<Result<Secret>> {
+	async getSecret(id: string): Promise<Secret> {
 		const s = await this.getSecretIfValid(id)
-		if (!s.isSuccess()) {
-			return s
-		}
 
 		logSecrets.info(`Secret #${id} was opened.`, { action: "get", id })
 
-		if (s.value.remainingReads === 1) {
+		if (s.remainingReads === 1) {
 			this.deleteSecret(id)
 		}
 
-		if (s.value.remainingReads !== -1) {
-			this.updateSecretMetadata(id, { remainingReads: s.value.remainingReads - 1 })
+		if (s.remainingReads !== -1) {
+			this.updateSecretMetadata(id, { remainingReads: s.remainingReads - 1 })
 		}
 
 		return s
@@ -258,13 +240,11 @@ export class Secrets {
 	 * @param secret Properties that should be updated
 	 */
 	async updateSecretMetadata(id: string, secret: Partial<SecretMutableMetadata>) {
-		const res = await Result.fromPromise(this.#db.updateSecretMetadata(id, secret))
-		if (res.isFailure()) {
-			logSecrets.error(`Failed to update secret #${id}. Reason: ${res.error.message}`, {
-				id,
-				action: "delete",
-				error: { name: res.error.name, message: res.error.message },
-			})
+		try {
+			await this.#db.updateSecretMetadata(id, secret)
+		} catch (e) {
+			logSecrets.error(`Failed to update secret #${id}.`, { id, action: "delete", error: e })
+			throw e
 		}
 	}
 
@@ -273,14 +253,11 @@ export class Secrets {
 	 * @param id Secret ID
 	 */
 	async deleteSecret(id: string) {
-		const res = await Result.fromPromise(this.#db.deleteSecret(id)).then(Result.map(() => id))
-		if (res.isFailure()) {
-			logSecrets.error(`Failed to delete secret #${id}. Reason: ${res.error.message}`, {
-				id,
-				error: { name: res.error.name, message: res.error.message },
-			})
+		try {
+			await this.#db.deleteSecret(id)
+		} catch (e) {
+			logSecrets.error(`Failed to delete secret #${id}.`, { id, error: e })
+			throw e
 		}
-
-		return res
 	}
 }

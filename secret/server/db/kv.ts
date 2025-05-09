@@ -3,13 +3,14 @@ import { logDB } from "log"
 import {
 	Secret,
 	SecretAlreadyExistsError,
+	SecretCreateError,
 	SecretDeleteError,
 	SecretListError,
 	SecretMetadata,
 	SecretMutableMetadata,
 	SecretNotFoundError,
 	SecretReadError,
-	SecretWriteError,
+	SecretUpdateError,
 } from "secret/models"
 import { Database } from "./shared.ts"
 
@@ -31,18 +32,8 @@ export class KVDatabase implements Database {
 	/**
 	 * Initializes the storage. This is called when the server starts.
 	 */
-	async init(): Promise<boolean> {
-		try {
-			this.#kv = await Deno.openKv(this.#location)
-		} catch (e: unknown) {
-			const err = e as Error
-			logDB.error(`Failed to initialize Deno KV backend. Reason: ${err.message}`, {
-				error: { name: err.name, message: err.message },
-			})
-			return false
-		}
-
-		return true
+	async init(): Promise<void> {
+		this.#kv = await Deno.openKv(this.#location)
 	}
 
 	/**
@@ -54,10 +45,7 @@ export class KVDatabase implements Database {
 				yield await SecretMetadata.parseAsync(e.value)
 			}
 		} catch (e) {
-			const err = e as Error
-			logDB.error(`Failed to list secrets. Reason: ${err.message}`, {
-				error: { name: err.name, message: err.message },
-			})
+			logDB.error(`Failed to list secrets.`, e)
 			throw new SecretListError()
 		}
 	}
@@ -90,9 +78,7 @@ export class KVDatabase implements Database {
 		try {
 			return await Secret.parseAsync(res.value)
 		} catch (e) {
-			logDB.error(`Failed to read secret. Reason: ${(e as Error).message}`, {
-				error: { name: (e as Error).name, message: (e as Error).message },
-			})
+			logDB.error(`Failed to read secret.`, e)
 			throw new SecretReadError(id)
 		}
 	}
@@ -121,7 +107,7 @@ export class KVDatabase implements Database {
 
 		if (!success) {
 			logDB.error(`Failed to write secret`)
-			throw new SecretWriteError(secret.id)
+			throw new SecretCreateError(secret.id)
 		}
 	}
 
@@ -140,7 +126,7 @@ export class KVDatabase implements Database {
 
 		if (!success) {
 			logDB.error(`Failed to write secret.`)
-			throw new SecretWriteError(secret.id)
+			throw new SecretUpdateError(secret.id)
 		}
 	}
 
@@ -157,9 +143,7 @@ export class KVDatabase implements Database {
 		try {
 			await this.#kv.delete(["secrets", id])
 		} catch (e) {
-			logDB.error(`Failed to delete secret. Reason: ${(e as Error).message}`, {
-				error: { name: (e as Error).name, message: (e as Error).message },
-			})
+			logDB.error(`Failed to delete secret.`, e)
 			throw new SecretDeleteError(id)
 		}
 	}

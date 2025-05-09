@@ -7,8 +7,7 @@
 		"update": "deno run -A -r jsr:@fresh/update@2.0.0-alpha.29 .",
 		"test": "deno test --coverage=coverage && deno coverage coverage --html && deno coverage coverage --detailed && deno coverage coverage",
 		"deps": "deno run -A jsr:@nihility-io/deno-deps@1.1.5",
-		"deploy": "deno task build && deployctl deploy --project=nihility-secretbin main.ts",
-		"docker_build": "docker build --platform linux/arm64,linux/amd64  -t secretbin:2.0.0 ."
+		"deploy": "deno task build && deployctl deploy --project=nihility-secretbin main.ts"
 	},
 	"lock": false,
 	"nodeModulesDir": "none",
@@ -49,8 +48,10 @@
 		"@libs/qrcode": "jsr:@libs/qrcode@^2.0.1",
 		"@nihility-io/cookies": "jsr:@nihility-io/cookies@^2.0.0-alpha.7",
 		"@nihility-io/record": "jsr:@nihility-io/record@^1.0.3",
-		"@nihility-io/result": "jsr:@nihility-io/result@1.1.0-beta.2",
+		"@nihility-io/result": "jsr:@nihility-io/result@1.1.0-beta.7",
+		"@oscar6echo/postgres": "jsr:@oscar6echo/postgres@^3.4.5-d",
 		"@std/assert": "jsr:@std/assert@^1.0.13",
+		"@std/async": "jsr:@std/async@^1.0.12",
 		"@std/encoding": "jsr:@std/encoding@^1.0.10",
 		"@std/fs": "jsr:@std/fs@^1.0.17",
 		"@std/http": "jsr:@std/http@^1.0.15",

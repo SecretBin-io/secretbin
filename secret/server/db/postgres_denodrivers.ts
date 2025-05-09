@@ -1,5 +1,5 @@
-import postgres from "@oscar6echo/postgres"
-import { PostgresDatabaseConfig } from "config"
+import { ClientOptions, Pool, QueryArrayResult, QueryObjectResult } from "@db/postgres"
+import { config, PostgresDatabaseConfig } from "config"
 import { LocalizedError } from "lang"
 import { logDB } from "log"
 import {
@@ -35,30 +35,65 @@ interface SecretRow {
  * Secret storage implementation which stores secrets in PostgreSQL using jsonb
  */
 export class PostgresDatabase implements Database {
-	#sql: postgres.Sql
+	#options: ClientOptions
+	#pool: Pool
 
 	/**
 	 * Creates and secret storage instance which stores secrets in PostgreSQL using jsonb
 	 * @param cfg Config
 	 */
 	constructor(cfg: PostgresDatabaseConfig) {
-		this.#sql = postgres({
-			host: cfg.host,
+		this.#options = {
+			applicationName: config.branding.appName,
+			hostname: cfg.host,
 			port: cfg.port,
 			database: cfg.database,
-			username: cfg.username,
+			user: cfg.username,
 			password: cfg.password,
-			max: 5,
-			idle_timeout: 30000,
-			ssl: cfg.tls === "enforced" ? "require" : cfg.tls === "on" ? "prefer" : false,
-		})
+			tls: {
+				enabled: cfg.tls === "on" || cfg.tls === "enforced",
+				enforce: cfg.tls === "enforced",
+			},
+			connection: {
+				attempts: 1,
+			},
+		}
+		this.#pool = new Pool(this.#options, 5, false)
+	}
+
+	/**
+	 * Executed queries and retrieve the data as object entries. It supports
+	 * a generic in order to type the entries retrieved by the query.
+	 * @param query Query
+	 * @returns Result returned by Postgres
+	 */
+	async #query<T = Record<string, unknown>>(
+		strings: TemplateStringsArray,
+		...args: unknown[]
+	): Promise<QueryObjectResult<T>> {
+		using client = await this.#pool.connect()
+		return await client.queryObject(strings, ...args)
+	}
+
+	/**
+	 * Execute queries and retrieve the data as array entries. It supports
+	 * a generic in order to type the entries retrieved by the query.
+	 * @param query Query
+	 * @returns Result returned by Postgres
+	 */
+	async #queryRaw<T extends Array<unknown>>(
+		strings: TemplateStringsArray,
+		...args: unknown[]
+	): Promise<QueryArrayResult<T>> {
+		using client = await this.#pool.connect()
+		return await client.queryArray(strings, ...args)
 	}
 
 	/**
 	 * Initializes the storage. This is called when the server starts.
 	 */
 	async init(): Promise<void> {
-		await this.#sql /*sql*/`
+		await this.#queryRaw /*sql*/`
 			create table if not exists secrets (
 				id                  uuid        not null primary key,
 				created_at          timestamp   not null default now(),
@@ -112,12 +147,12 @@ export class PostgresDatabase implements Database {
 	 */
 	async *getSecrets(): AsyncGenerator<SecretMetadata, void, unknown> {
 		try {
-			const res = await this.#sql /*sql*/`select
+			const res = await this.#query<SecretRow> /*sql*/`select
 				id, expires, remaining_reads, password_protected
 			from secrets`
 
-			for (const e of res.values()) {
-				yield await PostgresDatabase.#metadataFromRow(e as SecretRow)
+			for (const e of res.rows) {
+				yield await PostgresDatabase.#metadataFromRow(e)
 			}
 		} catch (e) {
 			logDB.error(`Failed to list secrets.`, e)
@@ -134,8 +169,8 @@ export class PostgresDatabase implements Database {
 	 */
 	async secretExists(id: string): Promise<boolean> {
 		try {
-			const res = await this.#sql /*sql*/`select 1 from secrets where id = ${id}`
-			return res.count === 1
+			const res = await this.#query<SecretRow> /*sql*/`select 1 from secrets where id = ${id}`
+			return res.rowCount === 1
 		} catch {
 			return false
 		}
@@ -147,12 +182,12 @@ export class PostgresDatabase implements Database {
 	 */
 	async getSecret(id: string): Promise<Secret> {
 		try {
-			const res = await this.#sql /*sql*/`select * from secrets where id = ${id}`
-			if (res.count === 0) {
+			const res = await this.#query<SecretRow> /*sql*/`select * from secrets where id = ${id}`
+			if (res.rowCount === 0) {
 				throw new SecretNotFoundError(id)
 			}
 
-			return await PostgresDatabase.#secretFromRow([...res.values()][0] as SecretRow)
+			return await PostgresDatabase.#secretFromRow(res.rows[0])
 		} catch (e) {
 			logDB.error(`Failed to read secrets.`, e)
 			if (e instanceof LocalizedError) {
@@ -168,15 +203,15 @@ export class PostgresDatabase implements Database {
 	 */
 	async getSecretMetadata(id: string): Promise<SecretMetadata> {
 		try {
-			const res = await this.#sql /*sql*/`select
+			const res = await this.#query<SecretRow> /*sql*/`select
 				id, expires, remaining_reads, password_protected
 			from secrets where id = ${id}`
 
-			if (res.count === 0) {
+			if (res.rowCount === 0) {
 				throw new SecretNotFoundError(id)
 			}
 
-			return await PostgresDatabase.#metadataFromRow([...res.values()][0] as SecretRow)
+			return await PostgresDatabase.#metadataFromRow(res.rows[0])
 		} catch (e) {
 			logDB.error(`Failed to read secrets.`, e)
 			if (e instanceof LocalizedError) {
@@ -197,7 +232,7 @@ export class PostgresDatabase implements Database {
 		}
 
 		try {
-			await this.#sql /*sql*/`insert into secrets (
+			await this.#queryRaw /*sql*/`insert into secrets (
                 id,
                 expires,
                 remaining_reads,
@@ -234,7 +269,7 @@ export class PostgresDatabase implements Database {
 		try {
 			const res = await this.getSecretMetadata(id)
 
-			await this.#sql /*sql*/`update secrets set
+			await this.#query<SecretRow> /*sql*/`update secrets set
                 expires             = ${patch.expires ?? res.expires},
                 remaining_reads     = ${patch.remainingReads ?? res.remainingReads}
             where id = ${id}`
@@ -258,7 +293,7 @@ export class PostgresDatabase implements Database {
 		}
 
 		try {
-			await this.#sql /*sql*/`delete from secrets where id = ${id}`
+			await this.#queryRaw /*sql*/`delete from secrets where id = ${id}`
 		} catch (e) {
 			logDB.error(`Failed to delete secret.`, e)
 			throw new SecretDeleteError(id)

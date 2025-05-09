@@ -1,4 +1,3 @@
-import Result from "@nihility-io/result"
 import { SecretParseError } from "secret/models"
 import z from "zod"
 
@@ -7,11 +6,13 @@ import z from "zod"
  * @param m Zod Model
  * @returns Parser function
  */
-export const parseModel = <T extends z.ZodType, R extends z.infer<T>>(m: T, obj: unknown): Result<R> =>
-	Result.fromTry<R>(() => {
-		try {
-			return m.parse(obj) as R
-		} catch (err) {
-			throw new SecretParseError((err as unknown as z.ZodError).issues)
+export const parseModel = async <T extends z.ZodType, R extends z.infer<T>>(m: T, obj: unknown): Promise<R> => {
+	try {
+		return await (m.parseAsync(obj) as Promise<R>)
+	} catch (err) {
+		if (err instanceof z.ZodError) {
+			throw new SecretParseError(err.issues)
 		}
-	})
+		throw new SecretParseError([])
+	}
+}

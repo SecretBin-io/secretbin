@@ -1,17 +1,46 @@
 import Result from "@nihility-io/result"
+import { STATUS_CODE } from "@std/http/status"
+import { LocalizedError } from "lang"
 export * from "./useSetting.ts"
 
 /**
- * Converts a result into a HTTP response
+ * Creates a success or error response depending on if the promise is fulfilled or rejected
+ * @param p Promise
+ * @returns Response
+ */
+export const promiseResponse = <T>(p: Promise<T>) => p.then(successResponse).catch(errorResponse)
+
+/**
+ * Creates a response from a result type
  * @param r Result
  * @returns Response
  */
-export const responseFromResult = <T>(r: Result<T>) =>
-	new Response(JSON.stringify(r), {
-		headers: {
-			"Content-Type": "application/json",
-		},
+export const resultResponse = <T>(r: Result<T>) =>
+	r.match({
+		success: successResponse,
+		failure: errorResponse,
 	})
+
+/**
+ * Creates a success response
+ * @param err Error
+ * @returns Response
+ */
+export const successResponse = <T>(value: T) =>
+	Response.json(Result.success(value), {
+		status: STATUS_CODE.OK,
+	})
+
+/**
+ * Creates a error response
+ * @param err Error
+ * @returns Response
+ */
+export const errorResponse = (err: Error | unknown) => {
+	const status = err instanceof LocalizedError ? err.code : STATUS_CODE.BadRequest
+	const res = err instanceof Error ? err : `${err}`
+	return Response.json(Result.failure(res), { status })
+}
 
 /**
  * Converts number of bytes into human readable size

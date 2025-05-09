@@ -1,11 +1,10 @@
-import Result from "@nihility-io/result"
 import { Secret, SecretMetadata, SecretMutableMetadata } from "secret/models"
 
 export interface Database {
 	/**
 	 * Initializes the storage. This is called when the server starts.
 	 */
-	init(): Promise<boolean>
+	init(): Promise<void>
 
 	/**
 	 * Creates an iterator which goes over all stored secrets

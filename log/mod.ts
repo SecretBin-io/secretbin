@@ -96,7 +96,29 @@ export class Logger {
 	 */
 	public error(arg: string | Error, ...args: unknown[]): void {
 		if (typeof arg === "string") {
-			this.#log("ERROR", arg, ...args)
+			if (arg.length === 1 && args[0] instanceof Error) {
+				this.#log("ERROR", arg, {
+					error: { name: args[0].name, message: args[0].message },
+				})
+			} else {
+				this.#log(
+					"ERROR",
+					arg,
+					...args.map((a) => {
+						if (a instanceof Error) {
+							return { error: { name: a.name, message: a.message } }
+						} else if (typeof a === "object") {
+							const { error, ...test } = a as Record<string, unknown>
+							if (a instanceof Error) {
+								return { ...test, error: { name: a.name, message: a.message } }
+							}
+							return { ...test, error }
+						} else {
+							return a
+						}
+					}),
+				)
+			}
 		} else {
 			this.#log("ERROR", `${arg.name}: ${arg.message}`, ...args)
 		}

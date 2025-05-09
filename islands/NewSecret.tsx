@@ -3,10 +3,9 @@ import { Button, Message, TextArea } from "components"
 import { config } from "config"
 import { useSetting } from "helpers"
 import { PasswordGenerator } from "islands"
-import { useTranslationWithPrefix } from "lang"
+import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { useRef, useState } from "preact/hooks"
 import { submitSecret } from "secret/client"
-import { LocalizedError } from "secret/models"
 import { State } from "state"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
@@ -27,7 +26,6 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 	const [error, setError] = useState("")
 	const [showGenerator, setShowGenerator] = useState(false)
 	const aRef = useRef<HTMLAnchorElement | null>(null)
-
 	const $ = useTranslationWithPrefix(state.lang, "NewSecret")
 
 	const submit = async () => {

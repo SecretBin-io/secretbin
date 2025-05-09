@@ -3,6 +3,7 @@ import en from "./en.ts"
 import { FlattenObjectKeys, formatString, TrimPrefix } from "./helpers.ts"
 
 export { type TrimPrefix } from "./helpers.ts"
+export * from "./error.ts"
 
 /**
  * Currently supported languages
@@ -39,23 +40,36 @@ export const isLanguageSupported = (lang: string): boolean => !!supportedLanguag
  */
 export type TranslationKey = FlattenObjectKeys<typeof en.Translations>
 
-export const useTranslation = (lang: Language) => (path: TranslationKey, params?: Record<string, string>): string => {
+/**
+ * Renders a translated string with the given parameters
+ * @param key Translation key
+ * @param params Optional parameters for the translated string
+ */
+export type TranslationFunction = (key: TranslationKey, params?: Record<string, string>) => string
+
+/**
+ * Gets the translation for the given key in the given language
+ * @param lang Language to use
+ * @param key Translation key
+ * @param params Optional parameters for the translated
+ */
+export const getTranslation = (lang: Language, key: TranslationKey, params?: Record<string, string>): string => {
 	// deno-lint-ignore no-explicit-any
 	let o: any = translations[lang].Translations
-	for (const key of path.split(".")) {
+	for (const k of key.split(".")) {
 		if (o === undefined) {
 			break
 		}
 
-		o = o[key]
+		o = o[k]
 	}
 
 	if (typeof o !== "string") {
 		if (lang !== Language.English) {
 			// deno-lint-ignore react-rules-of-hooks
-			return useTranslation(Language.English)(path, params)
+			return useTranslation(Language.English)(key, params)
 		}
-		return `{${path}}`
+		return `{${key}}`
 	}
 
 	if (params === undefined) {
@@ -64,6 +78,14 @@ export const useTranslation = (lang: Language) => (path: TranslationKey, params?
 
 	return formatString(o, params)
 }
+
+/**
+ * Creates a translation function for the given language which can be used to get the translated string
+ * @param lang Language to use
+ * @returns Translation function
+ */
+export const useTranslation = (lang: Language): TranslationFunction => (path, params): string =>
+	getTranslation(lang, path, params)
 
 /**
  * Preact hook for using translations based on the current language
