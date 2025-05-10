@@ -22,17 +22,6 @@
     "licenseFile": "https://raw.githubusercontent.com/JedWatson/classnames/main/LICENSE"
   },
   {
-    "registry": "jsr",
-    "name": "@db/postgres",
-    "version": "0.19.5",
-    "repository": "https://github.com/denodrivers/postgres",
-    "authors": [
-      "Deno Drivers"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denodrivers/postgres/main/LICENSE"
-  },
-  {
     "registry": "npm",
     "name": "detect-libc",
     "version": "2.0.4",
@@ -232,7 +221,7 @@
   {
     "registry": "jsr",
     "name": "@nihility-io/cookies",
-    "version": "1.0.3",
+    "version": "2.0.0-alpha.7",
     "repository": "https://github.com/Nihility-io/Cookies",
     "authors": [
       "Nihility.io"
@@ -252,17 +241,6 @@
     "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Record/main/LICENSE"
   },
   {
-    "registry": "jsr",
-    "name": "@nihility-io/result",
-    "version": "1.0.2",
-    "repository": "https://github.com/Nihility-io/Result",
-    "authors": [
-      "Nihility.io"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Result/main/LICENSE"
-  },
-  {
     "registry": "npm",
     "name": "@opentelemetry/api",
     "version": "1.9.0",
@@ -272,6 +250,15 @@
     ],
     "license": "Apache License 2.0",
     "licenseFile": "https://raw.githubusercontent.com/open-telemetry/opentelemetry-js/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@oscar6echo/postgres",
+    "version": "3.4.5-d",
+    "repository": "jsr",
+    "authors": [
+      "oscar6echo"
+    ]
   },
   {
     "registry": "npm",
@@ -294,16 +281,6 @@
     ],
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/postcss/postcss/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "postgres",
-    "version": "3.4.5",
-    "repository": "https://github.com/porsager/postgres",
-    "authors": [
-      "Rasmus Porsager"
-    ],
-    "license": "The Unlicense"
   },
   {
     "registry": "npm",
@@ -625,7 +602,18 @@
   {
     "registry": "npm",
     "name": "zod",
-    "version": "3.24.3",
+    "version": "4.0.0-beta.0",
+    "repository": "https://github.com/colinhacks/zod",
+    "authors": [
+      "Colin McDonnell"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/colinhacks/zod/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "@zod/core",
+    "version": "0.1.0",
     "repository": "https://github.com/colinhacks/zod",
     "authors": [
       "Colin McDonnell"

@@ -36,14 +36,17 @@ export const submitSecret = async (message: string, files: File[], password: str
 		JSON.stringify(content),
 	)
 
-	const res = await createSecret({
-		data: enc,
-		expires: opts.expires,
-		burnAfter: !opts.burn ? -1 : opts.slowBurn ? opts.rereads : 1,
-		passwordProtected: password !== "",
-	})
-
-	return res.map((id) => `/secret/${id}/share#${encodeBase58(masterKey)}`)
+	try {
+		const id = await createSecret({
+			data: enc,
+			expires: opts.expires,
+			burnAfter: !opts.burn ? -1 : opts.slowBurn ? opts.rereads : 1,
+			passwordProtected: password !== "",
+		})
+		return `/secret/${id}/share#${encodeBase58(masterKey)}`
+	} catch (e) {
+		throw e
+	}
 }
 
 /**

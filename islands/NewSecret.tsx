@@ -1,4 +1,3 @@
-import Result from "@nihility-io/result"
 import { Button, Message, TextArea } from "components"
 import { config } from "config"
 import { useSetting } from "helpers"
@@ -36,15 +35,14 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 		setMessagePreview(message)
 
 		// Submit the secret to the backend
-		await submitSecret(message, files, password, { expires, burn, slowBurn, rereads }).then(Result.match({
-			success: (value) => {
-				// If successful automatically redirect to the share page
-				setError("")
-				aRef.current!.href = value
-				aRef.current!.click()
-			},
-			failure: (err) => setError(LocalizedError.getLocalizedMessage(state.lang, err)),
-		}))
+		try {
+			const res = await submitSecret(message, files, password, { expires, burn, slowBurn, rereads })
+			setError("")
+			aRef.current!.href = res
+			aRef.current!.click()
+		} catch (e) {
+			setError(LocalizedError.getLocalizedMessage(state.lang, e as Error))
+		}
 	}
 
 	return (

@@ -1,14 +1,15 @@
 import { SecretParseError } from "secret/models"
-import z from "zod"
+import z, { ZodType } from "zod"
 
 /**
- * Creates a result based parser function for a given Zod model
+ * Parses an object using a given Zod model
  * @param m Zod Model
- * @returns Parser function
+ * @param obj Object to parse
+ * @returns Parsed result
  */
-export const parseModel = async <T extends z.ZodType, R extends z.infer<T>>(m: T, obj: unknown): Promise<R> => {
+export const parseModel = async <T>(m: ZodType<T>, obj: unknown): Promise<T> => {
 	try {
-		return await (m.parseAsync(obj) as Promise<R>)
+		return await m.parseAsync(obj)
 	} catch (err) {
 		if (err instanceof z.ZodError) {
 			throw new SecretParseError(err.issues)

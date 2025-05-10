@@ -37,18 +37,15 @@ export const ViewSecret = ({ id, state, remainingReads, passwordProtected }: Vie
 
 		// If the secret hasn't been fetch yet, fetch it now
 		if (!sec) {
-			sec = (await getSecret(id)).match({
-				success: (value) => {
-					setError("")
-					setSecret(value)
-					return value
-				},
-				failure: (err): Secret | undefined => {
-					setError(LocalizedError.getLocalizedMessage(state.lang, err))
-					console.log(err)
-					return undefined
-				},
-			})
+			try {
+				sec = await getSecret(id)
+				setError("")
+				setSecret(sec)
+			} catch (err) {
+				setError(LocalizedError.getLocalizedMessage(state.lang, err as Error))
+				console.log(err)
+				sec = undefined
+			}
 		}
 
 		// In case an error occurred do not process further

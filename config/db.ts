@@ -1,4 +1,4 @@
-import { z } from "zod"
+import z, { ZodType } from "zod"
 
 export interface PostgresDatabaseConfig {
 	type: "postgres"
@@ -10,7 +10,7 @@ export interface PostgresDatabaseConfig {
 	tls: "enforced" | "on" | "off"
 }
 
-export const PostgresDatabaseConfig = z.strictInterface({
+export const PostgresDatabaseConfig: ZodType<PostgresDatabaseConfig> = z.strictInterface({
 	type: z.literal("postgres"),
 	host: z.string().default("127.0.0.1"),
 	port: z.number().default(5432),
@@ -25,15 +25,16 @@ export interface KVDatabaseConfig {
 	location?: string
 }
 
-export const KVDatabaseConfig = z.strictInterface({
+export const KVDatabaseConfig: ZodType<KVDatabaseConfig> = z.strictInterface({
 	type: z.literal("kv"),
 	location: z.string().optional(),
 })
 
-export const DatabaseConfig = z.discriminatedUnion([
-	PostgresDatabaseConfig,
-	KVDatabaseConfig,
-])
 export type DatabaseConfig =
 	| PostgresDatabaseConfig
 	| KVDatabaseConfig
+
+export const DatabaseConfig: ZodType<DatabaseConfig> = z.discriminatedUnion([
+	PostgresDatabaseConfig as z.$ZodTypeDiscriminable,
+	KVDatabaseConfig as z.$ZodTypeDiscriminable,
+]) as unknown as ZodType<DatabaseConfig>

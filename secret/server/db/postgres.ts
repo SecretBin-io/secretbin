@@ -79,7 +79,7 @@ export class PostgresDatabase implements Database {
 	 * @returns Secret
 	 */
 	static #metadataFromRow(r: SecretRow): Promise<SecretMetadata> {
-		return parseModel<typeof SecretMetadata, SecretMetadata>(SecretMetadata, {
+		return parseModel(SecretMetadata, {
 			id: r.id,
 			expires: r.expires,
 			remainingReads: r.remaining_reads,
@@ -95,7 +95,7 @@ export class PostgresDatabase implements Database {
 	static async #secretFromRow(r: SecretRow): Promise<Secret> {
 		try {
 			const metadata = await this.#metadataFromRow(r)
-			const data = await parseModel<typeof EncryptedData, EncryptedData>(EncryptedData, {
+			const data = await parseModel(EncryptedData, {
 				iv: r.data_iv,
 				salt: r.data_salt,
 				algorithm: r.data_algorithm as EncryptionAlgorithm,
@@ -121,10 +121,7 @@ export class PostgresDatabase implements Database {
 			}
 		} catch (e) {
 			logDB.error(`Failed to list secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretListError()
+			throw e instanceof LocalizedError ? e : new SecretListError()
 		}
 	}
 
@@ -155,10 +152,7 @@ export class PostgresDatabase implements Database {
 			return await PostgresDatabase.#secretFromRow([...res.values()][0] as SecretRow)
 		} catch (e) {
 			logDB.error(`Failed to read secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretReadError(id)
+			throw e instanceof LocalizedError ? e : new SecretReadError(id)
 		}
 	}
 
@@ -179,10 +173,7 @@ export class PostgresDatabase implements Database {
 			return await PostgresDatabase.#metadataFromRow([...res.values()][0] as SecretRow)
 		} catch (e) {
 			logDB.error(`Failed to read secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretReadError(id)
+			throw e instanceof LocalizedError ? e : new SecretReadError(id)
 		}
 	}
 
@@ -218,10 +209,7 @@ export class PostgresDatabase implements Database {
             )`
 		} catch (e) {
 			logDB.error(`Failed to insert secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretCreateError(secret.id)
+			throw e instanceof LocalizedError ? e : new SecretCreateError(secret.id)
 		}
 	}
 
@@ -240,10 +228,7 @@ export class PostgresDatabase implements Database {
             where id = ${id}`
 		} catch (e) {
 			logDB.error(`Failed to update secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretUpdateError(id)
+			throw e instanceof LocalizedError ? e : new SecretUpdateError(id)
 		}
 	}
 

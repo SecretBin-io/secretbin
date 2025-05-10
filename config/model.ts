@@ -1,6 +1,6 @@
-import { z } from "zod"
-import { transformExpires, transformSize } from "./helpers.ts"
+import z, { ZodType } from "zod"
 import { DatabaseConfig } from "./db.ts"
+import { parseExpires, transformSize } from "./helpers.ts"
 
 /**
  * Record where the keys are the languages codes and the value are the
@@ -36,7 +36,7 @@ export interface Link {
 	link: TranslatedString
 }
 
-export const Link = z.strictInterface({
+export const Link: ZodType<Link> = z.strictInterface({
 	name: TranslatedString,
 	link: TranslatedString,
 })
@@ -69,7 +69,7 @@ export interface Branding {
 	showTerms: boolean
 }
 
-export const Branding = z.object({
+export const Branding: ZodType<Branding> = z.object({
 	appName: z.string().default("SecretBin"),
 	footer: z.string().default("Nihility.io"),
 	terms: Terms.optional(),
@@ -94,7 +94,7 @@ export interface Banner {
 	text: TranslatedString
 }
 
-export const Banner = z.strictInterface({
+export const Banner: ZodType<Banner> = z.strictInterface({
 	enabled: z.boolean().default(false),
 	type: z.enum(["info", "warning", "error"]).default("info"),
 	text: TranslatedString.default({ en: "Hello World!" }),
@@ -112,7 +112,7 @@ export interface Defaults {
 	showPassword: boolean
 }
 
-export const Defaults = z.strictInterface({
+export const Defaults: ZodType<Defaults> = z.strictInterface({
 	expires: z.string().regex(/^(\d+)(min|hr|d|w|m|y)$/, {
 		error: "Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min",
 	}).default("2w"),
@@ -137,7 +137,7 @@ export interface Policy {
 	denySlowBurn: boolean
 }
 
-export const Policy = z.strictInterface({
+export const Policy: ZodType<Policy> = z.strictInterface({
 	sharePreselect: z.boolean().default(false),
 	requireBurn: z.boolean().default(false),
 	requirePassword: z.boolean().default(false),
@@ -158,6 +158,11 @@ export interface Expires {
 	seconds: number
 }
 
+export const Expires = z.string()
+	.regex(/^(\d+)(min|hr|d|w|m|y)$/, { error: "Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min" })
+	.array().transform(parseExpires)
+	.default(parseExpires(["5min", "1hr", "1d", "1w", "2w", "1m"]))
+
 /**
  * Configs regarding how secrets are stored
  */
@@ -172,10 +177,13 @@ export interface Storage {
 	database: DatabaseConfig
 }
 
-export const Storage = z.strictInterface({
-	maxSize: z.string().regex(/^(\d+)(Ki|Mi|Gi|K|M|G)$/, {
-		error: "Invalid size. Expected: positive integer or string with format <num>(Ki|Mi|Gi|K|M|G) e.g 10Gi",
-	}).default("10Mi").transform(transformSize).or(z.uint32()),
+export const Storage: ZodType<Storage> = z.strictInterface({
+	maxSize: z.string()
+		.regex(/^(\d+)(Ki|Mi|Gi|K|M|G)$/, {
+			error: "Invalid size. Expected: positive integer or string with format <num>(Ki|Mi|Gi|K|M|G) e.g 10Gi",
+		})
+		.transform(transformSize).or(z.uint32())
+		.default(transformSize("10Mi")),
 	gcInterval: z.uint32().default(60 * 60),
 	database: DatabaseConfig.default(DatabaseConfig.parse({ type: "kv" })),
 })
@@ -188,7 +196,7 @@ export interface Logging {
 	level: "NOTSET" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "CRITICAL"
 }
 
-export const Logging = z.strictInterface({
+export const Logging: ZodType<Logging> = z.strictInterface({
 	level: z.enum(["NOTSET", "DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"]).default("INFO"),
 })
 
@@ -223,17 +231,12 @@ export interface Config {
 	storage: Storage
 }
 
-export const Config = z.strictInterface({
+export const Config: ZodType<Config> = z.strictInterface({
 	branding: Branding.default(Branding.parse({})),
 	banner: Banner.default(Banner.parse({})),
 	defaults: Defaults.default(Defaults.parse({})),
 	policy: Policy.default(Policy.parse({})),
 	logging: Logging.default(Logging.parse({})),
-	expires: z.string().regex(/^(\d+)(min|hr|d|w|m|y)$/, {
-		error: "Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min",
-	}).array().default(["5min", "1hr", "1d", "1w", "2w", "1m"])
-		.transform((x) =>
-			x.reduce((res, name) => ({ ...res, [name]: transformExpires(name) }), {} as Record<string, Expires>)
-		),
+	expires: Expires.default(Expires.parse([])),
 	storage: Storage.default(Storage.parse({})),
 })

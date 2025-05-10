@@ -156,10 +156,7 @@ export class PostgresDatabase implements Database {
 			}
 		} catch (e) {
 			logDB.error(`Failed to list secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretListError()
+			throw e instanceof LocalizedError ? e : new SecretListError()
 		}
 	}
 
@@ -190,10 +187,7 @@ export class PostgresDatabase implements Database {
 			return await PostgresDatabase.#secretFromRow(res.rows[0])
 		} catch (e) {
 			logDB.error(`Failed to read secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretReadError(id)
+			throw e instanceof LocalizedError ? e : new SecretReadError(id)
 		}
 	}
 
@@ -214,10 +208,7 @@ export class PostgresDatabase implements Database {
 			return await PostgresDatabase.#metadataFromRow(res.rows[0])
 		} catch (e) {
 			logDB.error(`Failed to read secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretReadError(id)
+			throw e instanceof LocalizedError ? e : new SecretReadError(id)
 		}
 	}
 
@@ -253,10 +244,7 @@ export class PostgresDatabase implements Database {
             )`
 		} catch (e) {
 			logDB.error(`Failed to insert secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretCreateError(secret.id)
+			throw e instanceof LocalizedError ? e : new SecretCreateError(secret.id)
 		}
 	}
 
@@ -275,10 +263,7 @@ export class PostgresDatabase implements Database {
             where id = ${id}`
 		} catch (e) {
 			logDB.error(`Failed to update secrets.`, e)
-			if (e instanceof LocalizedError) {
-				throw e
-			}
-			throw new SecretUpdateError(id)
+			throw e instanceof LocalizedError ? e : new SecretUpdateError(id)
 		}
 	}
 

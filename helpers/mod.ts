@@ -1,6 +1,7 @@
-import Result from "@nihility-io/result"
 import { STATUS_CODE } from "@std/http/status"
 import { LocalizedError } from "lang"
+import { encodeError } from "./error.ts"
+export * from "./error.ts"
 export * from "./useSetting.ts"
 
 /**
@@ -11,23 +12,12 @@ export * from "./useSetting.ts"
 export const promiseResponse = <T>(p: Promise<T>) => p.then(successResponse).catch(errorResponse)
 
 /**
- * Creates a response from a result type
- * @param r Result
- * @returns Response
- */
-export const resultResponse = <T>(r: Result<T>) =>
-	r.match({
-		success: successResponse,
-		failure: errorResponse,
-	})
-
-/**
  * Creates a success response
  * @param err Error
  * @returns Response
  */
 export const successResponse = <T>(value: T) =>
-	Response.json(Result.success(value), {
+	Response.json(value, {
 		status: STATUS_CODE.OK,
 	})
 
@@ -38,8 +28,8 @@ export const successResponse = <T>(value: T) =>
  */
 export const errorResponse = (err: Error | unknown) => {
 	const status = err instanceof LocalizedError ? err.code : STATUS_CODE.BadRequest
-	const res = err instanceof Error ? err : `${err}`
-	return Response.json(Result.failure(res), { status })
+	const res = err instanceof Error ? err : new Error(`${err}`)
+	return Response.json(encodeError(res), { status })
 }
 
 /**

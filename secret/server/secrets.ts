@@ -1,7 +1,6 @@
 import { config } from "config"
 import { logCG, logDB, logSecrets } from "log"
 import {
-	NewSecret,
 	parseModel,
 	Secret,
 	SecretMetadata,
@@ -9,6 +8,7 @@ import {
 	SecretNotFoundError,
 	SecretParseError,
 	SecretPolicyError,
+	SecretRequest,
 	SecretSizeLimitError,
 } from "secret/models"
 import { Database, initDatabase } from "./db/mod.ts"
@@ -107,9 +107,9 @@ export class Secrets {
 	 * @param secret Secret
 	 * @returns ID of the created secret
 	 */
-	async createSecret(secret: NewSecret): Promise<string> {
+	async createSecret(secret: SecretRequest): Promise<string> {
 		// Validate the secret again the Zod model
-		const m = await parseModel<typeof NewSecret, NewSecret>(NewSecret, secret)
+		const m = await parseModel(SecretRequest, secret)
 
 		if (m.data.data.length > config.storage.maxSize) {
 			throw new SecretSizeLimitError(m.data.data.length, config.storage.maxSize)
@@ -224,11 +224,9 @@ export class Secrets {
 		logSecrets.info(`Secret #${id} was opened.`, { action: "get", id })
 
 		if (s.remainingReads === 1) {
-			this.deleteSecret(id)
-		}
-
-		if (s.remainingReads !== -1) {
-			this.updateSecretMetadata(id, { remainingReads: s.remainingReads - 1 })
+			await this.deleteSecret(id)
+		} else if (s.remainingReads !== -1) {
+			await this.updateSecretMetadata(id, { remainingReads: s.remainingReads - 1 })
 		}
 
 		return s
