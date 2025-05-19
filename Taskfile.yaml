@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+vars:
+  NAME: secretbin
+  VERSION: 2.0.0-dev
+  REGISTRY: docker.io
+  PROJECT: nihilityiox
+  IMAGE: "{{.REGISTRY}}/{{.PROJECT}}/{{.NAME}}:{{.VERSION}}"
+  PWD:
+    sh: pwd
+  DENO_VERSION:
+    sh: deno -v | awk '{print $2}'
+
+tasks:
+  default:
+    - task: "build"
+  dbStart:
+    desc: Start the database
+    cmds:
+      - docker-compose up -d
+  dbStop:
+    desc: Stop the database
+    cmds:
+      - docker-compose down
+  build:
+    desc: Build the application container
+    cmds:
+      - tailwindcss -m -i static/styles.css -o tailwind.css
+      - docker build --no-cache --build-arg DENO_VERSION={{.DENO_VERSION}} --tag {{.IMAGE}} .
+      - rm tailwind.css
+  clean:
+    desc: Clean up
+    cmd: rm -rf dist
+  run:
+    # deps:
+    #   - build
+    desc: Run application container locally
+    cmds:
+      - docker run --rm --network=secretbin_network --read-only --mount type=bind,src="{{.PWD}}/config.yaml",target=/app/config.yaml -it -p 8000:8000 --name secretbin {{.IMAGE}}
+  publish:
+    desc: Push the image to the Docker Hub
+    cmds:
+      - tailwindcss -m -i static/styles.css -o tailwind.css
+      - docker buildx build --build-arg DENO_VERSION={{.DENO_VERSION}} --platform linux/amd64,linux/arm64 --no-cache --tag {{.IMAGE}} --push .
+      - rm tailwind.css

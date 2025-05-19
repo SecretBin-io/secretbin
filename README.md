@@ -65,9 +65,21 @@ That being said, it you want to build and host SecretBin yourself, you can. Just
    ```
 4. Change into the cloned repository (`cd SecretBin`) and build SecretBin using:
    ```bash
-   deno task compile
+   deno task build
    ```
-5. And there you go. You will find an executable called SecretBin or SecretBin.exe in the current folder. Copy it to where ever you want to use it. And run it.
+5. And run it using:
+   ```bash
+   deno task start
+   ```
+
+### Run using Docker
+You can also run SecretBin using Docker. See [SecretBin's Docker Hub page](https://hub.docker.com/r/nihilityiox/secretbin/tags).
+
+1. Configure your config.yaml (see [Configuration](#configuration))
+2. Run the container using the following command:
+```bash
+docker run --read-only --mount type=bind,src="config.yaml",target=/app/config.yaml -it -p 8000:8000 --name secretbin docker.io/nihilityiox/secretbin:2.0.0
+```
 
 ### Configuration
 
@@ -120,6 +132,7 @@ storage:
     database: secretbin
     username: secretbin
     password: abc123
+    tls: on
 expires: #Expire options for new secrets
   - 5min
   - 1hr

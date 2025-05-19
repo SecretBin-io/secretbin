@@ -58,7 +58,7 @@
 		"classnames": "npm:classnames@^2.5.1",
 		"components": "./components/mod.ts",
 		"config": "./config/mod.ts",
-		"fresh": "jsr:@fresh/core@^2.0.0-alpha.29",
+		"fresh": "jsr:@fresh/core@^2.0.0-alpha.34",
 		"helpers": "./helpers/mod.ts",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",

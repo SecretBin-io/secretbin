@@ -114,7 +114,7 @@ export class PostgresDatabase implements Database {
 	 * @returns Secret
 	 */
 	static #metadataFromRow(r: SecretRow): Promise<SecretMetadata> {
-		return parseModel<typeof SecretMetadata, SecretMetadata>(SecretMetadata, {
+		return parseModel(SecretMetadata, {
 			id: r.id,
 			expires: r.expires,
 			remainingReads: r.remaining_reads,
@@ -130,7 +130,7 @@ export class PostgresDatabase implements Database {
 	static async #secretFromRow(r: SecretRow): Promise<Secret> {
 		try {
 			const metadata = await this.#metadataFromRow(r)
-			const data = await parseModel<typeof EncryptedData, EncryptedData>(EncryptedData, {
+			const data = await parseModel(EncryptedData, {
 				iv: r.data_iv,
 				salt: r.data_salt,
 				algorithm: r.data_algorithm as EncryptionAlgorithm,
