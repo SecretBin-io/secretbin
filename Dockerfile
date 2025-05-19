@@ -2,6 +2,12 @@ ARG DENO_VERSION="20"
 
 FROM denoland/deno:ubuntu-${DENO_VERSION}
 
+LABEL org.opencontainers.image.title="SecretBin"
+LABEL org.opencontainers.image.authors="Nihility.io"
+LABEL org.opencontainers.image.documentation="https://github.com/Nihility-io/SecretBin"
+LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.description="SecretBin is a web app for sharing secrets like tokens and passwords."
+
 USER root
 
 RUN mkdir -p /app

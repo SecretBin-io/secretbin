@@ -78,7 +78,7 @@ You can also run SecretBin using Docker. See [SecretBin's Docker Hub page](https
 1. Configure your config.yaml (see [Configuration](#configuration))
 2. Run the container using the following command:
 ```bash
-docker run --read-only --mount type=bind,src="config.yaml",target=/app/config.yaml -it -p 8000:8000 --name secretbin docker.io/nihilityiox/secretbin:2.0.0
+docker run --read-only --mount type=bind,src="config.yaml",target=/app/config.yaml -it -p 8000:8000 --name secretbin ghcr.io/nihility-io/secretbin:dev
 ```
 
 ### Configuration
