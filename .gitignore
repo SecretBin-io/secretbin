@@ -66,11 +66,15 @@ Temporary Items
 ### Testing ###
 coverage
 
-/target
-/test.ts
-
+# Don't include Deno KV database files
 *.db
 *.db-shm
 *.db-wal
+
+# Don't include screenshots
+/resources
+
+/target
+/test.ts
 
 /tailwind.css

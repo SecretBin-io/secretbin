@@ -37,7 +37,7 @@ storage:
   gcInterval: 5 # Interval in seconds in which the garbage collector should run
 logging:
   level: INFO
-expires: #Expire options for new secrets
+expires: # Expire options for new secrets
   - 5min
   - 1hr
   - 1d

@@ -81,6 +81,24 @@ You can also run SecretBin using Docker. See [SecretBin's Docker Hub page](https
 docker run --read-only --mount type=bind,src="config.yaml",target=/app/config.yaml -it -p 8000:8000 --name secretbin ghcr.io/nihility-io/secretbin:dev
 ```
 
+### Creating a Branded SecretBin Image
+
+You can also create your own custom banded SecretBin image with custom static resources using the following Dockerfile:
+``` Dockerfile
+# Inherit from the default SecretBin image
+FROM ghcr.io/nihility-io/secretbin:dev
+
+# Copy your own configuration (see Configuration)
+COPY config.yaml /app/config.yaml
+
+# Copy your own static resource like a custom logo
+COPY static/ /app/static/
+
+# Important: If you use your own static file, you need 
+# to run this script in order for them to work
+RUN deno run -A update_snapshot.ts
+```
+
 ### Configuration
 
 In case you want to configure SecretBin, just place a config.yaml in the same folder as the executable. SecretBin has the following configuration options:
@@ -133,7 +151,7 @@ storage:
     username: secretbin
     password: abc123
     tls: on
-expires: #Expire options for new secrets
+expires: # Expire options for new secrets
   - 5min
   - 1hr
   - 1d

@@ -19,11 +19,11 @@ tasks:
   dbStart:
     desc: Start the database
     cmds:
-      - docker-compose up -d
+      - docker compose up -d
   dbStop:
     desc: Stop the database
     cmds:
-      - docker-compose down
+      - docker compose down
   build:
     desc: Build the application container
     cmds:
