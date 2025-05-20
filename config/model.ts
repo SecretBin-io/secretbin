@@ -7,7 +7,14 @@ import { parseExpires, transformSize } from "./helpers.ts"
  * string in that respective language
  */
 export type TranslatedString = Record<string, string>
-export const TranslatedString = z.record(z.string(), z.string())
+export const TranslatedString = z.record(
+	z.string(),
+	z.union([
+		z.string(),
+		z.object({ file: z.string() })
+			.transform(({ file }) => Deno.readTextFileSync(file)),
+	]),
+)
 
 /**
  * ToS Dialog show when the user first visits the app

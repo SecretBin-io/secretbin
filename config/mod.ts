@@ -11,18 +11,22 @@ const serverCfg: Config = await (async () => {
 		return undefined!
 	}
 
-	const { exists } = await import("@std/fs")
 	const YAML = await import("@std/yaml")
+	const { deepMerge } = await import("@std/collections")
 
-	if (!(await exists("config.yaml"))) {
+	const cfgs = await Promise.all(
+		(await Array.fromAsync(Deno.readDir(".")))
+			.filter((x) => /^config(?:\.[^\.]+)?\.ya?ml$/.test(x.name))
+			.map((x) => Deno.readTextFile(x.name).then((x) => YAML.parse(x) as Record<string, unknown>)),
+	)
+
+	if (cfgs.length === 0) {
 		return Config.parseAsync({})
 	}
 
 	try {
-		return await Deno.readTextFile("config.yaml")
-			.then((x) => YAML.parse(x))
-			.catch(() => ({}))
-			.then(Config.parseAsync)
+		console.debug(cfgs.reduce((p, c) => deepMerge(p, c), {}))
+		return await Config.parseAsync(cfgs.reduce((p, c) => deepMerge(p, c), {}))
 	} catch (e) {
 		console.error("Failed to parse config file. Reason: ")
 		if (!(e instanceof z.ZodError)) {

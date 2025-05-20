@@ -1,0 +1,9 @@
+storage:
+  database: # Use PostgreSQL as a database
+    type: postgres
+    host: 127.0.0.1
+    port: 5432
+    database: secretbin
+    username: secretbin
+    password: abc123
+    tls: on
