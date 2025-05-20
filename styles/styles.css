@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@import "./animations/styles.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  user-select: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  cursor: default;
+}

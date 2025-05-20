@@ -32,15 +32,12 @@ Temporary Items
 
 ### Deno ###
 /node_modules
+/_fresh
 
 .env
 *.orig
 *.pyc
 *.swp
-
-/bin
-/data
-/_fresh
 
 ### VisualStudioCode ###
 .vscode/*
@@ -76,5 +73,3 @@ coverage
 
 /target
 /test.ts
-
-/tailwind.css

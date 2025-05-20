@@ -1,141 +1,178 @@
 {
-	"tasks": {
-		"check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
-		"dev": "deno run -A --watch=static/,routes/ dev.ts",
-		"build": "deno run -A dev.ts build",
-		"start": "deno run -A main.ts",
-		"update": "deno run -A -r jsr:@fresh/update@2.0.0-alpha.29 .",
-		"test": "deno test --coverage=coverage && deno coverage coverage --html && deno coverage coverage --detailed && deno coverage coverage",
-		"deps": "deno run -A jsr:@nihility-io/deno-deps@1.1.5",
-		"deploy": "deno task build && deployctl deploy --project=nihility-secretbin main.ts"
-	},
-	"lock": false,
-	"nodeModulesDir": "none",
-	"lint": {
-		"rules": {
-			"tags": [
-				"fresh",
-				"recommended"
-			],
-			"include": [
-				"adjacent-overload-signatures",
-				"default-param-last",
-				"eqeqeq",
-				"no-const-assign",
-				"no-eval",
-				"no-external-import",
-				"no-inferrable-types",
-				"no-self-compare",
-				"no-sparse-arrays",
-				"no-sync-fn-in-async-fn",
-				"no-throw-literal",
-				"no-undef",
-				"single-var-declarator"
-			]
-		},
-		"exclude": [
-			".vscode/**",
-			"*.json",
-			"**/*.json",
-			"*.gen.ts*"
-		]
-	},
-	"exclude": [
-		"**/_fresh/*"
-	],
-	"imports": {
-		"@db/postgres": "jsr:@db/postgres@^0.19.5",
-		"@libs/qrcode": "jsr:@libs/qrcode@^2.0.1",
-		"@nihility-io/cookies": "jsr:@nihility-io/cookies@^2.0.0-alpha.7",
-		"@nihility-io/record": "jsr:@nihility-io/record@^1.0.3",
-		"@oscar6echo/postgres": "jsr:@oscar6echo/postgres@^3.4.5-d",
-		"@std/assert": "jsr:@std/assert@^1.0.13",
-		"@std/collections": "jsr:@std/collections@^1.1.0",
-		"@std/encoding": "jsr:@std/encoding@^1.0.10",
-		"@std/fs": "jsr:@std/fs@^1.0.17",
-		"@std/http": "jsr:@std/http@^1.0.15",
-		"@std/yaml": "jsr:@std/yaml@^1.0.6",
-		"@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.4",
-		"classnames": "npm:classnames@^2.5.1",
-		"components": "./components/mod.ts",
-		"config": "./config/mod.ts",
-		"fresh": "jsr:@fresh/core@^2.0.0-alpha.34",
-		"helpers": "./helpers/mod.ts",
-		"islands": "./islands/mod.ts",
-		"lang": "./lang/mod.ts",
-		"log": "./log/mod.ts",
-		"postcss": "npm:postcss@^8.5.3",
-		"preact": "npm:preact@^10.26.5",
-		"@preact/signals": "npm:@preact/signals@^2.0.4",
-		"secret/client": "./secret/client/mod.ts",
-		"secret/models": "./secret/models/mod.ts",
-		"secret/server": "./secret/server/mod.ts",
-		"state": "./state.ts",
-		"tailwindcss": "npm:tailwindcss@^4.1.4",
-		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.6.0",
-		"utils": "./utils.ts",
-		"zod": "npm:zod@4.0.0-beta.0"
-	},
-	"unstable": [
-		"kv"
-	],
-	"compilerOptions": {
-		"lib": [
-			"dom",
-			"dom.asynciterable",
-			"deno.ns",
-			"deno.window",
-			"deno.unstable"
-		],
-		"jsx": "precompile",
-		"jsxImportSource": "preact",
-		"jsxPrecompileSkipElements": [
-			"a",
-			"img",
-			"source",
-			"body",
-			"html",
-			"head"
-		]
-	},
-	"fmt": {
-		"useTabs": true,
-		"lineWidth": 120,
-		"indentWidth": 4,
-		"semiColons": false,
-		"singleQuote": false,
-		"proseWrap": "preserve",
-		"exclude": [
-			".vscode/**",
-			"*.json",
-			"**/*.json",
-			"*.gen.ts*"
-		]
-	},
-	"denoDeps": {
-		"entrypoint": "dev.ts",
-		"output": "credits.json",
-		"dependencies": [{
-			"name": "heroicons",
-			"repository": "https://github.com/tailwindlabs/heroicons",
-			"version": "2.2.0",
-			"authors": ["Tailwind Labs, Inc."],
-			"license": "MIT License",
-			"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
-		}],
-		"excludeDependencies": [
-			"@esbuild/.*",
-			"lightningcss-.*",
-			"@tailwindcss/oxide-.*",
-			"@types/.*"
-		]
-	},
-	"deploy": {
-		"project": "secretbin",
-		"exclude": [
-			"**/node_modules"
-		],
-		"include": [],
-		"entrypoint": "main.ts"
-	}
+  "tasks": {
+    "check": {
+      "description": "Lint and type check TypeScript files",
+      "command": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx"
+    },
+    "tailwindDev": {
+      "description": "Build styles.css using Tailwind and watch for changes.",
+      "command": "tailwindcss -i styles/styles.css -o static/styles.css -w"
+    },
+    "tailwindBuild": {
+      "description": "Build styles.css using Tailwind.",
+      "command": "tailwindcss -m -i styles/styles.css -o static/styles.css"
+    },
+    "freshDev": {
+      "description": "Starts Deno Fresh is dev mode and watch for changes.",
+      "command": "deno run -A --watch=static/,routes/ dev.ts"
+    },
+    "freshBuild": {
+      "description": "Builds Deno Fresh for production.",
+      "command": "rm -rf _fresh && deno run -A dev.ts build"
+    },
+    "dev": {
+      "description": "Starts SecretBin is dev mode and watch for changes.",
+      "dependencies": ["tailwindDev", "freshDev"]
+    },
+    "build": {
+      "description": "Builds SecretBin for production.",
+      "dependencies": ["tailwindBuild", "freshBuild"]
+    },
+    "start": {
+      "description": "Starts SecretBin",
+      "command": "deno run -A main.ts"
+    },
+    "update":{
+      "description": "Updates SecretBin to the latest Deno Fresh version.",
+      "command":  "deno run -A -r jsr:@fresh/update@2.0.0-alpha.34 ."
+    },
+    "deps": {
+      "description": "Updates the credits.json file",
+      "command": "deno run -A jsr:@nihility-io/deno-deps@1.1.5"
+    },
+    "deploy": {
+      "description": "Deploys SecretBin to Deno Deploy",
+      "command": "deployctl deploy --project=nihility-secretbin main.ts",
+      "dependencies": ["build"]
+    }
+  },
+  "lock": false,
+  "nodeModulesDir": "none",
+  "lint": {
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ],
+      "include": [
+        "adjacent-overload-signatures",
+        "default-param-last",
+        "eqeqeq",
+        "no-const-assign",
+        "no-eval",
+        "no-external-import",
+        "no-inferrable-types",
+        "no-self-compare",
+        "no-sparse-arrays",
+        "no-sync-fn-in-async-fn",
+        "no-throw-literal",
+        "no-undef",
+        "single-var-declarator"
+      ]
+    },
+    "exclude": [
+      ".vscode/**",
+      "*.json",
+      "**/*.json",
+      "*.gen.ts*"
+    ]
+  },
+  "exclude": [
+    "**/_fresh/*"
+  ],
+  "imports": {
+    "@db/postgres": "jsr:@db/postgres@^0.19.5",
+    "@libs/qrcode": "jsr:@libs/qrcode@^2.0.1",
+    "@nihility-io/cookies": "jsr:@nihility-io/cookies@^2.0.0-alpha.7",
+    "@nihility-io/record": "jsr:@nihility-io/record@^1.0.3",
+    "@oscar6echo/postgres": "jsr:@oscar6echo/postgres@^3.4.5-d",
+    "@std/assert": "jsr:@std/assert@^1.0.13",
+    "@std/collections": "jsr:@std/collections@^1.1.0",
+    "@std/encoding": "jsr:@std/encoding@^1.0.10",
+    "@std/fs": "jsr:@std/fs@^1.0.17",
+    "@std/http": "jsr:@std/http@^1.0.15",
+    "@std/yaml": "jsr:@std/yaml@^1.0.6",
+    "@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.4",
+    "classnames": "npm:classnames@^2.5.1",
+    "components": "./components/mod.ts",
+    "config": "./config/mod.ts",
+    "fresh": "jsr:@fresh/core@^2.0.0-alpha.34",
+    "helpers": "./helpers/mod.ts",
+    "islands": "./islands/mod.ts",
+    "lang": "./lang/mod.ts",
+    "log": "./log/mod.ts",
+    "postcss": "npm:postcss@^8.5.3",
+    "preact": "npm:preact@^10.26.5",
+    "@preact/signals": "npm:@preact/signals@^2.0.4",
+    "secret/client": "./secret/client/mod.ts",
+    "secret/models": "./secret/models/mod.ts",
+    "secret/server": "./secret/server/mod.ts",
+    "state": "./state.ts",
+    "tailwindcss": "npm:tailwindcss@^4.1.4",
+    "ts-pattern": "jsr:@gabriel/ts-pattern@^5.6.0",
+    "utils": "./utils.ts",
+    "zod": "npm:zod@4.0.0-beta.0"
+  },
+  "unstable": [
+    "kv"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.asynciterable",
+      "deno.ns",
+      "deno.window",
+      "deno.unstable"
+    ],
+    "jsx": "precompile",
+    "jsxImportSource": "preact",
+    "jsxPrecompileSkipElements": [
+      "a",
+      "img",
+      "source",
+      "body",
+      "html",
+      "head"
+    ]
+  },
+  "fmt": {
+    "useTabs": true,
+    "lineWidth": 120,
+    "indentWidth": 4,
+    "semiColons": false,
+    "singleQuote": false,
+    "proseWrap": "preserve",
+    "exclude": [
+      ".vscode/**",
+      "*.json",
+      "**/*.json",
+      "*.gen.ts*"
+    ]
+  },
+  "denoDeps": {
+    "entrypoint": "dev.ts",
+    "output": "credits.json",
+    "dependencies": [{
+      "name": "heroicons",
+      "repository": "https://github.com/tailwindlabs/heroicons",
+      "version": "2.2.0",
+      "authors": ["Tailwind Labs, Inc."],
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
+    }],
+    "excludeDependencies": [
+      "@esbuild/.*",
+      "lightningcss-.*",
+      "@tailwindcss/oxide-.*",
+      "@types/.*"
+    ]
+  },
+  "deploy": {
+    "project": "secretbin",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "main.ts"
+  }
 }

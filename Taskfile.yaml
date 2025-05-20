@@ -52,6 +52,7 @@ tasks:
           --annotation "index:org.opencontainers.image.title=SecretBin" \
           --annotation "index:org.opencontainers.image.authors=Nihility.io" \
           --annotation "index:org.opencontainers.image.documentation=https://github.com/Nihility-io/SecretBin" \
+          --annotation "index:org.opencontainers.image.source=https://github.com/Nihility-io/SecretBin" \
           --annotation "index:org.opencontainers.image.licenses=MIT" \
           --annotation "index:org.opencontainers.image.description=SecretBin is a web app for sharing secrets like tokens and passwords." \
           --push .

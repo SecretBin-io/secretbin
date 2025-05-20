@@ -1,0 +1,18 @@
+@theme {
+  --animate-disappear: disappear 0.25s ease-in-out forwards 0s;
+
+  @keyframes disappear {
+    0% {
+      opacity: 1;
+      scale: 110%;
+    }
+    50% {
+      opacity: 1;
+      scale: 110%;
+    }
+    100% {
+      opacity: 0;
+      scale: 90%;
+    }
+  }
+}

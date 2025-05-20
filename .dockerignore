@@ -32,17 +32,20 @@ Temporary Items
 
 ### Deno ###
 /node_modules
+/_fresh
 
 .env
 *.orig
 *.pyc
 *.swp
 
-/bin
-/data
-
 ### VisualStudioCode ###
-.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
 .history/
@@ -68,3 +71,5 @@ coverage
 # Don't include screenshots
 /resources
 
+/target
+/test.ts
