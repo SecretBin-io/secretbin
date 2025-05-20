@@ -25,7 +25,6 @@ const serverCfg: Config = await (async () => {
 	}
 
 	try {
-		console.debug(cfgs.reduce((p, c) => deepMerge(p, c), {}))
 		return await Config.parseAsync(cfgs.reduce((p, c) => deepMerge(p, c), {}))
 	} catch (e) {
 		console.error("Failed to parse config file. Reason: ")
