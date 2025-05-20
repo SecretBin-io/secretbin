@@ -18,18 +18,16 @@ tasks:
     - task: "build"
   dbStart:
     desc: Start the database
-    cmds:
-      - docker compose up -d
+    cmd: docker compose up -d
   dbStop:
     desc: Stop the database
-    cmds:
-      - docker compose down
+    cmd: docker compose down
   build:
     desc: Build the application container
-    cmds:
-      - tailwindcss -m -i static/styles.css -o tailwind.css
-      - docker build --no-cache --build-arg DENO_VERSION={{.DENO_VERSION}} --tag {{.IMAGE}}:{{.VERSION}} .
-      - rm tailwind.css
+    cmd: |
+      docker build --no-cache \
+        --build-arg DENO_VERSION={{.DENO_VERSION}} \
+        --tag {{.IMAGE}}:{{.VERSION}} .
   clean:
     desc: Clean up
     cmd: rm -rf dist
@@ -37,23 +35,26 @@ tasks:
     # deps:
     #   - build
     desc: Run application container locally
-    cmds:
-      - docker run --rm --network=secretbin_network --read-only --mount type=bind,src="{{.PWD}}/config.yaml",target=/app/config.yaml -it -p 8000:8000 --name secretbin {{.IMAGE}}:{{.VERSION}}
+    cmd: |
+      docker run --rm --interactive --tty \
+        --network=secretbin_network \
+        --read-only \
+        --mount type=bind,src="{{.PWD}}/config.yaml",target=/app/config.yaml \
+        --mount type=bind,src="{{.PWD}}/config.db.yaml",target=/app/config.db.yaml \
+        --publish 8000:8000 \
+        --name secretbin {{.IMAGE}}:{{.VERSION}}
   publish:
     desc: Push the image to the Docker Hub
-    cmds:
-      - tailwindcss -m -i static/styles.css -o tailwind.css
-      - |
-        docker buildx build --no-cache \
-          --build-arg DENO_VERSION={{.DENO_VERSION}} \
-          --platform linux/amd64,linux/arm64 \
-          --tag {{.IMAGE}}:{{.VERSION}} \
-          --tag {{.IMAGE}}:dev \
-          --annotation "index:org.opencontainers.image.title=SecretBin" \
-          --annotation "index:org.opencontainers.image.authors=Nihility.io" \
-          --annotation "index:org.opencontainers.image.documentation=https://github.com/Nihility-io/SecretBin" \
-          --annotation "index:org.opencontainers.image.source=https://github.com/Nihility-io/SecretBin" \
-          --annotation "index:org.opencontainers.image.licenses=MIT" \
-          --annotation "index:org.opencontainers.image.description=SecretBin is a web app for sharing secrets like tokens and passwords." \
-          --push .
-      - rm tailwind.css
+    cmd: |
+      docker buildx build --no-cache \
+        --build-arg DENO_VERSION={{.DENO_VERSION}} \
+        --platform linux/amd64,linux/arm64 \
+        --tag {{.IMAGE}}:{{.VERSION}} \
+        --tag {{.IMAGE}}:dev \
+        --annotation "index:org.opencontainers.image.title=SecretBin" \
+        --annotation "index:org.opencontainers.image.authors=Nihility.io" \
+        --annotation "index:org.opencontainers.image.documentation=https://github.com/Nihility-io/SecretBin" \
+        --annotation "index:org.opencontainers.image.source=https://github.com/Nihility-io/SecretBin" \
+        --annotation "index:org.opencontainers.image.licenses=MIT" \
+        --annotation "index:org.opencontainers.image.description=SecretBin is a web app for sharing secrets like tokens and passwords." \
+        --push .

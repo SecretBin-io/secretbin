@@ -30,7 +30,7 @@ await fsRoutes(app, {
 	loadRoute: (path) => import(`./routes/${path}`),
 })
 
-const isBuildMode = Deno.args.includes("build")
+const isBuildMode = Deno.args.includes("build") || Deno.args.includes("freshBuild")
 if (!isBuildMode) {
 	// Trigger the secret provider on startup but not when building
 	if (!(await Secrets.shared.init())) {

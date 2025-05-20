@@ -1,6 +1,3 @@
-# Created by https://www.toptal.com/developers/gitignore/api/deno
-# Edit at https://www.toptal.com/developers/gitignore?templates=deno
-
 ### macOS ###
 # General
 .DS_Store
@@ -58,11 +55,6 @@ Temporary Items
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/deno
-
-### Testing ###
-coverage
-
 # Don't include Deno KV database files
 *.db
 *.db-shm
@@ -71,5 +63,9 @@ coverage
 # Don't include screenshots
 /resources
 
-/target
+# Don't include generated styles
+/static/styles.css
+
+### Testing ###
+coverage
 /test.ts

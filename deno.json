@@ -17,8 +17,8 @@
       "command": "deno run -A --watch=static/,routes/ dev.ts"
     },
     "freshBuild": {
-      "description": "Builds Deno Fresh for production.",
-      "command": "rm -rf _fresh && deno run -A dev.ts build"
+      "description": "Build Deno Fresh for production.",
+      "command": "deno run -A dev.ts build"
     },
     "dev": {
       "description": "Starts SecretBin is dev mode and watch for changes.",
@@ -26,15 +26,15 @@
     },
     "build": {
       "description": "Builds SecretBin for production.",
-      "dependencies": ["tailwindBuild", "freshBuild"]
+      "command": "rm -rf _fresh && deno task tailwindBuild && deno task freshBuild"
     },
     "start": {
       "description": "Starts SecretBin",
       "command": "deno run -A main.ts"
     },
-    "update":{
+    "update": {
       "description": "Updates SecretBin to the latest Deno Fresh version.",
-      "command":  "deno run -A -r jsr:@fresh/update@2.0.0-alpha.34 ."
+      "command": "deno run -A -r jsr:@fresh/update@2.0.0-alpha.34 ."
     },
     "deps": {
       "description": "Updates the credits.json file",
