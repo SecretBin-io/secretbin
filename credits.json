@@ -22,17 +22,6 @@
     "licenseFile": "https://raw.githubusercontent.com/evanw/esbuild/main/LICENSE.md"
   },
   {
-    "registry": "npm",
-    "name": "esbuild-wasm",
-    "version": "0.23.1",
-    "repository": "https://github.com/evanw/esbuild",
-    "authors": [
-      "Evan Wallace"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/evanw/esbuild/main/LICENSE.md"
-  },
-  {
     "registry": "jsr",
     "name": "@fresh/core",
     "version": "2.0.0-alpha.34",
@@ -380,6 +369,16 @@
     ],
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
+  },
+  {
+    "name": "tailwindcss",
+    "repository": "https://github.com/tailwindlabs/tailwindcss",
+    "version": "4.1.7",
+    "authors": [
+      "Tailwind Labs"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/LICENSE"
   },
   {
     "registry": "npm",
