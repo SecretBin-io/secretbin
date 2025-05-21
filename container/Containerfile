@@ -30,7 +30,7 @@ WORKDIR /app
 EXPOSE 8000
 
 # Copy SecretBin into the container
-COPY --chown=deno . /app
+COPY --chown=deno .. /app
 
 # Install dependencies and build SecretBin
 RUN ls -lah && deno install && \

@@ -2,8 +2,8 @@ import { config } from "config"
 import { App, fsRoutes, staticFiles } from "fresh"
 import { logWeb } from "log"
 import { Secrets } from "secret/server"
-import { type State } from "utils"
-import { define, stateMiddleware } from "./utils.ts"
+import { define, stateMiddleware } from "utils"
+import { State } from "state"
 
 export const app = new App<State>()
 app.use(staticFiles())

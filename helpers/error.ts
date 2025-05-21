@@ -60,7 +60,6 @@ export const decodeError = ({ name, message, ...props }: ErrorObject) => {
 		return decodableErrorTypes[name].fromObject(message, props as never)
 	}
 
-
 	const err = (() => {
 		switch (name) {
 			case "TypeError":

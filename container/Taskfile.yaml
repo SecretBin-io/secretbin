@@ -2,12 +2,12 @@
 
 version: "3"
 
+
+
 vars:
-  NAME: secretbin
-  VERSION: 2.0.0-dev
-  REGISTRY: ghcr.io
-  PROJECT: nihility-io
-  IMAGE: "{{.REGISTRY}}/{{.PROJECT}}/{{.NAME}}"
+  IMAGE: "ghcr.io/nihility-io/secretbin"
+  VERSION:
+    sh: jq -r '.version' < deno.json
   PWD:
     sh: pwd
   DENO_VERSION:
@@ -16,25 +16,15 @@ vars:
 tasks:
   default:
     - task: "build"
-  dbStart:
-    desc: Start the database
-    cmd: docker compose up -d
-  dbStop:
-    desc: Stop the database
-    cmd: docker compose down
   build:
-    desc: Build the application container
+    desc: Builds the container image
     cmd: |
       docker build --no-cache \
         --build-arg DENO_VERSION={{.DENO_VERSION}} \
+        --file container/Containerfile \
         --tag {{.IMAGE}}:{{.VERSION}} .
-  clean:
-    desc: Clean up
-    cmd: rm -rf dist
   run:
-    # deps:
-    #   - build
-    desc: Run application container locally
+    desc: Runs the container locally
     cmd: |
       docker run --rm --interactive --tty \
         --network=secretbin_network \
@@ -44,10 +34,11 @@ tasks:
         --publish 8000:8000 \
         --name secretbin {{.IMAGE}}:{{.VERSION}}
   publish:
-    desc: Push the image to the Docker Hub
+    desc: Builds and publishes the container image
     cmd: |
       docker buildx build --no-cache \
         --build-arg DENO_VERSION={{.DENO_VERSION}} \
+        --file container/Containerfile \
         --platform linux/amd64,linux/arm64 \
         --tag {{.IMAGE}}:{{.VERSION}} \
         --tag {{.IMAGE}}:dev \

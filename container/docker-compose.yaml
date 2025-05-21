@@ -1,3 +1,4 @@
+name: secretbin
 services:
   postgres:
     image: postgres:17

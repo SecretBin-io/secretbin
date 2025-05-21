@@ -1,165 +1,186 @@
 {
-  "tasks": {
-    "check": {
-      "description": "Lint and type check TypeScript files",
-      "command": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx"
-    },
-    "test": {
-      "description": "Runs unit tests and checks test coverage.",
-      "command": "deno test --coverage=coverage && deno coverage coverage --detailed"
-    },
-    "dev:tailwind": {
-      "description": "Build styles.css using Tailwind and watch for changes.",
-      "command": "deno run -A npm:@tailwindcss/cli -i styles/styles.css -o static/styles.css -w"
-    },
-    "dev:fresh": {
-      "description": "Starts Deno Fresh is dev mode and watch for changes.",
-      "command": "deno run -A --watch=static/,routes/ dev.ts"
-    },
-    "dev": {
-      "description": "Starts SecretBin is dev mode and watch for changes.",
-      "dependencies": ["dev:tailwind", "dev:fresh"]
-    },
-    "build:tailwind": {
-      "description": "Build styles.css using Tailwind.",
-      "command": "deno run -A npm:@tailwindcss/cli -m -i styles/styles.css -o static/styles.css"
-    },
-    "build:fresh": {
-      "description": "Builds Deno Fresh for production.",
-      "command": "deno run -A dev.ts build"
-    },
-    "build": {
-      "description": "Builds SecretBin for production.",
-      "command": "rm -rf _fresh && deno task build:tailwind && deno task build:fresh"
-    },
-    "start": {
-      "description": "Starts SecretBin",
-      "command": "deno run -A main.ts"
-    },
-    "update": {
-      "description": "Updates SecretBin to the latest Deno Fresh version.",
-      "command": "deno run -A -r jsr:@fresh/update@2.0.0-alpha.34 ."
-    },
-    "deps": {
-      "description": "Updates the credits.json file",
-      "command": "deno run -A jsr:@nihility-io/deno-deps@1.1.5"
-    },
-    "deploy": {
-      "description": "Deploys SecretBin to Deno Deploy",
-      "command": "deployctl deploy --project=nihility-secretbin main.ts",
-      "dependencies": ["build"]
-    }
-  },
-  "lock": false,
-  "nodeModulesDir": "none",
-  "lint": {
-    "rules": {
-      "tags": ["fresh", "recommended"],
-      "include": [
-        "adjacent-overload-signatures",
-        "default-param-last",
-        "eqeqeq",
-        "no-const-assign",
-        "no-eval",
-        "no-external-import",
-        "no-inferrable-types",
-        "no-self-compare",
-        "no-sparse-arrays",
-        "no-sync-fn-in-async-fn",
-        "no-throw-literal",
-        "no-undef",
-        "single-var-declarator"
-      ]
-    }
-  },
-  "exclude": ["**/_fresh/*"],
-  "imports": {
-    "@libs/qrcode": "jsr:@libs/qrcode@^2.0.1",
-    "@nihility-io/cookies": "jsr:@nihility-io/cookies@^2.0.0-alpha.7",
-    "@nihility-io/record": "jsr:@nihility-io/record@^1.0.3",
-    "@opentelemetry/api": "npm:@opentelemetry/api@^1.9.0",
-    "@oscar6echo/postgres": "jsr:@oscar6echo/postgres@^3.4.5-d",
-    "@std/assert": "jsr:@std/assert@^1.0.13",
-    "@std/collections": "jsr:@std/collections@^1.1.0",
-    "@std/encoding": "jsr:@std/encoding@^1.0.10",
-    "@std/fs": "jsr:@std/fs@^1.0.17",
-    "@std/http": "jsr:@std/http@^1.0.15",
-    "@std/yaml": "jsr:@std/yaml@^1.0.6",
-    "classnames": "npm:classnames@^2.5.1",
-    "components": "./components/mod.ts",
-    "config": "./config/mod.ts",
-    "fresh": "jsr:@fresh/core@^2.0.0-alpha.34",
-    "helpers": "./helpers/mod.ts",
-    "islands": "./islands/mod.ts",
-    "lang": "./lang/mod.ts",
-    "log": "./log/mod.ts",
-    "preact": "npm:preact@^10.26.5",
-    "@preact/signals": "npm:@preact/signals@^2.0.4",
-    "secret/client": "./secret/client/mod.ts",
-    "secret/models": "./secret/models/mod.ts",
-    "secret/server": "./secret/server/mod.ts",
-    "state": "./state.ts",
-    "ts-pattern": "jsr:@gabriel/ts-pattern@^5.6.0",
-    "utils": "./utils.ts",
-    "zod": "npm:zod@4.0.0-beta.0"
-  },
-  "unstable": ["kv"],
-  "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.asynciterable",
-      "deno.ns",
-      "deno.window",
-      "deno.unstable"
-    ],
-    "jsx": "precompile",
-    "jsxImportSource": "preact",
-    "jsxPrecompileSkipElements": ["a", "img", "source", "body", "html", "head"]
-  },
-  "fmt": {
-    "useTabs": true,
-    "lineWidth": 120,
-    "indentWidth": 4,
-    "semiColons": false,
-    "singleQuote": false,
-    "proseWrap": "preserve",
-    "exclude": [".vscode/**", "*.json", "**/*.json", "*.gen.ts*"],
-    "trailingCommas": "onlyMultiLine"
-  },
-  "test": {
-    "include": ["./config", "./helpers", "./lang", "./log", "./secret"]
-  },
-  "denoDeps": {
-    "entrypoint": "dev.ts",
-    "output": "credits.json",
-    "dependencies": [
-      {
-        "name": "tailwindcss",
-        "repository": "https://github.com/tailwindlabs/tailwindcss",
-        "version": "4.1.7",
-        "authors": ["Tailwind Labs, Inc."],
-        "license": "MIT License",
-        "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
-      },
-      {
-        "name": "heroicons",
-        "repository": "https://github.com/tailwindlabs/heroicons",
-        "version": "2.2.0",
-        "authors": ["Tailwind Labs, Inc."],
-        "license": "MIT License",
-        "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
-      }
-    ],
-    "excludeDependencies": [
-      "@esbuild/.*",
-      "esbuild-wasm",
-      "@types/.*"
-    ]
-  },
-  "deploy": {
-    "project": "secretbin",
-    "exclude": ["**/node_modules"],
-    "include": [],
-    "entrypoint": "main.ts"
-  }
+	"version": "2.0.0-dev",
+	"tasks": {
+		"check": {
+			"description": "Lint and type check TypeScript files",
+			"command": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx"
+		},
+		"test": {
+			"description": "Runs unit tests and checks test coverage.",
+			"command": "deno test --coverage=coverage && deno coverage coverage --detailed && rm -rf coverage"
+		},
+		"dev:tailwind": {
+			"description": "Build styles.css using Tailwind and watch for changes.",
+			"command": "deno run -A npm:@tailwindcss/cli -i styles/styles.css -o static/styles.css -w"
+		},
+		"dev:fresh": {
+			"description": "Starts Deno Fresh is dev mode and watch for changes.",
+			"command": "deno run -A --watch=static/,routes/ dev.ts"
+		},
+		"dev": {
+			"description": "Starts SecretBin is dev mode and watch for changes.",
+			"dependencies": ["dev:tailwind", "dev:fresh"]
+		},
+		"build:tailwind": {
+			"description": "Build styles.css using Tailwind.",
+			"command": "deno run -A npm:@tailwindcss/cli -m -i styles/styles.css -o static/styles.css"
+		},
+		"build:fresh": {
+			"description": "Builds Deno Fresh for production.",
+			"command": "deno run -A dev.ts build"
+		},
+		"build": {
+			"description": "Builds SecretBin for production.",
+			"command": "rm -rf _fresh && deno task build:tailwind && deno task build:fresh"
+		},
+		"start": {
+			"description": "Starts SecretBin",
+			"command": "deno run -A main.ts"
+		},
+		"update": {
+			"description": "Updates SecretBin to the latest Deno Fresh version.",
+			"command": "deno run -A -r jsr:@fresh/update@2.0.0-alpha.34 ."
+		},
+		"deps": {
+			"description": "Updates the credits.json file",
+			"command": "deno run -A jsr:@nihility-io/deno-deps@1.1.5"
+		},
+		"db:start": {
+			"description": "Starts a local database for development.",
+			"command": "docker compose -f container/docker-compose.yaml up -d"
+		},
+		"db:stop": {
+			"description": "Stops the local database.",
+			"command": "docker compose -f container/docker-compose.yaml down"
+		},
+		"container:build": {
+			"description": "Builds the container image",
+			"command": "task -d . -t container/Taskfile.yaml build"
+		},
+		"container:run": {
+			"description": "Runs the container locally",
+			"command": "task -d . -t container/Taskfile.yaml run"
+		},
+		"container:publish": {
+			"description": "Builds and publishes the container image",
+			"command": "task -d . -t container/Taskfile.yaml publish"
+		},
+		"deploy": {
+			"description": "Deploys SecretBin to Deno Deploy",
+			"command": "deployctl deploy --project=nihility-secretbin main.ts",
+			"dependencies": ["build"]
+		}
+	},
+	"lock": false,
+	"nodeModulesDir": "none",
+	"lint": {
+		"rules": {
+			"tags": ["fresh", "recommended"],
+			"include": [
+				"adjacent-overload-signatures",
+				"default-param-last",
+				"eqeqeq",
+				"no-const-assign",
+				"no-eval",
+				"no-external-import",
+				"no-inferrable-types",
+				"no-self-compare",
+				"no-sparse-arrays",
+				"no-sync-fn-in-async-fn",
+				"no-throw-literal",
+				"no-undef",
+				"single-var-declarator"
+			]
+		}
+	},
+	"exclude": ["**/_fresh/*"],
+	"imports": {
+		"@libs/qrcode": "jsr:@libs/qrcode@^2.0.1",
+		"@nihility-io/cookies": "jsr:@nihility-io/cookies@^2.0.0-alpha.7",
+		"@nihility-io/record": "jsr:@nihility-io/record@^1.0.3",
+		"@opentelemetry/api": "npm:@opentelemetry/api@^1.9.0",
+		"@oscar6echo/postgres": "jsr:@oscar6echo/postgres@^3.4.5-d",
+		"@std/assert": "jsr:@std/assert@^1.0.13",
+		"@std/collections": "jsr:@std/collections@^1.1.0",
+		"@std/encoding": "jsr:@std/encoding@^1.0.10",
+		"@std/fs": "jsr:@std/fs@^1.0.17",
+		"@std/http": "jsr:@std/http@^1.0.15",
+		"@std/yaml": "jsr:@std/yaml@^1.0.6",
+		"classnames": "npm:classnames@^2.5.1",
+		"components": "./components/mod.ts",
+		"config": "./config/mod.ts",
+		"fresh": "jsr:@fresh/core@^2.0.0-alpha.34",
+		"helpers": "./helpers/mod.ts",
+		"islands": "./islands/mod.ts",
+		"lang": "./lang/mod.ts",
+		"log": "./log/mod.ts",
+		"preact": "npm:preact@^10.26.5",
+		"@preact/signals": "npm:@preact/signals@^2.0.4",
+		"secret/client": "./secret/client/mod.ts",
+		"secret/models": "./secret/models/mod.ts",
+		"secret/server": "./secret/server/mod.ts",
+		"state": "./state.ts",
+		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.6.0",
+		"utils": "./utils.ts",
+		"zod": "npm:zod@4.0.0-beta.0"
+	},
+	"unstable": ["kv"],
+	"compilerOptions": {
+		"lib": [
+			"dom",
+			"dom.asynciterable",
+			"deno.ns",
+			"deno.window",
+			"deno.unstable"
+		],
+		"jsx": "precompile",
+		"jsxImportSource": "preact",
+		"jsxPrecompileSkipElements": ["a", "img", "source", "body", "html", "head"]
+	},
+	"fmt": {
+		"useTabs": true,
+		"lineWidth": 120,
+		"indentWidth": 4,
+		"semiColons": false,
+		"singleQuote": false,
+		"proseWrap": "preserve",
+		"exclude": ["styles/**", "credits.json", "README.md", "*.yaml"],
+		"trailingCommas": "onlyMultiLine"
+	},
+	"test": {
+		"include": ["./config", "./helpers", "./lang", "./log", "./secret"]
+	},
+	"denoDeps": {
+		"entrypoint": "dev.ts",
+		"output": "credits.json",
+		"dependencies": [
+			{
+				"name": "tailwindcss",
+				"repository": "https://github.com/tailwindlabs/tailwindcss",
+				"version": "4.1.7",
+				"authors": ["Tailwind Labs, Inc."],
+				"license": "MIT License",
+				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
+			},
+			{
+				"name": "heroicons",
+				"repository": "https://github.com/tailwindlabs/heroicons",
+				"version": "2.2.0",
+				"authors": ["Tailwind Labs, Inc."],
+				"license": "MIT License",
+				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
+			}
+		],
+		"excludeDependencies": [
+			"@esbuild/.*",
+			"esbuild-wasm",
+			"@types/.*"
+		]
+	},
+	"deploy": {
+		"project": "secretbin",
+		"exclude": ["**/node_modules"],
+		"include": [],
+		"entrypoint": "main.ts"
+	}
 }
