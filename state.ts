@@ -6,10 +6,8 @@ export enum Theme {
 }
 
 export interface State {
-	lang: Language
 	theme: Theme
 	locale: string
-	locales: string[]
-	termsAccepted: boolean
+	language: Language
 	cookies: Record<string, string>
 }

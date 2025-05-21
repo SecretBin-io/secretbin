@@ -89,7 +89,7 @@ export const useTranslation = (lang: Language): TranslationFunction => (path, pa
 
 /**
  * Preact hook for using translations based on the current language
- * @param initialLanguage Language used until the language cookie is read on the client's side. Optimally set this value using the `state.lang`
+ * @param initialLanguage Language used until the language cookie is read on the client's side. Optimally set this value using the `state.language`
  * @returns Translate function
  * @example
  * export default () => {

@@ -10,7 +10,7 @@ export interface FileUploadProps {
 }
 
 export const FilesUpload = ({ state, files, setFiles }: FileUploadProps) => {
-	const $ = useTranslationWithPrefix(state.lang, "NewSecret")
+	const $ = useTranslationWithPrefix(state.language, "NewSecret")
 
 	return (
 		<Section

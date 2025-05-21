@@ -5,9 +5,13 @@ import { State, Theme } from "state"
 
 export const define = createDefine<State>()
 
-export const stateMiddleware = define.middleware(async (ctx) => {
-	const cookies = getCookies(ctx.req.headers)
-	ctx.state.locales = (ctx.req.headers.get("Accept-Language") ?? "")
+/**
+ * Detect preferred locales from the headers sent by the browser
+ * @param headers Request headers
+ * @returns List of locales as reported by the client's browser
+ */
+const detectBrowserLocales = (headers: Headers) =>
+	(headers.get("Accept-Language") ?? "")
 		.split(",")
 		.map((lang): [number, string] => {
 			const [locale, q = "q=1"] = lang.split(";")
@@ -18,29 +22,18 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 		.sort(([q1], [q2]) => q2 - q1)
 		.flatMap(([_, locale]) => locale === "*" ? [] : locale)
 
-	ctx.state.locale = ctx.state.locales.find(() => true) ?? "en-US"
+/**
+ * Middleware that adds the request state to the request context
+ */
+export const stateMiddleware = define.middleware(async (ctx) => {
+	ctx.state.cookies = getCookies(ctx.req.headers)
 
-	const cookieLang = cookies["lang"]
-	if (cookieLang && isLanguageSupported(cookieLang)) {
-		ctx.state.lang = cookieLang as Language
-	} else {
-		ctx.state.lang = ctx.state.locales.find(isLanguageSupported) as Language ?? Language.English
-	}
+	const locales = detectBrowserLocales(ctx.req.headers)
+	ctx.state.locale = locales.find(() => true) ?? "en-US"
+	ctx.state.language = [ctx.state.cookies["language"], ...locales]
+		.find(isLanguageSupported) as Language ?? Language.English
 
-	ctx.state.theme = (() => {
-		switch (cookies["theme"] ?? "dark") {
-			case "light":
-				return Theme.Light
-			case "dark":
-				return Theme.Dark
-			default:
-				return Theme.Light
-		}
-	})()
-
-	ctx.state.cookies = cookies
-
-	ctx.state.termsAccepted = cookies["terms"] === "accepted"
+	ctx.state.theme = ctx.state.cookies["theme"] === "light" ? Theme.Light : Theme.Dark
 
 	return await ctx.next()
 })

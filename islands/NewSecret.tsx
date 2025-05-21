@@ -25,7 +25,7 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 	const [error, setError] = useState("")
 	const [showGenerator, setShowGenerator] = useState(false)
 	const aRef = useRef<HTMLAnchorElement | null>(null)
-	const $ = useTranslationWithPrefix(state.lang, "NewSecret")
+	const $ = useTranslationWithPrefix(state.language, "NewSecret")
 
 	const submit = async () => {
 		if (password === undefined) {
@@ -41,7 +41,7 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 			aRef.current!.href = res
 			aRef.current!.click()
 		} catch (e) {
-			setError(LocalizedError.getLocalizedMessage(state.lang, e as Error))
+			setError(LocalizedError.getLocalizedMessage(state.language, e as Error))
 		}
 	}
 

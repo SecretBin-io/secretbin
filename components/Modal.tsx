@@ -52,6 +52,10 @@ export const Modal = ({ id, title, actions, show, onDismiss, children, ...props 
 		}
 	}, [show])
 
+	if (hidden) {
+		return undefined
+	}
+
 	return (
 		<div
 			id={modelId}
@@ -61,9 +65,6 @@ export const Modal = ({ id, title, actions, show, onDismiss, children, ...props 
 			aria-hidden="true"
 			class={classNames(
 				"overflow-y-auto overflow-x-hidden fixed justify-center items-center w-full max-h-full bg-gray-900/50 dark:bg-gray-900/80 inset-0 z-40 flex",
-				{
-					hidden: hidden,
-				},
 				props.class,
 			)}
 			onClick={onBackdropClicked}

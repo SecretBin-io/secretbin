@@ -8,7 +8,7 @@ import { State } from "state"
  * Entry page. Used for created new secrets
  */
 export default ({ state }: PageProps<unknown, State>) => {
-	const $ = useTranslationWithPrefix(state.lang, "NewSecret")
+	const $ = useTranslationWithPrefix(state.language, "NewSecret")
 
 	return (
 		<PageContent title={$("Title")} description={$("Description")}>

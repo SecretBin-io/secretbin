@@ -9,7 +9,7 @@ import { State } from "state"
  * Renders page for viewing a secret
  */
 export default async ({ params, state }: PageProps<unknown, State>) => {
-	const $ = useTranslationWithPrefix(state.lang, "ViewSecret")
+	const $ = useTranslationWithPrefix(state.language, "ViewSecret")
 
 	try {
 		const metadata = await Secrets.shared.getSecretMetadata(params.id)

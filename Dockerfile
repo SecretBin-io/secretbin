@@ -36,6 +36,6 @@ COPY --chown=deno . /app
 RUN ls -lah && deno install && \
     deno cache -r dev.ts && \
     deno cache -r main.ts && \
-    deno task freshBuild
+    deno task build:fresh
 
 ENTRYPOINT [ "deno", "task", "start" ] 

@@ -29,7 +29,7 @@ export const NavMenu = ({ state }: NavMenuProps) => {
 	}, [theme])
 
 	const setLanguage = (lang: Language) => {
-		Cookies.set("lang", lang, {})
+		Cookies.set("language", lang, {})
 		globalThis.location.reload()
 	}
 
@@ -45,7 +45,7 @@ export const NavMenu = ({ state }: NavMenuProps) => {
 				class="justify-center !px-4 !py-2 !mb-0 !me-0"
 				dropdownClass="right-0 w-40"
 				icon="Language"
-				label={supportedLanguages.find((x) => x.name === state.lang)?.native}
+				label={supportedLanguages.find((x) => x.name === state.language)?.native}
 				items={supportedLanguages.map((x) => ({
 					label: `${x.label} (${x.native})`,
 					onClick: () => setLanguage(x.name),

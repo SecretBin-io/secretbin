@@ -31,7 +31,7 @@ export const handler = define.handlers<DeleteSecretData>({
 				data: {
 					id: params.id,
 					done: true,
-					error: LocalizedError.getLocalizedMessage(state.lang, e as Error),
+					error: LocalizedError.getLocalizedMessage(state.language, e as Error),
 				},
 			}
 		}
@@ -42,7 +42,7 @@ export const handler = define.handlers<DeleteSecretData>({
  * Renders page for deleting a secrets
  */
 export default ({ data, state }: PageProps<DeleteSecretData, State>) => {
-	const $ = useTranslationWithPrefix(state.lang, "DeleteSecret")
+	const $ = useTranslationWithPrefix(state.language, "DeleteSecret")
 
 	if (data.done) {
 		return (

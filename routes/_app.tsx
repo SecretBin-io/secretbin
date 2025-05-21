@@ -11,10 +11,10 @@ import { State, Theme } from "state"
  * Wrapper for all pages. Providers header info and navigation
  */
 export default ({ Component, state }: PageProps<unknown, State>) => {
-	const $ = useTranslation(state.lang)
+	const $ = useTranslation(state.language)
 
 	return (
-		<html lang={state.lang} class={state.theme}>
+		<html lang={state.language} class={state.theme}>
 			<head>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,9 +58,7 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 				<meta property="og:image:width" content="180" />
 			</head>
 			<body class="bg-white dark:bg-gray-800 text-black dark:text-white" f-client-nav>
-				<Show if={!state.termsAccepted}>
-					<Terms state={state} />
-				</Show>
+				<Terms state={state} />
 
 				<nav class="fixed z-20 w-full top-0 start-0 bg-gray-50 shadow dark:bg-gray-900">
 					<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -92,7 +90,7 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 											<Message
 												type={config.banner.type}
 												title={config.branding.appName}
-												message={config.banner.text[state.lang] ?? config.banner.text.en}
+												message={config.banner.text[state.language] ?? config.banner.text.en}
 											/>
 										</div>
 									</div>
@@ -117,9 +115,9 @@ export default ({ Component, state }: PageProps<unknown, State>) => {
 								<a
 									class="hover:underline me-4 md:me-6"
 									target="_blank"
-									href={link.link[state.lang] ?? link.link.en}
+									href={link.link[state.language] ?? link.link.en}
 								>
-									{link.name[state.lang] ?? link.name.en}
+									{link.name[state.language] ?? link.name.en}
 								</a>
 							</li>
 						))}

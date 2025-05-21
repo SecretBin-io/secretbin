@@ -2,7 +2,7 @@ import { config } from "config"
 import { App, fsRoutes, staticFiles } from "fresh"
 import { logWeb } from "log"
 import { Secrets } from "secret/server"
-import { type State } from "state"
+import { type State } from "utils"
 import { define, stateMiddleware } from "./utils.ts"
 
 export const app = new App<State>()

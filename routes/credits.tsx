@@ -17,7 +17,7 @@ export const trimPrefix = (s: string, prefix: string): string => s.startsWith(pr
  * Page for show copyright and credit information
  */
 export default ({ state }: PageProps<unknown, State>) => {
-	const $ = useTranslation(state.lang)
+	const $ = useTranslation(state.language)
 
 	return (
 		<PageContent title={$("Credits.Title")}>

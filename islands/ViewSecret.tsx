@@ -22,7 +22,7 @@ export const ViewSecret = ({ id, state, remainingReads, passwordProtected }: Vie
 	const [secret, setSecret] = useState<Secret | undefined>(undefined)
 	const [secretData, setSecretData] = useState<SecretData | undefined>(undefined)
 
-	const $ = useTranslationWithPrefix(state.lang, "ViewSecret")
+	const $ = useTranslationWithPrefix(state.language, "ViewSecret")
 
 	useEffect(() => {
 		if (requireConfirm || requirePassword) {
@@ -42,7 +42,7 @@ export const ViewSecret = ({ id, state, remainingReads, passwordProtected }: Vie
 				setError("")
 				setSecret(sec)
 			} catch (err) {
-				setError(LocalizedError.getLocalizedMessage(state.lang, err as Error))
+				setError(LocalizedError.getLocalizedMessage(state.language, err as Error))
 				console.log(err)
 				sec = undefined
 			}

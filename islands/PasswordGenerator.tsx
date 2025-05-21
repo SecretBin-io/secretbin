@@ -19,7 +19,7 @@ export interface PasswordGeneratorProps {
 }
 
 export const PasswordGenerator = ({ show, onDismiss, onPassword, state }: PasswordGeneratorProps) => {
-	const $ = useTranslationWithPrefix(state.lang, "PasswordGenerator")
+	const $ = useTranslationWithPrefix(state.language, "PasswordGenerator")
 	const [password, setPassword] = useState("")
 	const [useUppercase, setUseUppercase] = useSetting("passwords.useUppercase", true, state)
 	const [useLowercase, setUseLowercase] = useSetting("passwords.useLowercase", true, state)

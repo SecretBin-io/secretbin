@@ -9,7 +9,7 @@ export interface ExpiresProps {
 
 export const Expires = ({ state, date }: ExpiresProps) => {
 	const [dateString, setDateString] = useState(date.toLocaleString(state.locale))
-	const $ = useTranslationWithPrefix(state.lang, "Common")
+	const $ = useTranslationWithPrefix(state.language, "Common")
 
 	useEffect(() => setDateString(date.toLocaleString()), [])
 

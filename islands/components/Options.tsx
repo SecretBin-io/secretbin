@@ -35,7 +35,7 @@ export const Options = ({
 	setRereads,
 	setPassword,
 }: OptionsProps) => {
-	const $ = useTranslationWithPrefix(state.lang, "NewSecret")
+	const $ = useTranslationWithPrefix(state.language, "NewSecret")
 
 	const [pass1, setPass1] = useState("")
 	const [pass2, setPass2] = useState("")

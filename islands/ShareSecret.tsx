@@ -14,7 +14,7 @@ export const ShareSecret = ({ id, state }: ShareSecretProps) => {
 	const [showQrCode, setShowQrCode] = useState(false)
 	const [link, setLink] = useState("")
 	const [preview, setPreview] = useState("")
-	const $ = useTranslationWithPrefix(state.lang, "ShareSecret")
+	const $ = useTranslationWithPrefix(state.language, "ShareSecret")
 
 	/**
 	 * Opens a new mail with the secret link in the default mail application
