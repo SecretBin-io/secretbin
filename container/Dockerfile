@@ -4,14 +4,6 @@ ARG DENO_VERSION="2.3.0"
 # Use the official Ubuntu Deno image as a base
 FROM denoland/deno:ubuntu-${DENO_VERSION}
 
-# Set images metadata
-LABEL org.opencontainers.image.title="SecretBin"
-LABEL org.opencontainers.image.authors="Nihility.io"
-LABEL org.opencontainers.image.documentation="https://github.com/Nihility-io/SecretBin"
-LABEL org.opencontainers.image.source="https://github.com/Nihility-io/SecretBin"
-LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.description="SecretBin is a web app for sharing secrets like tokens and passwords."
-
 # Switch to the root user in order to prepare the app folder
 USER root
 
@@ -33,9 +25,7 @@ EXPOSE 8000
 COPY --chown=deno .. /app
 
 # Install dependencies and build SecretBin
-RUN ls -lah && deno install && \
-    deno cache -r dev.ts && \
-    deno cache -r main.ts && \
+RUN deno install && \
     deno task build:fresh
 
 ENTRYPOINT [ "deno", "task", "start" ] 

@@ -13,24 +13,26 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
-      - network
+      - secretbin
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: secretbin@nihility.io
-      PGADMIN_DEFAULT_PASSWORD: abc123
+  secretbin:
+    image: ghcr.io/nihility-io/secretbin:dev
+    container_name: secretbin
+    read_only: true
     ports:
-      - "15432:80"
+      - "8000:8000"
     volumes:
-      - pgadmin-data:/var/lib/pgadmin
+      - type: bind
+        source: ../config.yaml
+        target: /app/config.yaml
+      - type: bind
+        source: ./config.db.yaml
+        target: /app/config.db.yaml
     networks:
-      - network
+      - secretbin
 
 volumes:
   postgres-data:
-  pgadmin-data:
 
 networks:
-  network:
+  secretbin:

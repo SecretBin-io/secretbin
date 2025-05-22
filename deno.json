@@ -47,23 +47,24 @@
 		},
 		"db:start": {
 			"description": "Starts a local database for development.",
-			"command": "docker compose -f container/docker-compose.yaml up -d"
+			"command": "cd container && docker compose up -d postgres"
 		},
 		"db:stop": {
 			"description": "Stops the local database.",
-			"command": "docker compose -f container/docker-compose.yaml down"
+			"command": "cd container && docker compose down postgres"
 		},
 		"container:build": {
 			"description": "Builds the container image",
-			"command": "task -d . -t container/Taskfile.yaml build"
+			"dependencies": ["build:tailwind"],
+			"command": "cd container && DENO_VERSION=$(deno -v | awk '{print $2}') docker buildx bake --allow=fs.read=.. -f docker-bake.hcl"
 		},
 		"container:run": {
 			"description": "Runs the container locally",
-			"command": "task -d . -t container/Taskfile.yaml run"
+			"command": "cd container && docker compose up secretbin"
 		},
 		"container:publish": {
 			"description": "Builds and publishes the container image",
-			"command": "task -d . -t container/Taskfile.yaml publish"
+			"command": "cd container && DENO_VERSION=$(deno -v | awk '{print $2}') docker buildx bake --allow=fs.read=.. -f docker-bake.hcl --push multi_arch"
 		},
 		"deploy": {
 			"description": "Deploys SecretBin to Deno Deploy",
@@ -135,7 +136,14 @@
 		],
 		"jsx": "precompile",
 		"jsxImportSource": "preact",
-		"jsxPrecompileSkipElements": ["a", "img", "source", "body", "html", "head"]
+		"jsxPrecompileSkipElements": [
+			"a",
+			"img",
+			"source",
+			"body",
+			"html",
+			"head"
+		]
 	},
 	"fmt": {
 		"useTabs": true,
