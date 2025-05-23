@@ -1,32 +1,37 @@
-import { Message, PageContent } from "components"
-import { type PageProps } from "fresh"
+import { PageContent } from "components"
+import { type PageProps, PageResponse } from "fresh"
 import { Expires, ShareSecret } from "islands"
 import { useTranslationWithPrefix } from "lang"
 import { Secrets } from "secret/server"
 import { State } from "state"
+import { SecretMetadata } from "secret/models"
+import { define } from "utils"
+
+interface ShareSecretData {
+	id: string
+	metadata: SecretMetadata
+}
+
+export const handler = define.handlers<unknown>({
+	async GET({ params: { id } }): Promise<PageResponse<ShareSecretData>> {
+		const metadata = await Secrets.shared.getSecretMetadata(id)
+		return { data: { id, metadata } }
+	},
+})
 
 /**
  * Renders page for sharing a secret
  */
-export default async ({ params, state }: PageProps<unknown, State>) => {
+export default ({ state, data: { id, metadata } }: PageProps<ShareSecretData, State>) => {
 	const $ = useTranslationWithPrefix(state.language, "ShareSecret")
-	try {
-		const metadata = await Secrets.shared.getSecretMetadata(params.id)
-		return (
-			<PageContent title={$("Title")} description={$("Description")}>
-				<div class="items-left justify-left space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
-					<div class="mx-auto">
-						<Expires state={state} date={metadata.expires} />
-						<ShareSecret state={state} id={params.id} />
-					</div>
+	return (
+		<PageContent title={$("Title")} description={$("Description")}>
+			<div class="items-left justify-left space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+				<div class="mx-auto">
+					<Expires state={state} date={metadata.expires} />
+					<ShareSecret state={state} id={id} />
 				</div>
-			</PageContent>
-		)
-	} catch (e) {
-		return (
-			<PageContent title={$("Title")}>
-				<Message type="error" title="Error" message={(e as Error).message} />
-			</PageContent>
-		)
-	}
+			</div>
+		</PageContent>
+	)
 }

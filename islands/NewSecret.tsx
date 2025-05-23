@@ -41,7 +41,7 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 			aRef.current!.href = res
 			aRef.current!.click()
 		} catch (e) {
-			setError(LocalizedError.getLocalizedMessage(state.language, e as Error))
+			setError(LocalizedError.getMessage(state.language, e as Error))
 		}
 	}
 

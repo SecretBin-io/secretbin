@@ -77,6 +77,17 @@
   },
   {
     "registry": "jsr",
+    "name": "@logtape/logtape",
+    "version": "0.10.0",
+    "repository": "https://github.com/dahlia/logtape",
+    "authors": [
+      "Hong Minhee (洪 民憙)"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/dahlia/logtape/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
     "name": "@luca/esbuild-deno-loader",
     "version": "0.11.1",
     "repository": "https://github.com/lucacasonato/esbuild_deno_loader",

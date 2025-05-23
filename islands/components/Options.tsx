@@ -55,10 +55,6 @@ export const Options = ({
 		}
 	}, [pass1, pass2, usePass])
 
-	// const setOpts = <K extends keyof SecretOptions>(key: K) => (value: SecretOptions[K]) => {
-	// 	setOptions({ ...options, [key]: value })
-	// }
-
 	return (
 		<>
 			<Section title={$("Expiration.Title")} description={$("Expiration.Description")}>
@@ -84,7 +80,7 @@ export const Options = ({
 					tooltip={config.policy.requireBurn
 						? $("RequiredByPolicy", { name: config.branding.appName })
 						: undefined}
-					on={burn}
+					on={config.policy.requireBurn || burn}
 					onChange={setBurn}
 				/>
 				<Show if={!config.policy.denySlowBurn && burn}>
@@ -123,10 +119,10 @@ export const Options = ({
 					tooltip={config.policy.requirePassword
 						? $("RequiredByPolicy", { name: config.branding.appName })
 						: undefined}
-					on={usePass}
+					on={config.policy.requirePassword || usePass}
 					onChange={setUsePass}
 				/>
-				<Show if={usePass}>
+				<Show if={config.policy.requirePassword || usePass}>
 					<div class="flex">
 						<div class="flex h-5">
 							<div class="w-11" />

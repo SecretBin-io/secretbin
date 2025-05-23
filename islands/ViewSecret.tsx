@@ -42,8 +42,7 @@ export const ViewSecret = ({ id, state, remainingReads, passwordProtected }: Vie
 				setError("")
 				setSecret(sec)
 			} catch (err) {
-				setError(LocalizedError.getLocalizedMessage(state.language, err as Error))
-				console.log(err)
+				setError(LocalizedError.getMessage(state.language, err as Error))
 				sec = undefined
 			}
 		}

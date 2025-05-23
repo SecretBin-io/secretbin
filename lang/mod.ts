@@ -66,8 +66,7 @@ export const getTranslation = (lang: Language, key: TranslationKey, params?: Rec
 
 	if (typeof o !== "string") {
 		if (lang !== Language.English) {
-			// deno-lint-ignore react-rules-of-hooks
-			return useTranslation(Language.English)(key, params)
+			return getTranslation(Language.English, key, params)
 		}
 		return `{${key}}`
 	}

@@ -11,7 +11,7 @@
 		},
 		"dev:tailwind": {
 			"description": "Build styles.css using Tailwind and watch for changes.",
-			"command": "deno run -A npm:@tailwindcss/cli -i styles/styles.css -o static/styles.css -w"
+			"command": "tailwindcss -i styles/styles.css -o static/styles.css -w"
 		},
 		"dev:fresh": {
 			"description": "Starts Deno Fresh is dev mode and watch for changes.",
@@ -23,7 +23,7 @@
 		},
 		"build:tailwind": {
 			"description": "Build styles.css using Tailwind.",
-			"command": "deno run -A npm:@tailwindcss/cli -m -i styles/styles.css -o static/styles.css"
+			"command": "tailwindcss -m -i styles/styles.css -o static/styles.css"
 		},
 		"build:fresh": {
 			"description": "Builds Deno Fresh for production.",
@@ -97,6 +97,7 @@
 	"exclude": ["**/_fresh/*"],
 	"imports": {
 		"@libs/qrcode": "jsr:@libs/qrcode@^2.0.1",
+		"@logtape/logtape": "jsr:@logtape/logtape@^0.10.0",
 		"@nihility-io/cookies": "jsr:@nihility-io/cookies@^2.0.0-alpha.7",
 		"@nihility-io/record": "jsr:@nihility-io/record@^1.0.3",
 		"@opentelemetry/api": "npm:@opentelemetry/api@^1.9.0",
@@ -111,6 +112,7 @@
 		"components": "./components/mod.ts",
 		"config": "./config/mod.ts",
 		"fresh": "jsr:@fresh/core@^2.0.0-alpha.34",
+		"fresh/error": "https://jsr.io/@fresh/core/2.0.0-alpha.34/src/error.ts",
 		"helpers": "./helpers/mod.ts",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",
@@ -152,7 +154,7 @@
 		"semiColons": false,
 		"singleQuote": false,
 		"proseWrap": "preserve",
-		"exclude": ["styles/**", "credits.json", "README.md", "*.yaml"],
+		"exclude": ["styles/**", "credits.json", "README.md", "*.yaml", "container/*"],
 		"trailingCommas": "onlyMultiLine"
 	},
 	"test": {

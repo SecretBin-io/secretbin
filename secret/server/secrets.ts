@@ -31,8 +31,8 @@ export class Secrets {
 		try {
 			// Initialize the backend
 			await this.#db.init()
-		} catch (e) {
-			logDB.error(`Failed to initialize database.`, e)
+		} catch (error) {
+			logDB.error(`Failed to initialize database.`, { error })
 			return false
 		}
 
@@ -75,13 +75,13 @@ export class Secrets {
 					try {
 						await this.#db.deleteSecret(s.id)
 						logCG.info(`Deleted secret #${s.id}.`, { id: s.id })
-					} catch (e) {
-						logCG.error(`Unable to delete secret #${s.id}.`, { id: s.id, error: e })
+					} catch (error) {
+						logCG.error(`Unable to delete secret #${s.id}.`, { id: s.id, error })
 					}
 				}
 			}
-		} catch (e) {
-			logCG.error(`Failed to collect garbage.`, e)
+		} catch (error) {
+			logCG.error(`Failed to collect garbage.`, { error })
 		}
 	}
 
@@ -156,9 +156,9 @@ export class Secrets {
 				`Create a new secret #${id} that expires ${expires.toISOString()}`,
 				{ id, expires, action: "create" },
 			)
-		} catch (e) {
-			logSecrets.error(`Failed to create a new secret #${id}.`, { id, action: "create", error: e })
-			throw e
+		} catch (error) {
+			logSecrets.error(`Failed to create a new secret #${id}.`, { id, action: "create", error })
+			throw error
 		}
 
 		return id

@@ -5,6 +5,8 @@ export type FlattenObjectKeys<T extends Record<string, unknown>, Key = keyof T> 
 
 export type TrimPrefix<TPrefix extends string, T extends string> = T extends `${TPrefix}.${infer R}` ? R : never
 
+export type TrimSuffix<TSuffix extends string, T extends string> = T extends `${infer R}.${TSuffix}` ? R : never
+
 /**
  * Compile strings containing variables
  * @param template Template string
@@ -46,6 +48,5 @@ export const formatString = (template: string, params: Record<string, string>): 
 			}
 		}
 	}
-
 	return res
 }

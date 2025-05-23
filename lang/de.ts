@@ -178,25 +178,55 @@ export default {
 			Decline: "Ablehnen",
 		},
 		Errors: {
-			SecretNotFoundError: "Ein Geheimnis mit der ID {{id}} wurde nicht gefunden.",
-			SecretAlreadyExistsError: "Ein Geheimnis mit der ID {{id}} existiert bereits.",
-			SecretListError: "Es ist ein Fehler beim Landen der Geheimnisse aufgetreten.",
-			SecretReadError: "Es ist ein Fehler beim Lesen des Geheimnisses mit der ID {{id}} aufgetreten.",
-			SecretCreateError: "Es ist ein Fehler beim Erstellen des Geheimnisses mit der ID {{id}} aufgetreten.",
-			SecretUpdateError: "Es ist ein Fehler beim aktualisieren des Geheimnisses mit der ID {{id}} aufgetreten.",
-			SecretDeleteError: "Es ist ein Fehler beim Löschen des Geheimnisses mit der ID {{id}} aufgetreten.",
-			SecretParseError: "Das Geheimnis hat ein ungültiges Format. Details: {{reason}}",
-			SecretPolicyError:
-				"Das Geheimnis was du versuchst anzulegen verstößt gegen die Vorgaben. Details: {{reason}}",
-			SecretSizeLimitError:
-				"Die Datenmenge von {{size}} des Geheimnisses überschreitet die zulässige Grenze von {{maxSize}}.",
+			PageNotFoundError: {
+				Title: "Seite nicht gefunden",
+				Message: "Die gesuchte Seite konnte nicht gefunden werden.",
+			},
+			SecretNotFoundError: {
+				Title: "SecretNotFoundError",
+				Message: "Ein Geheimnis mit der ID {{id}} wurde nicht gefunden.",
+			},
+			SecretAlreadyExistsError: {
+				Title: "SecretAlreadyExistsError",
+				Message: "Ein Geheimnis mit der ID {{id}} existiert bereits.",
+			},
+			SecretListError: {
+				Title: "SecretListError",
+				Message: "Es ist ein Fehler beim Landen der Geheimnisse aufgetreten.",
+			},
+			SecretReadError: {
+				Title: "SecretReadError",
+				Message: "Es ist ein Fehler beim Lesen des Geheimnisses mit der ID {{id}} aufgetreten.",
+			},
+			SecretCreateError: {
+				Title: "SecretCreateError",
+				Message: "Es ist ein Fehler beim Erstellen des Geheimnisses mit der ID {{id}} aufgetreten.",
+			},
+			SecretUpdateError: {
+				Title: "SecretUpdateError",
+				Message: "Es ist ein Fehler beim aktualisieren des Geheimnisses mit der ID {{id}} aufgetreten.",
+			},
+			SecretDeleteError: {
+				Title: "SecretDeleteError",
+				Message: "Es ist ein Fehler beim Löschen des Geheimnisses mit der ID {{id}} aufgetreten.",
+			},
+			SecretParseError: {
+				Title: "SecretParseError",
+				Message: "Das Geheimnis hat ein ungültiges Format. Details: {{reason}}",
+			},
+			SecretPolicyError: {
+				Title: "SecretPolicyError",
+				Message: "Das Geheimnis was du versuchst anzulegen verstößt gegen die Vorgaben. Details: {{reason}}",
+			},
+			SecretSizeLimitError: {
+				Title: "SecretSizeLimitError",
+				Message:
+					"Die Datenmenge von {{size}} des Geheimnisses überschreitet die zulässige Grenze von {{maxSize}}.",
+			},
 		},
 		ErrorPage: {
-			NotFound: {
-				Title: "Seite nicht gefunden",
-				Description: "Die gesuchte Seite konnte nicht gefunden werden.",
-				GoHome: "Zurück zur Startseite",
-			},
+			Title: "Seite nicht gefunden",
+			GoHome: "Zurück zur Startseite",
 		},
 	},
 } satisfies typeof baseLang

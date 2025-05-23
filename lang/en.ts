@@ -1,3 +1,5 @@
+import { title } from "node:process"
+
 export default {
 	Metadata: {
 		NativeName: "English",
@@ -177,24 +179,54 @@ export default {
 			Decline: "Decline",
 		},
 		Errors: {
-			SecretNotFoundError: "A secret with the ID {{id}} does not exist.",
-			SecretAlreadyExistsError: "A secret with the ID {{id}} already exists.",
-			SecretListError: "Failed to get secrets.",
-			SecretReadError: "Unable to read secret with ID {{id}}.",
-			SecretCreateError: "Unable to create secret with ID {{id}}.",
-			SecretUpdateError: "Unable to update the secret with ID {{id}}.",
-			SecretDeleteError: "Unable to delete secret with ID {{id}}.",
-			SecretParseError: "The secret has an invalid format. Details: {{reason}}",
-			SecretPolicyError: "The secret you are trying to create violates the policies. Details: {{reason}}",
-			SecretSizeLimitError:
-				"The total size of the secret ({{size}}) exceeds the maximum allowed size of {{maxSize}}.",
+			PageNotFoundError: {
+				Title: "Page Not Found",
+				Message: "The page you were looking for doesn't exist.",
+			},
+			SecretNotFoundError: {
+				Title: "SecretNotFoundError",
+				Message: "A secret with the ID {{id}} does not exist.",
+			},
+			SecretAlreadyExistsError: {
+				Title: "SecretAlreadyExistsError",
+				Message: "A secret with the ID {{id}} already exists.",
+			},
+			SecretListError: {
+				Title: "SecretListError",
+				Message: "Failed to get secrets.",
+			},
+			SecretReadError: {
+				Title: "SecretReadError",
+				Message: "Unable to read secret with ID {{id}}.",
+			},
+			SecretCreateError: {
+				Title: "SecretCreateError",
+				Message: "Unable to create secret with ID {{id}}.",
+			},
+			SecretUpdateError: {
+				Title: "SecretUpdateError",
+				Message: "Unable to update the secret with ID {{id}}.",
+			},
+			SecretDeleteError: {
+				Title: "SecretDeleteError",
+				Message: "Unable to delete secret with ID {{id}}.",
+			},
+			SecretParseError: {
+				Title: "SecretParseError",
+				Message: "The secret has an invalid format. Details: {{reason}}",
+			},
+			SecretPolicyError: {
+				Title: "SecretPolicyError",
+				Message: "The secret you are trying to create violates the policies. Details: {{reason}}",
+			},
+			SecretSizeLimitError: {
+				Title: "SecretSizeLimitError",
+				Message: "The total size of the secret ({{size}}) exceeds the maximum allowed size of {{maxSize}}.",
+			},
 		},
 		ErrorPage: {
-			NotFound: {
-				Title: "Page not NotFound",
-				Description: "The page you were looking for doesn't exist.",
-				GoHome: "Go back home",
-			},
+			Title: "Error",
+			GoHome: "Go back home",
 		},
 	},
 }

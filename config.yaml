@@ -36,7 +36,9 @@ storage:
   maxSize: 10Mi # Max size a new secret is allowed to have
   gcInterval: 5 # Interval in seconds in which the garbage collector should run
 logging:
-  level: INFO
+  level: info # Logging level (default: info)
+  mode: text # Specifies if logs should be rendered as text or JSON (default: text)
+  logAccess: true # Enable web access logging (default: false)
 expires: # Expire options for new secrets
   - 5min
   - 1hr

@@ -1,27 +1,16 @@
 import { config } from "config"
 import { App, fsRoutes, staticFiles } from "fresh"
-import { logWeb } from "log"
 import { Secrets } from "secret/server"
-import { define, stateMiddleware } from "utils"
 import { State } from "state"
+import { loggingMiddleware, stateMiddleware } from "utils"
 
 export const app = new App<State>()
 app.use(staticFiles())
 app.use(stateMiddleware)
 
-if (config.logging.level === "DEBUG") {
-	// this can also be defined via a file. feel free to delete this!
-	const loggerMiddleware = define.middleware(async (ctx) => {
-		const res = await ctx.next()
-		logWeb.debug(`${ctx.req.method} [${res.status}] ${ctx.req.url}`, {
-			method: ctx.req.method,
-			url: ctx.req.url,
-			status: res.status,
-		})
-		return res
-	})
-
-	app.use(loggerMiddleware)
+// Use access logging if enabled
+if (config.logging.logAccess) {
+	app.use(loggingMiddleware)
 }
 
 await fsRoutes(app, {

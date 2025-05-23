@@ -44,8 +44,8 @@ export class KVDatabase implements Database {
 			for await (const e of this.#kv.list({ prefix: ["secrets"] })) {
 				yield await SecretMetadata.parseAsync(e.value)
 			}
-		} catch (e) {
-			logDB.error(`Failed to list secrets.`, e)
+		} catch (error) {
+			logDB.error(`Failed to list secrets.`, { error })
 			throw new SecretListError()
 		}
 	}
@@ -77,8 +77,8 @@ export class KVDatabase implements Database {
 
 		try {
 			return await Secret.parseAsync(res.value)
-		} catch (e) {
-			logDB.error(`Failed to read secret.`, e)
+		} catch (error) {
+			logDB.error(`Failed to read secret.`, { error })
 			throw new SecretReadError(id)
 		}
 	}
@@ -106,7 +106,7 @@ export class KVDatabase implements Database {
 			.catch(() => false)
 
 		if (!success) {
-			logDB.error(`Failed to write secret`)
+			logDB.error(`Failed to write secret.`)
 			throw new SecretCreateError(secret.id)
 		}
 	}
@@ -142,8 +142,8 @@ export class KVDatabase implements Database {
 
 		try {
 			await this.#kv.delete(["secrets", id])
-		} catch (e) {
-			logDB.error(`Failed to delete secret.`, e)
+		} catch (error) {
+			logDB.error(`Failed to delete secret.`, { error })
 			throw new SecretDeleteError(id)
 		}
 	}

@@ -8,9 +8,8 @@ import z from "zod"
  * Implement a error sub-class for each error
  */
 export class SecretNotFoundError extends LocalizedError {
-	public override code = STATUS_CODE.NotFound
 	public constructor(public id: string) {
-		super("SecretNotFoundError", { id })
+		super(STATUS_CODE.NotFound, "SecretNotFoundError", { id })
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {
@@ -19,9 +18,8 @@ export class SecretNotFoundError extends LocalizedError {
 }
 
 export class SecretAlreadyExistsError extends LocalizedError {
-	public override code = STATUS_CODE.Conflict
 	public constructor(public id: string) {
-		super("SecretAlreadyExistsError", { id })
+		super(STATUS_CODE.Conflict, "SecretAlreadyExistsError", { id })
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {
@@ -31,7 +29,7 @@ export class SecretAlreadyExistsError extends LocalizedError {
 
 export class SecretListError extends LocalizedError {
 	public constructor() {
-		super("SecretListError")
+		super(STATUS_CODE.InternalServerError, "SecretListError")
 	}
 
 	public static fromObject(_message: string, _params: Record<string, unknown>): Error {
@@ -41,7 +39,7 @@ export class SecretListError extends LocalizedError {
 
 export class SecretReadError extends LocalizedError {
 	public constructor(public id: string) {
-		super("SecretReadError", { id })
+		super(STATUS_CODE.InternalServerError, "SecretReadError", { id })
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {
@@ -51,7 +49,7 @@ export class SecretReadError extends LocalizedError {
 
 export class SecretCreateError extends LocalizedError {
 	public constructor(public id: string) {
-		super("SecretCreateError", { id })
+		super(STATUS_CODE.BadRequest, "SecretCreateError", { id })
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {
@@ -61,7 +59,7 @@ export class SecretCreateError extends LocalizedError {
 
 export class SecretUpdateError extends LocalizedError {
 	public constructor(public id: string) {
-		super("SecretUpdateError", { id })
+		super(STATUS_CODE.InternalServerError, "SecretUpdateError", { id })
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {
@@ -71,7 +69,7 @@ export class SecretUpdateError extends LocalizedError {
 
 export class SecretDeleteError extends LocalizedError {
 	public constructor(public id: string) {
-		super("SecretDeleteError", { id })
+		super(STATUS_CODE.InternalServerError, "SecretDeleteError", { id })
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {
@@ -81,7 +79,7 @@ export class SecretDeleteError extends LocalizedError {
 
 export class SecretParseError extends LocalizedError {
 	public constructor(public issues: z.core.$ZodIssue[]) {
-		super("SecretParseError", { reasons: issues.map((x) => x.message).join(", ") })
+		super(STATUS_CODE.BadRequest, "SecretParseError", { reasons: issues.map((x) => x.message).join(", ") })
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {
@@ -90,9 +88,8 @@ export class SecretParseError extends LocalizedError {
 }
 
 export class SecretPolicyError extends LocalizedError {
-	public override code = STATUS_CODE.Forbidden
 	public constructor(public reason: string) {
-		super("SecretPolicyError", { reason })
+		super(STATUS_CODE.Forbidden, "SecretPolicyError", { reason })
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {
@@ -101,9 +98,11 @@ export class SecretPolicyError extends LocalizedError {
 }
 
 export class SecretSizeLimitError extends LocalizedError {
-	public override code = STATUS_CODE.ContentTooLarge
 	public constructor(public size: number, public maxSize: number) {
-		super("SecretSizeLimitError", { size: humanReadableSize(size), maxSize: humanReadableSize(maxSize) })
+		super(STATUS_CODE.ContentTooLarge, "SecretSizeLimitError", {
+			size: humanReadableSize(size),
+			maxSize: humanReadableSize(maxSize),
+		})
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {

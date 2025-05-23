@@ -1,38 +1,43 @@
 import { Message, PageContent } from "components"
-import { type PageProps } from "fresh"
+import { type PageProps, PageResponse } from "fresh"
 import { Expires, ViewSecret } from "islands"
 import { useTranslationWithPrefix } from "lang"
 import { Secrets } from "secret/server"
 import { State } from "state"
+import { SecretMetadata } from "secret/models"
+import { define } from "utils"
+
+interface GetSecretData {
+	id: string
+	metadata: SecretMetadata
+}
+
+export const handler = define.handlers<GetSecretData>({
+	async GET({ params: { id } }): Promise<PageResponse<GetSecretData>> {
+		const metadata = await Secrets.shared.getSecretMetadata(id)
+		return { data: { id, metadata } }
+	},
+})
 
 /**
  * Renders page for viewing a secret
  */
-export default async ({ params, state }: PageProps<unknown, State>) => {
+export default ({ state, data: { id, metadata } }: PageProps<GetSecretData, State>) => {
 	const $ = useTranslationWithPrefix(state.language, "ViewSecret")
 
-	try {
-		const metadata = await Secrets.shared.getSecretMetadata(params.id)
-		return (
-			<PageContent title={$("Title")} description={$("Description")}>
-				<div class="items-left justify-left space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
-					<div class="mx-auto">
-						<Expires state={state} date={metadata.expires} />
-						<ViewSecret
-							state={state}
-							id={params.id}
-							remainingReads={metadata.remainingReads}
-							passwordProtected={metadata.passwordProtected}
-						/>
-					</div>
+	return (
+		<PageContent title={$("Title")} description={$("Description")}>
+			<div class="items-left justify-left space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+				<div class="mx-auto">
+					<Expires state={state} date={metadata.expires} />
+					<ViewSecret
+						state={state}
+						id={id}
+						remainingReads={metadata.remainingReads}
+						passwordProtected={metadata.passwordProtected}
+					/>
 				</div>
-			</PageContent>
-		)
-	} catch (e) {
-		return (
-			<PageContent title={$("Title")}>
-				<Message type="error" title="Error" message={(e as Error).message} />
-			</PageContent>
-		)
-	}
+			</div>
+		</PageContent>
+	)
 }

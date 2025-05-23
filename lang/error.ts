@@ -1,29 +1,29 @@
-import { STATUS_CODE } from "@std/http/status"
-import { TrimPrefix } from "./helpers.ts"
+import { STATUS_TEXT } from "@std/http/status"
 import { getTranslation, Language, TranslationKey } from "lang"
+import { TrimPrefix, TrimSuffix } from "./helpers.ts"
+import { HttpError } from "fresh/error"
+
+export type ErrorKey = TrimSuffix<"Title", TrimPrefix<"Errors", TranslationKey>>
 
 /**
  * Error type which enables localized translated error messages
  */
-export class LocalizedError extends Error {
-	#key: TrimPrefix<"Errors", TranslationKey>
+export class LocalizedError extends HttpError {
+	#key: ErrorKey
 	#params: Record<string, string>
 
 	/**
-	 * HTTP status code for the error
-	 */
-	public code: number = STATUS_CODE.BadRequest
-
-	/**
 	 * Create a new localized error. Note: The error name is set to the translation key name by default
+	 * @param status HTTP status code
 	 * @param key Translation key for the error
 	 * @param params Optional parameters for the translated message
 	 */
 	public constructor(
-		key: TrimPrefix<"Errors", TranslationKey>,
+		status: keyof typeof STATUS_TEXT,
+		key: ErrorKey,
 		params: Record<string, string> = {},
 	) {
-		super(getTranslation(Language.English, `Errors.${key}`, params))
+		super(status, getTranslation(Language.English, `Errors.${key}.Message`, params))
 		this.name = key
 		this.#key = key
 		this.#params = params
@@ -34,8 +34,9 @@ export class LocalizedError extends Error {
 	 * @param lang Requested language
 	 * @returns Translated error message
 	 */
-	public getLocalizedMessage(lang: Language) {
-		return getTranslation(lang, `Errors.${this.#key}`, this.#params)
+	public getMessage(lang: Language) {
+		console.log({ lang, msg: `Errors.${this.#key}.Message`, param: this.#params })
+		return getTranslation(lang, `Errors.${this.#key}.Message`, this.#params)
 	}
 
 	/**
@@ -45,9 +46,33 @@ export class LocalizedError extends Error {
 	 * @param err Error
 	 * @returns Translated error message
 	 */
-	public static getLocalizedMessage(lang: Language, err: Error) {
+	public static getMessage(lang: Language, err: Error) {
 		if (err instanceof LocalizedError) {
-			return err.getLocalizedMessage(lang)
+			return err.getMessage(lang)
+		} else {
+			return err.message
+		}
+	}
+
+	/**
+	 * Gets the error title in the desired language.
+	 * @param lang Requested language
+	 * @returns Translated error title
+	 */
+	public getTitle(lang: Language) {
+		return getTranslation(lang, `Errors.${this.#key}.Title`, this.#params)
+	}
+
+	/**
+	 * Gets the error title in the desired language. If the error is not an localized error, the error
+	 * name is returned instead.
+	 * @param lang Requested language
+	 * @param err Error
+	 * @returns Translated error title
+	 */
+	public static getTitle(lang: Language, err: Error) {
+		if (err instanceof LocalizedError) {
+			return err.getTitle(lang)
 		} else {
 			return err.message
 		}

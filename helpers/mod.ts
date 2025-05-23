@@ -27,7 +27,7 @@ export const successResponse = <T>(value: T) =>
  * @returns Response
  */
 export const errorResponse = (err: Error | unknown) => {
-	const status = err instanceof LocalizedError ? err.code : STATUS_CODE.BadRequest
+	const status = err instanceof LocalizedError ? err.status : STATUS_CODE.BadRequest
 	const res = err instanceof Error ? err : new Error(`${err}`)
 	return Response.json(encodeError(res), { status })
 }

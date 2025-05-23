@@ -119,9 +119,9 @@ export class PostgresDatabase implements Database {
 			for (const e of res.values()) {
 				yield await PostgresDatabase.#metadataFromRow(e as SecretRow)
 			}
-		} catch (e) {
-			logDB.error(`Failed to list secrets.`, e)
-			throw e instanceof LocalizedError ? e : new SecretListError()
+		} catch (error) {
+			logDB.error(`Failed to list secrets.`, { error })
+			throw error instanceof LocalizedError ? error : new SecretListError()
 		}
 	}
 
@@ -150,9 +150,9 @@ export class PostgresDatabase implements Database {
 			}
 
 			return await PostgresDatabase.#secretFromRow([...res.values()][0] as SecretRow)
-		} catch (e) {
-			logDB.error(`Failed to read secrets.`, e)
-			throw e instanceof LocalizedError ? e : new SecretReadError(id)
+		} catch (error) {
+			logDB.error(`Failed to read secrets.`, { error })
+			throw error instanceof LocalizedError ? error : new SecretReadError(id)
 		}
 	}
 
@@ -171,9 +171,9 @@ export class PostgresDatabase implements Database {
 			}
 
 			return await PostgresDatabase.#metadataFromRow([...res.values()][0] as SecretRow)
-		} catch (e) {
-			logDB.error(`Failed to read secrets.`, e)
-			throw e instanceof LocalizedError ? e : new SecretReadError(id)
+		} catch (error) {
+			logDB.error(`Failed to read secrets.`, { error })
+			throw error instanceof LocalizedError ? error : new SecretReadError(id)
 		}
 	}
 
@@ -207,9 +207,9 @@ export class PostgresDatabase implements Database {
                 ${secret.data.salt},
                 ${secret.data.data}
             )`
-		} catch (e) {
-			logDB.error(`Failed to insert secrets.`, e)
-			throw e instanceof LocalizedError ? e : new SecretCreateError(secret.id)
+		} catch (error) {
+			logDB.error(`Failed to insert secrets.`, { error })
+			throw error instanceof LocalizedError ? error : new SecretCreateError(secret.id)
 		}
 	}
 
@@ -226,9 +226,9 @@ export class PostgresDatabase implements Database {
                 expires             = ${patch.expires ?? res.expires},
                 remaining_reads     = ${patch.remainingReads ?? res.remainingReads}
             where id = ${id}`
-		} catch (e) {
-			logDB.error(`Failed to update secrets.`, e)
-			throw e instanceof LocalizedError ? e : new SecretUpdateError(id)
+		} catch (error) {
+			logDB.error(`Failed to update secrets.`, { error })
+			throw error instanceof LocalizedError ? error : new SecretUpdateError(id)
 		}
 	}
 
@@ -244,8 +244,8 @@ export class PostgresDatabase implements Database {
 
 		try {
 			await this.#sql /*sql*/`delete from secrets where id = ${id}`
-		} catch (e) {
-			logDB.error(`Failed to delete secret.`, e)
+		} catch (error) {
+			logDB.error(`Failed to delete secret.`, { error })
 			throw new SecretDeleteError(id)
 		}
 	}

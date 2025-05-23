@@ -151,6 +151,10 @@ storage:
     username: secretbin
     password: abc123
     tls: on
+logging:
+  level: info # Logging level (default: info)
+  mode: text # Specifies if logs should be rendered as text or JSON (default: text)
+  logAccess: false # Enable web access logging (default: false)
 expires: # Expire options for new secrets
   - 5min
   - 1hr

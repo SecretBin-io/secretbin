@@ -1,6 +1,7 @@
 import classNames from "classnames"
-import { Icon, IconName } from "components"
+import { Icon, IconName, Show } from "components"
 import { BaseProps } from "./helpers.ts"
+import { ComponentChildren } from "preact"
 
 export type MessageType = "error" | "warning" | "info"
 
@@ -26,15 +27,20 @@ export interface MessageProps extends BaseProps {
 	/** Type of messages, which determines the style (default: info) */
 	type?: MessageType
 
-	/** Message text (Note: If no message is set, the message box will not be rendered) */
+	/** Message text (Note: If neither message nor children is set, the message box will not be rendered) */
 	message?: string
+
+	/** Makes the text larger */
+	largeText?: boolean
+
+	children?: ComponentChildren
 }
 
 /**
  * Creates a message with a title wrapped in a colored box
  */
-export const Message = ({ title = "Message", type = "info", message, ...props }: MessageProps) => {
-	if (!message) {
+export const Message = ({ title, type = "info", largeText, children, message, ...props }: MessageProps) => {
+	if (!message && !children) {
 		return undefined
 	}
 
@@ -50,7 +56,17 @@ export const Message = ({ title = "Message", type = "info", message, ...props }:
 		>
 			<Icon name={iconMessageType[type]} />
 			<div class="pl-2">
-				<span class="font-medium">{title}:</span> {message}
+				<Show if={title}>
+					<span class="font-medium">{title}:</span>
+					{" "}
+				</Show>
+				<span
+					class={classNames({
+						"text-base": largeText,
+					})}
+				>
+					{children ?? message}
+				</span>
 			</div>
 		</div>
 	)
