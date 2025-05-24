@@ -60,9 +60,6 @@ Temporary Items
 *.db-shm
 *.db-wal
 
-# Don't include screenshots
-/resources
-
 # Don't include generated styles
 /static/styles.css
 

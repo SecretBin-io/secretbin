@@ -1,7 +1,14 @@
 import z from "zod"
-import { Config } from "./model.ts"
-export type * from "./model.ts"
-export type * from "./db.ts"
+import { Config } from "./config.ts"
+export type * from "./banner.ts"
+export type * from "./branding.ts"
+export type * from "./defaults.ts"
+export type * from "./expires.ts"
+export type * from "./logging.ts"
+export type * from "./config.ts"
+export type * from "./policy.ts"
+export type * from "./storage.ts"
+export type * from "./string.ts"
 
 /**
  * Load the config.yaml file server side
@@ -14,18 +21,18 @@ const serverCfg: Config = await (async () => {
 	const YAML = await import("@std/yaml")
 	const { deepMerge } = await import("@std/collections")
 
-	const cfgs = await Promise.all(
+	const configs = await Promise.all(
 		(await Array.fromAsync(Deno.readDir(".")))
 			.filter((x) => /^config(?:\.[^\.]+)?\.ya?ml$/.test(x.name))
 			.map((x) => Deno.readTextFile(x.name).then((x) => YAML.parse(x) as Record<string, unknown>)),
 	)
 
-	if (cfgs.length === 0) {
+	if (configs.length === 0) {
 		return Config.parseAsync({})
 	}
 
 	try {
-		return await Config.parseAsync(cfgs.reduce((p, c) => deepMerge(p, c), {}))
+		return await Config.parseAsync(configs.reduce((p, c) => deepMerge(p, c), {}))
 	} catch (e) {
 		console.error("Failed to parse config file. Reason: ")
 		if (!(e instanceof z.ZodError)) {

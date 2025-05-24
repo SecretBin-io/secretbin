@@ -152,28 +152,6 @@ export default {
 		},
 		TermsOfService: {
 			Title: "Nutzungsbedingungen",
-			Content: `<h2>Usage Policy</h2>
-                <p class="text-base text-gray-500 dark:text-gray-400">
-                  Dieser Dienst wird ohne Gewähr angeboten. <b>{{name}} ist kein öffentlicher Service</b>. Es handelt sich um ein privates Projekt,
-                  das ausschließlich für meine Freunde und Bekannten nach ausdrücklicher Erlaubnis bestimmt ist.
-                  Geheimnisse, die mit {{name}} erstellt wurden, können jederzeit und ohne vorherige Ankündigung gelöscht werden.
-                </p>
-                <br />
-                <h2>Datenschutz</h2>
-                <p class="text-base text-gray-500 dark:text-gray-400">
-                  {{name}} nutzt Cookies um Einstellungen wie z.B. die präferierte Sprache zu speichern. Cookies werden nicht
-                  dazu genutzt und dich oder dein Geraet zu identifizieren. <br />
-                  Der Hoster von {{name}} sammelt möglicherweise folgende Daten in Form von Server-Logs:
-                  <ul class="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                    <li>- Deine IP-Adresse: Eine Zeichenkette zur Identifikation deines Internetanschlusses.</li>
-                    <li>- Dein User-Agent: Eine Zeichenkette, die von deinem Browser gesendet wird. Diese enthält Informationen zu deinen Browser und Betriebssystem, wie z.B. Version und Typ.</li>
-                    <li>- Zeit und Datum des Zugriffs auf {{name}}.</li>
-                  </ul>
-                </p>
-                <br />
-                <p class="text-base text-gray-500 dark:text-gray-400">
-                  <b><i>Wenn du mit diesen Bedingungen nicht einverstanden bist, verlasse bitte diese Seite.</i></b>
-                </p>`,
 			Accept: "Akzeptieren",
 			Decline: "Ablehnen",
 		},

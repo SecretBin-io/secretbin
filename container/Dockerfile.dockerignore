@@ -61,7 +61,10 @@ Temporary Items
 *.db-wal
 
 # Don't include screenshots
-/resources
+/resources/screenshots
+
+/container/*
+!/container/update_snapshot.ts
 
 ### Testing ###
 coverage

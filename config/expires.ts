@@ -1,5 +1,5 @@
-import { Expires } from "config"
 import { match, P } from "ts-pattern"
+import z from "zod"
 
 /**
  * Parses a duration string
@@ -43,17 +43,20 @@ export const parseExpires = (keys: string[]): Record<string, Expires> =>
 	keys.reduce((res, name) => ({ ...res, [name]: transformExpires(name) }), {})
 
 /**
- * Parses size string e.g. 10Mi into bytes
- * @param key Size string
- * @returns Size in Bytes
+ * Expire option for new secrets
  */
-export const transformSize = (key: string) =>
-	match(/^(\d+)(Ki|Mi|Gi|K|M|G)?$/.exec(key))
-		.with([P._, P.select()], (count) => +count)
-		.with([P._, P.select(), "Ki"], (count) => +count * 1024)
-		.with([P._, P.select(), "Mi"], (count) => +count * 1024 * 1024)
-		.with([P._, P.select(), "Gi"], (count) => +count * 1024 * 1024 * 1024)
-		.with([P._, P.select(), "K"], (count) => +count * 1000)
-		.with([P._, P.select(), "M"], (count) => +count * 1000 * 1000)
-		.with([P._, P.select(), "G"], (count) => +count * 1000 * 1000 * 1000)
-		.otherwise(() => 0)
+export interface Expires {
+	/** Number of e.g. Minutes */
+	count: number
+
+	/** Support time units */
+	unit: "Minute" | "Hour" | "Day" | "Week" | "Month" | "Year"
+
+	/** Duration converted into seconds */
+	seconds: number
+}
+
+export const Expires = z.string()
+	.regex(/^(\d+)(min|hr|d|w|m|y)$/, { error: "Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min" })
+	.array().transform(parseExpires)
+	.default(parseExpires(["5min", "1hr", "1d", "1w", "2w", "1m"]))

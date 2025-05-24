@@ -13,7 +13,11 @@ export interface TermsProps {
  */
 export const Terms = ({ state }: TermsProps) => {
 	const $ = useTranslationWithPrefix(state.language, "TermsOfService")
-	const [showTerms, setShowTerms] = useSetting("showTerms", true, state)
+	const [showTerms, setShowTerms] = useSetting("showTerms", !!config.branding.terms, state)
+
+	if (config.branding.terms === undefined) {
+		return undefined
+	}
 
 	return (
 		<Modal
@@ -39,9 +43,8 @@ export const Terms = ({ state }: TermsProps) => {
 				class="max-h-80 overflow-y-scroll"
 				// deno-lint-ignore react-no-danger
 				dangerouslySetInnerHTML={{
-					__html: config.branding.terms?.content[state.language] ?? // Get content from config in the desired language
-						config.branding.terms?.content.en ?? // If not found try to get title from config in English
-						$("Content", { name: config.branding.appName }), // If not found either use default from translation files
+					__html: config.branding.terms.content[state.language] ?? // Get content from config in the desired language
+						config.branding.terms.content.en, // If not found try to get title from config in English
 				}}
 			/>
 		</Modal>

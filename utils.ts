@@ -1,8 +1,8 @@
 import { getCookies } from "@std/http"
 import { createDefine } from "fresh"
 import { isLanguageSupported, Language } from "lang"
-import { State, Theme } from "state"
 import { logWeb } from "log"
+import { State, Theme } from "state"
 
 export const define = createDefine<State>()
 

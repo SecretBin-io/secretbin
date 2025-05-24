@@ -24,24 +24,17 @@ await configure({
 		// Logs JSON encoded logs to the console
 		jsonConsole: getConsoleSink({
 			formatter: getTextFormatter({
-				format: ({ level, category, message, record }) => {
+				timestamp: "rfc3339",
+				format: ({ timestamp, level, category, message, record }) => {
 					const { error, ...properties } = record.properties
-					const date = new Date(record.timestamp)
-					return JSON.stringify({
-						timestamp: date.toISOString(),
-						level: level,
-						category: category,
-						message: message,
-						error,
-						...(Object.keys(properties).length === 0 ? {} : { properties }),
-					})
+					return JSON.stringify({ timestamp, level, category, message, error, properties })
 				},
 			}),
 		}),
 	},
 	loggers: [
 		{ category: "web", lowestLevel, sinks: config.logging.logAccess ? sinks : [] },
-		{ category: "secret", lowestLevel, sinks },
+		{ category: "secrets", lowestLevel, sinks },
 		{ category: "garbageCollection", lowestLevel, sinks },
 		{ category: "database", lowestLevel, sinks },
 		{ category: ["logtape", "meta"], sinks: [] },

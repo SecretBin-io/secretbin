@@ -11,7 +11,7 @@ export interface TooltipProps extends BaseProps {
 
 export const Tooltip = ({ text, children, ...props }: TooltipProps) => {
 	if (!text) {
-		return undefined
+		return children
 	}
 
 	return (

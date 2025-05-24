@@ -4,7 +4,7 @@ SecretBin is a web app for sharing secrets like tokens and passwords.
 
 You can use SecretBin to create encrypted secrets and share them with as many people as you like via a link. Your secrets are encrypted on your device and then sent to the server where they are kept until they are opened or expired. The secrets can only be decrypted via the link.
 
-It is inspired by [PrivateBin](https://privatebin.info) PrivateBin is developed by [El RIDO](https://github.com/PrivateBin/PrivateBin/graphs/contributors) among others and released under the [Zlib License](https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md).
+SecretBin was inspired by [PrivateBin](https://privatebin.info), which is developed by [El RIDO](https://github.com/PrivateBin/PrivateBin/graphs/contributors) among others and released under the [Zlib License](https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md).
 
 SecretBin has been completely redeveloped and combines the basic functionality of PrivateBin with useful extensions.
 
@@ -12,16 +12,16 @@ SecretBin has been completely redeveloped and combines the basic functionality o
 
 When you open SecretBin you are presented with form that allows you to submit a new secret. Any text and or file can make up a secret. Just add the text and or files and change the security options if you like.
 
-You may choose when the secret should expire. And yes all secrets must expire and one point. SecretBin is a tool for securely sharing information. Its not a storage service.
+You may choose when the secret should expire. And yes all secrets must expire at one point. SecretBin is a tool for securely sharing information. It's not a storage service.
 
 If you want to you may also choose if your secret should self-destruct after someone reads it. I highly recommend setting this option and here is why:
-Imagine you have created a secret and want to share it with someone via e.g. email. If you haven't set a password, anyone can open the secret using the link. If the email account you're sending the secret to has been compromised, a malicious actor way obtain the secret by opening the link themselves. But at the very least the original recipient of the link will notice that someone had access to the link, since they can no longer open it. Now you can act accordingly and e.g. change the token you wanted to send.
+Imagine you have created a secret and want to share it with someone via e.g. email. If you haven't set a password, anyone can open the secret using the link. If the email account you're sending the secret to has been compromised, a malicious actor way obtain the secret by opening the link themselves. But at the very least the original recipient of the link will notice that someone had access to the link, since they can no longer open it. Now you can act accordingly and e.g. change the token you sent.
 
 ### Technical Workflow
 
 1. User A enters all the information for the secret (text, attached files and options).
 2. Generate a base key and encrypt secret in the browser (see [Encryption](#encryption))
-3. Send the encryption secret (excluding the base key) to the SecretBin server which stores it in a database.
+3. Send the encrypted secret (excluding the base key) to the SecretBin server which stores it in a database.
 4. The server returns the ID of the stored secret.
 5. Create a link using the secret ID and the base key in the following format: https://&lt;server&gt;/secret/&lt;id&gt;#encodeBase58(base key)
    - Note: The important bit is the **#**. The part after the **#** is called an [URI fragment](https://en.wikipedia.org/wiki/URI_fragment). Fragments are a special part of the URL which is not sent to web server with the request. This is important because we don't want SecretBin's server to know the key, otherwise the server would be able to decrypt the secret, which defeats the purpose.
@@ -39,7 +39,7 @@ Imagine you have created a secret and want to share it with someone via e.g. ema
    - baseKey := A 256 bit base key
    - iv := A 128 bit initialization vector
    - salt := A 64 bit salt
-2. Generate a encryption key with [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) using [Web Crypto's getRandomValues](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/deriveKey)
+2. Generate a encryption key with [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) using [Web Crypto's deriveKey](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/deriveKey)
    - key := PBKDF2(base Key + password, salt, 100000 iterations, SHA-256)
 3. Encrypt the secret with **AES256-GCM** using [Web Crypto's encrypt](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/encrypt)
    - enc := AES256-GCM(secret, baseKey, iv, adata: []) # _adata is not used, so leave it empty_
@@ -48,11 +48,15 @@ Imagine you have created a secret and want to share it with someone via e.g. ema
 
 Unfortunately, I only develop the app. I do not host it myself. Why? I am a developer and not a lawyer. Since I operate from the EU, SecretBin would need a privacy policy in order to operate it. I don't know how to write one and I can't be bothered to pay someone to do it.
 
-That being said, it you want to build and host SecretBin yourself, you can. Just pull the source code and run it using Deno (see [Getting Started](#getting-started)). You can even easily brand SecretBin with a new name if you want. SecretBin is licensed under the (MIT License)[https://www.tldrlegal.com/license/mit-license], so do it what you want. You might as well sell it if you want. I don't care, as long as it is within the license.
+That being said, it you want to host SecretBin yourself, you can. You have to options to host SecretBin yourself:
+- Pull the source code and run it using Deno (see [Build from Source](#build-from-source)).
+- Use the SecretBin container images (see [Run using Docker](#run-using-docker)).
+
+You can even easily brand SecretBin with a new name if you want. SecretBin is licensed under the (MIT License)[https://www.tldrlegal.com/license/mit-license], so do it what you want. You might as well sell it if you want. I don't care, as long as it is within the license.
 
 ## Getting Started
 
-### Building
+### Build from Source
 
 1. Download and install [Deno](https://deno.com).
 2. Install git e.g. using:
@@ -73,7 +77,7 @@ That being said, it you want to build and host SecretBin yourself, you can. Just
    ```
 
 ### Run using Docker
-You can also run SecretBin using Docker. See [SecretBin's Docker Hub page](https://hub.docker.com/r/nihilityiox/secretbin/tags).
+You can also run SecretBin using Docker. See [SecretBin's GHCR page](https://github.com/Nihility-io/SecretBin/pkgs/container/secretbin).
 
 1. Configure your config.yaml (see [Configuration](#configuration))
 2. Run the container using the following command:
@@ -96,7 +100,7 @@ COPY static/ /app/static/
 
 # Important: If you use your own static file, you need 
 # to run this script in order for them to work
-RUN deno run -A update_snapshot.ts
+RUN deno run -A container/update_snapshot.ts
 ```
 
 ### Configuration
@@ -104,6 +108,12 @@ RUN deno run -A update_snapshot.ts
 In case you want to configure SecretBin, just place a config.yaml in the same folder as the executable. SecretBin has the following configuration options:
 
 ```yaml
+banner: # Banner shown at the top of the app. You may use this option for e.g. announcements.
+  enabled: true # Show the banner if true
+  type: info # Banner type (info, warning or error)
+  text: # Text shown in the banner
+    en: Hello World!
+    de: Hallo Welt!
 branding:
   appName: SecretBin # Changes the app in all places including but not limited to the title bar
   footer: Nihility.io # Text shown in the footer on the left side e.g. the name of the service hoster
@@ -115,24 +125,22 @@ branding:
       en: https://github.com/Nihility-io/SecretBin # URL
   showLogo: true # If set the true, the app logo is shown before the app name in the navigation bar
   invertLogo: false # Invert the colors of the app logo in dark mode
-  showTerms: true #Sets if the ToS window should be shown when a user fist visits the app
-  terms: # ToS Dialog show when the user first visits the app
+  terms: # ToS Dialog show when the user first visits the app (if terms is not specified no dialog is shown)
     title:
       en: Terms of Service
       de: Nutzungsbedingungen
     content: # Text that may contain HTML 
       en: "..."
       de: "..."
-banner: # Banner shown at the top of the app. You may use this option for e.g. announcements.
-  enabled: true # Show the banner if true
-  type: info # Banner type (info, warning or error)
-  text: # Text shown in the banner
-    en: Hello World!
-    de: Hallo Welt!
 defaults: # Just customizable defaults 
   expires: 2w # Default expire time when creating a new secret
   burn: true # Default burn selection
   showPassword: false # Show password box by default
+expires: [5min, 1hr, 1d, 1w, 2w, 1m] # Expire options for new secrets
+logging:
+  level: info # Logging level (default: info)
+  mode: text # Specifies if logs should be rendered as text or JSON (default: text)
+  logAccess: false # Enable web access logging (default: false)
 policy:
   sharePreselect: true # Pre-selects the link in the share view
   requirePassword: false # Forces users to enable the burn option for new secrets
@@ -151,17 +159,6 @@ storage:
     username: secretbin
     password: abc123
     tls: on
-logging:
-  level: info # Logging level (default: info)
-  mode: text # Specifies if logs should be rendered as text or JSON (default: text)
-  logAccess: false # Enable web access logging (default: false)
-expires: # Expire options for new secrets
-  - 5min
-  - 1hr
-  - 1d
-  - 1w
-  - 2w
-  - 1m
 ```
 
 ## Screenshots
@@ -189,3 +186,7 @@ expires: # Expire options for new secrets
 ### Credits
 
 ![Credits](resources/screenshots/credits.png "Credits")
+
+### Generate a random password
+
+![Credits](resources/screenshots/generate.png "Generate")

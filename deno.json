@@ -15,7 +15,7 @@
 		},
 		"dev:fresh": {
 			"description": "Starts Deno Fresh is dev mode and watch for changes.",
-			"command": "deno run -A --watch=static/,routes/ dev.ts"
+			"command": "deno run -A --watch=static/,routes/ --watch=config.yaml dev.ts"
 		},
 		"dev": {
 			"description": "Starts SecretBin is dev mode and watch for changes.",
@@ -43,7 +43,7 @@
 		},
 		"deps": {
 			"description": "Updates the credits.json file",
-			"command": "deno run -A jsr:@nihility-io/deno-deps@1.1.5"
+			"command": "deno run -A jsr:@nihility-io/deno-deps@1.1.6"
 		},
 		"db:start": {
 			"description": "Starts a local database for development.",
@@ -64,7 +64,7 @@
 		},
 		"container:publish": {
 			"description": "Builds and publishes the container image",
-			"command": "cd container && DENO_VERSION=$(deno -v | awk '{print $2}') docker buildx bake --allow=fs.read=.. -f docker-bake.hcl --push multi_arch"
+			"command": "cd container && DENO_VERSION=$(deno -v | awk '{print $2}') BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx bake --allow=fs.read=.. -f docker-bake.hcl --push multi_arch"
 		},
 		"deploy": {
 			"description": "Deploys SecretBin to Deno Deploy",

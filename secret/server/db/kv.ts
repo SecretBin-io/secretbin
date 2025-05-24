@@ -42,7 +42,8 @@ export class KVDatabase implements Database {
 	async *getSecrets(): AsyncGenerator<SecretMetadata, void, unknown> {
 		try {
 			for await (const e of this.#kv.list({ prefix: ["secrets"] })) {
-				yield await SecretMetadata.parseAsync(e.value)
+				const { data: _, ...metadata } = e.value as Secret
+				yield await SecretMetadata.parseAsync(metadata)
 			}
 		} catch (error) {
 			logDB.error(`Failed to list secrets.`, { error })

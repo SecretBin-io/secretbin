@@ -1,5 +1,3 @@
-import { title } from "node:process"
-
 export default {
 	Metadata: {
 		NativeName: "English",
@@ -150,31 +148,6 @@ export default {
 		},
 		TermsOfService: {
 			Title: "Terms of Service",
-			Content: `<h2>Usage Policy</h2>
-        <p class="text-base text-gray-500 dark:text-gray-400">
-          This services is provided as is. <b>{{name}} is NOT a public service</b>. It is a private project and not intended to be used by anyone
-          aside from my friends and acquaintances which express permission. Secrets submitted to {{name}} may be
-          deleted at anytime without prior notice.
-        </p>
-        <br />
-        <h2>Data Policy</h2>
-        <p class="text-base text-gray-500 dark:text-gray-400">
-          {{name}} uses cookies in order to store user settings like the preferred language. Cookies are NOT use
-          to personally identify you or your browser. <br />
-          The hoster of {{name}} may also collect the following data for server logging:
-          <ul class="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-            <li>- Your IP address: A number used to identify your internet connection</li>
-            <li>
-              - Your User-Agent: A string sent by your browser which contains information about your browser and
-              device like browser type and version and the operating system you use e.g. Windows 11
-            </li>
-            <li>- Time and date when you access {{name}}</li>
-          </ul>
-        </p>
-        <br />
-        <p class="text-base text-gray-500 dark:text-gray-400">
-          <b><i>If you disagree with these terms, please close this page.</i></b>
-        </p>`,
 			Accept: "Accept",
 			Decline: "Decline",
 		},
