@@ -132,7 +132,6 @@
 		"utils": "./utils.ts",
 		"zod": "npm:zod@4.0.0-beta.0"
 	},
-	"unstable": ["kv"],
 	"compilerOptions": {
 		"lib": [
 			"dom",
@@ -191,11 +190,5 @@
 			"esbuild-wasm",
 			"@types/.*"
 		]
-	},
-	"deploy": {
-		"project": "secretbin",
-		"exclude": ["**/node_modules"],
-		"include": [],
-		"entrypoint": "main.ts"
 	}
 }

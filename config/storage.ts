@@ -18,27 +18,19 @@ export const PostgresDatabaseConfig: ZodType<PostgresDatabaseConfig> = z.strictI
 	database: z.string().default("postgres"),
 	username: z.string().default("postgres"),
 	password: z.string().default("postgres"),
-	tls: z.enum(["enforced", "on", "off"]),
+	tls: z.enum(["enforced", "on", "off"]).default("on"),
 })
 
-export interface KVDatabaseConfig {
-	type: "kv"
-	location?: string
-}
+// export type DatabaseConfig = PostgresDatabaseConfig | OtherDatabaseConfig
 
-export const KVDatabaseConfig: ZodType<KVDatabaseConfig> = z.strictInterface({
-	type: z.literal("kv"),
-	location: z.string().optional(),
-})
+// export const DatabaseConfig: ZodType<DatabaseConfig> = z.discriminatedUnion([
+// 	PostgresDatabaseConfig as z.$ZodTypeDiscriminable,
+// 	OtherDatabaseConfig as z.$ZodTypeDiscriminable,
+// ]) as unknown as ZodType<DatabaseConfig>
 
-export type DatabaseConfig =
-	| PostgresDatabaseConfig
-	| KVDatabaseConfig
+export type DatabaseConfig = PostgresDatabaseConfig
 
-export const DatabaseConfig: ZodType<DatabaseConfig> = z.discriminatedUnion([
-	PostgresDatabaseConfig as z.$ZodTypeDiscriminable,
-	KVDatabaseConfig as z.$ZodTypeDiscriminable,
-]) as unknown as ZodType<DatabaseConfig>
+export const DatabaseConfig = PostgresDatabaseConfig
 
 /**
  * Configs regarding how secrets are stored
@@ -62,5 +54,5 @@ export const Storage: ZodType<Storage> = z.strictInterface({
 		.transform(sizeToBytes).or(z.uint32())
 		.default(sizeToBytes("10Mi")),
 	gcInterval: z.uint32().default(60 * 60),
-	database: DatabaseConfig.default(DatabaseConfig.parse({ type: "kv" })),
+	database: DatabaseConfig.default(DatabaseConfig.parse({ type: "postgres" })),
 })
