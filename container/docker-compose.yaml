@@ -21,6 +21,7 @@ services:
   secretbin:
     image: ghcr.io/nihility-io/secretbin:dev
     container_name: secretbin
+    entrypoint: ["deno", "run", "--cert", "certs/ca.crt", "-A", "main.ts"]
     read_only: true
     ports:
       - "8000:8000"
@@ -31,6 +32,9 @@ services:
       - type: bind
         source: ./config.db.yaml
         target: /app/config.db.yaml
+      - type: bind
+        source: ./certs
+        target: /app/certs
     networks:
       - secretbin
 
