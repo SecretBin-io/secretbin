@@ -6,6 +6,7 @@ import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { submitSecret } from "secret/client"
+import { EncryptionAlgorithm } from "secret/models"
 import { State } from "state"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
@@ -37,7 +38,13 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 
 		// Submit the secret to the backend
 		try {
-			const res = await submitSecret(message, files, password, { expires, burn, slowBurn, rereads })
+			const res = await submitSecret(
+				message,
+				files,
+				password,
+				{ expires, burn, slowBurn, rereads },
+				EncryptionAlgorithm.AES256GCM,
+			)
 			setError("")
 			aRef.current!.href = res
 			aRef.current!.click()

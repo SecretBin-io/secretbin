@@ -1,6 +1,6 @@
 import { decodeBase58, encodeBase58 } from "@std/encoding/base58"
 import { encodeBase64 } from "@std/encoding/base64"
-import { Secret, SecretAttachment, SecretData } from "secret/models"
+import { EncryptionAlgorithm, Secret, SecretAttachment, SecretData } from "secret/models"
 import { createSecret } from "./api.ts"
 import { decrypt, encrypt, randomBytes } from "./crypto.ts"
 
@@ -24,6 +24,7 @@ export async function submitSecret(
 	files: File[],
 	password: string,
 	opts: SecretOptions,
+	algorithm: EncryptionAlgorithm,
 ): Promise<string> {
 	const masterKey = randomBytes(32)
 	const content = {
@@ -39,6 +40,7 @@ export async function submitSecret(
 		masterKey,
 		password,
 		JSON.stringify(content),
+		algorithm,
 	)
 
 	try {

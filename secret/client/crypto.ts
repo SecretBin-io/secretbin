@@ -1,3 +1,5 @@
+import { xchacha20poly1305 } from "@noble/ciphers/chacha"
+import { scryptAsync } from "@noble/hashes/scrypt"
 import { decodeBase64, encodeBase64 } from "@std/encoding/base64"
 import { EncryptedData, EncryptionAlgorithm } from "secret/models"
 
@@ -42,32 +44,30 @@ export async function encrypt(
 	message: string,
 	algorithm = EncryptionAlgorithm.AES256GCM,
 ): Promise<EncryptedData> {
-	if (algorithm !== EncryptionAlgorithm.AES256GCM) {
-		throw new Error("unsupported encryption algorithm")
-	}
-
-	if (algorithm === EncryptionAlgorithm.AES256GCM && key.length !== 32) {
+	if (key.length !== 32) {
 		throw new Error("invalid key length for AES256-GCM")
 	}
 
-	const iv = randomBytes(12)
+	const data = toBytes(message)
+	const iv = randomBytes(EncryptionAlgorithm.XChaCha20Poly1305 ? xchacha20poly1305.nonceLength : 12)
 	const salt = randomBytes(8)
-
-	const k = await deriveAESKey(key, password, salt)
-	const data = new Uint8Array(
-		await globalThis.crypto.subtle.encrypt(
-			{ name: "AES-GCM", iv: iv, additionalData: new Uint8Array() },
-			k,
-			toBytes(message),
-		),
-	)
+	const k = await deriveKey(key, password, salt, algorithm)
+	const encrypted = algorithm === EncryptionAlgorithm.XChaCha20Poly1305
+		? xchacha20poly1305(k as Uint8Array, iv).encrypt(data)
+		: new Uint8Array(
+			await globalThis.crypto.subtle.encrypt(
+				{ name: "AES-GCM", iv: iv, additionalData: new Uint8Array() },
+				k as CryptoKey,
+				data,
+			),
+		)
 
 	return {
-		data: encodeBase64(data),
+		data: encodeBase64(encrypted),
 		iv: encodeBase64(iv),
 		salt: encodeBase64(salt),
-		algorithm,
-	} as EncryptedData
+		algorithm: algorithm,
+	}
 }
 
 /**
@@ -78,38 +78,42 @@ export async function encrypt(
  * @returns Decrypted data string
  */
 export async function decrypt(key: Uint8Array, password: string, encrypted: EncryptedData): Promise<string> {
-	const { data, iv, salt, algorithm } = encrypted
-
-	if (algorithm !== EncryptionAlgorithm.AES256GCM) {
-		throw new Error("unsupported encryption algorithm")
-	}
-
-	if (algorithm === EncryptionAlgorithm.AES256GCM && key.length !== 32) {
+	if (key.length !== 32) {
 		throw new Error("invalid key length for AES256-GCM")
 	}
 
-	const k = await deriveAESKey(key, password, decodeBase64(salt))
-	const res = new Uint8Array(
-		await globalThis.crypto.subtle.decrypt(
-			{ name: "AES-GCM", iv: decodeBase64(iv), additionalData: new Uint8Array() },
-			k,
-			decodeBase64(data),
-		),
-	)
+	const data = decodeBase64(encrypted.data)
+	const iv = decodeBase64(encrypted.iv)
+	const salt = decodeBase64(encrypted.salt)
+	const k = await deriveKey(key, password, salt, encrypted.algorithm)
+
+	const res = encrypted.algorithm === EncryptionAlgorithm.XChaCha20Poly1305
+		? xchacha20poly1305(k as Uint8Array, iv).decrypt(data)
+		: new Uint8Array(
+			await globalThis.crypto.subtle.decrypt(
+				{ name: "AES-GCM", iv: iv, additionalData: new Uint8Array() },
+				k as CryptoKey,
+				data,
+			),
+		)
 
 	return fromBytes(res)
 }
 
 /**
  * Generates a new encryption key based on a random encryption key and an optional password
- * @param key Random encryption key
- * @param password Optional password
+ * @param key Random encryption key (e.g. 256 bit (32 byte) for AES256-GCM)
+ * @param password Optional encryption password which can be using in addition to the key
  * @param salt Random salt
- * @returns AES crypto key
+ * @param algorithm Encryption algorithm
+ * @returns Derived key
  */
-async function deriveAESKey(key: Uint8Array, password: string, salt: Uint8Array): Promise<CryptoKey> {
-	const iterations = 100000
-
+async function deriveKey(
+	key: Uint8Array,
+	password: string,
+	salt: Uint8Array,
+	algorithm: EncryptionAlgorithm,
+): Promise<CryptoKey | Uint8Array> {
 	// If password is set, append it to the key
 	const pwData = toBytes(password)
 	if (pwData.length > 0) {
@@ -117,6 +121,15 @@ async function deriveAESKey(key: Uint8Array, password: string, salt: Uint8Array)
 		newKeyArray.set(key, 0)
 		newKeyArray.set(pwData, key.length)
 		key = newKeyArray
+	}
+
+	if (algorithm === EncryptionAlgorithm.XChaCha20Poly1305) {
+		return scryptAsync(key, salt, {
+			N: 2 ** 16, // Cost factor
+			r: 8, // Block size
+			p: 1, // Parallelization
+			dkLen: 32, // Key length
+		})
 	}
 
 	// Import raw key
@@ -130,9 +143,17 @@ async function deriveAESKey(key: Uint8Array, password: string, salt: Uint8Array)
 
 	// derive a stronger key for use with AES
 	return globalThis.crypto.subtle.deriveKey(
-		{ name: "PBKDF2", salt, iterations, hash: { name: "SHA-256" } }, // Key algorithm
+		{
+			name: "PBKDF2",
+			salt,
+			iterations: 100000,
+			hash: { name: "SHA-256" },
+		}, // Key algorithm
 		importedKey,
-		{ name: "AES-GCM", length: 256 }, // Set what the key is intended to be used for
+		{
+			name: "AES-GCM",
+			length: 256,
+		}, // Set what the key is intended to be used for
 		true, // The key may be exported
 		["encrypt", "decrypt"], // We may only use it for en- and decryption
 	)

@@ -100,7 +100,7 @@
   {
     "registry": "jsr",
     "name": "@nihility-io/cookies",
-    "version": "2.0.0-alpha.7",
+    "version": "2.0.0-alpha.8",
     "repository": "https://github.com/Nihility-io/Cookies",
     "authors": [
       "Nihility.io"
@@ -111,13 +111,35 @@
   {
     "registry": "jsr",
     "name": "@nihility-io/record",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "repository": "https://github.com/Nihility-io/Record",
     "authors": [
       "Nihility.io"
     ],
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Record/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@noble/ciphers",
+    "version": "1.3.0",
+    "repository": "https://github.com/paulmillr/noble-ciphers",
+    "authors": [
+      "Paul Miller"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/paulmillr/noble-ciphers/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@noble/hashes",
+    "version": "1.8.0",
+    "repository": "https://github.com/paulmillr/noble-hashes",
+    "authors": [
+      "Paul Miller"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/paulmillr/noble-hashes/main/LICENSE"
   },
   {
     "registry": "npm",
@@ -142,7 +164,7 @@
   {
     "registry": "npm",
     "name": "preact",
-    "version": "10.26.6",
+    "version": "10.26.7",
     "repository": "https://github.com/preactjs/preact",
     "authors": [
       "Preact"
@@ -164,7 +186,7 @@
   {
     "registry": "npm",
     "name": "@preact/signals",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "repository": "https://github.com/preactjs/signals",
     "authors": [
       "Preact"
@@ -385,6 +407,17 @@
     "name": "tailwindcss",
     "repository": "https://github.com/tailwindlabs/tailwindcss",
     "version": "4.1.7",
+    "authors": [
+      "Tailwind Labs"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "tailwindcss",
+    "version": "4.1.7",
+    "repository": "https://github.com/tailwindlabs/tailwindcss",
     "authors": [
       "Tailwind Labs"
     ],
