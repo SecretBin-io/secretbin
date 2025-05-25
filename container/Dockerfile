@@ -26,6 +26,6 @@ COPY --chown=deno .. /app
 
 # Install dependencies and build SecretBin
 RUN deno install && \
-    deno task build:fresh
+    deno task build
 
 ENTRYPOINT [ "deno", "task", "start" ] 
