@@ -65,11 +65,6 @@
 		"container:publish": {
 			"description": "Builds and publishes the container image",
 			"command": "cd container && DENO_VERSION=$(deno -v | awk '{print $2}') BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx bake --allow=fs.read=.. -f docker-bake.hcl --push multi_arch"
-		},
-		"deploy": {
-			"description": "Deploys SecretBin to Deno Deploy",
-			"dependencies": ["build"],
-			"command": "deployctl deploy --project=nihility-secretbin main.ts"
 		}
 	},
 	"lock": false,
@@ -191,11 +186,5 @@
 			"esbuild-wasm",
 			"@types/.*"
 		]
-	},
-	"deploy": {
-		"project": "secretbin",
-		"exclude": ["**/node_modules"],
-		"include": [],
-		"entrypoint": "main.ts"
 	}
 }
