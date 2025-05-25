@@ -156,7 +156,7 @@ storage:
     database: secretbin
     username: secretbin
     password: abc123
-    tls: on
+    tls: prefer
 ```
 
 ## Screenshots

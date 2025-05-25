@@ -25,6 +25,7 @@ const serverCfg = await (async function (): Promise<Config> {
 	const configs = await Promise.all(
 		(await Array.fromAsync(Deno.readDir(".")))
 			.filter((x) => /^config(?:\.[^\.]+)?\.ya?ml$/.test(x.name))
+			.toSorted((a, b) => /^config\.ya?ml$/.test(a.name) ? -1 : a.name.localeCompare(b.name)) // Order configs by name but always evaluate
 			.map((x) => Deno.readTextFile(x.name).then((x) => YAML.parse(x) as Record<string, unknown>)),
 	)
 

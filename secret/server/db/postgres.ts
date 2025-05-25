@@ -1,7 +1,7 @@
-import postgres from "@oscar6echo/postgres"
 import { PostgresDatabaseConfig } from "config"
 import { LocalizedError } from "lang"
 import { logDB } from "log"
+import postgres from "postgres"
 import {
 	EncryptedData,
 	EncryptionAlgorithm,
@@ -57,7 +57,7 @@ export class PostgresDatabase implements Database {
 			password: cfg.password,
 			max: 5,
 			idle_timeout: 30000,
-			ssl: cfg.tls === "enforced" ? "require" : cfg.tls === "on" ? "prefer" : false,
+			ssl: cfg.tls === "off" ? undefined : cfg.tls,
 		})
 	}
 

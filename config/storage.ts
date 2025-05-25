@@ -8,17 +8,17 @@ export interface PostgresDatabaseConfig {
 	database: string
 	username: string
 	password: string
-	tls: "enforced" | "on" | "off"
+	tls: "require" | "prefer" | "off"
 }
 
 export const PostgresDatabaseConfig: ZodType<PostgresDatabaseConfig> = z.strictInterface({
 	type: z.literal("postgres"),
-	host: z.string().default("127.0.0.1"),
+	host: z.string().default(""),
 	port: z.number().default(5432),
-	database: z.string().default("postgres"),
-	username: z.string().default("postgres"),
-	password: z.string().default("postgres"),
-	tls: z.enum(["enforced", "on", "off"]).default("on"),
+	database: z.string().default(""),
+	username: z.string().default(""),
+	password: z.string().default(""),
+	tls: z.enum(["require", "prefer", "off"]).default("off"),
 })
 
 // export type DatabaseConfig = PostgresDatabaseConfig | OtherDatabaseConfig

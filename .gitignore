@@ -66,3 +66,7 @@ Temporary Items
 ### Testing ###
 coverage
 /test.ts
+
+# Local configs
+/config.db.yaml
+/_config.db.yaml

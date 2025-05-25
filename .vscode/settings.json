@@ -1,0 +1,19 @@
+{
+	"sqltools.connections": [
+		{
+			"driver": "PostgreSQL",
+			"name": "SecretBin",
+			"server": "127.0.0.1",
+			"port": 5432,
+			"database": "secretbin",
+			"username": "secretbin",
+			"password": "abc123",
+			"previewLimit": 50,
+			"pgOptions": {
+				"ssl": {
+					"rejectUnauthorized": false
+				}
+			}
+		}
+	]
+}
