@@ -1,6 +1,7 @@
 import { decodeBase64 } from "@std/encoding/base64"
 import { Button, FileList, Input, Message, Section, Show, TextArea } from "components"
 import { LocalizedError, useTranslationWithPrefix } from "lang"
+import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { decryptSecret, getSecret } from "secret/client"
 import { Secret, SecretData } from "secret/models"
@@ -13,7 +14,7 @@ export interface ViewSecretProps {
 	passwordProtected: boolean
 }
 
-export const ViewSecret = ({ id, state, remainingReads, passwordProtected }: ViewSecretProps) => {
+export function ViewSecret({ id, state, remainingReads, passwordProtected }: ViewSecretProps): JSX.Element {
 	const [requirePassword, setRequirePassword] = useState(passwordProtected)
 	const [requireConfirm, setRequireConfirm] = useState(remainingReads !== -1)
 	const [password, setPassword] = useState("")
@@ -66,6 +67,7 @@ export const ViewSecret = ({ id, state, remainingReads, passwordProtected }: Vie
 			// request a new password
 			setPasswordInvalid(true)
 			setRequirePassword(true)
+			// deno-lint-ignore no-console
 			console.log(err)
 			return
 		}

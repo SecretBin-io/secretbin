@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import { Icon } from "components"
 import { JSX } from "preact"
-import { BaseProps } from "./helpers.ts"
+import { BaseProps } from "./base.ts"
 
 export interface UploadProps extends BaseProps {
 	/** Display text inside the upload box */
@@ -20,7 +20,9 @@ export interface UploadProps extends BaseProps {
 /**
  * Creates a file drop zone where files can be dragged and dropped or added using a click
  */
-export const Upload = ({ text = "Click to upload or drag and drop", multiple, onFileAdded, ...props }: UploadProps) => {
+export function Upload(
+	{ text = "Click to upload or drag and drop", multiple, onFileAdded, ...props }: UploadProps,
+): JSX.Element {
 	const dropHandler = (ev: JSX.TargetedDragEvent<HTMLDivElement>) => {
 		ev.preventDefault()
 

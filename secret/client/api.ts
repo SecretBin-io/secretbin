@@ -22,33 +22,31 @@ interface APICallOptions {
  * @param options Options for the API call
  * @returns Parsed response
  */
-const apiCall = <T>(
-	path: string,
-	model: ZodType<T>,
-	options: APICallOptions = {},
-): Promise<T> =>
-	fetch(path, {
+async function apiCall<T>(path: string, model: ZodType<T>, options: APICallOptions = {}): Promise<T> {
+	const res = await fetch(path, {
 		method: options.method || "GET",
 		headers: options.body ? { "Content-Type": "application/json" } : {},
 		body: options.body ? JSON.stringify(options.body) : undefined,
-	}).then((res) =>
-		res.status === 200
-			? res.json()
-				.then((x) => parseModel(model, x))
-			: res.json()
-				.then((x) => Promise.reject(decodeError(x)))
-	)
+	})
+
+	if (res.status === 200) {
+		return res.json().then((x) => parseModel(model, x))
+	}
+
+	return res.json().then((x) => Promise.reject(decodeError(x)))
+}
 
 /**
  * Stores a new secret in the backend
  * @param secret Secret
  * @returns ID of the newly created secret
  */
-export const createSecret = (secret: SecretRequest): Promise<string> =>
-	apiCall("/api/secret", z.string(), {
+export function createSecret(secret: SecretRequest): Promise<string> {
+	return apiCall("/api/secret", z.string(), {
 		method: "POST",
 		body: secret,
 	})
+}
 
 /**
  * Fetches metadata for the secret (excluding the encrypted data).
@@ -56,7 +54,9 @@ export const createSecret = (secret: SecretRequest): Promise<string> =>
  * @param id Secret ID
  * @returns Secret metadata
  */
-export const getSecretMetadata = (id: string): Promise<SecretMetadata> => apiCall(`/api/secret/${id}`, SecretMetadata)
+export function getSecretMetadata(id: string): Promise<SecretMetadata> {
+	return apiCall(`/api/secret/${id}`, SecretMetadata)
+}
 
 /**
  * Fetches the secret (including the encrypted data).
@@ -65,16 +65,18 @@ export const getSecretMetadata = (id: string): Promise<SecretMetadata> => apiCal
  * @param id Secret ID
  * @returns Secret metadata
  */
-export const getSecret = (id: string): Promise<Secret> =>
-	apiCall(`/api/secret/${id}`, Secret, {
+export function getSecret(id: string): Promise<Secret> {
+	return apiCall(`/api/secret/${id}`, Secret, {
 		method: "POST",
 	})
+}
 
 /**
  * Deletes the secret from the backend
  * @param id Secret ID
  */
-export const deleteSecret = (id: string): Promise<void> =>
-	apiCall(`/api/secret/${id}`, z.string(), {
+export function deleteSecret(id: string): Promise<void> {
+	return apiCall(`/api/secret/${id}`, z.string(), {
 		method: "DELETE",
 	}).then(() => {})
+}

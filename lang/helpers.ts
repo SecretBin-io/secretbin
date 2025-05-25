@@ -14,7 +14,7 @@ export type TrimSuffix<TSuffix extends string, T extends string> = T extends `${
  * @example
  * formatString("Hello, {{name}}!", { name: "John Smith" }) // => "Hello, John Smith!"
  */
-export const formatString = (template: string, params: Record<string, string>): string => {
+export function formatString(template: string, params: Record<string, string>): string {
 	let res = ""
 	let v = ""
 	let brackets = 0

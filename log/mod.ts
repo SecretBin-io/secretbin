@@ -33,22 +33,22 @@ await configure({
 		}),
 	},
 	loggers: [
-		{ category: "web", lowestLevel, sinks: config.logging.logAccess ? sinks : [] },
-		{ category: "secrets", lowestLevel, sinks },
-		{ category: "garbageCollection", lowestLevel, sinks },
 		{ category: "database", lowestLevel, sinks },
+		{ category: "garbageCollection", lowestLevel, sinks },
+		{ category: "secrets", lowestLevel, sinks },
+		{ category: "web", lowestLevel, sinks: config.logging.logAccess ? sinks : [] },
 		{ category: ["logtape", "meta"], sinks: [] },
 	],
 })
 
-/** Web logs */
-export const logWeb = getLogger("web")
-
-/** Secrets logs */
-export const logSecrets = getLogger("secrets")
+/** Database logs */
+export const logDB = getLogger("database")
 
 /** Garbage collector logs */
 export const logCG = getLogger("garbageCollection")
 
-/** Database logs */
-export const logDB = getLogger("database")
+/** Secrets logs */
+export const logSecrets = getLogger("secrets")
+
+/** Web logs */
+export const logWeb = getLogger("web")

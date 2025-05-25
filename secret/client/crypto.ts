@@ -6,21 +6,27 @@ import { EncryptedData, EncryptionAlgorithm } from "secret/models"
  * @param length Number of bytes to return
  * @returns A Uint8Array with random bytes
  */
-export const randomBytes = (length: number): Uint8Array => globalThis.crypto.getRandomValues(new Uint8Array(length))
+export function randomBytes(length: number): Uint8Array {
+	return globalThis.crypto.getRandomValues(new Uint8Array(length))
+}
 
 /**
  * Converts a raw string into a bytes
  * @param s String
  * @returns Bytes
  */
-export const toBytes = (s: string): Uint8Array => new TextEncoder().encode(s)
+export function toBytes(s: string): Uint8Array {
+	return new TextEncoder().encode(s)
+}
 
 /**
  * Converts bytes into a raw string
  * @param b Bytes
  * @returns String
  */
-export const fromBytes = (b: Uint8Array): string => new TextDecoder().decode(b)
+export function fromBytes(b: Uint8Array): string {
+	return new TextDecoder().decode(b)
+}
 
 /**
  * Encrypts the message using the given key and password
@@ -30,12 +36,12 @@ export const fromBytes = (b: Uint8Array): string => new TextDecoder().decode(b)
  * @param algorithm Encryption algorithm (default: AES256-GCM)
  * @returns Encrypted data
  */
-export const encrypt = async (
+export async function encrypt(
 	key: Uint8Array,
 	password: string,
 	message: string,
 	algorithm = EncryptionAlgorithm.AES256GCM,
-): Promise<EncryptedData> => {
+): Promise<EncryptedData> {
 	if (algorithm !== EncryptionAlgorithm.AES256GCM) {
 		throw new Error("unsupported encryption algorithm")
 	}
@@ -71,7 +77,7 @@ export const encrypt = async (
  * @param data Encrypted data
  * @returns Decrypted data string
  */
-export const decrypt = async (key: Uint8Array, password: string, encrypted: EncryptedData): Promise<string> => {
+export async function decrypt(key: Uint8Array, password: string, encrypted: EncryptedData): Promise<string> {
 	const { data, iv, salt, algorithm } = encrypted
 
 	if (algorithm !== EncryptionAlgorithm.AES256GCM) {
@@ -101,7 +107,7 @@ export const decrypt = async (key: Uint8Array, password: string, encrypted: Encr
  * @param salt Random salt
  * @returns AES crypto key
  */
-const deriveAESKey = async (key: Uint8Array, password: string, salt: Uint8Array): Promise<CryptoKey> => {
+async function deriveAESKey(key: Uint8Array, password: string, salt: Uint8Array): Promise<CryptoKey> {
 	const iterations = 100000
 
 	// If password is set, append it to the key
@@ -145,7 +151,7 @@ export interface PasswordGeneratorOptions {
  * @param options Specify the password length and characters
  * @returns Random password
  */
-export const generatePassword = (options: PasswordGeneratorOptions): string => {
+export function generatePassword(options: PasswordGeneratorOptions): string {
 	const characters = [
 		options.useUppercase ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "",
 		options.useLowercase ? "abcdefghijklmnopqrstuvwxyz" : "",

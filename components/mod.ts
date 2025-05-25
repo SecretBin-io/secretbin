@@ -1,7 +1,7 @@
 export * from "./Button.tsx"
 export * from "./ButtonGroup.tsx"
 export * from "./Dropdown.tsx"
-export * from "./FileList/mod.ts"
+export * from "./FileList.tsx"
 export * from "./Icon/mod.tsx"
 export * from "./Input.tsx"
 export * from "./Message.tsx"
@@ -17,3 +17,4 @@ export * from "./TextArea.tsx"
 export * from "./Toggle.tsx"
 export * from "./Tooltip.tsx"
 export * from "./Upload.tsx"
+

@@ -12,7 +12,7 @@ export type { Database } from "./shared.ts"
  * @param cfg Database config
  * @returns Database instance
  */
-export const initDatabase = (cfg: DatabaseConfig): Database => {
+export function initDatabase(cfg: DatabaseConfig): Database {
 	switch (cfg.type) {
 		case "kv":
 			return new KVDatabase(cfg)

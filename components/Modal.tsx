@@ -2,14 +2,11 @@ import classNames from "classnames"
 import { Button, ButtonProps, Show } from "components"
 import { ComponentChildren, JSX } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
-import { BaseProps, elementID } from "./helpers.ts"
+import { BaseProps } from "./base.ts"
 
 export interface Action extends ButtonProps {}
 
 export interface ModalProps extends BaseProps {
-	/** Element ID (Default: Random ID) */
-	id?: string
-
 	/** Title of the modal dialog */
 	title: string
 
@@ -29,10 +26,11 @@ export interface ModalProps extends BaseProps {
 /**
  * Create a dismissible dialog in front of the page
  */
-export const Modal = ({ id, title, actions, show, onDismiss, children, ...props }: ModalProps) => {
+export function Modal(
+	{ title, actions, show, onDismiss, children, ...props }: ModalProps,
+): JSX.Element | undefined {
 	const [hidden, setHidden] = useState(true)
 	const backdropRef = useRef<HTMLDivElement | null>(null)
-	const modelId = elementID("modal", id)
 
 	/**
 	 * Dismiss the modal when the user clicks on the backdrop and the `onDismiss` prop is set
@@ -58,7 +56,6 @@ export const Modal = ({ id, title, actions, show, onDismiss, children, ...props 
 
 	return (
 		<div
-			id={modelId}
 			ref={backdropRef}
 			style={props.style}
 			tabindex={-1}
@@ -96,7 +93,7 @@ export const Modal = ({ id, title, actions, show, onDismiss, children, ...props 
 						{children}
 					</div>
 					<div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-						{actions.map((action, i) => <Button key={`${modelId}-${i}`} class="mr-5" {...action} />)}
+						{actions.map((action, i) => <Button key={i} class="mr-5" {...action} />)}
 					</div>
 				</div>
 			</div>

@@ -1,11 +1,11 @@
 import z, { ZodType } from "zod"
+import { Banner } from "./banner.ts"
 import { Branding } from "./branding.ts"
+import { Defaults } from "./defaults.ts"
 import { Expires } from "./expires.ts"
 import { Logging } from "./logging.ts"
-import { Storage } from "./storage.ts"
-import { Banner } from "./banner.ts"
-import { Defaults } from "./defaults.ts"
 import { Policy } from "./policy.ts"
+import { Storage } from "./storage.ts"
 
 /** SecretBin config */
 export interface Config {

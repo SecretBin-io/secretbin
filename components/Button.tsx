@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import { Icon, IconName } from "components"
 import { JSX } from "preact"
-import { BaseProps } from "./helpers.ts"
+import { BaseProps } from "./base.ts"
 
 /**
  * Button themes
@@ -73,9 +73,9 @@ export interface ButtonProps extends BaseProps {
 /**
  * Creates a clickable button
  */
-export const Button = (
+export function Button(
 	{ label, icon, theme = "default", type = "button", disabled, overrideClass, link, onClick, ...props }: ButtonProps,
-) => {
+): JSX.Element {
 	const classes = overrideClass ? props.class : classNames(
 		"inline-flex items-center focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-2.5 py-2.5 mb-2 me-2",
 		buttonThemes[theme],

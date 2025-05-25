@@ -1,3 +1,4 @@
+import { JSX } from "preact"
 import { SVGIconProps } from "./Base.tsx"
 import * as Icons from "./Icons.tsx"
 export * as Icons from "./Icons.tsx"
@@ -8,7 +9,7 @@ export interface IconProps extends SVGIconProps {
 	name: IconName
 }
 
-export const Icon = ({ name, ...props }: IconProps) => {
+export function Icon({ name, ...props }: IconProps): JSX.Element {
 	const NamedIcon = Icons[name] ?? Icons.Close
 	return <NamedIcon {...props} />
 }

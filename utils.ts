@@ -11,8 +11,8 @@ export const define = createDefine<State>()
  * @param headers Request headers
  * @returns List of locales as reported by the client's browser
  */
-const detectBrowserLocales = (headers: Headers) =>
-	(headers.get("Accept-Language") ?? "")
+function detectBrowserLocales(headers: Headers): string[] {
+	return (headers.get("Accept-Language") ?? "")
 		.split(",")
 		.map((lang): [number, string] => {
 			const [locale, q = "q=1"] = lang.split(";")
@@ -22,6 +22,7 @@ const detectBrowserLocales = (headers: Headers) =>
 		})
 		.sort(([q1], [q2]) => q2 - q1)
 		.flatMap(([_, locale]) => locale === "*" ? [] : locale)
+}
 
 /**
  * Middleware that adds the request state to the request context

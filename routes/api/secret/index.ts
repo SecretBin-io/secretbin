@@ -7,7 +7,7 @@ import { define } from "utils"
  * Secret API: /secret
  */
 export const handler = define.handlers({
-	async POST(ctx) {
+	async POST(ctx): Promise<Response> {
 		// Note: data is validated inside createSecret
 		try {
 			const m = await ctx.req.json() as SecretRequest

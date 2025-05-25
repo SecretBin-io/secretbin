@@ -1,6 +1,6 @@
-import { ComponentChildren } from "preact"
-import { BaseProps } from "./helpers.ts"
 import classNames from "classnames"
+import { ComponentChildren, JSX } from "preact"
+import { BaseProps } from "./base.ts"
 
 export interface TooltipProps extends BaseProps {
 	/** Text that should be shown when hovering */
@@ -9,7 +9,7 @@ export interface TooltipProps extends BaseProps {
 	children?: ComponentChildren
 }
 
-export const Tooltip = ({ text, children, ...props }: TooltipProps) => {
+export function Tooltip({ text, children, ...props }: TooltipProps): JSX.Element | ComponentChildren {
 	if (!text) {
 		return children
 	}

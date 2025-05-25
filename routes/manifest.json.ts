@@ -7,7 +7,7 @@ import { State, Theme } from "state"
  * Renders the branded manifest.json for PWA usage
  */
 export const handler: HandlerByMethod<unknown, State> = {
-	GET({ state }) {
+	GET({ state }): Response {
 		return new Response(JSON.stringify({
 			name: config.branding.appName,
 			short_name: config.branding.appName,

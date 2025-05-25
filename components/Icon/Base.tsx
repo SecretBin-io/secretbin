@@ -11,19 +11,21 @@ export interface BaseProps extends SVGProps {
 	children: ComponentChildren
 }
 
-export const Base = ({ solid, children, ...rest }: BaseProps) => (
-	<svg
-		aria-hidden="true"
-		xmlns="http://www.w3.org/2000/svg"
-		width="24"
-		height="24"
-		fill={solid ? "currentColor" : "none"}
-		viewBox="0 0 24 24"
-		stroke-width="1.5"
-		stroke="currentColor"
-		class="w-6 h-6"
-		{...rest}
-	>
-		{children}
-	</svg>
-)
+export function Base({ solid, children, ...rest }: BaseProps): JSX.Element {
+	return (
+		<svg
+			aria-hidden="true"
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			fill={solid ? "currentColor" : "none"}
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+			class="w-6 h-6"
+			{...rest}
+		>
+			{children}
+		</svg>
+	)
+}

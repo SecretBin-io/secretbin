@@ -1,8 +1,51 @@
 import classNames from "classnames"
 import { Button, ButtonTheme, IconName } from "components"
+import { cloneElement, VNode } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
-import { BaseProps } from "./helpers.ts"
+import { BaseProps } from "./base.ts"
+
+export interface DropdownItemProps extends BaseProps {
+	/** Text displayed on the item */
+	label: string
+
+	/** Optional item icon */
+	icon?: IconName
+
+	/** Makes item non-clickable */
+	disabled?: boolean
+
+	/**
+	 * Function which will be called when item is press
+	 */
+	onClick?: (e: JSX.TargetedMouseEvent<HTMLButtonElement>) => void
+
+	/**
+	 * (Internal): Dismiss modal when clicked
+	 */
+	onDismiss?: () => void
+}
+
+/**
+ * Creates an button which goes inside a dropdown
+ */
+export function DropdownItem({ label, icon, disabled, onClick, onDismiss }: DropdownItemProps): JSX.Element {
+	return (
+		<li>
+			<Button
+				overrideClass
+				class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white w-full"
+				label={label}
+				icon={icon}
+				disabled={disabled}
+				onClick={(e) => {
+					onClick?.(e)
+					onDismiss!()
+				}}
+			/>
+		</li>
+	)
+}
 
 export interface DropdownProps extends BaseProps {
 	/** Text displayed on the button */
@@ -26,36 +69,13 @@ export interface DropdownProps extends BaseProps {
 	dropdownClass?: string
 
 	/** Dropdown items */
-	items?: DropdownItem[]
-}
-
-export interface DropdownItem extends BaseProps {
-	/** Text displayed on the item */
-	label: string
-
-	/** Optional item icon */
-	icon?: IconName
-
-	/** Makes item non-clickable */
-	disabled?: boolean
-
-	/**
-	 * Link which will be navigated to when button is press
-	 * (Note: you can only set either `link` or `onSubmit` and not both)
-	 */
-	link?: string
-
-	/**
-	 * Function which will be called when button is press
-	 * (Note: you can only set either `link` or `onSubmit` and not both)
-	 */
-	onClick?: (e: JSX.TargetedMouseEvent<HTMLButtonElement>) => void
+	children: VNode<DropdownItemProps>[]
 }
 
 /**
- * Creates a drop down button which displays a list of items when clicked
+ * Creates a dropdown button which displays a list of items when clicked
  */
-export const Dropdown = ({ dropdownClass, items, ...rest }: DropdownProps) => {
+export function Dropdown({ dropdownClass, children, ...rest }: DropdownProps): JSX.Element {
 	const [show, setShow] = useState(false)
 	const [hidden, setHidden] = useState(true)
 
@@ -84,19 +104,7 @@ export const Dropdown = ({ dropdownClass, items, ...rest }: DropdownProps) => {
 				)}
 			>
 				<ul class="py-2 font-medium" role="none">
-					{items?.map(({ onClick, ...rest }) => (
-						<li>
-							<Button
-								overrideClass
-								class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white w-full"
-								onClick={(e) => {
-									onClick?.(e)
-									setShow(false)
-								}}
-								{...rest}
-							/>
-						</li>
-					))}
+					{children?.map((b) => cloneElement(b, { ...b, onDismiss: () => setShow(false) }))}
 				</ul>
 			</div>
 		</div>

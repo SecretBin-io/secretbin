@@ -1,21 +1,5 @@
-import { match, P } from "ts-pattern"
+import { sizeToBytes } from "helpers"
 import z, { ZodType } from "zod"
-
-/**
- * Parses size string e.g. 10Mi into bytes
- * @param key Size string
- * @returns Size in Bytes
- */
-export const transformSize = (key: string) =>
-	match(/^(\d+)(Ki|Mi|Gi|K|M|G)?$/.exec(key))
-		.with([P._, P.select()], (count) => +count)
-		.with([P._, P.select(), "Ki"], (count) => +count * 1024)
-		.with([P._, P.select(), "Mi"], (count) => +count * 1024 * 1024)
-		.with([P._, P.select(), "Gi"], (count) => +count * 1024 * 1024 * 1024)
-		.with([P._, P.select(), "K"], (count) => +count * 1000)
-		.with([P._, P.select(), "M"], (count) => +count * 1000 * 1000)
-		.with([P._, P.select(), "G"], (count) => +count * 1000 * 1000 * 1000)
-		.otherwise(() => 0)
 
 export interface PostgresDatabaseConfig {
 	type: "postgres"
@@ -75,8 +59,8 @@ export const Storage: ZodType<Storage> = z.strictInterface({
 		.regex(/^(\d+)(Ki|Mi|Gi|K|M|G)$/, {
 			error: "Invalid size. Expected: positive integer or string with format <num>(Ki|Mi|Gi|K|M|G) e.g 10Gi",
 		})
-		.transform(transformSize).or(z.uint32())
-		.default(transformSize("10Mi")),
+		.transform(sizeToBytes).or(z.uint32())
+		.default(sizeToBytes("10Mi")),
 	gcInterval: z.uint32().default(60 * 60),
 	database: DatabaseConfig.default(DatabaseConfig.parse({ type: "kv" })),
 })

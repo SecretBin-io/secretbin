@@ -6,8 +6,8 @@ import z from "zod"
  * @param key Duration string e.g. 5d
  * @returns Expires object e.g. { count: 5, unit: "Days", seconds: 432000 }
  */
-export const transformExpires = (key: string) =>
-	match(/^(\d+)(min|hr|d|w|m|y)$/.exec(key))
+function transformExpires(key: string): Expires {
+	return match(/^(\d+)(min|hr|d|w|m|y)$/.exec(key))
 		.with(
 			[P._, P.select(), "min"],
 			(count) => ({ count: +count, unit: "Minute", seconds: +count * 60 } as Expires),
@@ -33,14 +33,16 @@ export const transformExpires = (key: string) =>
 			(count) => ({ count: +count, unit: "Year", seconds: +count * 60 * 60 * 24 * 365 } as Expires),
 		)
 		.otherwise(() => ({ count: 0, unit: "Minute", seconds: 0 } as Expires))
+}
 
 /**
  * Parses a set of duration strings
  * @param key Set of duration string e.g. 5d
  * @returns Expires object e.g. { count: 5, unit: "Days", seconds: 432000 }
  */
-export const parseExpires = (keys: string[]): Record<string, Expires> =>
-	keys.reduce((res, name) => ({ ...res, [name]: transformExpires(name) }), {})
+function parseExpires(keys: string[]): Record<string, Expires> {
+	return keys.reduce((res, name) => ({ ...res, [name]: transformExpires(name) }), {})
+}
 
 /**
  * Expire option for new secrets

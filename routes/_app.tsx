@@ -5,12 +5,13 @@ import { type PageProps } from "fresh"
 import { asset, Partial } from "fresh/runtime"
 import { NavMenu, Terms } from "islands"
 import { useTranslation } from "lang"
+import { JSX } from "preact"
 import { State, Theme } from "state"
 
 /**
  * Wrapper for all pages. Providers header info and navigation
  */
-export default ({ Component, state }: PageProps<unknown, State>) => {
+export default function App({ Component, state }: PageProps<unknown, State>): JSX.Element {
 	const $ = useTranslation(state.language)
 
 	return (

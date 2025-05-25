@@ -1,7 +1,7 @@
 import { STATUS_TEXT } from "@std/http/status"
+import { HttpError } from "fresh/error"
 import { getTranslation, Language, TranslationKey } from "lang"
 import { TrimPrefix, TrimSuffix } from "./helpers.ts"
-import { HttpError } from "fresh/error"
 
 export type ErrorKey = TrimSuffix<"Title", TrimPrefix<"Errors", TranslationKey>>
 
@@ -34,8 +34,7 @@ export class LocalizedError extends HttpError {
 	 * @param lang Requested language
 	 * @returns Translated error message
 	 */
-	public getMessage(lang: Language) {
-		console.log({ lang, msg: `Errors.${this.#key}.Message`, param: this.#params })
+	public getMessage(lang: Language): string {
 		return getTranslation(lang, `Errors.${this.#key}.Message`, this.#params)
 	}
 
@@ -46,7 +45,7 @@ export class LocalizedError extends HttpError {
 	 * @param err Error
 	 * @returns Translated error message
 	 */
-	public static getMessage(lang: Language, err: Error) {
+	public static getMessage(lang: Language, err: Error): string {
 		if (err instanceof LocalizedError) {
 			return err.getMessage(lang)
 		} else {
@@ -59,7 +58,7 @@ export class LocalizedError extends HttpError {
 	 * @param lang Requested language
 	 * @returns Translated error title
 	 */
-	public getTitle(lang: Language) {
+	public getTitle(lang: Language): string {
 		return getTranslation(lang, `Errors.${this.#key}.Title`, this.#params)
 	}
 
@@ -70,7 +69,7 @@ export class LocalizedError extends HttpError {
 	 * @param err Error
 	 * @returns Translated error title
 	 */
-	public static getTitle(lang: Language, err: Error) {
+	public static getTitle(lang: Language, err: Error): string {
 		if (err instanceof LocalizedError) {
 			return err.getTitle(lang)
 		} else {

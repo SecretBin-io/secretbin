@@ -1,7 +1,8 @@
 import { Cookies } from "@nihility-io/cookies"
-import { Button, Dropdown } from "components"
+import { Button, Dropdown, DropdownItem } from "components"
 import { useSetting } from "helpers"
 import { Language, supportedLanguages } from "lang"
+import { JSX } from "preact"
 import { useEffect } from "preact/hooks"
 import { State, Theme } from "state"
 
@@ -9,7 +10,7 @@ export interface NavMenuProps {
 	state: State
 }
 
-export const NavMenu = ({ state }: NavMenuProps) => {
+export function NavMenu({ state }: NavMenuProps): JSX.Element {
 	const [theme, setTheme] = useSetting(
 		"theme",
 		typeof document !== "undefined"
@@ -46,11 +47,14 @@ export const NavMenu = ({ state }: NavMenuProps) => {
 				dropdownClass="right-0 w-40"
 				icon="Language"
 				label={supportedLanguages.find((x) => x.name === state.language)?.native}
-				items={supportedLanguages.map((x) => ({
-					label: `${x.label} (${x.native})`,
-					onClick: () => setLanguage(x.name),
-				}))}
-			/>
+			>
+				{supportedLanguages.map(({ label, native, name }) => (
+					<DropdownItem
+						label={`${label} (${native})`}
+						onClick={() => setLanguage(name)}
+					/>
+				))}
+			</Dropdown>
 		</>
 	)
 }

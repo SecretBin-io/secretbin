@@ -2,6 +2,7 @@ import { PageContent, Table } from "components"
 import { config } from "config"
 import { type PageProps } from "fresh"
 import { useTranslation } from "lang"
+import { JSX } from "preact"
 import { State } from "state"
 import credits from "../credits.json" with { type: "json" }
 
@@ -16,7 +17,7 @@ export const trimPrefix = (s: string, prefix: string): string => s.startsWith(pr
 /**
  * Page for show copyright and credit information
  */
-export default ({ state }: PageProps<unknown, State>) => {
+export default function Credits({ state }: PageProps<unknown, State>): JSX.Element {
 	const $ = useTranslation(state.language)
 
 	return (
@@ -38,31 +39,6 @@ export default ({ state }: PageProps<unknown, State>) => {
 			/>
 
 			<br />
-
-			{
-				/** Not used at the moment since we don't have any translations at the moment that where done by others */
-				/* <div class="relative overflow-x-auto mb-5">
-				<h5 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
-					{$("Credits.Translations.Title")}
-				</h5>
-				<div
-					dangerouslySetInnerHTML={{
-						__html: $("Credits.Translations.Description", { name: config.branding.appName }),
-					}}
-				/>
-				<br />
-				<Table
-					headers={{
-						language: $("Credits.Translations.Headers.Translation"),
-						author: $("Credits.Translations.Headers.Author"),
-					}}
-					rows={supportedLanguages.map((lang) => ({
-						language: `${lang.label} (${lang.native})`,
-						author: lang.author,
-					}))}
-				/>
-			</div> */
-			}
 
 			<div class="relative overflow-x-auto">
 				<h5 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">

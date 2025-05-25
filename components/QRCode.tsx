@@ -1,8 +1,10 @@
 import { qrcode } from "@libs/qrcode"
 import classNames from "classnames"
 import { Button } from "components"
+import { downloadDataURL, imageDataURL } from "helpers"
+import { JSX } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
-import { BaseProps, downloadDataURL, imageDataURL } from "./helpers.ts"
+import { BaseProps } from "./base.ts"
 
 export interface QRCodeProps extends BaseProps {
 	/** QRCode content */
@@ -18,7 +20,7 @@ export interface QRCodeProps extends BaseProps {
 /**
  * Generates a QRCode and displays it as an image
  */
-export const QRCode = ({ content, size = 256, downloadLabel = "Download", ...props }: QRCodeProps) => {
+export function QRCode({ content, size = 256, downloadLabel = "Download", ...props }: QRCodeProps): JSX.Element {
 	const [qrCode, setQrCode] = useState("")
 	const imgRef = useRef<HTMLImageElement | null>(null)
 

@@ -3,6 +3,7 @@ import { config } from "config"
 import { useSetting } from "helpers"
 import { PasswordGenerator } from "islands"
 import { LocalizedError, useTranslationWithPrefix } from "lang"
+import { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { submitSecret } from "secret/client"
 import { State } from "state"
@@ -14,7 +15,7 @@ export interface NewSecretProps {
 	state: State
 }
 
-export const NewSecret = ({ state }: NewSecretProps) => {
+export function NewSecret({ state }: NewSecretProps): JSX.Element {
 	const [message, setMessage] = useState("")
 	const [files, setFiles] = useState<File[]>([])
 	const [password, setPassword] = useState<string | undefined>("")
@@ -47,7 +48,7 @@ export const NewSecret = ({ state }: NewSecretProps) => {
 
 	return (
 		<>
-			<TextArea id="note" tabs lines={10} resizable placeholder="" value={message} onChange={setMessage} />
+			<TextArea tabs lines={10} resizable placeholder="" value={message} onChange={setMessage} />
 			<Button
 				label={$("Options.GeneratePassword")}
 				icon="Key"

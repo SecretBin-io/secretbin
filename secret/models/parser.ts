@@ -7,7 +7,7 @@ import z, { ZodType } from "zod"
  * @param obj Object to parse
  * @returns Parsed result
  */
-export const parseModel = async <T>(m: ZodType<T>, obj: unknown): Promise<T> => {
+export async function parseModel<T>(m: ZodType<T>, obj: unknown): Promise<T> {
 	try {
 		return await m.parseAsync(obj)
 	} catch (err) {

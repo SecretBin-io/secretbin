@@ -1,7 +1,32 @@
 import Record from "@nihility-io/record"
 import classNames from "classnames"
-import { ComponentChild } from "preact"
-import { BaseProps } from "./helpers.ts"
+import { ComponentChild, JSX } from "preact"
+import { BaseProps } from "./base.ts"
+
+interface TableCellProps {
+	/** Cell index in the row  */
+	index: number
+
+	children: ComponentChild
+}
+
+/**
+ * Creates a new cell for a table
+ */
+function TableCell({ index, children }: TableCellProps): JSX.Element {
+	if (index > 0) {
+		return <td class="px-6 py-4">{children}</td>
+	}
+
+	return (
+		<th
+			scope="row"
+			class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+		>
+			{children}
+		</th>
+	)
+}
 
 export interface TableProps<T extends string> extends BaseProps {
 	/** Header where the keys are used to map rows to the headers and the values are the header display names */
@@ -14,7 +39,7 @@ export interface TableProps<T extends string> extends BaseProps {
 /**
  * Creates a simple data table
  */
-export const Table = <T extends string>({ headers, rows, ...props }: TableProps<T>) => {
+export function Table<T extends string>({ headers, rows, ...props }: TableProps<T>): JSX.Element {
 	return (
 		<table
 			style={props.style}
@@ -32,17 +57,10 @@ export const Table = <T extends string>({ headers, rows, ...props }: TableProps<
 			<tbody>
 				{rows.map((row) => (
 					<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-						{Record.mapToArray(headers, (key, _value, i) =>
-							i === 0
-								? (
-									<th
-										scope="row"
-										class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-									>
-										{row[key]}
-									</th>
-								)
-								: <td class="px-6 py-4">{row[key]}</td>)}
+						{Record.mapToArray(
+							headers,
+							(key, _value, i) => <TableCell index={i}>{row[key]}</TableCell>,
+						)}
 					</tr>
 				))}
 			</tbody>

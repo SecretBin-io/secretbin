@@ -1,10 +1,11 @@
+import { JSX } from "preact"
 import { Base, SVGIcon, SVGIconProps } from "./Base.tsx"
 
 /**
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/x-mark.svg
  */
-export const Close: SVGIcon = (props: SVGIconProps) => (
+export const Close: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
 	</Base>
@@ -14,7 +15,7 @@ export const Close: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/document-duplicate.svg
  */
-export const Copy: SVGIcon = (props: SVGIconProps) => (
+export const Copy: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"
@@ -28,7 +29,7 @@ export const Copy: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/check.svg
  */
-export const Check: SVGIcon = (props: SVGIconProps) => (
+export const Check: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
 	</Base>
@@ -38,7 +39,7 @@ export const Check: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/document.svg
  */
-export const Document: SVGIcon = (props: SVGIconProps) => (
+export const Document: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base solid {...props}>
 		<path
 			stroke-linecap="round"
@@ -52,7 +53,7 @@ export const Document: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/arrow-down-circle.svg
  */
-export const Download: SVGIcon = (props: SVGIconProps) => (
+export const Download: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"
@@ -66,7 +67,7 @@ export const Download: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/x-circle.svg
  */
-export const Error: SVGIcon = (props: SVGIconProps) => (
+export const Error: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			strokeLinecap="round"
@@ -80,7 +81,7 @@ export const Error: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/exclamation-triangle.svg
  */
-export const Exclamation: SVGIcon = (props: SVGIconProps) => (
+export const Exclamation: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"
@@ -94,7 +95,7 @@ export const Exclamation: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/information-circle.svg
  */
-export const Info: SVGIcon = (props: SVGIconProps) => (
+export const Info: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			strokeLinecap="round"
@@ -108,7 +109,7 @@ export const Info: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/key.svg
  */
-export const Key: SVGIcon = (props: SVGIconProps) => (
+export const Key: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"
@@ -122,7 +123,7 @@ export const Key: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/language.svg
  */
-export const Language: SVGIcon = (props: SVGIconProps) => (
+export const Language: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"
@@ -136,7 +137,7 @@ export const Language: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/link.svg
  */
-export const Link: SVGIcon = (props: SVGIconProps) => (
+export const Link: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"
@@ -150,7 +151,7 @@ export const Link: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/envelope.svg
  */
-export const Mail: SVGIcon = (props: SVGIconProps) => (
+export const Mail: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"
@@ -164,7 +165,7 @@ export const Mail: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/minus.svg
  */
-export const Minus: SVGIcon = (props: SVGIconProps) => (
+export const Minus: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
 	</Base>
@@ -174,7 +175,7 @@ export const Minus: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/moon.svg
  */
-export const Moon: SVGIcon = (props: SVGIconProps) => (
+export const Moon: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base solid {...props}>
 		<path
 			stroke-linecap="round"
@@ -188,7 +189,7 @@ export const Moon: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/plus.svg
  */
-export const Plus: SVGIcon = (props: SVGIconProps) => (
+export const Plus: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 	</Base>
@@ -198,7 +199,7 @@ export const Plus: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/qr-code.svg
  */
-export const QRCode: SVGIcon = (props: SVGIconProps) => (
+export const QRCode: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"
@@ -217,7 +218,7 @@ export const QRCode: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/sun.svg
  */
-export const Sun: SVGIcon = (props: SVGIconProps) => (
+export const Sun: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base solid {...props}>
 		<path
 			stroke-linecap="round"
@@ -231,7 +232,7 @@ export const Sun: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/trash.svg
  */
-export const Trash: SVGIcon = (props: SVGIconProps) => (
+export const Trash: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"
@@ -245,7 +246,7 @@ export const Trash: SVGIcon = (props: SVGIconProps) => (
  * @author By the makers of tailwindcss
  * @link https://raw.githubusercontent.com/tailwindlabs/heroicons/fa902f44d071eac776758cfd6e0522cb7c37b1c3/src/24/outline/cloud-arrow-up.svg
  */
-export const Upload: SVGIcon = (props: SVGIconProps) => (
+export const Upload: SVGIcon = (props: SVGIconProps): JSX.Element => (
 	<Base {...props}>
 		<path
 			stroke-linecap="round"

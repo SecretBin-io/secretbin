@@ -1,11 +1,9 @@
 import classNames from "classnames"
+import { JSX } from "preact"
 import { useEffect, useRef } from "preact/hooks"
-import { BaseProps, elementID } from "./helpers.ts"
+import { BaseProps } from "./base.ts"
 
 export interface InputProps extends BaseProps {
-	/** Element ID (Default: Random ID) */
-	id?: string
-
 	/** Hides input text for e.g. passwords */
 	password?: boolean
 
@@ -40,9 +38,8 @@ export interface InputProps extends BaseProps {
 /**
  * Creates a text input field
  */
-export const Input = (
+export function Input(
 	{
-		id,
 		password,
 		readOnly,
 		value,
@@ -55,7 +52,7 @@ export const Input = (
 		onSubmit,
 		...props
 	}: InputProps,
-) => {
+): JSX.Element {
 	const ref = useRef<HTMLInputElement | null>(null)
 
 	useEffect(() => {
@@ -75,7 +72,6 @@ export const Input = (
 	}, [])
 	return (
 		<input
-			id={elementID("input", id)}
 			ref={ref}
 			style={props.style}
 			class={classNames(

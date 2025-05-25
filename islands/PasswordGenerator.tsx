@@ -1,6 +1,7 @@
 import { Button, Input, Modal, NumberInput, Section, Toggle } from "components"
 import { useSetting } from "helpers"
 import { useTranslationWithPrefix } from "lang"
+import { JSX } from "preact"
 import { useState } from "preact/hooks"
 import { generatePassword } from "secret/client"
 import { State } from "state"
@@ -18,7 +19,7 @@ export interface PasswordGeneratorProps {
 	onPassword: (password: string) => void
 }
 
-export const PasswordGenerator = ({ show, onDismiss, onPassword, state }: PasswordGeneratorProps) => {
+export function PasswordGenerator({ show, onDismiss, onPassword, state }: PasswordGeneratorProps): JSX.Element {
 	const $ = useTranslationWithPrefix(state.language, "PasswordGenerator")
 	const [password, setPassword] = useState("")
 	const [useUppercase, setUseUppercase] = useSetting("passwords.useUppercase", true, state)

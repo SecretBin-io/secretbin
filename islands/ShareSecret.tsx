@@ -1,6 +1,7 @@
 import { Button, ButtonGroup, Input, QRCode, Section, Show, TextArea } from "components"
 import { config } from "config"
 import { useTranslationWithPrefix } from "lang"
+import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { State } from "state"
 import { MessagePreview, setMessagePreview } from "./preview.ts"
@@ -10,7 +11,7 @@ export interface ShareSecretProps {
 	id: string
 }
 
-export const ShareSecret = ({ id, state }: ShareSecretProps) => {
+export function ShareSecret({ id, state }: ShareSecretProps): JSX.Element {
 	const [showQrCode, setShowQrCode] = useState(false)
 	const [link, setLink] = useState("")
 	const [preview, setPreview] = useState("")

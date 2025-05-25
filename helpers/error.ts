@@ -6,6 +6,9 @@ export interface DecodableErrorType {
 	fromObject(message: string, params: Record<string, unknown>): Error
 }
 
+/**
+ * Plain object representation of an error
+ */
 export interface ErrorObject {
 	name: string
 	message: string
@@ -18,7 +21,7 @@ const decodableErrorTypes: Record<string, DecodableErrorType> = {}
  * Registers a custom decodable error type, which is used by `decodeError`.
  * @param err Decodable error type
  */
-export const registerErrorType = (err: DecodableErrorType) => {
+export function registerErrorType(err: DecodableErrorType): void {
 	decodableErrorTypes[err.name] = err
 }
 
@@ -26,10 +29,8 @@ export const registerErrorType = (err: DecodableErrorType) => {
  * Registers custom decodable error types, which are used by `decodeError`.
  * @param err Decodable error types
  */
-export const registerErrorTypes = (...err: DecodableErrorType[]) => {
-	err.forEach((e) => {
-		decodableErrorTypes[e.name] = e
-	})
+export function registerErrorTypes(...err: DecodableErrorType[]): void {
+	err.forEach(registerErrorType)
 }
 
 /**
@@ -38,13 +39,14 @@ export const registerErrorTypes = (...err: DecodableErrorType[]) => {
  * @param err Error that should be encoded
  * @returns Plain object representing the error
  */
-export const encodeError = (err: Error) =>
-	Object.getOwnPropertyNames(err)
+export function encodeError(err: Error): ErrorObject {
+	return Object.getOwnPropertyNames(err)
 		.filter((x) => x !== "stack")
 		.reduce((res, key) => ({
 			...res,
 			[key]: (err as unknown as Record<string, unknown>)[key],
 		}), { name: err.name, message: err.message })
+}
 
 /**
  * Decodes an error type from the given plain object and adds the additional properties to it.
@@ -55,7 +57,7 @@ export const encodeError = (err: Error) =>
  * @param additionalProps Object containing additional properties
  * @returns Instance of an error class
  */
-export const decodeError = ({ name, message, ...props }: ErrorObject) => {
+export function decodeError({ name, message, ...props }: ErrorObject): Error {
 	if (Object.hasOwn(registerErrorType, name)) {
 		return decodableErrorTypes[name].fromObject(message, props as never)
 	}
@@ -81,12 +83,11 @@ export const decodeError = ({ name, message, ...props }: ErrorObject) => {
 		}
 	})()
 
-	Object.keys(props)
-		.forEach((key) =>
-			Object.defineProperty(err, key, {
-				value: props[key],
-			})
-		)
+	for (const key in props) {
+		Object.defineProperty(err, key, {
+			value: props[key],
+		})
+	}
 
 	return Object.defineProperty(err, "stack", { value: "" })
 }

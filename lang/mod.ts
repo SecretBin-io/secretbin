@@ -2,8 +2,8 @@ import de from "./de.ts"
 import en from "./en.ts"
 import { FlattenObjectKeys, formatString, TrimPrefix } from "./helpers.ts"
 
-export { type TrimPrefix } from "./helpers.ts"
 export * from "./error.ts"
+export { type TrimPrefix } from "./helpers.ts"
 
 /**
  * Currently supported languages
@@ -33,7 +33,9 @@ export const supportedLanguages: SupportedLanguage[] = [
  * Checks if a language code is supported
  * @param lang Language code
  */
-export const isLanguageSupported = (lang: string): boolean => !!supportedLanguages.find((x) => x.name === lang)
+export function isLanguageSupported(lang: string): boolean {
+	return !!supportedLanguages.find((x) => x.name === lang)
+}
 
 /**
  * List of all translated keys
@@ -45,7 +47,10 @@ export type TranslationKey = FlattenObjectKeys<typeof en.Translations>
  * @param key Translation key
  * @param params Optional parameters for the translated string
  */
-export type TranslationFunction = (key: TranslationKey, params?: Record<string, string>) => string
+export type TranslationFunction<Key extends string = TranslationKey> = (
+	key: Key,
+	params?: Record<string, string>,
+) => string
 
 /**
  * Gets the translation for the given key in the given language
@@ -53,15 +58,14 @@ export type TranslationFunction = (key: TranslationKey, params?: Record<string, 
  * @param key Translation key
  * @param params Optional parameters for the translated
  */
-export const getTranslation = (lang: Language, key: TranslationKey, params?: Record<string, string>): string => {
-	// deno-lint-ignore no-explicit-any
-	let o: any = translations[lang].Translations
+export function getTranslation(lang: Language, key: TranslationKey, params?: Record<string, string>): string {
+	let o: unknown = translations[lang].Translations
 	for (const k of key.split(".")) {
 		if (o === undefined) {
 			break
 		}
 
-		o = o[k]
+		o = (o as Record<string, unknown>)[k]
 	}
 
 	if (typeof o !== "string") {
@@ -83,8 +87,9 @@ export const getTranslation = (lang: Language, key: TranslationKey, params?: Rec
  * @param lang Language to use
  * @returns Translation function
  */
-export const useTranslation = (lang: Language): TranslationFunction => (path, params): string =>
-	getTranslation(lang, path, params)
+export function useTranslation(lang: Language): TranslationFunction {
+	return (path, params): string => getTranslation(lang, path, params)
+}
 
 /**
  * Preact hook for using translations based on the current language
@@ -98,7 +103,9 @@ export const useTranslation = (lang: Language): TranslationFunction => (path, pa
  *     )
  * }
  */
-export const useTranslationWithPrefix =
-	<P extends string>(initialLanguage: Language, prefix: P) =>
-	(key: TrimPrefix<P, TranslationKey>, params?: Record<string, string>) =>
-		useTranslation(initialLanguage)(prefix + "." + key as unknown as TranslationKey, params)
+export function useTranslationWithPrefix<P extends string>(
+	initialLanguage: Language,
+	prefix: P,
+): TranslationFunction<TrimPrefix<P, TranslationKey>> {
+	return (key, params) => useTranslation(initialLanguage)(prefix + "." + key as unknown as TranslationKey, params)
+}

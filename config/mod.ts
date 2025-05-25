@@ -1,11 +1,12 @@
+// deno-lint-ignore-file no-console
 import z from "zod"
 import { Config } from "./config.ts"
 export type * from "./banner.ts"
 export type * from "./branding.ts"
+export type * from "./config.ts"
 export type * from "./defaults.ts"
 export type * from "./expires.ts"
 export type * from "./logging.ts"
-export type * from "./config.ts"
 export type * from "./policy.ts"
 export type * from "./storage.ts"
 export type * from "./string.ts"
@@ -13,7 +14,7 @@ export type * from "./string.ts"
 /**
  * Load the config.yaml file server side
  */
-const serverCfg: Config = await (async () => {
+const serverCfg = await (async function (): Promise<Config> {
 	if (typeof document !== "undefined") {
 		return undefined!
 	}
@@ -50,7 +51,7 @@ const serverCfg: Config = await (async () => {
 /**
  * Censor the config by removing data which should not be exposed to the client
  */
-export const clientCfg: Config = (() => {
+export const clientCfg = (function (): Config {
 	if (typeof document !== "undefined") {
 		return undefined!
 	}
@@ -62,19 +63,20 @@ export const clientCfg: Config = (() => {
 /**
  * Serves the client configuration via HTTP in the backend. See [/routes/api/config.ts]
  */
-export const serveClientConfig = () =>
-	new Response(JSON.stringify(clientCfg), {
+export function serveClientConfig(): Response {
+	return new Response(JSON.stringify(clientCfg), {
 		headers: {
 			"Content-Type": "application/json",
 		},
 	})
+}
 
 let cachedClientConfig: Config | undefined = undefined
 
 /**
  * Application configuration (config.yaml). This config is available to the server and client
  */
-export const config: Config = await (async () => {
+export const config = await (async function (): Promise<Config> {
 	if (typeof document === "undefined") {
 		return serverCfg
 	}

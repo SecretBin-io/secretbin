@@ -1,6 +1,7 @@
 import { FileList, Section, Upload } from "components"
 import { config } from "config"
 import { useTranslationWithPrefix } from "lang"
+import { JSX } from "preact"
 import { State } from "state"
 
 export interface FileUploadProps {
@@ -9,7 +10,7 @@ export interface FileUploadProps {
 	setFiles: (files: File[]) => void
 }
 
-export const FilesUpload = ({ state, files, setFiles }: FileUploadProps) => {
+export function FilesUpload({ state, files, setFiles }: FileUploadProps): JSX.Element {
 	const $ = useTranslationWithPrefix(state.language, "NewSecret")
 
 	return (

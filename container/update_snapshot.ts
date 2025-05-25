@@ -10,7 +10,7 @@ import { encodeHex } from "@std/encoding/hex"
  * @param fn Filename
  * @returns Hexadecimal encoded file hash
  */
-const hashFile = async (fn: string) => {
+async function hashFile(fn: string): Promise<string> {
 	const message = await Deno.readFile(fn)
 	const hashBuffer = await crypto.subtle.digest("SHA-256", message)
 	return encodeHex(hashBuffer)

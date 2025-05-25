@@ -1,9 +1,10 @@
 import { Button, Message, PageContent } from "components"
 import { HttpError, type PageProps } from "fresh"
 import { LocalizedError, useTranslationWithPrefix } from "lang"
+import { JSX } from "preact"
 import { State } from "state"
 
-export default ({ state, error }: PageProps<unknown, State>) => {
+export default function Error({ state, error }: PageProps<unknown, State>): JSX.Element {
 	const $ = useTranslationWithPrefix(state.language, "ErrorPage")
 
 	let title = "Error"
@@ -22,8 +23,8 @@ export default ({ state, error }: PageProps<unknown, State>) => {
 			break
 		}
 		case error instanceof Error: {
-			title = error.name
-			message = error.message
+			title = (error as Error).name
+			message = (error as Error).message
 			break
 		}
 		default: {

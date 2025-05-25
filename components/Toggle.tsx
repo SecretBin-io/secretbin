@@ -1,6 +1,7 @@
 import classNames from "classnames"
 import { Show, Tooltip } from "components"
-import { BaseProps, elementID } from "./helpers.ts"
+import { JSX } from "preact"
+import { BaseProps } from "./base.ts"
 
 export interface ToggleProps extends BaseProps {
 	/** Element ID (Default: Random ID) */
@@ -28,16 +29,14 @@ export interface ToggleProps extends BaseProps {
 /**
  * Creates a checkable toggle
  */
-export const Toggle = (
+export function Toggle(
 	{ id, label, subLabel, on, onChange, tooltip, disabled, ...props }: ToggleProps,
-) => {
-	const elemId = elementID("checkbox", id)
+): JSX.Element {
 	return (
 		<Tooltip text={tooltip}>
 			<div class="flex mb-4" style={props.style}>
 				<div
 					class={classNames("flex-none", { "mt-1": subLabel, "brightness-75": disabled })}
-					{...(tooltip ? { "data-tooltip-target": `${elemId}-tooltip` } : {})}
 				>
 					<div
 						{...props}
@@ -66,7 +65,7 @@ export const Toggle = (
 
 				<div class="flex-1">
 					<div class="ms-2 text-sm">
-						<label for={elemId} class="font-medium text-gray-900 dark:text-gray-300">
+						<label class="font-medium text-gray-900 dark:text-gray-300">
 							{label}
 						</label>
 						<Show if={subLabel}>

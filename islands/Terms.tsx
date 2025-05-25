@@ -2,6 +2,7 @@ import { Modal } from "components"
 import { config } from "config"
 import { useSetting } from "helpers"
 import { useTranslationWithPrefix } from "lang"
+import { JSX } from "preact"
 import { State } from "state"
 
 export interface TermsProps {
@@ -11,7 +12,7 @@ export interface TermsProps {
 /**
  * Creates a modal with the usage terms
  */
-export const Terms = ({ state }: TermsProps) => {
+export function Terms({ state }: TermsProps): JSX.Element | undefined {
 	const $ = useTranslationWithPrefix(state.language, "TermsOfService")
 	const [showTerms, setShowTerms] = useSetting("showTerms", !!config.branding.terms, state)
 

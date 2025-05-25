@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import { Icon, IconName, Show } from "components"
-import { BaseProps } from "./helpers.ts"
-import { ComponentChildren } from "preact"
+import { ComponentChildren, JSX } from "preact"
+import { BaseProps } from "./base.ts"
 
 export type MessageType = "error" | "warning" | "info"
 
@@ -39,7 +39,9 @@ export interface MessageProps extends BaseProps {
 /**
  * Creates a message with a title wrapped in a colored box
  */
-export const Message = ({ title, type = "info", largeText, children, message, ...props }: MessageProps) => {
+export function Message(
+	{ title, type = "info", largeText, children, message, ...props }: MessageProps,
+): JSX.Element | undefined {
 	if (!message && !children) {
 		return undefined
 	}
@@ -60,11 +62,7 @@ export const Message = ({ title, type = "info", largeText, children, message, ..
 					<span class="font-medium">{title}:</span>
 					{" "}
 				</Show>
-				<span
-					class={classNames({
-						"text-base": largeText,
-					})}
-				>
+				<span class={classNames({ "text-base": largeText })}>
 					{children ?? message}
 				</span>
 			</div>

@@ -21,13 +21,20 @@ import { Database } from "./shared.ts"
 
 interface SecretRow {
 	id: string
+	// deno-lint-ignore camelcase
 	created_at: Date
 	expires: Date
+	// deno-lint-ignore camelcase
 	remaining_reads: number
+	// deno-lint-ignore camelcase
 	password_protected: boolean
+	// deno-lint-ignore camelcase
 	data_iv: string
+	// deno-lint-ignore camelcase
 	data_salt: string
+	// deno-lint-ignore camelcase
 	data_algorithm: string
+	// deno-lint-ignore camelcase
 	data_data: string
 }
 

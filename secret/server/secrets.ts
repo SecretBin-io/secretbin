@@ -237,7 +237,7 @@ export class Secrets {
 	 * @param id Secret ID
 	 * @param secret Properties that should be updated
 	 */
-	async updateSecretMetadata(id: string, secret: Partial<SecretMutableMetadata>) {
+	async updateSecretMetadata(id: string, secret: Partial<SecretMutableMetadata>): Promise<void> {
 		try {
 			await this.#db.updateSecretMetadata(id, secret)
 		} catch (e) {
@@ -250,7 +250,7 @@ export class Secrets {
 	 * Deletes the secret from the backend
 	 * @param id Secret ID
 	 */
-	async deleteSecret(id: string) {
+	async deleteSecret(id: string): Promise<void> {
 		try {
 			await this.#db.deleteSecret(id)
 		} catch (e) {

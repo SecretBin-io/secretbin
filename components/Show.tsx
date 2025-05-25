@@ -11,4 +11,9 @@ export interface ShowProps {
 /**
  * Element that only renders its children if the `if` condition is meet
  */
-export const Show = (props: ShowProps) => props.if ? <>{props.children}</> : undefined
+export function Show(props: ShowProps): ComponentChildren | undefined {
+	if (!props.if) {
+		return undefined
+	}
+	return props.children
+}

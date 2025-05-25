@@ -1,4 +1,5 @@
 import { useTranslationWithPrefix } from "lang"
+import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { State } from "state"
 
@@ -7,7 +8,7 @@ export interface ExpiresProps {
 	date: Date
 }
 
-export const Expires = ({ state, date }: ExpiresProps) => {
+export function Expires({ state, date }: ExpiresProps): JSX.Element {
 	const [dateString, setDateString] = useState(date.toLocaleString(state.locale))
 	const $ = useTranslationWithPrefix(state.language, "Common")
 

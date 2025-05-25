@@ -1,5 +1,5 @@
 export let MessagePreview = ""
 
-export const setMessagePreview = (s: string) => {
+export function setMessagePreview(s: string): void {
 	MessagePreview = s
 }

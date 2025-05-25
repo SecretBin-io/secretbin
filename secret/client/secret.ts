@@ -19,7 +19,12 @@ export interface SecretOptions {
  * @param opts Additional secret objects. See {@link SecretOptions}
  * @returns Secret URL
  */
-export const submitSecret = async (message: string, files: File[], password: string, opts: SecretOptions) => {
+export async function submitSecret(
+	message: string,
+	files: File[],
+	password: string,
+	opts: SecretOptions,
+): Promise<string> {
 	const masterKey = randomBytes(32)
 	const content = {
 		message,
@@ -55,7 +60,7 @@ export const submitSecret = async (message: string, files: File[], password: str
  * @param password  Encryption password (can be empty)
  * @returns Decrypted Secret
  */
-export const decryptSecret = async (secret: Secret, password: string): Promise<SecretData> => {
+export async function decryptSecret(secret: Secret, password: string): Promise<SecretData> {
 	const masterKey = decodeBase58(globalThis.location.hash.slice(1))
 	const msg = await decrypt(masterKey, password, {
 		data: secret.data.data,
