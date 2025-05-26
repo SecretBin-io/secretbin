@@ -1,5 +1,12 @@
 import { EncryptionAlgorithm, KeyAlgorithm } from "secret/crypto"
 
+export class InvalidCryptoParametersError extends Error {
+	constructor(value: string) {
+		super(`Invalid crypto parameters: ${value}`)
+		this.name = "InvalidCryptoParametersError"
+	}
+}
+
 export class UnsupportedKeyAlgorithmError extends Error {
 	constructor(algorithm: KeyAlgorithm) {
 		super(`Unsupported key algorithm: ${algorithm}`)
@@ -45,5 +52,14 @@ export class DecryptionError extends Error {
 	constructor(message: string) {
 		super(`Internal decryption error: ${message}`)
 		this.name = "DecryptionError"
+	}
+}
+
+export class ReservedKeysError extends Error {
+	constructor() {
+		super(
+			"`algo` and `key-algo` are reserved keys and cannot be used here. Use the properties `algorithm` and `keyAlgorithm` instead.",
+		)
+		this.name = "ReservedKeysError"
 	}
 }

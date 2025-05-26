@@ -1,85 +1,65 @@
 import { xchacha20poly1305 } from "@noble/ciphers/chacha"
 import {
-	combineKeyWithPassword,
-	CryptoParams,
-	decodeCryptoURL,
+	CryptoURL,
 	DecryptionError,
 	deriveKey,
 	EncryptionAlgorithm,
 	fromBytes,
-	getBase58Parameter,
-	UnexpectedEncryptionAlgorithmError,
 	UnsupportedEncryptionAlgorithmError,
 } from "secret/crypto"
 
 /**
- * Decrypts the message using the given key and password
+ * Decrypts the encrypted data using the given key and password
  * @param key Random encryption key
  * @param password Optional encryption password which can be using in addition to the key
- * @param data Encrypted data
+ * @param cryptoURL Encrypted data and encryption parameters in the form of a CryptoURL
  * @returns Decrypted data string
  */
-export function decrypt(key: Uint8Array, password: string, encrypted: string): Promise<string> {
-	const [params, data] = decodeCryptoURL(encrypted)
-	const newKey = combineKeyWithPassword(key, password)
+export async function decrypt(key: Uint8Array, password: string, cryptoURL: string): Promise<string> {
+	const c = new CryptoURL(cryptoURL)
 
-	switch (params.algo) {
+	switch (c.algorithm) {
 		case EncryptionAlgorithm.AES256GCM:
-			return decryptAES256GCM(newKey, params, data)
+			return fromBytes(await decryptAES256GCM(key, password, c))
 		case EncryptionAlgorithm.XChaCha20Poly1305:
-			return decryptXChaCha20Poly1305(newKey, params, data)
+			return fromBytes(await decryptXChaCha20Poly1305(key, password, c))
 		default:
-			throw new UnsupportedEncryptionAlgorithmError(params.algo)
+			throw new UnsupportedEncryptionAlgorithmError(c.algorithm)
 	}
 }
 
 /**
- * Decrypts the data with the given key using AES256-GCM
+ * Decrypts the encrypted data with the given key and optional password using AES256-GCM
  * @param key Encryption key
- * @param params Encryption parameters
- * @param data Encrypted data
+ * @param password Optional encryption password which can be using in addition to the key
+ * @param cryptoURL Encrypted data and encryption parameters in the form of a CryptoURL
  * @returns Decrypted data string
  */
-async function decryptAES256GCM(key: Uint8Array, params: CryptoParams, data: Uint8Array): Promise<string> {
-	if (params.algo !== EncryptionAlgorithm.AES256GCM) {
-		throw new UnexpectedEncryptionAlgorithmError(params.algo, EncryptionAlgorithm.AES256GCM)
-	}
-
-	const iv = getBase58Parameter(params, "nonce")
-	const salt = getBase58Parameter(params, "salt")
-
-	const [k, _] = await deriveKey(key, salt, params)
+async function decryptAES256GCM(key: Uint8Array, password: string, cryptoURL: CryptoURL): Promise<Uint8Array> {
+	const iv = cryptoURL.getBase58("nonce")
+	const k = await deriveKey(key, password, cryptoURL)
 
 	try {
 		const gcmParams = { name: "AES-GCM", iv: iv, additionalData: new Uint8Array() } satisfies AesGcmParams
-		const res = new Uint8Array(await globalThis.crypto.subtle.decrypt(gcmParams, k as CryptoKey, data))
-
-		return fromBytes(res)
+		return new Uint8Array(await globalThis.crypto.subtle.decrypt(gcmParams, k as CryptoKey, cryptoURL.data))
 	} catch (error) {
 		throw new DecryptionError(error instanceof Error ? error.message : String(error))
 	}
 }
 
 /**
- * Decrypts the data with the given key using XChaCha20-Poly1305
+ * Decrypts the encrypted data with the given key and optional password using XChaCha20-Poly1305
  * @param key Encryption key
- * @param params Encryption parameters
- * @param data Encrypted data
+ * @param password Optional encryption password which can be using in addition to the key
+ * @param cryptoURL Encrypted data and encryption parameters in the form of a CryptoURL
  * @returns Decrypted data string
  */
-async function decryptXChaCha20Poly1305(key: Uint8Array, params: CryptoParams, data: Uint8Array): Promise<string> {
-	if (params.algo !== EncryptionAlgorithm.XChaCha20Poly1305) {
-		throw new UnexpectedEncryptionAlgorithmError(params.algo, EncryptionAlgorithm.AES256GCM)
-	}
-
-	const iv = getBase58Parameter(params, "nonce")
-	const salt = getBase58Parameter(params, "salt")
-
-	const [k, _] = await deriveKey(key, salt, params)
+async function decryptXChaCha20Poly1305(key: Uint8Array, password: string, cryptoURL: CryptoURL): Promise<Uint8Array> {
+	const iv = cryptoURL.getBase58("nonce")
+	const k = await deriveKey(key, password, cryptoURL)
 
 	try {
-		const res = xchacha20poly1305(k as Uint8Array, iv).decrypt(data)
-		return fromBytes(res)
+		return xchacha20poly1305(k as Uint8Array, iv).decrypt(cryptoURL.data)
 	} catch (error) {
 		throw new DecryptionError(error instanceof Error ? error.message : String(error))
 	}
