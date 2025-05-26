@@ -1,8 +1,8 @@
 import { decodeBase58, encodeBase58 } from "@std/encoding/base58"
 import { encodeBase64 } from "@std/encoding/base64"
+import { decrypt, encrypt, randomBytes } from "secret/crypto"
 import { EncryptionAlgorithm, Secret, SecretAttachment, SecretData } from "secret/models"
 import { createSecret } from "./api.ts"
-import { decrypt, encrypt, randomBytes } from "./crypto.ts"
 
 export interface SecretOptions {
 	expires: string
@@ -64,11 +64,6 @@ export async function submitSecret(
  */
 export async function decryptSecret(secret: Secret, password: string): Promise<SecretData> {
 	const masterKey = decodeBase58(globalThis.location.hash.slice(1))
-	const msg = await decrypt(masterKey, password, {
-		data: secret.data.data,
-		iv: secret.data.iv,
-		salt: secret.data.salt,
-		algorithm: secret.data.algorithm,
-	})
+	const msg = await decrypt(masterKey, password, secret.data)
 	return SecretData.parse(JSON.parse(msg)) as SecretData
 }

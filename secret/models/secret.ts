@@ -3,20 +3,21 @@
  */
 
 import z, { ZodInterface, ZodType } from "zod"
-import { EncryptedData } from "./crypto.ts"
+
+export const EncryptionString = z.string().startsWith("crypto://")
 
 export interface SecretRequest {
 	expires: string
 	burnAfter: number
 	passwordProtected: boolean
-	data: EncryptedData
+	data: string
 }
 
 export const SecretRequest: ZodType<SecretRequest> = z.strictInterface({
 	expires: z.string().check(z.regex(/^(\d+)(min|hr|d|w|m)$/)),
 	burnAfter: z.number().default(-1),
 	passwordProtected: z.boolean().default(false),
-	data: EncryptedData,
+	data: EncryptionString,
 })
 
 export interface SecretMutableMetadata {
@@ -46,13 +47,13 @@ export const SecretMetadata: ZodType<SecretMetadata> = z.extend(
 ) as unknown as ZodType<SecretMetadata>
 
 export interface Secret extends SecretMetadata {
-	data: EncryptedData
+	data: string
 }
 
 export const Secret: ZodType<Secret> = z.extend(
 	SecretMetadata as unknown as ZodInterface,
 	z.strictInterface({
-		data: EncryptedData,
+		data: EncryptionString,
 	}),
 ) as unknown as ZodType<Secret>
 

@@ -121,6 +121,7 @@
 		"preact": "npm:preact@^10.26.7",
 		"@preact/signals": "npm:@preact/signals@^2.0.5",
 		"secret/client": "./secret/client/mod.ts",
+		"secret/crypto": "./secret/crypto/mod.ts",
 		"secret/models": "./secret/models/mod.ts",
 		"secret/server": "./secret/server/mod.ts",
 		"state": "./state.ts",

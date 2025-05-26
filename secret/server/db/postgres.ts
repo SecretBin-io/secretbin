@@ -3,8 +3,7 @@ import { LocalizedError } from "lang"
 import { logDB } from "log"
 import postgres from "postgres"
 import {
-	EncryptedData,
-	EncryptionAlgorithm,
+	EncryptionString,
 	parseModel,
 	Secret,
 	SecretAlreadyExistsError,
@@ -28,14 +27,7 @@ interface SecretRow {
 	remaining_reads: number
 	// deno-lint-ignore camelcase
 	password_protected: boolean
-	// deno-lint-ignore camelcase
-	data_iv: string
-	// deno-lint-ignore camelcase
-	data_salt: string
-	// deno-lint-ignore camelcase
-	data_algorithm: string
-	// deno-lint-ignore camelcase
-	data_data: string
+	data: string
 }
 
 /**
@@ -72,10 +64,7 @@ export class PostgresDatabase implements Database {
 				expires             timestamp   not null,
 				remaining_reads     integer     not null,
 				password_protected  boolean     not null,
-				data_algorithm      text        not null,
-				data_iv             text        not null,
-				data_salt           text        not null,
-				data_data           text        not null
+				data	            text        not null
 			)
 		`
 	}
@@ -102,12 +91,7 @@ export class PostgresDatabase implements Database {
 	static async #secretFromRow(r: SecretRow): Promise<Secret> {
 		try {
 			const metadata = await this.#metadataFromRow(r)
-			const data = await parseModel(EncryptedData, {
-				iv: r.data_iv,
-				salt: r.data_salt,
-				algorithm: r.data_algorithm as EncryptionAlgorithm,
-				data: r.data_data,
-			})
+			const data = await parseModel(EncryptionString, r.data)
 			return { ...metadata, data: data } satisfies Secret
 		} catch (e) {
 			throw e
@@ -200,19 +184,13 @@ export class PostgresDatabase implements Database {
                 expires,
                 remaining_reads,
                 password_protected,
-                data_algorithm,
-                data_iv,
-                data_salt,
-                data_data
+                data
             ) values (
                 ${secret.id},
                 ${secret.expires},
                 ${secret.remainingReads},
                 ${secret.passwordProtected},
-                ${secret.data.algorithm},
-                ${secret.data.iv},
-                ${secret.data.salt},
-                ${secret.data.data}
+                ${secret.data}
             )`
 		} catch (error) {
 			logDB.error(`Failed to insert secrets.`, { error })

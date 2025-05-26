@@ -111,8 +111,8 @@ export class Secrets {
 		// Validate the secret again the Zod model
 		const m = await parseModel(SecretRequest, secret)
 
-		if (m.data.data.length > config.storage.maxSize) {
-			throw new SecretSizeLimitError(m.data.data.length, config.storage.maxSize)
+		if (m.data.length > config.storage.maxSize) {
+			throw new SecretSizeLimitError(m.data.length, config.storage.maxSize)
 		}
 
 		// Ensure that the secrets fulfills the configured policies

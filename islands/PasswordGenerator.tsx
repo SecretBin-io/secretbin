@@ -3,7 +3,7 @@ import { useSetting } from "helpers"
 import { useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useState } from "preact/hooks"
-import { generatePassword } from "secret/client"
+import { generatePassword } from "secret/crypto"
 import { State } from "state"
 
 export interface PasswordGeneratorProps {
