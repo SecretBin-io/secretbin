@@ -1,7 +1,14 @@
+import {
+	combineBaseKeyWithPassword,
+	decrypt,
+	encrypt,
+	EncryptionAlgorithm,
+	fromBytes,
+	randomBytes,
+} from "@nihility-io/crypto"
 import { decodeBase58, encodeBase58 } from "@std/encoding/base58"
 import { encodeBase64 } from "@std/encoding/base64"
-import { decrypt, encrypt, randomBytes } from "secret/crypto"
-import { EncryptionAlgorithm, Secret, SecretAttachment, SecretData } from "secret/models"
+import { Secret, SecretAttachment, SecretData } from "secret/models"
 import { createSecret } from "./api.ts"
 
 export interface SecretOptions {
@@ -26,7 +33,9 @@ export async function submitSecret(
 	opts: SecretOptions,
 	algorithm: EncryptionAlgorithm,
 ): Promise<string> {
-	const masterKey = randomBytes(32)
+	const baseKey = randomBytes(32)
+
+	const passphrase = fromBytes(combineBaseKeyWithPassword(baseKey, password))
 	const content = {
 		message,
 		attachments: await Promise.all(files.map(async (x) => ({
@@ -36,12 +45,7 @@ export async function submitSecret(
 		} satisfies SecretAttachment))),
 	} satisfies SecretData
 
-	const enc = await encrypt(
-		masterKey,
-		password,
-		JSON.stringify(content),
-		algorithm,
-	)
+	const enc = await encrypt(passphrase, JSON.stringify(content), algorithm)
 
 	try {
 		const id = await createSecret({
@@ -50,7 +54,7 @@ export async function submitSecret(
 			burnAfter: !opts.burn ? -1 : opts.slowBurn ? opts.rereads : 1,
 			passwordProtected: password !== "",
 		})
-		return `/secret/${id}/share#${encodeBase58(masterKey)}`
+		return `/secret/${id}/share#${encodeBase58(baseKey)}`
 	} catch (e) {
 		throw e
 	}
@@ -63,7 +67,8 @@ export async function submitSecret(
  * @returns Decrypted Secret
  */
 export async function decryptSecret(secret: Secret, password: string): Promise<SecretData> {
-	const masterKey = decodeBase58(globalThis.location.hash.slice(1))
-	const msg = await decrypt(masterKey, password, secret.data)
+	const baseKey = decodeBase58(globalThis.location.hash.slice(1))
+	const passphrase = fromBytes(combineBaseKeyWithPassword(baseKey, password))
+	const msg = await decrypt(passphrase, secret.data)
 	return SecretData.parse(JSON.parse(msg)) as SecretData
 }

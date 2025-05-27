@@ -59,6 +59,7 @@ export default {
 				},
 				GeneratePassword: "Passwort Generieren",
 			},
+			Encrypting: "Geheimnis wird verschlüsselt",
 		},
 		PasswordGenerator: {
 			Title: "Passwort Generieren",
@@ -124,6 +125,7 @@ export default {
 			},
 			DecryptionError:
 				"Das Geheimnis konnte nicht entschlüsselt werden. Dies kann z.B. an einem falschen Passwort liegen. Bitte versuche es erneut.\n",
+			Decrypting: "Geheimnis wird entschlüsselt",
 		},
 		DeleteSecret: {
 			Title: "Geheimnis löschen",

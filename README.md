@@ -34,18 +34,29 @@ Imagine you have created a secret and want to share it with someone via e.g. ema
 12. User B can see the secret text and or files.
 
 ### Encryption
+SecretBin current support two encryption algorithms; AES256-GCM with PBKDF2 and XChaCha20-Poly1305 with Scrypt.
 
+#### AES256-GCM with PBKDF2
 1. Generate random binary data using [Web Crypto's getRandomValues](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues)
    - baseKey := A 256 bit base key
-   - iv := A 128 bit initialization vector
-   - salt := A 64 bit salt
+   - iv := A 96 bit initialization vector
+   - salt := A 128 bit salt
 2. Generate a encryption key with [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) using [Web Crypto's deriveKey](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/deriveKey)
-   - key := PBKDF2(base Key + password, salt, 100000 iterations, SHA-256)
+   - key := PBKDF2(base Key + password, salt, 210000 iterations, SHA-512)
 3. Encrypt the secret with **AES256-GCM** using [Web Crypto's encrypt](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/encrypt)
    - enc := AES256-GCM(secret, baseKey, iv, adata: []) # _adata is not used, so leave it empty_
 
-## How Can I Use This App?
+#### XChaCha20-Poly1305 with Scrypt
+1. Generate random binary data using [Web Crypto's getRandomValues](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues)
+   - baseKey := A 256 bit base key
+   - nonce := A 192 bit nonce
+   - salt := A 128 bit salt
+2. Generate a encryption key with [Scrypt](https://en.wikipedia.org/wiki/Scrypt) using [@noble/hashes](https://github.com/paulmillr/noble-hashes)
+   - key := Scrypt(base Key + password, salt, N = 2 ** 15, r = 8, p = 3)
+3. Encrypt the secret with **XChaCha20-Poly1305** using [@noble/ciphers](https://github.com/paulmillr/noble-ciphers)
+   - enc := XChaCha20-Poly1305(secret, baseKey, nonce, adata: []) # _adata is not used, so leave it empty_
 
+## How Can I Use This App?
 Unfortunately, I only develop the app. I do not host it myself. Why? I am a developer and not a lawyer. Since I operate from the EU, SecretBin would need a privacy policy in order to operate it. I don't know how to write one and I can't be bothered to pay someone to do it.
 
 That being said, it you want to host SecretBin yourself, you can. You have to options to host SecretBin yourself:
@@ -146,6 +157,7 @@ policy:
   requirePassword: false # Forces users to enable the burn option for new secrets
   requireBurn: false # Forces users to specify a password for new secrets
   denySlowBurn: false # Blocks users from enabling slow burn for new secrets
+  encryptionAlgorithm: AES256-GCM # Algorithm used for encrypting new secrets (AES256-GCM, XChaCha20-Poly1305)
 storage:
   maxSize: 10Mi # Max size a new secret is allowed to have
   gcInterval: 5 # Interval in seconds in which the garbage collector should run

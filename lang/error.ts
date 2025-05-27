@@ -1,5 +1,4 @@
 import { STATUS_TEXT } from "@std/http/status"
-import { HttpError } from "fresh/error"
 import { getTranslation, Language, TranslationKey } from "lang"
 import { TrimPrefix, TrimSuffix } from "./helpers.ts"
 
@@ -8,9 +7,14 @@ export type ErrorKey = TrimSuffix<"Title", TrimPrefix<"Errors", TranslationKey>>
 /**
  * Error type which enables localized translated error messages
  */
-export class LocalizedError extends HttpError {
+export class LocalizedError extends Error {
 	#key: ErrorKey
 	#params: Record<string, string>
+
+	/**
+	 * HTTP status code for the error, used to determine the response status
+	 */
+	public readonly status: keyof typeof STATUS_TEXT
 
 	/**
 	 * Create a new localized error. Note: The error name is set to the translation key name by default
@@ -23,7 +27,8 @@ export class LocalizedError extends HttpError {
 		key: ErrorKey,
 		params: Record<string, string> = {},
 	) {
-		super(status, getTranslation(Language.English, `Errors.${key}.Message`, params))
+		super(getTranslation(Language.English, `Errors.${key}.Message`, params))
+		this.status = status
 		this.name = key
 		this.#key = key
 		this.#params = params

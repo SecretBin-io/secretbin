@@ -1,5 +1,6 @@
 import { decodeBase64 } from "@std/encoding/base64"
-import { Button, FileList, Input, Message, Section, Show, TextArea } from "components"
+import classNames from "classnames"
+import { Button, FileList, Input, Message, Section, Show, Spinner, TextArea } from "components"
 import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
@@ -22,6 +23,7 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 	const [error, setError] = useState("")
 	const [secret, setSecret] = useState<Secret | undefined>(undefined)
 	const [secretData, setSecretData] = useState<SecretData | undefined>(undefined)
+	const [loading, setLoading] = useState(false)
 
 	const $ = useTranslationWithPrefix(state.language, "ViewSecret")
 
@@ -59,7 +61,9 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 
 		// Try to decrypt the secret
 		try {
+			setLoading(true)
 			const data = await decryptSecret(sec, password)
+			setLoading(false)
 			setSecretData(data)
 			return
 		} catch (err) {
@@ -69,51 +73,55 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 			setRequirePassword(true)
 			// deno-lint-ignore no-console
 			console.log(err)
+			setLoading(false)
 			return
 		}
 	}
 
 	return (
 		<>
-			<Show if={requireConfirm}>
-				<p>{$("ReadConfirm")}</p>
-				<br />
-				<Button class="float-right" label={$("Read")} onClick={() => setRequireConfirm(false)} />
-			</Show>
-			<Show if={!requireConfirm && requirePassword}>
-				<Section title={$("Password.Title")} description={$("Password.Description")}>
-					<Input
-						class="mb-2"
-						password
-						invalid={passwordInvalid}
-						value={password}
-						onChange={setPassword}
-						onSubmit={() => setRequirePassword(false)}
-					/>
-					<Button class="float-right" label={$("Decrypt")} onClick={() => setRequirePassword(false)} />
-					<Show if={passwordInvalid}>
-						<p class="text-red-600 dark:text-red-500">
-							{$("DecryptionError")}
-						</p>
-					</Show>
-				</Section>
-			</Show>
-			<Message type="error" title="Error" message={error} />
-			<Show if={!!secretData}>
-				<TextArea class="resize-none" lines={15} readOnly value={secretData?.message} />
-				<Show if={(secretData?.attachments ?? []).length !== 0}>
-					<Section title={$("Files.Title")}>
-						<FileList
-							files={secretData?.attachments.map((att) =>
-								new File([
-									new Blob([decodeBase64(att.data).buffer], { type: att.contentType }),
-								], att.name)
-							) ?? []}
-							downloadable
+			<Spinner label={$("Decrypting")} hidden={!loading} />
+			<div class={classNames({ "hidden": loading })}>
+				<Show if={requireConfirm}>
+					<p>{$("ReadConfirm")}</p>
+					<br />
+					<Button class="float-right" label={$("Read")} onClick={() => setRequireConfirm(false)} />
+				</Show>
+				<Show if={!requireConfirm && requirePassword}>
+					<Section title={$("Password.Title")} description={$("Password.Description")}>
+						<Input
+							class="mb-2"
+							password
+							invalid={passwordInvalid}
+							value={password}
+							onChange={setPassword}
+							onSubmit={() => setRequirePassword(false)}
 						/>
+						<Button class="float-right" label={$("Decrypt")} onClick={() => setRequirePassword(false)} />
+						<Show if={passwordInvalid}>
+							<p class="text-red-600 dark:text-red-500">
+								{$("DecryptionError")}
+							</p>
+						</Show>
 					</Section>
 				</Show>
-			</Show>
+				<Message type="error" title="Error" message={error} />
+				<Show if={!!secretData}>
+					<TextArea class="resize-none" lines={15} readOnly value={secretData?.message} />
+					<Show if={(secretData?.attachments ?? []).length !== 0}>
+						<Section title={$("Files.Title")}>
+							<FileList
+								files={secretData?.attachments.map((att) =>
+									new File([
+										new Blob([decodeBase64(att.data).buffer], { type: att.contentType }),
+									], att.name)
+								) ?? []}
+								downloadable
+							/>
+						</Section>
+					</Show>
+				</Show>
+			</div>
 		</>
 	)
 }

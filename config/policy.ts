@@ -1,3 +1,4 @@
+import { EncryptionAlgorithm } from "@nihility-io/crypto"
 import z, { ZodType } from "zod"
 
 /**
@@ -15,6 +16,9 @@ export interface Policy {
 
 	/** Blocks users from enabling slow burn for new secrets */
 	denySlowBurn: boolean
+
+	/** Algorithm used for encrypting new secrets */
+	encryptionAlgorithm: EncryptionAlgorithm
 }
 
 export const Policy: ZodType<Policy> = z.strictInterface({
@@ -22,4 +26,5 @@ export const Policy: ZodType<Policy> = z.strictInterface({
 	requireBurn: z.boolean().default(false),
 	requirePassword: z.boolean().default(false),
 	denySlowBurn: z.boolean().default(false),
+	encryptionAlgorithm: z.enum(EncryptionAlgorithm).default(EncryptionAlgorithm.AES256GCM),
 })

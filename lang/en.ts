@@ -56,6 +56,7 @@ export default {
 				},
 				GeneratePassword: "Generate Password",
 			},
+			Encrypting: "Encrypting secret",
 		},
 		PasswordGenerator: {
 			Title: "Generate Password",
@@ -120,6 +121,7 @@ export default {
 				Title: "Attached Files",
 			},
 			DecryptionError: "Unable to decrypt the secret. This is likely due to a wrong password. PLease try again.",
+			Decrypting: "Decrypting secret",
 		},
 		DeleteSecret: {
 			Title: "Delete Secret",

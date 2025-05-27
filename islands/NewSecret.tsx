@@ -1,4 +1,5 @@
-import { Button, Message, TextArea } from "components"
+import classNames from "classnames"
+import { Button, Message, Spinner, TextArea } from "components"
 import { config } from "config"
 import { useSetting } from "helpers"
 import { PasswordGenerator } from "islands"
@@ -6,7 +7,6 @@ import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { submitSecret } from "secret/client"
-import { EncryptionAlgorithm } from "secret/models"
 import { State } from "state"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
@@ -26,6 +26,7 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 	const [rereads, setRereads] = useSetting("options.rereads", 2, state)
 	const [error, setError] = useState("")
 	const [showGenerator, setShowGenerator] = useState(false)
+	const [loading, setLoading] = useState(false)
 	const aRef = useRef<HTMLAnchorElement | null>(null)
 	const $ = useTranslationWithPrefix(state.language, "NewSecret")
 
@@ -38,56 +39,61 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 
 		// Submit the secret to the backend
 		try {
+			setLoading(true)
 			const res = await submitSecret(
 				message,
 				files,
 				password,
 				{ expires, burn, slowBurn, rereads },
-				EncryptionAlgorithm.AES256GCM,
+				config.policy.encryptionAlgorithm,
 			)
 			setError("")
 			aRef.current!.href = res
 			aRef.current!.click()
 		} catch (e) {
+			setLoading(false)
 			setError(LocalizedError.getMessage(state.language, e as Error))
 		}
 	}
 
 	return (
 		<>
-			<TextArea tabs lines={10} resizable placeholder="" value={message} onChange={setMessage} />
-			<Button
-				label={$("Options.GeneratePassword")}
-				icon="Key"
-				theme="plainAlternative"
-				class="mt-2"
-				onClick={() => setShowGenerator(true)}
-			/>
-			<PasswordGenerator
-				state={state}
-				show={showGenerator}
-				onPassword={(x) => {
-					setMessage(message + x)
-					setShowGenerator(false)
-				}}
-				onDismiss={() => setShowGenerator(false)}
-			/>
-			<br />
-			<FilesUpload state={state} files={files} setFiles={setFiles} />
-			<Options
-				state={state}
-				expires={expires}
-				setExpires={setExpires}
-				burn={burn}
-				setBurn={setBurn}
-				slowBurn={slowBurn}
-				setSlowBurn={setSlowBurn}
-				rereads={rereads}
-				setRereads={setRereads}
-				setPassword={setPassword}
-			/>
-			<Message type="error" title="Error" message={error} />
-			<Button class="float-right" label={$("Create")} onClick={submit} />
+			<Spinner label={$("Encrypting")} hidden={!loading} />
+			<div class={classNames({ "hidden": loading })}>
+				<TextArea tabs lines={10} resizable placeholder="" value={message} onChange={setMessage} />
+				<Button
+					label={$("Options.GeneratePassword")}
+					icon="Key"
+					theme="plainAlternative"
+					class="mt-2"
+					onClick={() => setShowGenerator(true)}
+				/>
+				<PasswordGenerator
+					state={state}
+					show={showGenerator}
+					onPassword={(x) => {
+						setMessage(message + x)
+						setShowGenerator(false)
+					}}
+					onDismiss={() => setShowGenerator(false)}
+				/>
+				<br />
+				<FilesUpload state={state} files={files} setFiles={setFiles} />
+				<Options
+					state={state}
+					expires={expires}
+					setExpires={setExpires}
+					burn={burn}
+					setBurn={setBurn}
+					slowBurn={slowBurn}
+					setSlowBurn={setSlowBurn}
+					rereads={rereads}
+					setRereads={setRereads}
+					setPassword={setPassword}
+				/>
+				<Message type="error" title="Error" message={error} />
+				<Button class="float-right" label={$("Create")} onClick={submit} />
+			</div>
 			{/* This line is necessary in order to use Deno Fresh Partials. Partials only work when navigating using links. */}
 			<a class="hidden" ref={aRef} href="" />
 		</>
