@@ -110,6 +110,17 @@
   },
   {
     "registry": "jsr",
+    "name": "@nihility-io/crypto",
+    "version": "1.0.0-beta.1",
+    "repository": "https://github.com/Nihility-io/Crypto",
+    "authors": [
+      "Nihility.io"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Crypto/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
     "name": "@nihility-io/record",
     "version": "1.0.4",
     "repository": "https://github.com/Nihility-io/Record",
@@ -219,7 +230,7 @@
   {
     "registry": "jsr",
     "name": "@std/cli",
-    "version": "1.0.17",
+    "version": "1.0.18",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -230,7 +241,7 @@
   {
     "registry": "jsr",
     "name": "@std/collections",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -252,7 +263,7 @@
   {
     "registry": "jsr",
     "name": "@std/datetime",
-    "version": "0.225.4",
+    "version": "0.225.5",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -307,7 +318,7 @@
   {
     "registry": "jsr",
     "name": "@std/http",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -362,7 +373,7 @@
   {
     "registry": "jsr",
     "name": "@std/path",
-    "version": "1.0.9",
+    "version": "1.1.0",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -395,7 +406,7 @@
   {
     "registry": "jsr",
     "name": "@std/yaml",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
