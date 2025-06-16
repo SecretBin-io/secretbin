@@ -2,8 +2,8 @@
  * This script is used for creating a branded Docker image with custom static files
  */
 
-import * as fs from "@std/fs"
 import { encodeHex } from "@std/encoding/hex"
+import * as fs from "@std/fs"
 
 /**
  * Generate the SHA256 hash of the given file
@@ -25,7 +25,7 @@ for await (const file of fs.walk("static", { includeDirs: false })) {
 	const staticPath = file.path.slice("static".length)
 
 	// Skip generated files
-	if (file.name === ".DS_Store" || snapshot.staticFiles[staticPath].generated === true) {
+	if (file.name === ".DS_Store" || snapshot.staticFiles[staticPath]?.generated === true) {
 		continue
 	}
 
