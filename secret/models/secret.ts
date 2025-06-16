@@ -2,7 +2,7 @@
  * This file defines all the models used by SecretBin. Models are validated using Zod
  */
 
-import z, { ZodInterface, ZodType } from "zod"
+import z, { ZodObject, ZodType } from "zod"
 
 export const EncryptionString = z.string().startsWith("crypto://")
 
@@ -13,7 +13,7 @@ export interface SecretRequest {
 	data: string
 }
 
-export const SecretRequest: ZodType<SecretRequest> = z.strictInterface({
+export const SecretRequest: ZodType<SecretRequest> = z.strictObject({
 	expires: z.string().check(z.regex(/^(\d+)(min|hr|d|w|m)$/)),
 	burnAfter: z.number().default(-1),
 	passwordProtected: z.boolean().default(false),
@@ -25,7 +25,7 @@ export interface SecretMutableMetadata {
 	remainingReads: number
 }
 
-export const SecretMutableMetadata: ZodType<SecretMutableMetadata> = z.strictInterface({
+export const SecretMutableMetadata: ZodType<SecretMutableMetadata> = z.strictObject({
 	expires: z.union([
 		z.string().transform((str) => new Date(str)),
 		z.date(),
@@ -38,24 +38,18 @@ export interface SecretMetadata extends SecretMutableMetadata {
 	passwordProtected: boolean
 }
 
-export const SecretMetadata: ZodType<SecretMetadata> = z.extend(
-	SecretMutableMetadata as unknown as ZodInterface,
-	z.strictInterface({
-		id: z.string(),
-		passwordProtected: z.boolean().default(false),
-	}),
-) as unknown as ZodType<SecretMetadata>
+export const SecretMetadata: ZodType<SecretMetadata> = (SecretMutableMetadata as unknown as ZodObject).extend({
+	id: z.string(),
+	passwordProtected: z.boolean().default(false),
+}) as unknown as ZodType<SecretMetadata>
 
 export interface Secret extends SecretMetadata {
 	data: string
 }
 
-export const Secret: ZodType<Secret> = z.extend(
-	SecretMetadata as unknown as ZodInterface,
-	z.strictInterface({
-		data: EncryptionString,
-	}),
-) as unknown as ZodType<Secret>
+export const Secret: ZodType<Secret> = (SecretMetadata as unknown as ZodObject).extend({
+	data: EncryptionString,
+}) as unknown as ZodType<Secret>
 
 export interface SecretAttachment {
 	name: string
@@ -63,7 +57,7 @@ export interface SecretAttachment {
 	data: string
 }
 
-export const SecretAttachment: ZodType<SecretAttachment> = z.strictInterface({
+export const SecretAttachment: ZodType<SecretAttachment> = z.strictObject({
 	name: z.string(),
 	contentType: z.string(),
 	data: z.string(),
@@ -74,7 +68,7 @@ export interface SecretData {
 	attachments: SecretAttachment[]
 }
 
-export const SecretData: ZodType<SecretData> = z.strictInterface({
+export const SecretData: ZodType<SecretData> = z.strictObject({
 	message: z.string(),
 	attachments: z.array(SecretAttachment),
 })

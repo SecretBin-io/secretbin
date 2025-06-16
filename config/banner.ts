@@ -16,7 +16,7 @@ export interface Banner {
 	text: TranslatedString
 }
 
-export const Banner: ZodType<Banner> = z.strictInterface({
+export const Banner: ZodType<Banner> = z.strictObject({
 	enabled: z.boolean().default(false),
 	type: z.enum(["info", "warning", "error"]).default("info"),
 	text: TranslatedString.default({ en: "Hello World!" }),

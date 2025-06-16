@@ -20,7 +20,7 @@ export interface Logging {
 	logAccess: boolean
 }
 
-export const Logging: ZodType<Logging> = z.strictInterface({
+export const Logging: ZodType<Logging> = z.strictObject({
 	level: LogLevel.default("info"),
 	mode: LogMode.default("text"),
 	logAccess: z.boolean().default(false),

@@ -11,7 +11,7 @@ export interface PostgresDatabaseConfig {
 	tls: "require" | "prefer" | "off"
 }
 
-export const PostgresDatabaseConfig: ZodType<PostgresDatabaseConfig> = z.strictInterface({
+export const PostgresDatabaseConfig: ZodType<PostgresDatabaseConfig> = z.strictObject({
 	type: z.literal("postgres"),
 	host: z.string().default(""),
 	port: z.number().default(5432),
@@ -46,7 +46,7 @@ export interface Storage {
 	database: DatabaseConfig
 }
 
-export const Storage: ZodType<Storage> = z.strictInterface({
+export const Storage: ZodType<Storage> = z.strictObject({
 	maxSize: z.string()
 		.regex(/^(\d+)(Ki|Mi|Gi|K|M|G)$/, {
 			error: "Invalid size. Expected: positive integer or string with format <num>(Ki|Mi|Gi|K|M|G) e.g 10Gi",

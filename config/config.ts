@@ -38,7 +38,7 @@ export interface Config {
 	storage: Storage
 }
 
-export const Config: ZodType<Config> = z.strictInterface({
+export const Config: ZodType<Config> = z.strictObject({
 	banner: Banner.default(Banner.parse({})),
 	branding: Branding.default(Branding.parse({})),
 	defaults: Defaults.default(Defaults.parse({})),

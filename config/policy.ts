@@ -21,7 +21,7 @@ export interface Policy {
 	encryptionAlgorithm: EncryptionAlgorithm
 }
 
-export const Policy: ZodType<Policy> = z.strictInterface({
+export const Policy: ZodType<Policy> = z.strictObject({
 	sharePreselect: z.boolean().default(false),
 	requireBurn: z.boolean().default(false),
 	requirePassword: z.boolean().default(false),

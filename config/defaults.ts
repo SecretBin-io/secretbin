@@ -12,7 +12,7 @@ export interface Defaults {
 	showPassword: boolean
 }
 
-export const Defaults: ZodType<Defaults> = z.strictInterface({
+export const Defaults: ZodType<Defaults> = z.strictObject({
 	expires: z.string().regex(/^(\d+)(min|hr|d|w|m|y)$/, {
 		error: "Invalid expires format. Expected: <num>(min|hr|d|w|m|y) e.g 5min",
 	}).default("2w"),

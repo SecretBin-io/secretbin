@@ -12,7 +12,7 @@ export interface Terms {
 	content: TranslatedString
 }
 
-export const Terms = z.strictInterface({
+export const Terms = z.strictObject({
 	title: TranslatedString,
 	content: TranslatedString,
 })
@@ -28,7 +28,7 @@ export interface Link {
 	link: TranslatedString
 }
 
-export const Link: ZodType<Link> = z.strictInterface({
+export const Link: ZodType<Link> = z.strictObject({
 	name: TranslatedString,
 	link: TranslatedString,
 })
