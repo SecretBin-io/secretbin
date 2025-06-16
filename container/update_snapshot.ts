@@ -37,4 +37,4 @@ for await (const file of fs.walk("static", { includeDirs: false })) {
 }
 
 // Write the updated snapshot configuration
-await Deno.writeTextFile("_fresh/snapshot2.json", JSON.stringify(snapshot, null, 2))
+await Deno.writeTextFile("_fresh/snapshot.json", JSON.stringify(snapshot, null, 2))
