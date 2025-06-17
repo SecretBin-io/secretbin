@@ -49,4 +49,4 @@ storage:
     database: secretbin
     username: secretbin
     password: abc123
-    tls: prefer
+    tls: off

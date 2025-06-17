@@ -1,11 +1,4 @@
-import {
-	combineBaseKeyWithPassword,
-	decrypt,
-	encrypt,
-	EncryptionAlgorithm,
-	fromBytes,
-	randomBytes,
-} from "@nihility-io/crypto"
+import { combineBaseKeyWithPassword, decrypt, encrypt, EncryptionAlgorithm, randomBytes } from "@nihility-io/crypto"
 import { decodeBase58, encodeBase58 } from "@std/encoding/base58"
 import { encodeBase64 } from "@std/encoding/base64"
 import { Secret, SecretAttachment, SecretData } from "secret/models"
@@ -35,7 +28,7 @@ export async function submitSecret(
 ): Promise<string> {
 	const baseKey = randomBytes(32)
 
-	const passphrase = fromBytes(combineBaseKeyWithPassword(baseKey, password))
+	const passphrase = combineBaseKeyWithPassword(baseKey, password)
 	const content = {
 		message,
 		attachments: await Promise.all(files.map(async (x) => ({
@@ -68,7 +61,7 @@ export async function submitSecret(
  */
 export async function decryptSecret(secret: Secret, password: string): Promise<SecretData> {
 	const baseKey = decodeBase58(globalThis.location.hash.slice(1))
-	const passphrase = fromBytes(combineBaseKeyWithPassword(baseKey, password))
+	const passphrase = combineBaseKeyWithPassword(baseKey, password)
 	const msg = await decrypt(passphrase, secret.data)
 	return SecretData.parse(JSON.parse(msg)) as SecretData
 }
