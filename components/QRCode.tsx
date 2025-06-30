@@ -25,7 +25,7 @@ export function QRCode({ content, size = 256, downloadLabel = "Download", ...pro
 	const imgRef = useRef<HTMLImageElement | null>(null)
 
 	useEffect(() => {
-		const svg = qrcode(content, { output: "svg", ecl: "HIGH" })
+		const svg = qrcode(content, { output: "svg", ecl: "HIGH", border: 0 })
 		setQrCode(`data:image/svg+xml;base64,${btoa(svg)}`)
 	}, [content])
 
@@ -40,7 +40,7 @@ export function QRCode({ content, size = 256, downloadLabel = "Download", ...pro
 	return (
 		<>
 			<div style={props.style} class={classNames("flex items-center justify-center pt-10 pb-5", props.class)}>
-				<img ref={imgRef} width={size} src={qrCode} />
+				<img class="border-10" ref={imgRef} width={size} src={qrCode} />
 			</div>
 			<div style={props.style} class={classNames("flex items-center justify-center", props.class)}>
 				<Button

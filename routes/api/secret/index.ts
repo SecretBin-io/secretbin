@@ -11,7 +11,7 @@ export const handler = define.handlers({
 		// Note: data is validated inside createSecret
 		try {
 			const m = await ctx.req.json() as SecretRequest
-			return promiseResponse(Secrets.shared.createSecret(m))
+			return promiseResponse(Secrets.shared.createSecret(m).then((id) => ({ id })))
 		} catch (e) {
 			return errorResponse(e as Error)
 		}

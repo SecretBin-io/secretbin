@@ -13,6 +13,6 @@ export const handler = define.handlers({
 		return promiseResponse(Secrets.shared.getSecret(params.id))
 	},
 	DELETE({ params }): Promise<Response> {
-		return promiseResponse(Secrets.shared.deleteSecret(params.id).then(() => params.id))
+		return promiseResponse(Secrets.shared.deleteSecret(params.id).then(() => ({ id: params.id })))
 	},
 })

@@ -42,10 +42,10 @@ async function apiCall<T>(path: string, model: ZodType<T>, options: APICallOptio
  * @returns ID of the newly created secret
  */
 export function createSecret(secret: SecretRequest): Promise<string> {
-	return apiCall("/api/secret", z.string(), {
+	return apiCall("/api/secret", z.object({ id: z.string() }), {
 		method: "POST",
 		body: secret,
-	})
+	}).then((x) => x.id)
 }
 
 /**
