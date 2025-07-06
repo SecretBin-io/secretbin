@@ -11,9 +11,31 @@
     "licenseFile": "https://raw.githubusercontent.com/JedWatson/classnames/main/LICENSE"
   },
   {
+    "registry": "jsr",
+    "name": "@deno/esbuild-plugin",
+    "version": "1.0.1",
+    "repository": "https://github.com/denoland/deno-esbuild-plugin",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno-esbuild-plugin/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@deno/loader",
+    "version": "0.1.3",
+    "repository": "https://github.com/denoland/deno-js-loader",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/deno-js-loader/main/LICENSE"
+  },
+  {
     "registry": "npm",
     "name": "esbuild",
-    "version": "0.23.1",
+    "version": "0.25.5",
     "repository": "https://github.com/evanw/esbuild",
     "authors": [
       "Evan Wallace"
@@ -24,7 +46,7 @@
   {
     "registry": "jsr",
     "name": "@fresh/core",
-    "version": "2.0.0-alpha.34",
+    "version": "2.0.0-alpha.37",
     "repository": "https://github.com/denoland/fresh",
     "authors": [
       "Deno"
@@ -67,7 +89,7 @@
   {
     "registry": "jsr",
     "name": "@libs/qrcode",
-    "version": "2.0.1",
+    "version": "3.0.0",
     "repository": "https://github.com/lowlighter/libs",
     "authors": [
       "Simon Lecoq"
@@ -78,7 +100,7 @@
   {
     "registry": "jsr",
     "name": "@logtape/logtape",
-    "version": "0.10.0",
+    "version": "1.0.2",
     "repository": "https://github.com/dahlia/logtape",
     "authors": [
       "Hong Minhee (洪 民憙)"
@@ -88,19 +110,8 @@
   },
   {
     "registry": "jsr",
-    "name": "@luca/esbuild-deno-loader",
-    "version": "0.11.1",
-    "repository": "https://github.com/lucacasonato/esbuild_deno_loader",
-    "authors": [
-      "Luca Casonato"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/lucacasonato/esbuild_deno_loader/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
     "name": "@nihility-io/cookies",
-    "version": "2.0.0-alpha.8",
+    "version": "2.0.0",
     "repository": "https://github.com/Nihility-io/Cookies",
     "authors": [
       "Nihility.io"
@@ -111,7 +122,7 @@
   {
     "registry": "jsr",
     "name": "@nihility-io/crypto",
-    "version": "1.0.0-beta.1",
+    "version": "1.0.0-beta.3",
     "repository": "https://github.com/Nihility-io/Crypto",
     "authors": [
       "Nihility.io"
@@ -133,7 +144,7 @@
   {
     "registry": "jsr",
     "name": "@noble/ciphers",
-    "version": "1.3.0",
+    "version": "2.0.0-beta.1",
     "repository": "https://github.com/paulmillr/noble-ciphers",
     "authors": [
       "Paul Miller"
@@ -144,7 +155,7 @@
   {
     "registry": "jsr",
     "name": "@noble/hashes",
-    "version": "1.8.0",
+    "version": "2.0.0-beta.1",
     "repository": "https://github.com/paulmillr/noble-hashes",
     "authors": [
       "Paul Miller"
@@ -175,7 +186,7 @@
   {
     "registry": "npm",
     "name": "preact",
-    "version": "10.26.7",
+    "version": "10.26.9",
     "repository": "https://github.com/preactjs/preact",
     "authors": [
       "Preact"
@@ -197,7 +208,7 @@
   {
     "registry": "npm",
     "name": "@preact/signals",
-    "version": "2.0.5",
+    "version": "2.2.1",
     "repository": "https://github.com/preactjs/signals",
     "authors": [
       "Preact"
@@ -208,7 +219,7 @@
   {
     "registry": "npm",
     "name": "@preact/signals-core",
-    "version": "1.8.0",
+    "version": "1.11.0",
     "repository": "https://github.com/preactjs/signals",
     "authors": [
       "Preact"
@@ -230,7 +241,7 @@
   {
     "registry": "jsr",
     "name": "@std/cli",
-    "version": "1.0.18",
+    "version": "1.0.20",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -241,7 +252,7 @@
   {
     "registry": "jsr",
     "name": "@std/collections",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -296,7 +307,7 @@
   {
     "registry": "jsr",
     "name": "@std/fs",
-    "version": "1.0.17",
+    "version": "1.0.19",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -318,7 +329,18 @@
   {
     "registry": "jsr",
     "name": "@std/http",
-    "version": "1.0.17",
+    "version": "1.0.19",
+    "repository": "https://github.com/denoland/std",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/internal",
+    "version": "1.0.9",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -373,7 +395,7 @@
   {
     "registry": "jsr",
     "name": "@std/path",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -395,6 +417,17 @@
   {
     "registry": "jsr",
     "name": "@std/streams",
+    "version": "1.0.10",
+    "repository": "https://github.com/denoland/std",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/uuid",
     "version": "1.0.9",
     "repository": "https://github.com/denoland/std",
     "authors": [
@@ -406,7 +439,7 @@
   {
     "registry": "jsr",
     "name": "@std/yaml",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -427,7 +460,7 @@
   {
     "registry": "npm",
     "name": "tailwindcss",
-    "version": "4.1.7",
+    "version": "4.1.11",
     "repository": "https://github.com/tailwindlabs/tailwindcss",
     "authors": [
       "Tailwind Labs"
@@ -449,18 +482,7 @@
   {
     "registry": "npm",
     "name": "zod",
-    "version": "4.0.0-beta.0",
-    "repository": "https://github.com/colinhacks/zod",
-    "authors": [
-      "Colin McDonnell"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/colinhacks/zod/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "@zod/core",
-    "version": "0.1.0",
+    "version": "3.25.74",
     "repository": "https://github.com/colinhacks/zod",
     "authors": [
       "Colin McDonnell"

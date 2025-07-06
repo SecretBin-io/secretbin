@@ -110,21 +110,21 @@
 		"classnames": "npm:classnames@^2.5.1",
 		"components": "./components/mod.ts",
 		"config": "./config/mod.ts",
-		"fresh": "jsr:@fresh/core@^2.0.0-alpha.36",
+		"fresh": "jsr:@fresh/core@^2.0.0-alpha.37",
 		"helpers": "./helpers/mod.ts",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",
 		"log": "./log/mod.ts",
-		"preact": "npm:preact@^10.26.7",
-		"@preact/signals": "npm:@preact/signals@^2.0.5",
+		"preact": "npm:preact@^10.26.9",
+		"@preact/signals": "npm:@preact/signals@^2.2.1",
 		"secret/client": "./secret/client/mod.ts",
 		"secret/models": "./secret/models/mod.ts",
 		"secret/server": "./secret/server/mod.ts",
 		"state": "./state.ts",
-		"tailwindcss": "npm:tailwindcss@^4.1.7",
-		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.6.0",
+		"tailwindcss": "npm:tailwindcss@^4.1.11",
+		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.7.1",
 		"utils": "./utils.ts",
-		"zod": "npm:zod@^3.25.65/v4"
+		"zod": "npm:zod@^3.25.74/v4"
 	},
 	"compilerOptions": {
 		"lib": [
