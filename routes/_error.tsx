@@ -1,10 +1,9 @@
 import { Button, Message, PageContent } from "components"
-import { HttpError, type PageProps } from "fresh"
+import { HttpError } from "fresh"
 import { LocalizedError, useTranslationWithPrefix } from "lang"
-import { JSX } from "preact"
-import { State } from "state"
+import { define } from "utils"
 
-export default function Error({ state, error }: PageProps<unknown, State>): JSX.Element {
+export default define.page(({ state, error }) => {
 	const $ = useTranslationWithPrefix(state.language, "ErrorPage")
 
 	let title = "Error"
@@ -41,4 +40,4 @@ export default function Error({ state, error }: PageProps<unknown, State>): JSX.
 			<Button label={$("GoHome")} link="/" />
 		</PageContent>
 	)
-}
+})

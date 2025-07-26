@@ -1,5 +1,6 @@
 import { FileList, Section, Upload } from "components"
 import { config } from "config"
+import { humanReadableSize } from "helpers"
 import { useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { State } from "state"
@@ -16,7 +17,7 @@ export function FilesUpload({ state, files, setFiles }: FileUploadProps): JSX.El
 	return (
 		<Section
 			title={$("Files.Title")}
-			description={$("Files.Description", { size: "" + (config.storage.maxSize / 1000000) })}
+			description={$("Files.Description", { size: humanReadableSize(config.storage.maxSize, true) })}
 		>
 			<Upload
 				multiple

@@ -1,4 +1,4 @@
-import z, { ZodType } from "zod"
+import z, { ZodType } from "@zod/zod"
 import { Banner } from "./banner.ts"
 import { Branding } from "./branding.ts"
 import { Defaults } from "./defaults.ts"

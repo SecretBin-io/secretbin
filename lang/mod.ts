@@ -59,7 +59,7 @@ export type TranslationFunction<Key extends string = TranslationKey> = (
  * @param params Optional parameters for the translated
  */
 export function getTranslation(lang: Language, key: TranslationKey, params?: Record<string, string>): string {
-	let o: unknown = translations[lang].Translations
+	let o: unknown = (translations[lang] ?? translations[Language.English]).Translations
 	for (const k of key.split(".")) {
 		if (o === undefined) {
 			break

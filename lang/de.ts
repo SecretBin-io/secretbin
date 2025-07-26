@@ -31,7 +31,7 @@ export default {
 			Files: {
 				Title: "Dateien",
 				Description:
-					"Lade Dateien hoch und teile sie als Teil des Geheimnisses. Anmerkung: Das gesamte Geheimnis (der Text und die Datei(en)) darf {{size}} MB nicht überschreiten.",
+					"Lade Dateien hoch und teile sie als Teil des Geheimnisses. Anmerkung: Das gesamte Geheimnis (der Text und die Datei(en)) darf {{size}} nicht überschreiten.",
 				DragAndDrop: "Klicke hier zum Hochladen oder ziehe eine Datei in dieses Feld.",
 			},
 			RequiredByPolicy: "Du kannst diese option nicht ändern, da sie von {{name}} vorgeschrieben ist.",

@@ -1,9 +1,7 @@
 import { PageContent, Table } from "components"
 import { config } from "config"
-import { type PageProps } from "fresh"
 import { useTranslation } from "lang"
-import { JSX } from "preact"
-import { State } from "state"
+import { define } from "utils"
 import credits from "../credits.json" with { type: "json" }
 
 /**
@@ -17,7 +15,7 @@ export const trimPrefix = (s: string, prefix: string): string => s.startsWith(pr
 /**
  * Page for show copyright and credit information
  */
-export default function Credits({ state }: PageProps<unknown, State>): JSX.Element {
+export default define.page(({ state }) => {
 	const $ = useTranslation(state.language)
 
 	return (
@@ -70,4 +68,4 @@ export default function Credits({ state }: PageProps<unknown, State>): JSX.Eleme
 			</div>
 		</PageContent>
 	)
-}
+})

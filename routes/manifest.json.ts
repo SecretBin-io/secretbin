@@ -1,12 +1,12 @@
 import { config } from "config"
-import { type HandlerByMethod } from "fresh"
 import { asset } from "fresh/runtime"
-import { State, Theme } from "state"
+import { Theme } from "state"
+import { define } from "utils"
 
 /**
  * Renders the branded manifest.json for PWA usage
  */
-export const handler: HandlerByMethod<unknown, State> = {
+export const handler = define.handlers({
 	GET({ state }): Response {
 		return new Response(JSON.stringify({
 			name: config.branding.appName,
@@ -31,4 +31,4 @@ export const handler: HandlerByMethod<unknown, State> = {
 			],
 		}))
 	},
-}
+})

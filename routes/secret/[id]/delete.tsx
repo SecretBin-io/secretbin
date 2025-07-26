@@ -1,17 +1,15 @@
 import { Button, PageContent } from "components"
-import { type PageProps, PageResponse } from "fresh"
+import { PageResponse } from "fresh"
 import { useTranslationWithPrefix } from "lang"
-import { JSX } from "preact"
 import { Secrets } from "secret/server"
-import { State } from "state"
 import { define } from "utils"
 
 interface DeleteSecretData {
 	id: string
-	done?: boolean
+	done: boolean
 }
 
-export const handler = define.handlers<DeleteSecretData>({
+export const handler = define.handlers({
 	async GET({ params: { id } }): Promise<PageResponse<DeleteSecretData>> {
 		await Secrets.shared.getSecretMetadata(id)
 		return { data: { id, done: false } }
@@ -25,7 +23,7 @@ export const handler = define.handlers<DeleteSecretData>({
 /**
  * Renders page for deleting a secrets
  */
-export default ({ state, data: { id, done } }: PageProps<DeleteSecretData, State>): JSX.Element => {
+export default define.page<typeof handler>(({ state, data: { id, done } }) => {
 	const $ = useTranslationWithPrefix(state.language, "DeleteSecret")
 
 	if (done) {
@@ -49,4 +47,4 @@ export default ({ state, data: { id, done } }: PageProps<DeleteSecretData, State
 			</form>
 		</PageContent>
 	)
-}
+})

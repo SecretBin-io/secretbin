@@ -1,5 +1,5 @@
 banner: # Banner shown at the top of the app. You may use this option for e.g. announcements.
-  enabled: false # Show the banner if true
+  enabled: true # Show the banner if true
   type: warning # Banner type (info, warning or error)
   text: # Text shown in the banner
     en: This is a preview version. Do not use in production!
@@ -21,9 +21,9 @@ branding:
       de: Nutzungsbedingungen
     content: # Text that may contain HTML 
       en:
-        file: resources/terms_en.html
+        file: resources/terms_en.md
       de:
-        file: resources/terms_de.html
+        file: resources/terms_de.md
 defaults: # Just customizable defaults 
   expires: 2w # Default expire time when creating a new secret
   burn: true # Default burn selection
@@ -40,7 +40,7 @@ policy:
   denySlowBurn: false # Blocks users from enabling slow burn for new secrets
   encryptionAlgorithm: AES256-GCM # Algorithm used for encrypting new secrets (AES256-GCM, XChaCha20-Poly1305)
 storage:
-  maxSize: 10Mi # Max size a new secret is allowed to have
+  maxSize: 10M # Max size a new secret is allowed to have
   gcInterval: 5 # Interval in seconds in which the garbage collector should run
   database: # Use PostgreSQL as a database
     type: postgres

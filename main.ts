@@ -1,5 +1,5 @@
 import { config } from "config"
-import { App, fsRoutes, HttpError, staticFiles } from "fresh"
+import { App, HttpError, staticFiles } from "fresh"
 import { LocalizedError } from "lang"
 import { Secrets } from "secret/server"
 import { State } from "state"
@@ -27,12 +27,6 @@ if (config.logging.logAccess) {
 	app.use(loggingMiddleware)
 }
 
-await fsRoutes(app, {
-	dir: "./",
-	loadIsland: (path) => import(`./islands/${path}`),
-	loadRoute: (path) => import(`./routes/${path}`),
-})
-
 const isBuildMode = Deno.args.includes("build") || Deno.args.includes("freshBuild")
 if (!isBuildMode) {
 	// Trigger the secret provider on startup but not when building
@@ -41,6 +35,5 @@ if (!isBuildMode) {
 	}
 }
 
-if (import.meta.main) {
-	await app.listen()
-}
+// Include file-system based routes here
+app.fsRoutes()

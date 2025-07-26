@@ -29,7 +29,7 @@ export default {
 			Files: {
 				Title: "Files",
 				Description:
-					"Upload files and share them as part of the secret. Note: The total size of the secret (the text and files) cannot exceed {{size}} MB.",
+					"Upload files and share them as part of the secret. Note: The total size of the secret (the text and files) cannot exceed {{size}}.",
 				DragAndDrop: "Click here to upload or drag and drop a file onto this field.",
 			},
 			RequiredByPolicy: "You cannot change this option since it's required by {{name}}'s policies.",

@@ -1,5 +1,5 @@
+import z, { ZodType } from "@zod/zod"
 import { sizeToBytes } from "helpers"
-import z, { ZodType } from "zod"
 
 export interface PostgresDatabaseConfig {
 	type: "postgres"

@@ -60,9 +60,6 @@ Temporary Items
 *.db-shm
 *.db-wal
 
-# Don't include generated styles
-/static/styles.css
-
 ### Testing ###
 coverage
 /test.ts
@@ -70,3 +67,9 @@ coverage
 # Local configs
 /config.db.yaml
 /_config.db.yaml
+
+# Binaries
+bin/
+# Added by goreleaser init:
+dist/
+resources/Icon.ico

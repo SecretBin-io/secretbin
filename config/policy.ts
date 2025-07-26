@@ -1,5 +1,5 @@
 import { EncryptionAlgorithm } from "@nihility-io/crypto"
-import z, { ZodType } from "zod"
+import z, { ZodType } from "@zod/zod"
 
 /**
  * Set enforced usage policy for new secrets

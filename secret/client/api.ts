@@ -1,5 +1,5 @@
+import z, { ZodType } from "@zod/zod"
 import { parseModel, Secret, SecretMetadata, SecretRequest } from "secret/models"
-import z, { ZodType } from "zod"
 import { decodeError } from "../../helpers/error.ts"
 
 interface APICallOptions {

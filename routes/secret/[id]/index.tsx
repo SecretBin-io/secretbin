@@ -1,11 +1,9 @@
 import { PageContent } from "components"
-import { type PageProps, PageResponse } from "fresh"
+import { PageResponse } from "fresh"
 import { Expires, ViewSecret } from "islands"
 import { useTranslationWithPrefix } from "lang"
-import { JSX } from "preact"
 import { SecretMetadata } from "secret/models"
 import { Secrets } from "secret/server"
-import { State } from "state"
 import { define } from "utils"
 
 interface GetSecretData {
@@ -23,7 +21,7 @@ export const handler = define.handlers<GetSecretData>({
 /**
  * Renders page for viewing a secret
  */
-export default ({ state, data: { id, metadata } }: PageProps<GetSecretData, State>): JSX.Element => {
+export default define.page<typeof handler>(({ state, data: { id, metadata } }) => {
 	const $ = useTranslationWithPrefix(state.language, "ViewSecret")
 
 	return (
@@ -41,4 +39,4 @@ export default ({ state, data: { id, metadata } }: PageProps<GetSecretData, Stat
 			</div>
 		</PageContent>
 	)
-}
+})

@@ -1,5 +1,5 @@
+import z from "@zod/zod"
 import { match, P } from "ts-pattern"
-import z from "zod"
 
 /**
  * Parses a duration string

@@ -1,11 +1,9 @@
 import { PageContent } from "components"
-import { type PageProps, PageResponse } from "fresh"
+import { PageResponse } from "fresh"
 import { Expires, ShareSecret } from "islands"
 import { useTranslationWithPrefix } from "lang"
-import { JSX } from "preact"
 import { SecretMetadata } from "secret/models"
 import { Secrets } from "secret/server"
-import { State } from "state"
 import { define } from "utils"
 
 interface ShareSecretData {
@@ -13,7 +11,7 @@ interface ShareSecretData {
 	metadata: SecretMetadata
 }
 
-export const handler = define.handlers<unknown>({
+export const handler = define.handlers<ShareSecretData>({
 	async GET({ params: { id } }): Promise<PageResponse<ShareSecretData>> {
 		const metadata = await Secrets.shared.getSecretMetadata(id)
 		return { data: { id, metadata } }
@@ -23,7 +21,7 @@ export const handler = define.handlers<unknown>({
 /**
  * Renders page for sharing a secret
  */
-export default ({ state, data: { id, metadata } }: PageProps<ShareSecretData, State>): JSX.Element => {
+export default define.page<typeof handler>(({ state, data: { id, metadata } }) => {
 	const $ = useTranslationWithPrefix(state.language, "ShareSecret")
 	return (
 		<PageContent title={$("Title")} description={$("Description")}>
@@ -35,4 +33,4 @@ export default ({ state, data: { id, metadata } }: PageProps<ShareSecretData, St
 			</div>
 		</PageContent>
 	)
-}
+})

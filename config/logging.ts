@@ -1,4 +1,4 @@
-import { z, ZodType } from "zod"
+import { z, ZodType } from "@zod/zod"
 
 export type LogLevel = "debug" | "info" | "warning" | "error" | "fatal"
 const LogLevel: ZodType<LogLevel> = z.enum(["debug", "info", "warning", "error", "fatal"])

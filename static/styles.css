@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  user-select: none;
+}
+
+.markdown-body p {
+  @apply text-base text-gray-500 dark:text-gray-400;
+}
+
+.markdown-body ul {
+  @apply pl-5 space-y-1 text-gray-500 list-disc list-outside dark:text-gray-400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  cursor: default;
+}
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
+@theme {
+  --animate-appear: appear 0.25s ease-in-out forwards 0s;
+
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      scale: 90%;
+    }
+    50% {
+      opacity: 1;
+      scale: 110%;
+    }
+    100% {
+      opacity: 1;
+      scale: 100%;
+    }
+  }
+}
+
+@theme {
+  --animate-disappear: disappear 0.25s ease-in-out forwards 0s;
+
+  @keyframes disappear {
+    0% {
+      opacity: 1;
+      scale: 110%;
+    }
+    50% {
+      opacity: 1;
+      scale: 110%;
+    }
+    100% {
+      opacity: 0;
+      scale: 90%;
+    }
+  }
+}
+
+.loading-dots::after {
+  display: inline-block;
+  animation: dotty steps(1, end) 1.25s infinite;
+  content: "\00a0\00a0\00a0";
+  font-size: large;
+}
+
+@keyframes dotty {
+  0% {
+    content: "\00a0\00a0\00a0";
+  }
+  25% {
+    content: ".\00a0\00a0";
+  }
+  50% {
+    content: "..\00a0";
+  }
+  75% {
+    content: "...";
+  }
+  100% {
+    content: "\00a0\00a0\00a0";
+  }
+}
+
+@theme {
+  --animate-slide-down: slide-down 5.25s ease-in-out forwards 0s;
+
+  @keyframes slide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY();
+    }
+  }
+}
+
+@theme {
+  --animate-slice-up: slice-up 0.25s ease-in-out forwards 0s;
+
+  @keyframes slice-up {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

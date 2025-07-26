@@ -1,5 +1,5 @@
+import z, { ZodType } from "@zod/zod"
 import { SecretParseError } from "secret/models"
-import z, { ZodType } from "zod"
 
 /**
  * Parses an object using a given Zod model

@@ -1,14 +1,12 @@
 import { PageContent } from "components"
-import { type PageProps } from "fresh"
 import { NewSecret } from "islands"
 import { useTranslationWithPrefix } from "lang"
-import { JSX } from "preact"
-import { State } from "state"
+import { define } from "utils"
 
 /**
  * Entry page. Used for created new secrets
  */
-export default function Index({ state }: PageProps<unknown, State>): JSX.Element {
+export default define.page(({ state }) => {
 	const $ = useTranslationWithPrefix(state.language, "NewSecret")
 
 	return (
@@ -20,4 +18,4 @@ export default function Index({ state }: PageProps<unknown, State>): JSX.Element
 			</div>
 		</PageContent>
 	)
-}
+})

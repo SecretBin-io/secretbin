@@ -1,4 +1,4 @@
-import z, { ZodType } from "zod"
+import z, { ZodType } from "@zod/zod"
 import { TranslatedString } from "./string.ts"
 
 /**

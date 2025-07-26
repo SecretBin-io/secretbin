@@ -68,9 +68,9 @@ You can even easily brand SecretBin with a new name if you want. SecretBin is li
 ## Getting Started
 
 ### Build from Source
-
 1. Download and install [Deno](https://deno.com).
-2. Install git e.g. using:
+2. Download and install [goreleaser](https://goreleaser.com).
+3. Install git e.g. using:
    ```bash
    sudo apt install git
    ```
@@ -80,39 +80,10 @@ You can even easily brand SecretBin with a new name if you want. SecretBin is li
    ```
 4. Change into the cloned repository (`cd SecretBin`) and build SecretBin using:
    ```bash
-   deno task build
+   goreleaser release --snapshot --clean
    ```
-5. And run it using:
-   ```bash
-   deno task start
-   ```
-
-### Run using Docker
-You can also run SecretBin using Docker. See [SecretBin's GHCR page](https://github.com/Nihility-io/SecretBin/pkgs/container/secretbin).
-
-1. Configure your config.yaml (see [Configuration](#configuration))
-2. Run the container using the following command:
-```bash
-docker run --read-only --mount type=bind,src="config.yaml",target=/app/config.yaml -it -p 8000:8000 --name secretbin ghcr.io/nihility-io/secretbin:dev
-```
-
-### Creating a Branded SecretBin Image
-
-You can also create your own custom banded SecretBin image with custom static resources using the following Dockerfile:
-``` Dockerfile
-# Inherit from the default SecretBin image
-FROM ghcr.io/nihility-io/secretbin:dev
-
-# Copy your own configuration (see Configuration)
-COPY config.yaml /app/config.yaml
-
-# Copy your own static resource like a custom logo
-COPY static/ /app/static/
-
-# Important: If you use your own static file, you need 
-# to run this script in order for them to work
-RUN deno run -A container/update_snapshot.ts
-```
+5. Extract the archived build for your platform e.g. dist/SecretBin_macOS_arm64.tar.gz
+6. Run the SecretBin executable
 
 ### Configuration
 
@@ -140,7 +111,7 @@ branding:
     title:
       en: Terms of Service
       de: Nutzungsbedingungen
-    content: # Text that may contain HTML 
+    content: # Text that may contain Markdown 
       en: "..."
       de: "..."
 defaults: # Just customizable defaults 

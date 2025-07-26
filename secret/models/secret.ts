@@ -2,7 +2,7 @@
  * This file defines all the models used by SecretBin. Models are validated using Zod
  */
 
-import z, { ZodObject, ZodType } from "zod"
+import z, { ZodObject, ZodType } from "@zod/zod"
 
 export const EncryptionString = z.string().startsWith("crypto://")
 

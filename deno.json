@@ -9,33 +9,17 @@
 			"description": "Runs unit tests and checks test coverage.",
 			"command": "deno test --coverage=coverage && deno coverage coverage --detailed && rm -rf coverage"
 		},
-		"dev:tailwind": {
-			"description": "Build styles.css using Tailwind and watch for changes.",
-			"command": "deno run -A npm:@tailwindcss/cli -i styles/styles.css -o static/styles.css -w"
-		},
-		"dev:fresh": {
-			"description": "Starts Deno Fresh is dev mode and watch for changes.",
-			"command": "deno run -A --cert container/certs/ca.crt --watch=static/,routes/ --watch=config.yaml dev.ts"
-		},
 		"dev": {
 			"description": "Starts SecretBin is dev mode and watch for changes.",
-			"dependencies": ["dev:tailwind", "dev:fresh"]
-		},
-		"build:tailwind": {
-			"description": "Build styles.css using Tailwind.",
-			"command": "deno run -A npm:@tailwindcss/cli -m -i styles/styles.css -o static/styles.css"
-		},
-		"build:fresh": {
-			"description": "Builds Deno Fresh for production.",
-			"command": "deno run -A dev.ts build"
+			"command": "deno run -A --cert ~/Library/Application\\ Support/Postgres/var-17/tls/ca.crt --watch=static/,routes/ --watch=config.yaml dev.ts"
 		},
 		"build": {
 			"description": "Builds SecretBin for production.",
-			"command": "rm -rf _fresh && deno task build:tailwind && deno task build:fresh"
+			"command": "deno run -A dev.ts build"
 		},
 		"start": {
 			"description": "Starts SecretBin",
-			"command": "deno run -A main.ts"
+			"command": "deno serve -A _fresh/server.js"
 		},
 		"update": {
 			"description": "Updates SecretBin to the latest Deno Fresh version.",
@@ -43,27 +27,7 @@
 		},
 		"deps": {
 			"description": "Updates the credits.json file",
-			"command": "deno run -A jsr:@nihility-io/deno-deps@1.1.7"
-		},
-		"db:start": {
-			"description": "Starts a local database for development.",
-			"command": "cd container && docker compose up -d postgres"
-		},
-		"db:stop": {
-			"description": "Stops the local database.",
-			"command": "cd container && docker compose down postgres"
-		},
-		"container:build": {
-			"description": "Builds the container image",
-			"command": "cd container && DENO_VERSION=$(deno -v | awk '{print $2}') docker buildx bake --allow=fs.read=.. -f docker-bake.hcl"
-		},
-		"container:run": {
-			"description": "Runs the container locally",
-			"command": "cd container && docker compose up secretbin"
-		},
-		"container:publish": {
-			"description": "Builds and publishes the container image",
-			"command": "cd container && DENO_VERSION=$(deno -v | awk '{print $2}') BUILDX_NO_DEFAULT_ATTESTATIONS=1 docker buildx bake --allow=fs.read=.. -f docker-bake.hcl --push multi_arch"
+			"command": "deno run -A jsr:@nihility-io/deno-deps@1.2.0"
 		}
 	},
 	"lock": false,
@@ -95,36 +59,41 @@
 	},
 	"exclude": ["**/_fresh/*"],
 	"imports": {
+		"@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.9",
 		"@libs/qrcode": "jsr:@libs/qrcode@^3.0.0",
-		"@logtape/logtape": "jsr:@logtape/logtape@^1.0.0",
+		"@logtape/logtape": "jsr:@logtape/logtape@^1.0.4",
 		"@nihility-io/cookies": "jsr:@nihility-io/cookies@^2.0.0",
 		"@nihility-io/crypto": "jsr:@nihility-io/crypto@1.0.0-beta.3",
 		"@nihility-io/record": "jsr:@nihility-io/record@^1.0.4",
-		"postgres": "jsr:@oscar6echo/postgres@^3.4.5-d",
+		"@preact/signals": "npm:@preact/signals@^2.2.1",
 		"@std/assert": "jsr:@std/assert@^1.0.13",
 		"@std/collections": "jsr:@std/collections@^1.1.0",
 		"@std/encoding": "jsr:@std/encoding@^1.0.10",
 		"@std/fs": "jsr:@std/fs@^1.0.17",
 		"@std/http": "jsr:@std/http@^1.0.15",
 		"@std/yaml": "jsr:@std/yaml@^1.0.6",
+		"@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.11",
+		"@zod/zod": "jsr:@zod/zod@^4.0.5",
 		"classnames": "npm:classnames@^2.5.1",
 		"components": "./components/mod.ts",
 		"config": "./config/mod.ts",
-		"fresh": "jsr:@fresh/core@^2.0.0-alpha.37",
+		"fresh": "jsr:@fresh/core@^2.0.0-alpha.46",
 		"helpers": "./helpers/mod.ts",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",
 		"log": "./log/mod.ts",
+		"marked": "npm:marked@^16.1.1",
+		"postcss": "npm:postcss@^8.5.6",
+		"postgres": "jsr:@oscar6echo/postgres@^3.4.5-d",
 		"preact": "npm:preact@^10.26.9",
-		"@preact/signals": "npm:@preact/signals@^2.2.1",
+		"sanitize-html": "npm:sanitize-html@^2.17.0",
 		"secret/client": "./secret/client/mod.ts",
 		"secret/models": "./secret/models/mod.ts",
 		"secret/server": "./secret/server/mod.ts",
 		"state": "./state.ts",
 		"tailwindcss": "npm:tailwindcss@^4.1.11",
 		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.7.1",
-		"utils": "./utils.ts",
-		"zod": "npm:zod@^3.25.74/v4"
+		"utils": "./utils.ts"
 	},
 	"compilerOptions": {
 		"lib": [
@@ -152,20 +121,27 @@
 		"semiColons": false,
 		"singleQuote": false,
 		"proseWrap": "preserve",
-		"exclude": ["styles/**", "credits.json", "README.md", "*.yaml", "container/*"],
+		"exclude": [
+			"styles/**",
+			"credits.json",
+			"README.md",
+			"*.yaml",
+			"container/*"
+		],
 		"trailingCommas": "onlyMultiLine"
 	},
 	"test": {
 		"include": ["./config", "./helpers", "./lang", "./log", "./secret"]
 	},
 	"denoDeps": {
-		"entrypoint": "dev.ts",
+		"entrypoint": "main.ts",
 		"output": "credits.json",
+		"jsonMode": false,
 		"dependencies": [
 			{
 				"name": "tailwindcss",
 				"repository": "https://github.com/tailwindlabs/tailwindcss",
-				"version": "4.1.7",
+				"version": "4.1.11",
 				"authors": ["Tailwind Labs, Inc."],
 				"license": "MIT License",
 				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
@@ -182,6 +158,8 @@
 		"excludeDependencies": [
 			"@esbuild/.*",
 			"esbuild-wasm",
+			"@tailwindcss/.*",
+			"lightningcss-.*",
 			"@types/.*"
 		]
 	}

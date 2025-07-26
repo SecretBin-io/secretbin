@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-console
-import z from "zod"
+import z from "@zod/zod"
 import { Config } from "./config.ts"
 export type * from "./banner.ts"
 export type * from "./branding.ts"

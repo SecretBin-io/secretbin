@@ -1,17 +1,16 @@
 import classNames from "classnames"
 import { Message, Show } from "components"
 import { config } from "config"
-import { type PageProps } from "fresh"
 import { asset, Partial } from "fresh/runtime"
 import { NavMenu, Terms } from "islands"
 import { useTranslation } from "lang"
-import { JSX } from "preact"
-import { State, Theme } from "state"
+import { Theme } from "state"
+import { define } from "utils"
 
 /**
  * Wrapper for all pages. Providers header info and navigation
  */
-export default function App({ Component, state }: PageProps<unknown, State>): JSX.Element {
+export default define.page(({ state, Component }) => {
 	const $ = useTranslation(state.language)
 
 	return (
@@ -132,4 +131,4 @@ export default function App({ Component, state }: PageProps<unknown, State>): JS
 			</body>
 		</html>
 	)
-}
+})

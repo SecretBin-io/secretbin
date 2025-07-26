@@ -1,7 +1,8 @@
 import { combineBaseKeyWithPassword, decrypt, encrypt, EncryptionAlgorithm, randomBytes } from "@nihility-io/crypto"
 import { decodeBase58, encodeBase58 } from "@std/encoding/base58"
 import { encodeBase64 } from "@std/encoding/base64"
-import { Secret, SecretAttachment, SecretData } from "secret/models"
+import { config } from "config"
+import { Secret, SecretAttachment, SecretData, SecretSizeLimitError } from "secret/models"
 import { createSecret } from "./api.ts"
 
 export interface SecretOptions {
@@ -27,6 +28,11 @@ export async function submitSecret(
 	algorithm: EncryptionAlgorithm,
 ): Promise<string> {
 	const baseKey = randomBytes(32)
+
+	const size = files.reduce((acc, x) => acc + x.size, 0) + message.length
+	if (size >= config.storage.maxSize) {
+		throw new SecretSizeLimitError(size, config.storage.maxSize)
+	}
 
 	const passphrase = combineBaseKeyWithPassword(baseKey, password)
 	const content = {
