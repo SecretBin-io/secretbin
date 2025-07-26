@@ -142,6 +142,12 @@ storage:
     tls: prefer
 ```
 
+## Automation
+SecretBin offers modules for Python and Golang as well as a CLI for creating secrets.
+- [SecretBin-CLI](https://github.com/Nihility-io/SecretBin-CLI)
+- [SecretBin-Go](https://github.com/Nihility-io/SecretBin-Go)
+- [SecretBin-Python](https://github.com/Nihility-io/SecretBin-Python)
+
 ## Screenshots
 
 ### Create a new secret
