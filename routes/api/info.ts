@@ -1,7 +1,6 @@
 import { STATUS_CODE } from "@std/http/status"
-import denoJson from "../../deno.json" with { type: "json" }
-
 import { define } from "utils"
+import denoJson from "../../deno.json" with { type: "json" }
 
 export const handler = define.handlers({
 	GET(): Response {
