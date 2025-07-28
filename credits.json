@@ -89,7 +89,7 @@
   {
     "registry": "jsr",
     "name": "@gabriel/ts-pattern",
-    "version": "5.7.1",
+    "version": "5.8.0",
     "repository": "https://github.com/gvergnaud/ts-pattern",
     "authors": [
       "Gabriel Vergnaud"

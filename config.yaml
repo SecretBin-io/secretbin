@@ -1,5 +1,5 @@
 banner: # Banner shown at the top of the app. You may use this option for e.g. announcements.
-  enabled: true # Show the banner if true
+  enabled: false # Show the banner if true
   type: warning # Banner type (info, warning or error)
   text: # Text shown in the banner
     en: This is a preview version. Do not use in production!
