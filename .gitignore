@@ -68,8 +68,9 @@ coverage
 /config.db.yaml
 /_config.db.yaml
 
-# Binaries
-bin/
 # Added by goreleaser init:
 dist/
+
+# Generated files
 resources/Icon.ico
+lib/postgres

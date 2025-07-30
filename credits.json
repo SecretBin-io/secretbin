@@ -78,7 +78,7 @@
   {
     "registry": "jsr",
     "name": "@fresh/core",
-    "version": "2.0.0-alpha.46",
+    "version": "2.0.0-alpha.49",
     "repository": "https://github.com/denoland/fresh",
     "authors": [
       "Deno"
@@ -240,15 +240,6 @@
     "licenseFile": "https://raw.githubusercontent.com/open-telemetry/opentelemetry-js/main/LICENSE"
   },
   {
-    "registry": "jsr",
-    "name": "@oscar6echo/postgres",
-    "version": "3.4.5-d",
-    "repository": "jsr",
-    "authors": [
-      "oscar6echo"
-    ]
-  },
-  {
     "registry": "npm",
     "name": "parse-srcset",
     "version": "1.0.2",
@@ -282,9 +273,19 @@
     "licenseFile": "https://raw.githubusercontent.com/postcss/postcss/main/LICENSE"
   },
   {
+    "name": "postgres",
+    "repository": "https://github.com/porsager/postgres",
+    "version": "3.4.7",
+    "authors": [
+      "Rasmus Porsager"
+    ],
+    "license": "The Unlicense",
+    "licenseFile": "https://raw.githubusercontent.com/porsager/postgres/refs/heads/master/UNLICENSE"
+  },
+  {
     "registry": "npm",
     "name": "preact",
-    "version": "10.26.9",
+    "version": "10.27.0",
     "repository": "https://github.com/preactjs/preact",
     "authors": [
       "Preact"
@@ -503,7 +504,7 @@
   {
     "registry": "jsr",
     "name": "@zod/zod",
-    "version": "4.0.10",
+    "version": "4.0.14",
     "repository": "https://github.com/colinhacks/zod",
     "authors": [
       "Colin McDonnell"

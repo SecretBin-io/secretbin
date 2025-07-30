@@ -1,8 +1,12 @@
 {
 	"version": "2.0.0",
 	"tasks": {
+		"postgres:build": {
+			"description": "Builds the Postgres library using the Postgres.js.",
+			"command": "cd lib && deno run -A build_postgres.ts"
+		},
 		"check": {
-			"description": "Lint and type check TypeScript files",
+			"description": "Lints and types check TypeScript files",
 			"command": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx"
 		},
 		"test": {
@@ -84,7 +88,7 @@
 		"log": "./log/mod.ts",
 		"marked": "npm:marked@^16.1.1",
 		"postcss": "npm:postcss@^8.5.6",
-		"postgres": "jsr:@oscar6echo/postgres@^3.4.5-d",
+		"postgres": "./lib/postgres/mod.js",
 		"preact": "npm:preact@^10.26.9",
 		"sanitize-html": "npm:sanitize-html@^2.17.0",
 		"secret/client": "./secret/client/mod.ts",
@@ -139,22 +143,30 @@
 		"jsonMode": false,
 		"dependencies": [
 			{
-				"name": "tailwindcss",
-				"repository": "https://github.com/tailwindlabs/tailwindcss",
-				"version": "4.1.11",
-				"authors": ["Tailwind Labs, Inc."],
-				"license": "MIT License",
-				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
-			},
-			{
-				"name": "heroicons",
-				"repository": "https://github.com/tailwindlabs/heroicons",
-				"version": "2.2.0",
-				"authors": ["Tailwind Labs, Inc."],
-				"license": "MIT License",
-				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
-			}
-		],
+			"name": "postgres",
+			"repository": "https://github.com/porsager/postgres",
+			"version": "3.4.7",
+			"authors": ["Rasmus Porsager"],
+			"license": "Unlicense license",
+			"licenseFile": "https://raw.githubusercontent.com/porsager/postgres/refs/heads/master/UNLICENSE"
+		},
+		 {
+			"name": "tailwindcss",
+			"repository": "https://github.com/tailwindlabs/tailwindcss",
+			"version": "4.1.11",
+			"authors": ["Tailwind Labs, Inc."],
+			"license": "MIT License",
+			"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
+		}, 
+		{
+			"name": "heroicons",
+			"repository": "https://github.com/tailwindlabs/heroicons",
+			"version": "2.2.0",
+			"authors": ["Tailwind Labs, Inc."],
+			"license": "MIT License",
+			"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
+		}
+	],
 		"excludeDependencies": [
 			"@esbuild/.*",
 			"esbuild-wasm",
