@@ -143,30 +143,30 @@
 		"jsonMode": false,
 		"dependencies": [
 			{
-			"name": "postgres",
-			"repository": "https://github.com/porsager/postgres",
-			"version": "3.4.7",
-			"authors": ["Rasmus Porsager"],
-			"license": "Unlicense license",
-			"licenseFile": "https://raw.githubusercontent.com/porsager/postgres/refs/heads/master/UNLICENSE"
-		},
-		 {
-			"name": "tailwindcss",
-			"repository": "https://github.com/tailwindlabs/tailwindcss",
-			"version": "4.1.11",
-			"authors": ["Tailwind Labs, Inc."],
-			"license": "MIT License",
-			"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
-		}, 
-		{
-			"name": "heroicons",
-			"repository": "https://github.com/tailwindlabs/heroicons",
-			"version": "2.2.0",
-			"authors": ["Tailwind Labs, Inc."],
-			"license": "MIT License",
-			"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
-		}
-	],
+				"name": "postgres",
+				"repository": "https://github.com/porsager/postgres",
+				"version": "3.4.7",
+				"authors": ["Rasmus Porsager"],
+				"license": "Unlicense license",
+				"licenseFile": "https://raw.githubusercontent.com/porsager/postgres/refs/heads/master/UNLICENSE"
+			},
+			{
+				"name": "tailwindcss",
+				"repository": "https://github.com/tailwindlabs/tailwindcss",
+				"version": "4.1.11",
+				"authors": ["Tailwind Labs, Inc."],
+				"license": "MIT License",
+				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
+			},
+			{
+				"name": "heroicons",
+				"repository": "https://github.com/tailwindlabs/heroicons",
+				"version": "2.2.0",
+				"authors": ["Tailwind Labs, Inc."],
+				"license": "MIT License",
+				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
+			}
+		],
 		"excludeDependencies": [
 			"@esbuild/.*",
 			"esbuild-wasm",
