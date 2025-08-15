@@ -17,7 +17,10 @@ export interface ModalProps extends BaseProps {
 	show?: boolean
 
 	/** Function called when the modal is closed */
-	onDismiss?: () => void
+	onClose?: () => void
+
+	/** Clicking the background dismisses tha modal if `dismissible` is true  */
+	dismissible?: boolean
 
 	/** Modal content */
 	children: ComponentChildren
@@ -27,7 +30,7 @@ export interface ModalProps extends BaseProps {
  * Create a dismissible dialog in front of the page
  */
 export function Modal(
-	{ title, actions, show, onDismiss, children, ...props }: ModalProps,
+	{ title, actions, show, onClose: onClose, dismissible, children, ...props }: ModalProps,
 ): JSX.Element | undefined {
 	const [hidden, setHidden] = useState(true)
 	const backdropRef = useRef<HTMLDivElement | null>(null)
@@ -35,9 +38,9 @@ export function Modal(
 	/**
 	 * Dismiss the modal when the user clicks on the backdrop and the `onDismiss` prop is set
 	 */
-	const onBackdropClicked = !onDismiss ? undefined : (e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
+	const onBackdropClicked = !onClose ? undefined : (e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
 		if (e.target === backdropRef.current) {
-			onDismiss()
+			onClose()
 		}
 	}
 
@@ -64,7 +67,7 @@ export function Modal(
 				"overflow-y-auto overflow-x-hidden fixed justify-center items-center w-full max-h-full bg-gray-900/50 dark:bg-gray-900/80 inset-0 z-40 flex",
 				props.class,
 			)}
-			onClick={onBackdropClicked}
+			onClick={dismissible ? onBackdropClicked : undefined}
 		>
 			<div
 				class={classNames(
@@ -80,12 +83,12 @@ export function Modal(
 						<h3 class="text-xl font-semibold text-gray-900 dark:text-white">
 							{title}
 						</h3>
-						<Show if={onDismiss}>
+						<Show if={onClose}>
 							<Button
 								icon="Close"
 								overrideClass
 								class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-								onClick={onDismiss}
+								onClick={onClose}
 							/>
 						</Show>
 					</div>

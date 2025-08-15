@@ -77,8 +77,19 @@
   },
   {
     "registry": "jsr",
+    "name": "@fresh/build-id",
+    "version": "1.0.0",
+    "repository": "https://github.com/denoland/fresh",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/fresh/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
     "name": "@fresh/core",
-    "version": "2.0.0-alpha.49",
+    "version": "2.0.0-alpha.58",
     "repository": "https://github.com/denoland/fresh",
     "authors": [
       "Deno"
@@ -154,7 +165,7 @@
   {
     "registry": "npm",
     "name": "marked",
-    "version": "16.1.1",
+    "version": "16.1.2",
     "repository": "https://github.com/markedjs/marked",
     "authors": [
       "Marked"
@@ -187,7 +198,7 @@
   {
     "registry": "jsr",
     "name": "@nihility-io/crypto",
-    "version": "1.0.0-beta.3",
+    "version": "1.0.0-beta.5",
     "repository": "https://github.com/Nihility-io/Crypto",
     "authors": [
       "Nihility.io"
@@ -209,7 +220,7 @@
   {
     "registry": "jsr",
     "name": "@noble/ciphers",
-    "version": "2.0.0-beta.1",
+    "version": "2.0.0-beta.3",
     "repository": "https://github.com/paulmillr/noble-ciphers",
     "authors": [
       "Paul Miller"
@@ -220,7 +231,7 @@
   {
     "registry": "jsr",
     "name": "@noble/hashes",
-    "version": "2.0.0-beta.1",
+    "version": "2.0.0-beta.4",
     "repository": "https://github.com/paulmillr/noble-hashes",
     "authors": [
       "Paul Miller"
@@ -362,7 +373,7 @@
   {
     "registry": "jsr",
     "name": "@std/collections",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -450,7 +461,7 @@
   {
     "registry": "jsr",
     "name": "@std/net",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -461,7 +472,7 @@
   {
     "registry": "jsr",
     "name": "@std/path",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -472,7 +483,7 @@
   {
     "registry": "jsr",
     "name": "@std/streams",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
@@ -504,7 +515,7 @@
   {
     "registry": "jsr",
     "name": "@zod/zod",
-    "version": "4.0.14",
+    "version": "4.0.17",
     "repository": "https://github.com/colinhacks/zod",
     "authors": [
       "Colin McDonnell"

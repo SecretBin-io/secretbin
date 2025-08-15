@@ -41,7 +41,7 @@ export function PasswordGenerator({ show, onDismiss, onPassword, state }: Passwo
 		<Modal
 			title={$("Title")}
 			show={show}
-			onDismiss={onDismiss}
+			onClose={onDismiss}
 			actions={[
 				{ label: $("Insert"), disabled: password === "", onClick: onInsert },
 			]}
