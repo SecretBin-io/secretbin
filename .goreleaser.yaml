@@ -33,7 +33,7 @@ builds:
         {{- end -}}
 
 archives:
-  - formats: [tar.gz]
+  - formats: [zip]
     # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
       {{ .ProjectName }}_
@@ -44,9 +44,11 @@ archives:
       {{- .Arch }}
     # use zip for windows archives
     format_overrides:
-      - goos: windows
-        formats: [zip]
+      - goos: linux
+        formats: [tar.gz]
     files:
       - README.md
       - LICENSE
       - config.yaml
+      - resources/terms_de.md
+      - resources/terms_en.md

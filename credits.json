@@ -89,7 +89,7 @@
   {
     "registry": "jsr",
     "name": "@fresh/core",
-    "version": "2.0.0-alpha.58",
+    "version": "2.0.0-alpha.60",
     "repository": "https://github.com/denoland/fresh",
     "authors": [
       "Deno"
@@ -165,7 +165,7 @@
   {
     "registry": "npm",
     "name": "marked",
-    "version": "16.1.2",
+    "version": "16.2.0",
     "repository": "https://github.com/markedjs/marked",
     "authors": [
       "Marked"
@@ -284,19 +284,19 @@
     "licenseFile": "https://raw.githubusercontent.com/postcss/postcss/main/LICENSE"
   },
   {
+    "registry": "npm",
     "name": "postgres",
-    "repository": "https://github.com/porsager/postgres",
     "version": "3.4.7",
+    "repository": "https://github.com/porsager/postgres",
     "authors": [
       "Rasmus Porsager"
     ],
-    "license": "The Unlicense",
-    "licenseFile": "https://raw.githubusercontent.com/porsager/postgres/refs/heads/master/UNLICENSE"
+    "license": "The Unlicense"
   },
   {
     "registry": "npm",
     "name": "preact",
-    "version": "10.27.0",
+    "version": "10.27.1",
     "repository": "https://github.com/preactjs/preact",
     "authors": [
       "Preact"
@@ -307,7 +307,7 @@
   {
     "registry": "npm",
     "name": "preact-render-to-string",
-    "version": "6.5.13",
+    "version": "6.6.1",
     "repository": "https://github.com/preactjs/preact-render-to-string",
     "authors": [
       "Preact"
@@ -318,7 +318,7 @@
   {
     "registry": "npm",
     "name": "@preact/signals",
-    "version": "2.2.1",
+    "version": "2.3.1",
     "repository": "https://github.com/preactjs/signals",
     "authors": [
       "Preact"
@@ -329,7 +329,7 @@
   {
     "registry": "npm",
     "name": "@preact/signals-core",
-    "version": "1.11.0",
+    "version": "1.12.0",
     "repository": "https://github.com/preactjs/signals",
     "authors": [
       "Preact"
