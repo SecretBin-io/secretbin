@@ -33,14 +33,26 @@ export type DatabaseConfig = PostgresDatabaseConfig
 export const DatabaseConfig = PostgresDatabaseConfig
 
 /**
+ * Config the garbage collector which deletes expired secrets
+ */
+export interface GarbageCollection {
+	/** Configure when the garbage collector should run */
+	cron: string
+}
+
+export const GarbageCollection: ZodType<GarbageCollection> = z.strictObject({
+	cron: z.string().default("* * * * *"),
+})
+
+/**
  * Configs regarding how secrets are stored
  */
 export interface Storage {
 	/** Max size a new secret is allowed to have (in bytes) */
 	maxSize: number
 
-	/** Interval in seconds in which the garbage collector should run */
-	gcInterval: number
+	/** Config the garbage collector which deletes expired secrets */
+	garbageCollection: GarbageCollection
 
 	/** Configure the database where secrets are actually stored */
 	database: DatabaseConfig
@@ -53,6 +65,6 @@ export const Storage: ZodType<Storage> = z.strictObject({
 		})
 		.transform(sizeToBytes).or(z.uint32())
 		.default(sizeToBytes("10Mi")),
-	gcInterval: z.uint32().default(60 * 60),
+	garbageCollection: GarbageCollection.default(GarbageCollection.parse({})),
 	database: DatabaseConfig.default(DatabaseConfig.parse({ type: "postgres" })),
 })

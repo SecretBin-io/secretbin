@@ -15,7 +15,7 @@
 		},
 		"dev": {
 			"description": "Starts SecretBin is dev mode and watch for changes.",
-			"command": "deno run -A --cert ~/Library/Application\\ Support/Postgres/var-17/tls/ca.crt --watch=static/,routes/ --watch=config.yaml dev.ts"
+			"command": "deno run -A --unstable-cron --cert ~/Library/Application\\ Support/Postgres/var-17/tls/ca.crt --watch=static/,routes/ --watch=config.yaml dev.ts"
 		},
 		"build": {
 			"description": "Builds SecretBin for production.",

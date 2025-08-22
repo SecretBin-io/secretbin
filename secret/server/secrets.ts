@@ -38,11 +38,9 @@ export class Secrets {
 
 		// Schedule the garbage collector to run every hour in the background.
 		// The garbage collector deletes expired secrets
-		setInterval(() => {
+		Deno.cron("GarbageCollector", config.storage.garbageCollection.cron, () => {
 			this.garbageCollection()
-		}, 1000 * config.storage.gcInterval)
-
-		this.garbageCollection()
+		})
 
 		return true
 	}
@@ -67,6 +65,7 @@ export class Secrets {
 	 * every hour in the background but it can also be called manually.
 	 */
 	async garbageCollection(): Promise<void> {
+		logCG.info(`Running garbage collector...`)
 		try {
 			// Go through all secrets
 			for await (const s of Secrets.#instance!.#db.getSecrets()) {
@@ -83,6 +82,7 @@ export class Secrets {
 		} catch (error) {
 			logCG.error(`Failed to collect garbage.`, { error })
 		}
+		logCG.info(`Garbage collector finished.`)
 	}
 
 	/**

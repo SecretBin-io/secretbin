@@ -41,7 +41,8 @@ policy:
   encryptionAlgorithm: AES256-GCM # Algorithm used for encrypting new secrets (AES256-GCM, XChaCha20-Poly1305)
 storage:
   maxSize: 10M # Max size a new secret is allowed to have
-  gcInterval: 5 # Interval in seconds in which the garbage collector should run
+  garbageCollection: # Config the garbage collector which deletes expired secrets
+    cron: "* * * * *" # Configure when the garbage collector should run
   database: # Use PostgreSQL as a database
     type: postgres
     host: 127.0.0.1

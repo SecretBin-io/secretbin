@@ -26,6 +26,7 @@ builds:
     flags:
       - --include=_fresh
       - --include=static
+      - --unstable-cron
       - --allow-all
       - >-
         {{- if eq .Os "windows" -}}
