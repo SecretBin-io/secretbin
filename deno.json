@@ -1,10 +1,6 @@
 {
 	"version": "2.0.2",
 	"tasks": {
-		"postgres:build": {
-			"description": "Builds the Postgres library using the Postgres.js.",
-			"command": "cd lib && deno run -A build_postgres.ts"
-		},
 		"check": {
 			"description": "Lints and types check TypeScript files",
 			"command": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx"
@@ -15,7 +11,7 @@
 		},
 		"dev": {
 			"description": "Starts SecretBin is dev mode and watch for changes.",
-			"command": "deno run -A --unstable-cron --cert ~/Library/Application\\ Support/Postgres/var-17/tls/ca.crt --watch=static/,routes/ --watch=config.yaml dev.ts"
+			"command": "deno run -A --unstable-cron --cert \"$PGPATH/tls/ca.crt\" --watch=static/,routes/ --watch=config.yaml dev.ts"
 		},
 		"build": {
 			"description": "Builds SecretBin for production.",
@@ -24,10 +20,6 @@
 		"start": {
 			"description": "Starts SecretBin",
 			"command": "deno serve -A _fresh/server.js"
-		},
-		"update": {
-			"description": "Updates SecretBin to the latest Deno Fresh version.",
-			"command": "deno run -A -r jsr:@fresh/update@2.0.0-alpha.34 ."
 		},
 		"deps": {
 			"description": "Updates the credits.json file",
@@ -59,15 +51,17 @@
 				"no-useless-rename",
 				"single-var-declarator"
 			]
-		}
+		},
+		"plugins": ["jsr:@ryu/deno-lint-plugin-tailwindcss"]
 	},
 	"exclude": ["**/_fresh/*"],
 	"imports": {
 		"@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.9",
 		"@libs/qrcode": "jsr:@libs/qrcode@^3.0.0",
 		"@logtape/logtape": "jsr:@logtape/logtape@^1.0.4",
+		"@nick/clsx": "jsr:@nick/clsx@^0.3.1",
 		"@nihility-io/cookies": "jsr:@nihility-io/cookies@^2.0.0",
-		"@nihility-io/crypto": "jsr:@nihility-io/crypto@1.0.0-beta.5",
+		"@nihility-io/crypto": "jsr:@nihility-io/crypto@1.0.0",
 		"@nihility-io/record": "jsr:@nihility-io/record@^1.0.4",
 		"@preact/signals": "npm:@preact/signals@^2.3.1",
 		"@std/assert": "jsr:@std/assert@^1.0.14",
@@ -78,10 +72,9 @@
 		"@std/yaml": "jsr:@std/yaml@^1.0.9",
 		"@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.12",
 		"@zod/zod": "jsr:@zod/zod@^4.0.17",
-		"classnames": "npm:classnames@^2.5.1",
 		"components": "./components/mod.ts",
 		"config": "./config/mod.ts",
-		"fresh": "jsr:@fresh/core@^2.0.0-alpha.60",
+		"fresh": "jsr:@fresh/core@2.0.0-alpha.60",
 		"helpers": "./helpers/mod.ts",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",

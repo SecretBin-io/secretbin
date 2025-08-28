@@ -1,6 +1,6 @@
-import classNames from "classnames"
 import { JSX } from "preact"
 import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx"
 
 export interface SpinnerProps extends BaseProps {
 	/** Label shown beneath the spinner */
@@ -24,13 +24,13 @@ export function Spinner({ label, size = 64, hidden, ...props }: SpinnerProps): J
 	return (
 		<div
 			style={props.style}
-			class={classNames(
+			class={clsx(
 				"grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible",
 				props.class,
 			)}
 		>
 			<svg
-				class="animate-spin text-gray-300 "
+				class="animate-spin text-gray-300"
 				viewBox="0 0 64 64"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"

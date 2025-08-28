@@ -1,7 +1,7 @@
-import classNames from "classnames"
 import { Show } from "components"
 import { JSX, VNode } from "preact"
 import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx"
 
 export interface SectionProps extends BaseProps {
 	/** Title shown above the section */
@@ -20,7 +20,7 @@ export function Section({ title, description, children, ...props }: SectionProps
 	return (
 		<div
 			style={props.style}
-			class={classNames("mx-auto py-2", props.class)}
+			class={clsx("mx-auto py-2", props.class)}
 		>
 			<label
 				for={Array.isArray(children) ? undefined : children.props.id}
@@ -29,7 +29,7 @@ export function Section({ title, description, children, ...props }: SectionProps
 				{title}
 			</label>
 			<Show if={description}>
-				<p class="text-xs font-normal text-gray-500 dark:text-gray-400">
+				<p class="font-normal text-gray-500 text-xs dark:text-gray-400">
 					{description}
 				</p>
 			</Show>

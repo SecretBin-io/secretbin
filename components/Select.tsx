@@ -1,7 +1,7 @@
-import classNames from "classnames"
 import { VNode } from "preact"
 import { JSX } from "preact/jsx-runtime"
 import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx"
 
 export interface SelectOptionProps {
 	/** Option display name */
@@ -36,8 +36,8 @@ export function Select({ value, onChange, children, ...props }: SelectProps): JS
 	return (
 		<select
 			style={props.style}
-			class={classNames(
-				"cursor-pointer appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+			class={clsx(
+				"block w-full cursor-pointer appearance-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
 				props.class,
 			)}
 			value={value}

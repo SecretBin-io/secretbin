@@ -1,10 +1,10 @@
 import { qrcode } from "@libs/qrcode"
-import classNames from "classnames"
 import { Button } from "components"
 import { downloadDataURL, imageDataURL } from "helpers"
 import { JSX } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
 import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx"
 
 export interface QRCodeProps extends BaseProps {
 	/** QRCode content */
@@ -39,10 +39,10 @@ export function QRCode({ content, size = 256, downloadLabel = "Download", ...pro
 
 	return (
 		<>
-			<div style={props.style} class={classNames("flex items-center justify-center pt-10 pb-5", props.class)}>
+			<div style={props.style} class={clsx("flex items-center justify-center pt-10 pb-5", props.class)}>
 				<img class="border-10" ref={imgRef} width={size} src={qrCode} />
 			</div>
-			<div style={props.style} class={classNames("flex items-center justify-center", props.class)}>
+			<div style={props.style} class={clsx("flex items-center justify-center", props.class)}>
 				<Button
 					theme="plainAlternative"
 					icon="Download"

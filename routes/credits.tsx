@@ -39,7 +39,7 @@ export default define.page(({ state }) => {
 			<br />
 
 			<div class="relative overflow-x-auto">
-				<h5 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+				<h5 class="mb-2 font-bold text-gray-900 text-xl dark:text-white">
 					{$("Credits.Components.Title")}
 				</h5>
 				<div

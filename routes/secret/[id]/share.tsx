@@ -25,7 +25,7 @@ export default define.page<typeof handler>(({ state, data: { id, metadata } }) =
 	const $ = useTranslationWithPrefix(state.language, "ShareSecret")
 	return (
 		<PageContent title={$("Title")} description={$("Description")}>
-			<div class="items-left justify-left space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+			<div class="items-left justify-left space-y-4 sm:space-x-4 sm:space-y-0 rtl:space-x-reverse">
 				<div class="mx-auto">
 					<Expires state={state} date={metadata.expires} />
 					<ShareSecret state={state} id={id} />

@@ -78,7 +78,7 @@
   {
     "registry": "jsr",
     "name": "@fresh/build-id",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "repository": "https://github.com/denoland/fresh",
     "authors": [
       "Deno"
@@ -198,7 +198,7 @@
   {
     "registry": "jsr",
     "name": "@nihility-io/crypto",
-    "version": "1.0.0-beta.5",
+    "version": "1.0.0",
     "repository": "https://github.com/Nihility-io/Crypto",
     "authors": [
       "Nihility.io"
@@ -220,7 +220,7 @@
   {
     "registry": "jsr",
     "name": "@noble/ciphers",
-    "version": "2.0.0-beta.3",
+    "version": "2.0.0",
     "repository": "https://github.com/paulmillr/noble-ciphers",
     "authors": [
       "Paul Miller"
@@ -231,7 +231,7 @@
   {
     "registry": "jsr",
     "name": "@noble/hashes",
-    "version": "2.0.0-beta.4",
+    "version": "2.0.0",
     "repository": "https://github.com/paulmillr/noble-hashes",
     "authors": [
       "Paul Miller"
@@ -329,7 +329,7 @@
   {
     "registry": "npm",
     "name": "@preact/signals-core",
-    "version": "1.12.0",
+    "version": "1.12.1",
     "repository": "https://github.com/preactjs/signals",
     "authors": [
       "Preact"
@@ -515,7 +515,7 @@
   {
     "registry": "jsr",
     "name": "@zod/zod",
-    "version": "4.0.17",
+    "version": "4.1.4",
     "repository": "https://github.com/colinhacks/zod",
     "authors": [
       "Colin McDonnell"

@@ -93,7 +93,7 @@ export function Options({
 					/>
 
 					<Show if={slowBurn}>
-						<div class="flex mb-3">
+						<div class="mb-3 flex">
 							<div class="flex">
 								<div class="w-11" />
 							</div>
@@ -106,7 +106,7 @@ export function Options({
 								/>
 							</div>
 							<div class="ms-2 text-sm">
-								<p class="text-sm text-gray-500 dark:text-gray-400">
+								<p class="text-gray-500 text-sm dark:text-gray-400">
 									{$("Options.SlowBurn.Status", { count: `${rereads}` })}
 								</p>
 							</div>
@@ -150,7 +150,7 @@ export function Options({
 							<div class="flex h-5">
 								<div class="w-11" />
 							</div>
-							<p class="mt-2 ml-2 mb-2 text-sm text-red-600 dark:text-red-500">
+							<p class="mt-2 mb-2 ml-2 text-red-600 text-sm dark:text-red-500">
 								{$("Options.Password.Mismatch")}
 							</p>
 						</div>

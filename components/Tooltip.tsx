@@ -1,6 +1,6 @@
-import classNames from "classnames"
 import { ComponentChildren, JSX } from "preact"
 import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx"
 
 export interface TooltipProps extends BaseProps {
 	/** Text that should be shown when hovering */
@@ -18,8 +18,8 @@ export function Tooltip({ text, children, ...props }: TooltipProps): JSX.Element
 		<div class="has-tooltip">
 			<span
 				style={props.style}
-				class={classNames(
-					"tooltip rounded shadow-lg border-1 border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-black dark:text-white py-1 px-2 -mt-10",
+				class={clsx(
+					"tooltip -mt-10 rounded border-1 border-gray-300 bg-gray-100 px-2 py-1 text-black shadow-lg dark:border-gray-600 dark:bg-gray-700 dark:text-white",
 					props.class,
 				)}
 			>

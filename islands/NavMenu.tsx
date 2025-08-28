@@ -37,13 +37,13 @@ export function NavMenu({ state }: NavMenuProps): JSX.Element {
 	return (
 		<>
 			<Button
-				class="justify-center !px-4 !py-2 !mb-0 !me-0"
+				class="!me-0 !mb-0 justify-center !px-4 !py-2"
 				theme="clear"
 				icon={theme === Theme.Dark ? "Sun" : "Moon"}
 				onClick={() => setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark)}
 			/>
 			<Dropdown
-				class="justify-center !px-4 !py-2 !mb-0 !me-0"
+				class="!me-0 !mb-0 justify-center !px-4 !py-2"
 				dropdownClass="right-0 w-40"
 				icon="Language"
 				label={supportedLanguages.find((x) => x.name === state.language)?.native}

@@ -1,7 +1,7 @@
-import classNames from "classnames"
 import { Icon } from "components"
 import { JSX } from "preact"
 import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx"
 
 interface NumberButtonProps {
 	/** Button mode */
@@ -18,12 +18,12 @@ function NumberButton({ mode, disabled, onClick }: NumberButtonProps): JSX.Eleme
 	return (
 		<button
 			type="button"
-			class={classNames(
-				"bg-gray-100 dark:bg-gray-700 dark:border-gray-600 border border-gray-300 p-3 h-11",
+			class={clsx(
+				"h-11 border border-gray-300 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700",
 				{
 					"rounded-s-lg": mode === "-",
 					"rounded-e-lg": mode === "+",
-					"hover:bg-gray-200 dark:hover:bg-gray-600 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none":
+					"hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:hover:bg-gray-600 dark:focus:ring-gray-700":
 						!disabled,
 					"bg-white dark:bg-gray-800": disabled,
 				},
@@ -32,8 +32,8 @@ function NumberButton({ mode, disabled, onClick }: NumberButtonProps): JSX.Eleme
 			onClick={onClick}
 		>
 			{mode === "+"
-				? <Icon name="Plus" class="w-4 h-4 text-gray-900 dark:text-white" />
-				: <Icon name="Minus" class="w-4 h-4 text-gray-900 dark:text-white" />}
+				? <Icon name="Plus" class="h-4 w-4 text-gray-900 dark:text-white" />
+				: <Icon name="Minus" class="h-4 w-4 text-gray-900 dark:text-white" />}
 		</button>
 	)
 }
@@ -67,7 +67,7 @@ export function NumberInput({ value, min, max, step = 1, onChange, ...props }: N
 			: onChange?.(value)
 
 	return (
-		<div style={props.style} class={classNames("relative flex items-center max-w-[8rem]", props.class)}>
+		<div style={props.style} class={clsx("relative flex max-w-[8rem] items-center", props.class)}>
 			<NumberButton
 				mode="-"
 				disabled={min !== undefined && value <= min}
@@ -77,7 +77,7 @@ export function NumberInput({ value, min, max, step = 1, onChange, ...props }: N
 				type="text"
 				data-input-counter
 				aria-describedby="helper-text-explanation"
-				class="bg-gray-50 border-x-0 border-y-1 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+				class="block h-11 w-full border-gray-300 border-x-0 border-y-1 bg-gray-50 py-2.5 text-center text-gray-900 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
 				required
 				value={"" + value}
 				step={step}

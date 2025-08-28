@@ -39,7 +39,7 @@ export default define.page<typeof handler>(({ state, data: { id, done } }) => {
 	return (
 		<PageContent title={$("Title")} description={$("Description", { id })}>
 			<form method="post">
-				<div class="items-left justify-left space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+				<div class="items-left justify-left space-y-4 sm:space-x-4 sm:space-y-0 rtl:space-x-reverse">
 					<div class="mx-auto">
 						<Button type="submit" label={$("Delete")} />
 					</div>

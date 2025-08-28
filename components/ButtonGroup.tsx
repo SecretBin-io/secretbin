@@ -1,4 +1,4 @@
-import classNames from "classnames"
+import { clsx } from "@nick/clsx"
 import { ButtonProps } from "components"
 import { cloneElement, JSX, VNode } from "preact"
 import { BaseProps } from "./base.ts"
@@ -14,15 +14,15 @@ export function ButtonGroup({ children, ...props }: ButtonGroupProps): JSX.Eleme
 	return (
 		<div
 			style={props.style}
-			class={classNames("inline-flex rounded-md", props.class)}
+			class={clsx("inline-flex rounded-md", props.class)}
 			role="group"
 		>
 			{children.map((b, i) =>
 				cloneElement(b, {
 					...b,
 					overrideClass: true,
-					class: classNames(
-						"inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white",
+					class: clsx(
+						"inline-flex items-center border border-gray-200 bg-white px-4 py-2 font-medium text-gray-900 text-sm hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white dark:focus:text-white dark:focus:ring-blue-500",
 						{
 							"rounded-s-lg": i === 0,
 							"rounded-e-lg": i === children.length - 1,

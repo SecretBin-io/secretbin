@@ -1,4 +1,4 @@
-import classNames from "classnames"
+import { clsx } from "@nick/clsx"
 import { Icon, IconName, Show } from "components"
 import { ComponentChildren, JSX } from "preact"
 import { BaseProps } from "./base.ts"
@@ -6,12 +6,15 @@ import { BaseProps } from "./base.ts"
 export type MessageType = "error" | "warning" | "info"
 
 const colorMessageType: Record<MessageType, string> = {
-	info:
-		"text-grey-800 border-grey-300 border-grey-300 bg-grey-50 dark:bg-gray-800 dark:text-grey-400 dark:border-grey-800",
-	warning:
-		"text-yellow-800 border-yellow-900 border-yellow-900 bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400 dark:border-yellow-400",
-	error:
-		"text-red-800 border-red-300 border-red-300 bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800",
+	info: clsx(
+		"border-grey-300 bg-grey-50 text-grey-800 dark:border-grey-800 dark:bg-gray-800 dark:text-grey-400",
+	),
+	warning: clsx(
+		"border-yellow-900 bg-yellow-50 text-yellow-800 dark:border-yellow-400 dark:bg-gray-800 dark:text-yellow-400",
+	),
+	error: clsx(
+		"border-red-300 bg-red-50 text-red-800 dark:border-red-800 dark:bg-gray-800 dark:text-red-400",
+	),
 }
 
 const iconMessageType: Record<MessageType, IconName> = {
@@ -49,8 +52,8 @@ export function Message(
 	return (
 		<div
 			style={props.style}
-			class={classNames(
-				"flex items-center p-4 mb-4 text-sm border rounded-lg",
+			class={clsx(
+				"mb-4 flex items-center rounded-lg border p-4 text-sm",
 				colorMessageType[type],
 				props.class,
 			)}
@@ -62,7 +65,7 @@ export function Message(
 					<span class="font-medium">{title}:</span>
 					{" "}
 				</Show>
-				<span class={classNames({ "text-base": largeText })}>
+				<span class={clsx({ "text-base": largeText })}>
 					{children ?? message}
 				</span>
 			</div>

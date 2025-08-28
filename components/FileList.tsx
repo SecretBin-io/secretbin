@@ -1,4 +1,4 @@
-import classNames from "classnames"
+import { clsx } from "@nick/clsx"
 import { Button, Icon, Show } from "components"
 import { downloadFile, humanReadableSize } from "helpers"
 import { JSX } from "preact"
@@ -22,23 +22,23 @@ function FileItem({ file, downloadable, onDelete, ...props }: FileItemProps): JS
 	return (
 		<li
 			{...props}
-			class={classNames("p-2.5 px-2.5", { "cursor-pointer": downloadable }, props.class)}
+			class={clsx("p-2.5 px-2.5", { "cursor-pointer": downloadable }, props.class)}
 			onClick={downloadable ? () => downloadFile(file) : undefined}
 		>
 			<div class="flex items-center space-x-4 rtl:space-x-reverse">
 				<div class="flex-shrink-0">
-					<Icon name="Document" className="w-6 h-6 text-gray-800 dark:text-white" />
+					<Icon name="Document" className="h-6 w-6 text-gray-800 dark:text-white" />
 				</div>
-				<div class="flex-1 min-w-0">
-					<p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+				<div class="min-w-0 flex-1">
+					<p class="truncate font-medium text-gray-900 text-sm dark:text-white">
 						{file.name}
 					</p>
-					<p class="text-sm text-gray-500 truncate dark:text-gray-400">
+					<p class="truncate text-gray-500 text-sm dark:text-gray-400">
 						{humanReadableSize(file.size)}
 					</p>
 				</div>
 				<Show if={onDelete}>
-					<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+					<div class="inline-flex items-center font-semibold text-base text-gray-900 dark:text-white">
 						<Button theme="plainDanger" icon="Trash" onClick={onDelete} />
 					</div>
 				</Show>
@@ -61,8 +61,8 @@ export function FileList({ files, downloadable, onDelete, ...props }: FileListPr
 	return (
 		<div
 			{...props}
-			class={classNames(
-				"bg-gray-50 dark:bg-gray-700 border border-gray-200 rounded-lg shadow dark:border-gray-700",
+			class={clsx(
+				"rounded-lg border border-gray-200 bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-700",
 				props.class,
 			)}
 		>

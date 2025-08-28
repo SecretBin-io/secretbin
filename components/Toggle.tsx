@@ -1,7 +1,7 @@
-import classNames from "classnames"
 import { Show, Tooltip } from "components"
 import { JSX } from "preact"
 import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx"
 
 export interface ToggleProps extends BaseProps {
 	/** Element ID (Default: Random ID) */
@@ -34,13 +34,13 @@ export function Toggle(
 ): JSX.Element {
 	return (
 		<Tooltip text={tooltip}>
-			<div class="flex mb-4" style={props.style}>
+			<div class="mb-4 flex" style={props.style}>
 				<div
-					class={classNames("flex-none", { "mt-1": subLabel, "brightness-75": disabled })}
+					class={clsx("flex-none", { "mt-1": subLabel, "brightness-75": disabled })}
 				>
 					<div
 						{...props}
-						class={classNames("relative inline-flex items-center cursor-pointer", props.class)}
+						class={clsx("relative inline-flex cursor-pointer items-center", props.class)}
 						onClick={() => !disabled && onChange?.(!on)}
 					>
 						<input
@@ -48,12 +48,12 @@ export function Toggle(
 							type="checkbox"
 							disabled={disabled}
 							checked={on}
-							class="sr-only peer"
+							class="peer sr-only"
 							onInput={(e) => !disabled && onChange?.(e.currentTarget.checked)}
 						/>
 						<div
-							class={classNames(
-								"w-11 h-6 border-1 border-gray-300 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600",
+							class={clsx(
+								"peer h-6 w-11 rounded-full border-1 border-gray-300 bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800",
 								{
 									"peer-checked:bg-gray-600": disabled,
 								},
@@ -69,7 +69,7 @@ export function Toggle(
 							{label}
 						</label>
 						<Show if={subLabel}>
-							<p class="text-xs font-normal text-gray-500 dark:text-gray-400">
+							<p class="font-normal text-gray-500 text-xs dark:text-gray-400">
 								{subLabel}
 							</p>
 						</Show>

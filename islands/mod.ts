@@ -5,4 +5,3 @@ export * from "./PasswordGenerator.tsx"
 export * from "./ShareSecret.tsx"
 export * from "./Terms.tsx"
 export * from "./ViewSecret.tsx"
-

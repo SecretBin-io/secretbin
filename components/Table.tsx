@@ -1,7 +1,7 @@
 import Record from "@nihility-io/record"
-import classNames from "classnames"
 import { ComponentChild, JSX } from "preact"
 import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx"
 
 interface TableCellProps {
 	/** Cell index in the row  */
@@ -21,7 +21,7 @@ function TableCell({ index, children }: TableCellProps): JSX.Element {
 	return (
 		<th
 			scope="row"
-			class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+			class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
 		>
 			{children}
 		</th>
@@ -43,9 +43,9 @@ export function Table<T extends string>({ headers, rows, ...props }: TableProps<
 	return (
 		<table
 			style={props.style}
-			class={classNames("w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400", props.class)}
+			class={clsx("w-full text-left text-gray-500 text-sm rtl:text-right dark:text-gray-400", props.class)}
 		>
-			<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+			<thead class="bg-gray-50 text-gray-700 text-xs uppercase dark:bg-gray-700 dark:text-gray-400">
 				<tr>
 					{Record.mapToArray(headers, (_key, value) => (
 						<th scope="col" class="px-6 py-3">
@@ -56,7 +56,7 @@ export function Table<T extends string>({ headers, rows, ...props }: TableProps<
 			</thead>
 			<tbody>
 				{rows.map((row) => (
-					<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+					<tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
 						{Record.mapToArray(
 							headers,
 							(key, _value, i) => <TableCell index={i}>{row[key]}</TableCell>,

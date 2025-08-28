@@ -1,4 +1,4 @@
-import classNames from "classnames"
+import { clsx } from "@nick/clsx"
 import { JSX } from "preact"
 import { useEffect, useRef } from "preact/hooks"
 import { BaseProps } from "./base.ts"
@@ -74,11 +74,11 @@ export function Input(
 		<input
 			ref={ref}
 			style={props.style}
-			class={classNames(
-				"block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+			class={clsx(
+				"block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
 				{
 					"border-red-500 dark:border-red-500": invalid,
-					"border-green-500 dark:border-green-500": valid,
+					"border-green-500": valid,
 				},
 				props.class,
 			)}

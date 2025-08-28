@@ -1,6 +1,6 @@
 import { decodeBase64 } from "@std/encoding/base64"
-import classNames from "classnames"
 import { Button, FileList, Input, Message, Section, Show, Spinner, TextArea } from "components"
+import { clsx } from "@nick/clsx"
 import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
@@ -81,7 +81,7 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 	return (
 		<>
 			<Spinner label={$("Decrypting")} hidden={!loading} />
-			<div class={classNames({ "hidden": loading })}>
+			<div class={clsx({ "hidden": loading })}>
 				<Show if={requireConfirm}>
 					<p>{$("ReadConfirm")}</p>
 					<br />

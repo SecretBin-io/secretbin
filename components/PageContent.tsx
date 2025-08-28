@@ -17,9 +17,9 @@ export interface PageContentProps extends BaseProps {
  */
 export function PageContent({ title, description, children }: PageContentProps): JSX.Element {
 	return (
-		<div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
+		<div class="mx-auto flex max-w-screen-md flex-col items-center justify-center">
 			<div class="w-full p-4">
-				<h5 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+				<h5 class="mb-2 font-bold text-3xl text-gray-900 dark:text-white">
 					{title}
 				</h5>
 				<Show if={description}>

@@ -1,9 +1,9 @@
-import classNames from "classnames"
 import { Button, ButtonTheme, IconName } from "components"
 import { cloneElement, VNode } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx"
 
 export interface DropdownItemProps extends BaseProps {
 	/** Text displayed on the item */
@@ -34,7 +34,7 @@ export function DropdownItem({ label, icon, disabled, onClick, onDismiss }: Drop
 		<li>
 			<Button
 				overrideClass
-				class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white w-full"
+				class="block w-full px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
 				label={label}
 				icon={icon}
 				disabled={disabled}
@@ -93,8 +93,8 @@ export function Dropdown({ dropdownClass, children, ...rest }: DropdownProps): J
 			<Button theme="clear" onClick={() => setShow(!show)} {...rest} />
 
 			<div
-				class={classNames(
-					"absolute my-2 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700",
+				class={clsx(
+					"absolute my-2 list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:bg-gray-700",
 					dropdownClass,
 					{
 						"animate-appear": show,

@@ -1,4 +1,3 @@
-import classNames from "classnames"
 import { Button, Message, Spinner, TextArea } from "components"
 import { config } from "config"
 import { useSetting } from "helpers"
@@ -11,6 +10,7 @@ import { State } from "state"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
 import { setMessagePreview } from "./preview.ts"
+import { clsx } from "@nick/clsx"
 
 export interface NewSecretProps {
 	state: State
@@ -59,7 +59,7 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 	return (
 		<>
 			<Spinner label={$("Encrypting")} hidden={!loading} />
-			<div class={classNames({ "hidden": loading })}>
+			<div class={clsx({ "hidden": loading })}>
 				<TextArea tabs lines={10} resizable placeholder="" value={message} onChange={setMessage} />
 				<Button
 					label={$("Options.GeneratePassword")}
