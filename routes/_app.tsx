@@ -1,12 +1,11 @@
+import { clsx } from "@nick/clsx"
 import { Message, Show } from "components"
 import { config } from "config"
 import { asset, Partial } from "fresh/runtime"
-import { clsx } from "@nick/clsx"
 import { NavMenu, Terms } from "islands"
 import { useTranslation } from "lang"
 import { Theme } from "state"
 import { define } from "utils"
-
 /**
  * Wrapper for all pages. Providers header info and navigation
  */
@@ -19,7 +18,7 @@ export default define.page(({ state, Component }) => {
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<title>{config.branding.appName}</title>
-				<link rel="stylesheet" href="/styles.css" />
+				<link rel="stylesheet" href="../static/styles.css" />
 
 				{
 					/**
