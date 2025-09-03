@@ -1,6 +1,8 @@
+import { ExclamationTriangleIcon, InformationCircleIcon, XCircleIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
-import { Icon, IconName, Show } from "components"
+import { Show, SVGIcon } from "components"
 import { ComponentChildren, JSX } from "preact"
+import { jsx } from "preact/jsx-runtime"
 import { BaseProps } from "./base.ts"
 
 export type MessageType = "error" | "warning" | "info"
@@ -17,10 +19,10 @@ const colorMessageType: Record<MessageType, string> = {
 	),
 }
 
-const iconMessageType: Record<MessageType, IconName> = {
-	info: "Info",
-	warning: "Exclamation",
-	error: "Error",
+const iconMessageType: Record<MessageType, SVGIcon> = {
+	info: InformationCircleIcon,
+	warning: ExclamationTriangleIcon,
+	error: XCircleIcon,
 }
 
 export interface MessageProps extends BaseProps {
@@ -59,7 +61,7 @@ export function Message(
 			)}
 			role="alert"
 		>
-			<Icon name={iconMessageType[type]} />
+			{jsx(iconMessageType[type], { class: clsx("h-6 w-6") })}
 			<div class="pl-2">
 				<Show if={title}>
 					<span class="font-medium">{title}:</span>

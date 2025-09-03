@@ -1,9 +1,16 @@
-import { Button, ButtonGroup, Input, QRCode, Section, Show, TextArea } from "components"
-import { config } from "config"
+import {
+	DocumentDuplicateIcon,
+	EnvelopeIcon,
+	LinkIcon,
+	PlusIcon,
+	QrCodeIcon,
+	TrashIcon,
+} from "@heroicons/react/24/outline"
+import { Button, Input, QRCode, Section, Show, TextArea } from "components"
 import { useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
-import { State } from "state"
+import { State } from "utils/state"
 import { MessagePreview, setMessagePreview } from "./preview.ts"
 
 export interface ShareSecretProps {
@@ -21,7 +28,7 @@ export function ShareSecret({ id, state }: ShareSecretProps): JSX.Element {
 	 * Opens a new mail with the secret link in the default mail application
 	 */
 	const sendEmail = () => {
-		const subject = `${config.branding.appName}`
+		const subject = `${state.config.branding.appName}`
 		const text = `${link}`
 		globalThis.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`
 	}
@@ -35,22 +42,27 @@ export function ShareSecret({ id, state }: ShareSecretProps): JSX.Element {
 
 	return (
 		<>
-			<Input readOnly autoPreselect={config.policy.sharePreselect} value={link} />
-			<ButtonGroup class="py-3">
+			<Input readOnly autoPreselect={state.config.policy.sharePreselect} value={link} />
+			<div role="group" class="inline-flex rounded-md py-3">
 				<Button
 					label={$("Actions.New")}
-					icon="Plus"
+					theme="alternative"
+					icon={PlusIcon}
+					groupPosition="first"
 					link="/"
 				/>
 				<Button
 					label={$("Actions.Open")}
-					icon="Link"
+					theme="alternative"
+					icon={LinkIcon}
+					groupPosition="middle"
 					link={link}
 				/>
 				<Button
 					label={$("Actions.CopyLink")}
-					icon="Copy"
-					// onClick={() => navigator.clipboard.writeText(link)}
+					theme="alternative"
+					icon={DocumentDuplicateIcon}
+					groupPosition="middle"
 					onClick={() =>
 						navigator.clipboard.write([
 							new globalThis.ClipboardItem({
@@ -61,20 +73,26 @@ export function ShareSecret({ id, state }: ShareSecretProps): JSX.Element {
 				/>
 				<Button
 					label={$("Actions.GenerateQR")}
-					icon="QRCode"
+					theme="alternative"
+					icon={QrCodeIcon}
+					groupPosition="middle"
 					onClick={() => setShowQrCode(true)}
 				/>
 				<Button
 					label={$("Actions.Email")}
-					icon="Mail"
+					theme="alternative"
+					icon={EnvelopeIcon}
+					groupPosition="middle"
 					onClick={sendEmail}
 				/>
 				<Button
 					label={$("Actions.Delete")}
-					icon="Trash"
+					theme="alternative"
+					icon={TrashIcon}
+					groupPosition="last"
 					link={`/secret/${id}/delete`}
 				/>
-			</ButtonGroup>
+			</div>
 			<Show if={showQrCode}>
 				<QRCode downloadLabel={$("Actions.DownloadQR")} content={link} />
 			</Show>

@@ -1,7 +1,7 @@
-import { Icon } from "components"
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline"
+import { clsx } from "@nick/clsx"
 import { JSX } from "preact"
 import { BaseProps } from "./base.ts"
-import { clsx } from "@nick/clsx"
 
 interface NumberButtonProps {
 	/** Button mode */
@@ -32,8 +32,8 @@ function NumberButton({ mode, disabled, onClick }: NumberButtonProps): JSX.Eleme
 			onClick={onClick}
 		>
 			{mode === "+"
-				? <Icon name="Plus" class="h-4 w-4 text-gray-900 dark:text-white" />
-				: <Icon name="Minus" class="h-4 w-4 text-gray-900 dark:text-white" />}
+				? <PlusIcon class="h-4 w-4 text-gray-900 dark:text-white" />
+				: <MinusIcon name="Minus" class="h-4 w-4 text-gray-900 dark:text-white" />}
 		</button>
 	)
 }

@@ -4,7 +4,7 @@ import { useSetting } from "helpers"
 import { useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useState } from "preact/hooks"
-import { State } from "state"
+import { State } from "utils/state"
 
 export interface PasswordGeneratorProps {
 	state: State

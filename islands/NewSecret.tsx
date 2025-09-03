@@ -1,16 +1,17 @@
+import { KeyIcon } from "@heroicons/react/24/outline"
+import { clsx } from "@nick/clsx"
 import { Button, Message, Spinner, TextArea } from "components"
-import { config } from "config"
 import { useSetting } from "helpers"
 import { PasswordGenerator } from "islands"
 import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { submitSecret } from "secret/client"
-import { State } from "state"
+import { SecretSizeLimitError } from "secret/models"
+import { State } from "../utils/state.ts"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
 import { setMessagePreview } from "./preview.ts"
-import { clsx } from "@nick/clsx"
 
 export interface NewSecretProps {
 	state: State
@@ -20,8 +21,12 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 	const [message, setMessage] = useState("")
 	const [files, setFiles] = useState<File[]>([])
 	const [password, setPassword] = useState<string | undefined>("")
-	const [expires, setExpires] = useSetting("options.expires", config.defaults.expires, state)
-	const [burn, setBurn] = useSetting("options.burn", config.policy.requireBurn ? true : config.defaults.burn, state)
+	const [expires, setExpires] = useSetting("options.expires", state.config.defaults.expires, state)
+	const [burn, setBurn] = useSetting(
+		"options.burn",
+		state.config.policy.requireBurn ? true : state.config.defaults.burn,
+		state,
+	)
 	const [slowBurn, setSlowBurn] = useSetting("options.slowBurn", false, state)
 	const [rereads, setRereads] = useSetting("options.rereads", 2, state)
 	const [error, setError] = useState("")
@@ -37,6 +42,11 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 
 		setMessagePreview(message)
 
+		const size = files.reduce((acc, x) => acc + x.size, 0) + message.length
+		if (size >= state.config.storage.maxSize) {
+			throw new SecretSizeLimitError(size, state.config.storage.maxSize)
+		}
+
 		// Submit the secret to the backend
 		try {
 			setLoading(true)
@@ -45,7 +55,7 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 				files,
 				password,
 				{ expires, burn, slowBurn, rereads },
-				config.policy.encryptionAlgorithm,
+				state.config.policy.encryptionAlgorithm,
 			)
 			setError("")
 			aRef.current!.href = res
@@ -63,7 +73,7 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 				<TextArea tabs lines={10} resizable placeholder="" value={message} onChange={setMessage} />
 				<Button
 					label={$("Options.GeneratePassword")}
-					icon="Key"
+					icon={KeyIcon}
 					theme="plainAlternative"
 					class="mt-2"
 					onClick={() => setShowGenerator(true)}

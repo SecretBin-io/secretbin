@@ -1,10 +1,11 @@
+import { LanguageIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline"
 import { Cookies } from "@nihility-io/cookies"
 import { Button, Dropdown, DropdownItem } from "components"
 import { useSetting } from "helpers"
 import { Language, supportedLanguages } from "lang"
 import { JSX } from "preact"
 import { useEffect } from "preact/hooks"
-import { State, Theme } from "state"
+import { State, Theme } from "../utils/state.ts"
 
 export interface NavMenuProps {
 	state: State
@@ -39,13 +40,13 @@ export function NavMenu({ state }: NavMenuProps): JSX.Element {
 			<Button
 				class="!me-0 !mb-0 justify-center !px-4 !py-2"
 				theme="clear"
-				icon={theme === Theme.Dark ? "Sun" : "Moon"}
+				icon={theme === Theme.Dark ? SunIcon : MoonIcon}
 				onClick={() => setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark)}
 			/>
 			<Dropdown
 				class="!me-0 !mb-0 justify-center !px-4 !py-2"
 				dropdownClass="right-0 w-40"
-				icon="Language"
+				icon={LanguageIcon}
 				label={supportedLanguages.find((x) => x.name === state.language)?.native}
 			>
 				{supportedLanguages.map(({ label, native, name }) => (

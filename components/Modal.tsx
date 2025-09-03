@@ -1,8 +1,9 @@
+import { XMarkIcon } from "@heroicons/react/24/outline"
+import { clsx } from "@nick/clsx"
 import { Button, ButtonProps, Show } from "components"
 import { ComponentChildren, JSX } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
 import { BaseProps } from "./base.ts"
-import { clsx } from "@nick/clsx"
 
 export interface Action extends ButtonProps {}
 
@@ -85,7 +86,7 @@ export function Modal(
 						</h3>
 						<Show if={onClose}>
 							<Button
-								icon="Close"
+								icon={XMarkIcon}
 								overrideClass
 								class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-gray-400 text-sm hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
 								onClick={onClose}

@@ -1,10 +1,9 @@
 import Record from "@nihility-io/record"
 import { Input, NumberInput, Section, Select, SelectOption, Show, Toggle } from "components"
-import { config } from "config"
 import { TranslationKey, TrimPrefix, useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
-import { State } from "state"
+import { State } from "utils/state"
 
 export interface OptionsProps {
 	state: State
@@ -41,7 +40,7 @@ export function Options({
 	const [pass1, setPass1] = useState("")
 	const [pass2, setPass2] = useState("")
 	const [passInvalid, setPassInvalid] = useState(false)
-	const [usePass, setUsePass] = useState(config.defaults.showPassword)
+	const [usePass, setUsePass] = useState(state.config.defaults.showPassword)
 
 	useEffect(() => {
 		if (!usePass) {
@@ -60,7 +59,7 @@ export function Options({
 		<>
 			<Section title={$("Expiration.Title")} description={$("Expiration.Description")}>
 				<Select value={expires} onChange={setExpires}>
-					{Record.mapToArray(config.expires, (key, value) => (
+					{Record.mapToArray(state.config.expires, (key, value) => (
 						<SelectOption
 							name={$(
 								`Expiration.Expire.${value.unit as string}.${
@@ -77,14 +76,14 @@ export function Options({
 				<Toggle
 					label={$("Options.Burn.Title")}
 					subLabel={$("Options.Burn.Description")}
-					disabled={config.policy.requireBurn}
-					tooltip={config.policy.requireBurn
-						? $("RequiredByPolicy", { name: config.branding.appName })
+					disabled={state.config.policy.requireBurn}
+					tooltip={state.config.policy.requireBurn
+						? $("RequiredByPolicy", { name: state.config.branding.appName })
 						: undefined}
-					on={config.policy.requireBurn || burn}
+					on={state.config.policy.requireBurn || burn}
 					onChange={setBurn}
 				/>
-				<Show if={!config.policy.denySlowBurn && burn}>
+				<Show if={!state.config.policy.denySlowBurn && burn}>
 					<Toggle
 						label={$("Options.SlowBurn.Title")}
 						subLabel={$("Options.SlowBurn.Description")}
@@ -116,14 +115,14 @@ export function Options({
 				<Toggle
 					label={$("Options.Password.Title")}
 					subLabel={$("Options.Password.Description")}
-					disabled={config.policy.requirePassword}
-					tooltip={config.policy.requirePassword
-						? $("RequiredByPolicy", { name: config.branding.appName })
+					disabled={state.config.policy.requirePassword}
+					tooltip={state.config.policy.requirePassword
+						? $("RequiredByPolicy", { name: state.config.branding.appName })
 						: undefined}
-					on={config.policy.requirePassword || usePass}
+					on={state.config.policy.requirePassword || usePass}
 					onChange={setUsePass}
 				/>
-				<Show if={config.policy.requirePassword || usePass}>
+				<Show if={state.config.policy.requirePassword || usePass}>
 					<div class="flex">
 						<div class="flex h-5">
 							<div class="w-11" />

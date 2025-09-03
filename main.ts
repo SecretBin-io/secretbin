@@ -2,8 +2,8 @@ import { config } from "config"
 import { App, HttpError, staticFiles } from "fresh"
 import { LocalizedError } from "lang"
 import { Secrets } from "secret/server"
-import { State } from "state"
-import { loggingMiddleware, stateMiddleware } from "utils"
+import { loggingMiddleware, stateMiddleware } from "utils/middleware"
+import { State } from "utils/state"
 
 // TODO: Remove when or if https://github.com/denoland/fresh/issues/2995 is implemented
 // This is a workaround which allows LocalizedError to be recognized as an instance of

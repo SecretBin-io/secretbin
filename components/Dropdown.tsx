@@ -1,16 +1,16 @@
-import { Button, ButtonTheme, IconName } from "components"
+import { clsx } from "@nick/clsx"
+import { Button, ButtonTheme } from "components"
 import { cloneElement, VNode } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
-import { BaseProps } from "./base.ts"
-import { clsx } from "@nick/clsx"
+import { BaseProps, SVGIcon } from "./base.ts"
 
 export interface DropdownItemProps extends BaseProps {
 	/** Text displayed on the item */
 	label: string
 
 	/** Optional item icon */
-	icon?: IconName
+	icon?: SVGIcon
 
 	/** Makes item non-clickable */
 	disabled?: boolean
@@ -55,7 +55,7 @@ export interface DropdownProps extends BaseProps {
 	theme?: ButtonTheme
 
 	/** Optional button icon */
-	icon?: IconName
+	icon?: SVGIcon
 
 	/**
 	 * Overrides button styling (cannot be used with `theme`)

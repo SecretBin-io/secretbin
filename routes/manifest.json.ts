@@ -1,6 +1,5 @@
-import { config } from "config"
 import { asset } from "fresh/runtime"
-import { Theme } from "state"
+import { Theme } from "utils/state"
 import { define } from "utils"
 
 /**
@@ -9,8 +8,8 @@ import { define } from "utils"
 export const handler = define.handlers({
 	GET({ state }): Response {
 		return new Response(JSON.stringify({
-			name: config.branding.appName,
-			short_name: config.branding.appName,
+			name: state.config.branding.appName,
+			short_name: state.config.branding.appName,
 			theme_color: state.theme === Theme.Dark ? "#121826" : "#ffffff",
 			background_color: state.theme === Theme.Dark ? "#121826" : "#ffffff",
 			display: "fullscreen",

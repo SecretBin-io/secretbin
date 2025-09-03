@@ -89,7 +89,7 @@
   {
     "registry": "jsr",
     "name": "@fresh/core",
-    "version": "2.0.0-alpha.60",
+    "version": "2.0.0-beta.3",
     "repository": "https://github.com/denoland/fresh",
     "authors": [
       "Deno"
@@ -109,9 +109,10 @@
     "licenseFile": "https://raw.githubusercontent.com/gvergnaud/ts-pattern/main/LICENSE"
   },
   {
-    "name": "heroicons",
-    "repository": "https://github.com/tailwindlabs/heroicons",
+    "registry": "npm",
+    "name": "@heroicons/react",
     "version": "2.2.0",
+    "repository": "https://github.com/tailwindlabs/heroicons",
     "authors": [
       "Tailwind Labs"
     ],
@@ -153,6 +154,17 @@
   },
   {
     "registry": "jsr",
+    "name": "@libs/qrcode",
+    "version": "3.0.0",
+    "repository": "https://github.com/lowlighter/libs",
+    "authors": [
+      "Simon Lecoq"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/lowlighter/libs/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
     "name": "@logtape/logtape",
     "version": "1.0.4",
     "repository": "https://github.com/dahlia/logtape",
@@ -165,7 +177,7 @@
   {
     "registry": "npm",
     "name": "marked",
-    "version": "16.2.0",
+    "version": "16.2.1",
     "repository": "https://github.com/markedjs/marked",
     "authors": [
       "Marked"
@@ -183,6 +195,17 @@
     ],
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/ai/nanoid/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@nick/clsx",
+    "version": "0.3.1",
+    "repository": "https://github.com/nberlette/clsx",
+    "authors": [
+      "Nick Berlette"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/nberlette/clsx/main/LICENSE"
   },
   {
     "registry": "jsr",
@@ -336,6 +359,17 @@
     ],
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/preactjs/signals/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "react",
+    "version": "19.1.1",
+    "repository": "https://github.com/facebook/react",
+    "authors": [
+      "Meta"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/facebook/react/main/LICENSE"
   },
   {
     "registry": "npm",
@@ -515,7 +549,7 @@
   {
     "registry": "jsr",
     "name": "@zod/zod",
-    "version": "4.1.4",
+    "version": "4.1.5",
     "repository": "https://github.com/colinhacks/zod",
     "authors": [
       "Colin McDonnell"

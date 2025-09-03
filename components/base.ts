@@ -1,4 +1,4 @@
-import { JSX } from "preact"
+import { AnyComponent, JSX } from "preact"
 
 export interface BaseProps {
 	/** Element ID for the root element of the component */
@@ -10,3 +10,5 @@ export interface BaseProps {
 	/** Style for the root element of the component */
 	style?: JSX.CSSProperties
 }
+
+export type SVGIcon = AnyComponent<JSX.IntrinsicElements["svg"]>

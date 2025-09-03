@@ -1,7 +1,7 @@
 import { useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
-import { State } from "state"
+import { State } from "utils/state"
 
 export interface ExpiresProps {
 	state: State

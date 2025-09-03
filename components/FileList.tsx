@@ -1,5 +1,6 @@
+import { DocumentIcon, TrashIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
-import { Button, Icon, Show } from "components"
+import { Button, Show } from "components"
 import { downloadFile, humanReadableSize } from "helpers"
 import { JSX } from "preact"
 import { BaseProps } from "./base.ts"
@@ -27,7 +28,7 @@ function FileItem({ file, downloadable, onDelete, ...props }: FileItemProps): JS
 		>
 			<div class="flex items-center space-x-4 rtl:space-x-reverse">
 				<div class="flex-shrink-0">
-					<Icon name="Document" className="h-6 w-6 text-gray-800 dark:text-white" />
+					<DocumentIcon className="h-6 w-6 text-gray-800 dark:text-white" />
 				</div>
 				<div class="min-w-0 flex-1">
 					<p class="truncate font-medium text-gray-900 text-sm dark:text-white">
@@ -39,7 +40,7 @@ function FileItem({ file, downloadable, onDelete, ...props }: FileItemProps): JS
 				</div>
 				<Show if={onDelete}>
 					<div class="inline-flex items-center font-semibold text-base text-gray-900 dark:text-white">
-						<Button theme="plainDanger" icon="Trash" onClick={onDelete} />
+						<Button theme="plainDanger" icon={TrashIcon} onClick={onDelete} />
 					</div>
 				</Show>
 			</div>

@@ -1,5 +1,8 @@
 // deno-lint-ignore-file no-console
-import z from "@zod/zod"
+import { deepMerge } from "@std/collections"
+import * as YAML from "@std/yaml"
+import { z } from "@zod/zod"
+import { IS_BROWSER } from "fresh/runtime"
 import { Config } from "./config.ts"
 export type * from "./banner.ts"
 export type * from "./branding.ts"
@@ -11,16 +14,14 @@ export type * from "./policy.ts"
 export type * from "./storage.ts"
 export type * from "./string.ts"
 
+/*
 /**
- * Load the config.yaml file server side
+ * Application configuration (config.yaml). This config is available to the server and client
  */
-const serverCfg = await (async function (): Promise<Config> {
-	if (typeof document !== "undefined") {
+export const config = await (async function (): Promise<Config> {
+	if (IS_BROWSER) {
 		return undefined!
 	}
-
-	const YAML = await import("@std/yaml")
-	const { deepMerge } = await import("@std/collections")
 
 	const configs = await Promise.all(
 		(await Array.fromAsync(Deno.readDir(".")))
@@ -53,38 +54,10 @@ const serverCfg = await (async function (): Promise<Config> {
  * Censor the config by removing data which should not be exposed to the client
  */
 export const clientCfg = (function (): Config {
-	if (typeof document !== "undefined") {
+	if (IS_BROWSER) {
 		return undefined!
 	}
-	const res = structuredClone(serverCfg)
+	const res = structuredClone(config)
 	res.storage.database = undefined as never
 	return res
-})()
-
-/**
- * Serves the client configuration via HTTP in the backend. See [/routes/api/config.ts]
- */
-export function serveClientConfig(): Response {
-	return new Response(JSON.stringify(clientCfg), {
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
-}
-
-let cachedClientConfig: Config | undefined = undefined
-
-/**
- * Application configuration (config.yaml). This config is available to the server and client
- */
-export const config = await (async function (): Promise<Config> {
-	if (typeof document === "undefined") {
-		return serverCfg
-	}
-
-	if (!cachedClientConfig) {
-		cachedClientConfig = await fetch("/api/config").then((x) => x.json())
-	}
-
-	return cachedClientConfig!
 })()

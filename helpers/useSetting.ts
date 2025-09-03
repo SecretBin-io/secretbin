@@ -1,6 +1,6 @@
 import { PrimitiveType, useCookie } from "@nihility-io/cookies"
 import { Dispatch } from "preact/hooks"
-import { State } from "state"
+import { State } from "utils/state"
 
 /**
  * Creates a preact state that stores a setting inside a cookie.

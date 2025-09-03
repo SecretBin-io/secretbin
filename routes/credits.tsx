@@ -1,5 +1,4 @@
 import { PageContent, Table } from "components"
-import { config } from "config"
 import { useTranslation } from "lang"
 import { define } from "utils"
 import credits from "../credits.json" with { type: "json" }
@@ -23,8 +22,8 @@ export default define.page(({ state }) => {
 			<p
 				// deno-lint-ignore react-no-danger
 				dangerouslySetInnerHTML={{
-					__html: (config.branding.footer !== "Nihility.io"
-						? $("Credits.BrandedNotice", { name: config.branding.appName }) + " "
+					__html: (state.config.branding.footer !== "Nihility.io"
+						? $("Credits.BrandedNotice", { name: state.config.branding.appName }) + " "
 						: "") +
 						$("Credits.SourceNotice"),
 				}}
@@ -32,7 +31,7 @@ export default define.page(({ state }) => {
 			<p
 				// deno-lint-ignore react-no-danger
 				dangerouslySetInnerHTML={{
-					__html: $("Credits.Description", { name: config.branding.appName }),
+					__html: $("Credits.Description", { name: state.config.branding.appName }),
 				}}
 			/>
 
@@ -45,7 +44,7 @@ export default define.page(({ state }) => {
 				<div
 					// deno-lint-ignore react-no-danger
 					dangerouslySetInnerHTML={{
-						__html: $("Credits.Components.Description", { name: config.branding.appName }),
+						__html: $("Credits.Components.Description", { name: state.config.branding.appName }),
 					}}
 				/>
 				<br />

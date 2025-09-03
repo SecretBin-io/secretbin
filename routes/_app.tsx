@@ -1,10 +1,9 @@
 import { clsx } from "@nick/clsx"
 import { Message, Show } from "components"
-import { config } from "config"
 import { asset, Partial } from "fresh/runtime"
 import { NavMenu, Terms } from "islands"
 import { useTranslation } from "lang"
-import { Theme } from "state"
+import { Theme } from "utils/state"
 import { define } from "utils"
 /**
  * Wrapper for all pages. Providers header info and navigation
@@ -17,7 +16,7 @@ export default define.page(({ state, Component }) => {
 			<head>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<title>{config.branding.appName}</title>
+				<title>{state.config.branding.appName}</title>
 				<link rel="stylesheet" href="../static/styles.css" />
 
 				{
@@ -46,11 +45,11 @@ export default define.page(({ state, Component }) => {
 					 */
 				}
 				<meta name="twitter:card" content="summary" />
-				<meta name="twitter:title" content={`Sends secrets using ${config.branding.appName}`} />
+				<meta name="twitter:title" content={`Sends secrets using ${state.config.branding.appName}`} />
 				<meta name="twitter:description" content="Visit this link in order to view the secret." />
 				<meta name="twitter:image" content={asset("/images/apple-touch-icon.png")} />
-				<meta property="og:title" content={config.branding.appName} />
-				<meta property="og:site_name" content={config.branding.appName} />
+				<meta property="og:title" content={state.config.branding.appName} />
+				<meta property="og:site_name" content={state.config.branding.appName} />
 				<meta property="og:description" content="Visit this link in order to view the secret." />
 				<meta property="og:image" content={asset("/images/apple-touch-icon.png")} />
 				<meta property="og:image:type" content="image/png" />
@@ -62,14 +61,14 @@ export default define.page(({ state, Component }) => {
 				<nav class="fixed start-0 top-0 z-20 w-full bg-gray-50 shadow dark:bg-gray-900">
 					<div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
 						<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-							<Show if={config.branding.showLogo}>
+							<Show if={state.config.branding.showLogo}>
 								<img
-									class={clsx("h-8", { "dark:invert": config.branding.invertLogo })}
+									class={clsx("h-8", { "dark:invert": state.config.branding.invertLogo })}
 									src={asset("/images/Icon.png")}
 								/>
 							</Show>
 							<span class="self-center whitespace-nowrap font-semibold text-2xl dark:text-white">
-								{config.branding.appName}
+								{state.config.branding.appName}
 							</span>
 						</a>
 						<div class="flex items-center space-x-1 md:order-2 md:space-x-0 rtl:space-x-reverse">
@@ -82,14 +81,15 @@ export default define.page(({ state, Component }) => {
 					<div class="content">
 						<div class="mx-auto px-4 py-8">
 							{/* Show banner e.g. for planned maintenance message if configured */}
-							<Show if={config.banner.enabled}>
+							<Show if={state.config.banner.enabled}>
 								<div class="mx-auto">
 									<div class="mx-auto flex max-w-screen-md flex-col items-center justify-center">
 										<div class="w-full p-4">
 											<Message
-												type={config.banner.type}
-												title={config.branding.appName}
-												message={config.banner.text[state.language] ?? config.banner.text.en}
+												type={state.config.banner.type}
+												title={state.config.branding.appName}
+												message={state.config.banner.text[state.language] ??
+													state.config.banner.text.en}
 											/>
 										</div>
 									</div>
@@ -106,10 +106,10 @@ export default define.page(({ state, Component }) => {
 				{/* Add footer with configured links */}
 				<footer class="fixed bottom-0 left-0 z-20 w-full border-gray-200 border-t bg-white p-4 shadow md:flex md:items-center md:justify-between md:p-6 dark:border-gray-600 dark:bg-gray-800">
 					<span class="text-gray-500 text-sm sm:text-center dark:text-gray-400">
-						{config.branding.footer}
+						{state.config.branding.footer}
 					</span>
 					<ul class="mt-3 flex flex-wrap items-center font-medium text-gray-500 text-sm sm:mt-0 dark:text-gray-400">
-						{config.branding.links.map((link) => (
+						{state.config.branding.links.map((link) => (
 							<li>
 								<a
 									class="me-4 hover:underline md:me-6"

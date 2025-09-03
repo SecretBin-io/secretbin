@@ -1,10 +1,8 @@
 import { getCookies } from "@std/http"
-import { createDefine } from "fresh"
+import { clientCfg } from "config"
 import { isLanguageSupported, Language } from "lang"
-import { logWeb } from "log"
-import { State, Theme } from "state"
-
-export const define = createDefine<State>()
+import { define } from "utils"
+import { Theme } from "utils/state"
 
 /**
  * Detect preferred locales from the headers sent by the browser
@@ -37,27 +35,16 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 
 	ctx.state.theme = ctx.state.cookies["theme"] === "light" ? Theme.Light : Theme.Dark
 
+	ctx.state.config = {
+		...clientCfg,
+		branding: {
+			...clientCfg.branding,
+			terms: undefined, // By default do not include the terms in the config sent to the client
+		},
+	}
+	if (ctx.state.cookies["showTerms"] !== "false") {
+		ctx.state.config.branding.terms = clientCfg.branding.terms
+	}
+
 	return await ctx.next()
-})
-
-/**
- * Middleware that logs requests
- */
-export const loggingMiddleware = define.middleware(async (ctx) => {
-	const res = await ctx.next()
-	const msg = `${ctx.req.method} [${res.status}] ${ctx.req.url}`
-	const args = {
-		method: ctx.req.method,
-		url: ctx.req.url,
-		status: res.status,
-	}
-
-	if (res.status >= 200 && res.status <= 299) {
-		logWeb.info(msg, args)
-	} else if (res.status >= 500 && res.status <= 599) {
-		logWeb.error(msg, args)
-	} else {
-		logWeb.warn(msg, args)
-	}
-	return res
 })

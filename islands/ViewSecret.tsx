@@ -1,12 +1,12 @@
+import { clsx } from "@nick/clsx"
 import { decodeBase64 } from "@std/encoding/base64"
 import { Button, FileList, Input, Message, Section, Show, Spinner, TextArea } from "components"
-import { clsx } from "@nick/clsx"
 import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { decryptSecret, getSecret } from "secret/client"
 import { Secret, SecretData } from "secret/models"
-import { State } from "state"
+import { State } from "utils/state"
 
 export interface ViewSecretProps {
 	state: State

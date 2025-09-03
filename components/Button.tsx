@@ -1,7 +1,7 @@
 import { clsx } from "@nick/clsx"
-import { Icon, IconName } from "components"
 import { JSX } from "preact"
-import { BaseProps } from "./base.ts"
+import { jsx } from "preact/jsx-runtime"
+import { BaseProps, SVGIcon } from "./base.ts"
 
 /**
  * Button themes
@@ -14,7 +14,7 @@ const buttonThemes = {
 		"bg-blue-700 text-white hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700 dark:focus:ring-blue-800",
 	),
 	alternative: clsx(
-		"border border-gray-200 bg-white text-gray-900 hover:bg-gray-100 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700",
+		"border border-gray-200 bg-white text-gray-900 hover:bg-gray-100 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700",
 	),
 	success: clsx(
 		"bg-green-700 text-white hover:bg-green-800 focus:ring-green-300 dark:bg-green-600 dark:text-white dark:hover:bg-green-700 dark:focus:ring-green-800",
@@ -56,7 +56,7 @@ export interface ButtonProps extends BaseProps {
 	theme?: ButtonTheme
 
 	/** Optional button icon */
-	icon?: IconName
+	icon?: SVGIcon
 
 	/**
 	 * Overrides button styling (cannot be used with `theme`)
@@ -75,6 +75,9 @@ export interface ButtonProps extends BaseProps {
 	/** Specify the button type (default: button) */
 	type?: "button" | "submit" | "reset"
 
+	/** Specify if the button is part of a group and at which position */
+	groupPosition?: "first" | "middle" | "last"
+
 	/**
 	 * Function which will be called when button is press
 	 * (Note: you can only set either `link` or `onSubmit` and not both)
@@ -86,12 +89,28 @@ export interface ButtonProps extends BaseProps {
  * Creates a clickable button
  */
 export function Button(
-	{ label, icon, theme = "default", type = "button", disabled, overrideClass, link, onClick, ...props }: ButtonProps,
+	{
+		label,
+		icon,
+		theme = "default",
+		type = "button",
+		groupPosition,
+		disabled,
+		overrideClass,
+		link,
+		onClick,
+		...props
+	}: ButtonProps,
 ): JSX.Element {
 	const classes = overrideClass ? props.class : clsx(
-		"me-2 mb-2 inline-flex items-center rounded-lg px-2.5 py-2.5 font-medium text-sm focus:outline-none focus:ring-4",
+		"inline-flex items-center font-medium text-sm focus:outline-none focus:ring-4",
 		buttonThemes[theme],
 		{
+			"me-2 mb-2 rounded-lg px-2.5 py-2.5": !groupPosition,
+			"border-e-none": groupPosition === "middle",
+			"rounded-s-lg": groupPosition === "first",
+			"rounded-e-lg": groupPosition === "last",
+			"px-4 py-2": !!groupPosition,
 			"pointer-events-none cursor-not-allowed opacity-50": disabled,
 		},
 		props.class,
@@ -99,7 +118,7 @@ export function Button(
 
 	const Label = () => (
 		<>
-			{icon ? <Icon name={icon} class={clsx("h-6 w-6", { "me-2": !!label })} /> : null}
+			{icon ? jsx(icon, { class: clsx("h-6 w-6", { "me-2": !!label }) }) : null}
 			{label}
 		</>
 	)

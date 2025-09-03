@@ -23,7 +23,7 @@
 		},
 		"deps": {
 			"description": "Updates the credits.json file",
-			"command": "deno run -A jsr:@nihility-io/deno-deps@1.2.0"
+			"command": "deno run -A jsr:@nihility-io/deno-deps@1.3.0"
 		}
 	},
 	"lock": false,
@@ -56,7 +56,8 @@
 	},
 	"exclude": ["**/_fresh/*"],
 	"imports": {
-		"@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^0.9.6",
+		"@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^0.9.10",
+		"@heroicons/react": "npm:@heroicons/react@^2.2.0",
 		"@libs/qrcode": "jsr:@libs/qrcode@^3.0.0",
 		"@logtape/logtape": "jsr:@logtape/logtape@^1.0.4",
 		"@nick/clsx": "jsr:@nick/clsx@^0.3.1",
@@ -75,7 +76,7 @@
 		"@zod/zod": "jsr:@zod/zod@^4.1.5",
 		"components": "./components/mod.ts",
 		"config": "./config/mod.ts",
-		"fresh": "jsr:@fresh/core@2.0.0-beta.1",
+		"fresh": "jsr:@fresh/core@2.0.0-beta.3",
 		"helpers": "./helpers/mod.ts",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",
@@ -88,11 +89,12 @@
 		"secret/client": "./secret/client/mod.ts",
 		"secret/models": "./secret/models/mod.ts",
 		"secret/server": "./secret/server/mod.ts",
-		"state": "./state.ts",
 		"tailwindcss": "npm:tailwindcss@^4.1.12",
 		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.8.0",
-		"utils": "./utils.ts",
-		"vite": "npm:vite@^7.1.3"
+		"utils": "./utils/mod.ts",
+		"utils/middleware": "./utils/middleware/mod.ts",
+		"utils/state": "./utils/state.ts",
+		"vite": "npm:vite@^7.1.4"
 	},
 	"compilerOptions": {
 		"lib": [
@@ -133,7 +135,7 @@
 		"include": ["./config", "./helpers", "./lang", "./log", "./secret"]
 	},
 	"denoDeps": {
-		"entrypoint": "main.ts",
+		"entrypoints": ["main.ts", "components/mod.ts", "islands/mod.ts"],
 		"output": "credits.json",
 		"jsonMode": false,
 		"dependencies": [
@@ -144,14 +146,6 @@
 				"authors": ["Tailwind Labs, Inc."],
 				"license": "MIT License",
 				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
-			},
-			{
-				"name": "heroicons",
-				"repository": "https://github.com/tailwindlabs/heroicons",
-				"version": "2.2.0",
-				"authors": ["Tailwind Labs, Inc."],
-				"license": "MIT License",
-				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
 			}
 		],
 		"excludeDependencies": [

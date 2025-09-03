@@ -1,10 +1,11 @@
+import { ArrowDownCircleIcon } from "@heroicons/react/24/outline"
 import { qrcode } from "@libs/qrcode"
+import { clsx } from "@nick/clsx"
 import { Button } from "components"
 import { downloadDataURL, imageDataURL } from "helpers"
 import { JSX } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
 import { BaseProps } from "./base.ts"
-import { clsx } from "@nick/clsx"
 
 export interface QRCodeProps extends BaseProps {
 	/** QRCode content */
@@ -45,13 +46,13 @@ export function QRCode({ content, size = 256, downloadLabel = "Download", ...pro
 			<div style={props.style} class={clsx("flex items-center justify-center", props.class)}>
 				<Button
 					theme="plainAlternative"
-					icon="Download"
+					icon={ArrowDownCircleIcon}
 					label={`${downloadLabel} (.png)`}
 					onClick={downloadPNG}
 				/>
 				<Button
 					theme="plainAlternative"
-					icon="Download"
+					icon={ArrowDownCircleIcon}
 					label={`${downloadLabel} (.svg)`}
 					onClick={downloadSVG}
 				/>
