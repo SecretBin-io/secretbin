@@ -1,8 +1,8 @@
 import { DocumentIcon, TrashIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
 import { Button, Show } from "components"
-import { downloadFile, humanReadableSize } from "helpers"
 import { JSX } from "preact"
+import { downloadFile, humanReadableSize } from "utils/helpers"
 import { BaseProps } from "./base.ts"
 
 interface FileItemProps extends BaseProps {

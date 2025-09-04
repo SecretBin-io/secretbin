@@ -1,11 +1,12 @@
 import { clsx } from "@nick/clsx"
 import { decodeBase64 } from "@std/encoding/base64"
+import { decryptSecret, getSecret } from "client"
 import { Button, FileList, Input, Message, Section, Show, Spinner, TextArea } from "components"
-import { LocalizedError, useTranslationWithPrefix } from "lang"
+import { Secret, SecretData } from "models"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
-import { decryptSecret, getSecret } from "secret/client"
-import { Secret, SecretData } from "secret/models"
+import { LocalizedError } from "utils/errors"
+import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
 
 export interface ViewSecretProps {
@@ -25,7 +26,7 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 	const [secretData, setSecretData] = useState<SecretData | undefined>(undefined)
 	const [loading, setLoading] = useState(false)
 
-	const $ = useTranslationWithPrefix(state.language, "ViewSecret")
+	const $ = useTranslation(state.language, "ViewSecret")
 
 	useEffect(() => {
 		if (requireConfirm || requirePassword) {

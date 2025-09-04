@@ -1,4 +1,4 @@
-import { logWeb } from "log"
+import { logWeb } from "server/log"
 import { define } from "utils"
 
 /**

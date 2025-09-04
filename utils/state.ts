@@ -1,5 +1,5 @@
-import { Config } from "config"
 import { Language } from "lang"
+import { Config } from "server/config"
 
 export enum Theme {
 	Light = "light",

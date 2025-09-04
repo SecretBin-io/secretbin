@@ -1,13 +1,12 @@
 import { KeyIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
+import { submitSecret } from "client"
 import { Button, Message, Spinner, TextArea } from "components"
-import { useSetting } from "helpers"
 import { PasswordGenerator } from "islands"
-import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
-import { submitSecret } from "secret/client"
-import { SecretSizeLimitError } from "secret/models"
+import { LocalizedError, SecretSizeLimitError } from "utils/errors"
+import { useSetting, useTranslation } from "utils/hooks"
 import { State } from "../utils/state.ts"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
@@ -33,7 +32,7 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 	const [showGenerator, setShowGenerator] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const aRef = useRef<HTMLAnchorElement | null>(null)
-	const $ = useTranslationWithPrefix(state.language, "NewSecret")
+	const $ = useTranslation(state.language, "NewSecret")
 
 	const submit = async () => {
 		if (password === undefined) {
@@ -42,14 +41,14 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 
 		setMessagePreview(message)
 
-		const size = files.reduce((acc, x) => acc + x.size, 0) + message.length
-		if (size >= state.config.storage.maxSize) {
-			throw new SecretSizeLimitError(size, state.config.storage.maxSize)
-		}
-
 		// Submit the secret to the backend
 		try {
 			setLoading(true)
+			const size = files.reduce((acc, x) => acc + x.size, 0) + message.length
+			if (size >= state.config.storage.maxSize) {
+				throw new SecretSizeLimitError(size, state.config.storage.maxSize)
+			}
+
 			const res = await submitSecret(
 				message,
 				files,
@@ -60,9 +59,9 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 			setError("")
 			aRef.current!.href = res
 			aRef.current!.click()
-		} catch (e) {
+		} catch (err) {
 			setLoading(false)
-			setError(LocalizedError.getMessage(state.language, e as Error))
+			setError(LocalizedError.getMessage(state.language, err as Error))
 		}
 	}
 

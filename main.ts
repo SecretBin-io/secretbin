@@ -1,22 +1,10 @@
-import { config } from "config"
-import { App, HttpError, staticFiles } from "fresh"
-import { LocalizedError } from "lang"
-import { Secrets } from "secret/server"
+import { App, staticFiles } from "fresh"
+import { Secrets } from "server"
+import { config } from "server/config"
 import { loggingMiddleware, stateMiddleware } from "utils/middleware"
 import { State } from "utils/state"
 
-// TODO: Remove when or if https://github.com/denoland/fresh/issues/2995 is implemented
-// This is a workaround which allows LocalizedError to be recognized as an instance of
-// HttpError, which is needed for Fresh to set the correct status code.
-const orig = HttpError[Symbol.hasInstance]
-Object.defineProperty(HttpError, Symbol.hasInstance, {
-	get(): (this: HttpError, obj: unknown) => boolean {
-		return function (this: HttpError, obj: unknown): boolean {
-			// instanceof returns true for HttpError and LocalizedError
-			return orig.call(this, obj) || obj instanceof LocalizedError
-		}
-	},
-})
+import "utils/errors/patch"
 
 export const app = new App<State>()
 app.use(staticFiles())

@@ -7,9 +7,9 @@ import {
 	TrashIcon,
 } from "@heroicons/react/24/outline"
 import { Button, Input, QRCode, Section, Show, TextArea } from "components"
-import { useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
+import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
 import { MessagePreview, setMessagePreview } from "./preview.ts"
 
@@ -22,7 +22,7 @@ export function ShareSecret({ id, state }: ShareSecretProps): JSX.Element {
 	const [showQrCode, setShowQrCode] = useState(false)
 	const [link, setLink] = useState("")
 	const [preview, setPreview] = useState("")
-	const $ = useTranslationWithPrefix(state.language, "ShareSecret")
+	const $ = useTranslation(state.language, "ShareSecret")
 
 	/**
 	 * Opens a new mail with the secret link in the default mail application

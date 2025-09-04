@@ -1,11 +1,11 @@
 import { LanguageIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline"
 import { Cookies } from "@nihility-io/cookies"
 import { Button, Dropdown, DropdownItem } from "components"
-import { useSetting } from "helpers"
 import { Language, supportedLanguages } from "lang"
 import { JSX } from "preact"
 import { useEffect } from "preact/hooks"
-import { State, Theme } from "../utils/state.ts"
+import { useSetting } from "utils/hooks"
+import { State, Theme } from "utils/state"
 
 export interface NavMenuProps {
 	state: State

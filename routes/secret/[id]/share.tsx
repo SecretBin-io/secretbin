@@ -1,10 +1,10 @@
 import { PageContent } from "components"
 import { PageResponse } from "fresh"
 import { Expires, ShareSecret } from "islands"
-import { useTranslationWithPrefix } from "lang"
-import { SecretMetadata } from "secret/models"
-import { Secrets } from "secret/server"
+import { SecretMetadata } from "models"
+import { Secrets } from "server"
 import { define } from "utils"
+import { useTranslation } from "utils/hooks"
 
 interface ShareSecretData {
 	id: string
@@ -22,7 +22,7 @@ export const handler = define.handlers<ShareSecretData>({
  * Renders page for sharing a secret
  */
 export default define.page<typeof handler>(({ state, data: { id, metadata } }) => {
-	const $ = useTranslationWithPrefix(state.language, "ShareSecret")
+	const $ = useTranslation(state.language, "ShareSecret")
 	return (
 		<PageContent title={$("Title")} description={$("Description")}>
 			<div class="items-left justify-left space-y-4 sm:space-x-4 sm:space-y-0 rtl:space-x-reverse">

@@ -1,6 +1,6 @@
 import { getCookies } from "@std/http"
-import { clientCfg } from "config"
 import { isLanguageSupported, Language } from "lang"
+import { config } from "server/config"
 import { define } from "utils"
 import { Theme } from "utils/state"
 
@@ -35,15 +35,10 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 
 	ctx.state.theme = ctx.state.cookies["theme"] === "light" ? Theme.Light : Theme.Dark
 
-	ctx.state.config = {
-		...clientCfg,
-		branding: {
-			...clientCfg.branding,
-			terms: undefined, // By default do not include the terms in the config sent to the client
-		},
-	}
-	if (ctx.state.cookies["showTerms"] !== "false") {
-		ctx.state.config.branding.terms = clientCfg.branding.terms
+	ctx.state.config = structuredClone(config)
+	ctx.state.config.storage.database = undefined
+	if (ctx.state.cookies["showTerms"] === "false") {
+		ctx.state.config.branding.terms = undefined
 	}
 
 	return await ctx.next()

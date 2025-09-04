@@ -1,8 +1,7 @@
 import { CheckIcon } from "@heroicons/react/24/outline"
 import { Modal } from "components"
-import { useSetting } from "helpers"
-import { useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
+import { useSetting, useTranslation } from "utils/hooks"
 import { State } from "utils/state"
 
 export interface TermsProps {
@@ -13,7 +12,7 @@ export interface TermsProps {
  * Creates a modal with the usage terms
  */
 export function Terms({ state }: TermsProps): JSX.Element | undefined {
-	const $ = useTranslationWithPrefix(state.language, "TermsOfService")
+	const $ = useTranslation(state.language, "TermsOfService")
 	const [showTerms, setShowTerms] = useSetting("showTerms", !!state.config.branding.terms, state)
 
 	if (state.config.branding.terms === undefined) {

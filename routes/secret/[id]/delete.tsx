@@ -1,8 +1,8 @@
 import { Button, PageContent } from "components"
 import { PageResponse } from "fresh"
-import { useTranslationWithPrefix } from "lang"
-import { Secrets } from "secret/server"
+import { Secrets } from "server"
 import { define } from "utils"
+import { useTranslation } from "utils/hooks"
 
 interface DeleteSecretData {
 	id: string
@@ -24,7 +24,7 @@ export const handler = define.handlers({
  * Renders page for deleting a secrets
  */
 export default define.page<typeof handler>(({ state, data: { id, done } }) => {
-	const $ = useTranslationWithPrefix(state.language, "DeleteSecret")
+	const $ = useTranslation(state.language, "DeleteSecret")
 
 	if (done) {
 		return (

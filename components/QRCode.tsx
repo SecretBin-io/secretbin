@@ -2,9 +2,9 @@ import { ArrowDownCircleIcon } from "@heroicons/react/24/outline"
 import { qrcode } from "@libs/qrcode"
 import { clsx } from "@nick/clsx"
 import { Button } from "components"
-import { downloadDataURL, imageDataURL } from "helpers"
 import { JSX } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
+import { downloadDataURL, imageDataURL } from "utils/helpers"
 import { BaseProps } from "./base.ts"
 
 export interface QRCodeProps extends BaseProps {

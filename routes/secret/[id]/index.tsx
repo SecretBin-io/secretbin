@@ -1,10 +1,10 @@
 import { PageContent } from "components"
 import { PageResponse } from "fresh"
 import { Expires, ViewSecret } from "islands"
-import { useTranslationWithPrefix } from "lang"
-import { SecretMetadata } from "secret/models"
-import { Secrets } from "secret/server"
+import { SecretMetadata } from "models"
+import { Secrets } from "server"
 import { define } from "utils"
+import { useTranslation } from "utils/hooks"
 
 interface GetSecretData {
 	id: string
@@ -22,7 +22,7 @@ export const handler = define.handlers<GetSecretData>({
  * Renders page for viewing a secret
  */
 export default define.page<typeof handler>(({ state, data: { id, metadata } }) => {
-	const $ = useTranslationWithPrefix(state.language, "ViewSecret")
+	const $ = useTranslation(state.language, "ViewSecret")
 
 	return (
 		<PageContent title={$("Title")} description={$("Description")}>

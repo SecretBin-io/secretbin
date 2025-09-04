@@ -396,7 +396,7 @@
   {
     "registry": "jsr",
     "name": "@std/cli",
-    "version": "1.0.21",
+    "version": "1.0.22",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"

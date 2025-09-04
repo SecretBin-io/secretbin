@@ -1,7 +1,7 @@
 import { FileList, Section, Upload } from "components"
-import { humanReadableSize } from "helpers"
-import { useTranslationWithPrefix } from "lang"
 import { JSX } from "preact"
+import { humanReadableSize } from "utils/helpers"
+import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
 
 export interface FileUploadProps {
@@ -11,7 +11,7 @@ export interface FileUploadProps {
 }
 
 export function FilesUpload({ state, files, setFiles }: FileUploadProps): JSX.Element {
-	const $ = useTranslationWithPrefix(state.language, "NewSecret")
+	const $ = useTranslation(state.language, "NewSecret")
 
 	return (
 		<Section

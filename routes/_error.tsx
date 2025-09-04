@@ -1,10 +1,11 @@
 import { Button, Message, PageContent } from "components"
 import { HttpError } from "fresh"
-import { LocalizedError, useTranslationWithPrefix } from "lang"
 import { define } from "utils"
+import { LocalizedError } from "utils/errors"
+import { useTranslation } from "utils/hooks"
 
 export default define.page(({ state, error }) => {
-	const $ = useTranslationWithPrefix(state.language, "ErrorPage")
+	const $ = useTranslation(state.language, "ErrorPage")
 
 	let title = "Error"
 	let message = ""
@@ -16,7 +17,7 @@ export default define.page(({ state, error }) => {
 			break
 		}
 		case error instanceof HttpError && error.status === 404: {
-			const $err = useTranslationWithPrefix(state.language, "Errors.PageNotFoundError")
+			const $err = useTranslation(state.language, "Errors.PageNotFoundError")
 			title = $err("Title")
 			message = $err("Message")
 			break

@@ -1,8 +1,10 @@
 import Record from "@nihility-io/record"
 import { Input, NumberInput, Section, Select, SelectOption, Show, Toggle } from "components"
-import { TranslationKey, TrimPrefix, useTranslationWithPrefix } from "lang"
+import { TranslationKey } from "lang"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
+import { TrimPrefix } from "utils/helpers"
+import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
 
 export interface OptionsProps {
@@ -35,7 +37,7 @@ export function Options({
 	setRereads,
 	setPassword,
 }: OptionsProps): JSX.Element {
-	const $ = useTranslationWithPrefix(state.language, "NewSecret")
+	const $ = useTranslation(state.language, "NewSecret")
 
 	const [pass1, setPass1] = useState("")
 	const [pass2, setPass2] = useState("")

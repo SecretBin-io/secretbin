@@ -2,9 +2,9 @@ import { clsx } from "@nick/clsx"
 import { Message, Show } from "components"
 import { asset, Partial } from "fresh/runtime"
 import { NavMenu, Terms } from "islands"
-import { useTranslation } from "lang"
-import { Theme } from "utils/state"
 import { define } from "utils"
+import { useTranslation } from "utils/hooks"
+import { Theme } from "utils/state"
 /**
  * Wrapper for all pages. Providers header info and navigation
  */

@@ -1,7 +1,7 @@
 import { PageContent, Table } from "components"
-import { useTranslation } from "lang"
 import { define } from "utils"
 import credits from "../credits.json" with { type: "json" }
+import { useTranslation } from "utils/hooks"
 
 /**
  * Removes a given prefix from a string if the string has it

@@ -1,19 +1,16 @@
-import { errorResponse, promiseResponse } from "helpers"
-import { SecretRequest } from "secret/models"
-import { Secrets } from "secret/server"
+import { Secrets } from "server"
 import { define } from "utils"
+import { promiseResponse } from "utils/helpers"
 
 /**
  * Secret API: /secret
  */
 export const handler = define.handlers({
-	async POST(ctx): Promise<Response> {
-		// Note: data is validated inside createSecret
-		try {
-			const m = await ctx.req.json() as SecretRequest
-			return promiseResponse(Secrets.shared.createSecret(m).then((id) => ({ id })))
-		} catch (e) {
-			return errorResponse(e as Error)
-		}
+	POST(ctx): Promise<Response> {
+		return promiseResponse(
+			ctx.req.json()
+				.then((x) => Secrets.shared.createSecret(x))
+				.then((id) => ({ id })),
+		)
 	},
 })

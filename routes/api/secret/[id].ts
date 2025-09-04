@@ -1,6 +1,6 @@
-import { promiseResponse } from "helpers"
-import { Secrets } from "secret/server"
+import { Secrets } from "server"
 import { define } from "utils"
+import { promiseResponse } from "utils/helpers"
 
 /**
  * Secret API: /secret/<some_id>
