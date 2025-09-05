@@ -120,7 +120,7 @@ export default {
 			Files: {
 				Title: "Attached Files",
 			},
-			DecryptionError: "Unable to decrypt the secret. This is likely due to a wrong password. PLease try again.",
+			DecryptionError: "Unable to decrypt the secret. This is likely due to a wrong password. Please try again.",
 			Decrypting: "Decrypting secret",
 		},
 		DeleteSecret: {

@@ -1,8 +1,8 @@
-import { STATUS_CODE } from "@std/http/status"
 import { define } from "utils"
+import { successResponse } from "utils/helpers"
 
 export const handler = define.handlers({
-	GET({ state: { config } }): Response {
-		return Response.json(config, { status: STATUS_CODE.OK })
+	GET({ req, state: { config } }): Response {
+		return successResponse(req, config)
 	},
 })

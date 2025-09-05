@@ -1,6 +1,7 @@
 import { combineBaseKeyWithPassword, decrypt, encrypt, EncryptionAlgorithm, randomBytes } from "@nihility-io/crypto"
 import { decodeBase58, encodeBase58 } from "@std/encoding/base58"
-import { encodeBase64 } from "@std/encoding/base64"
+import { decodeBase64, encodeBase64 } from "@std/encoding/base64"
+import * as MsgPack from "@std/msgpack"
 import { Secret, SecretAttachment, SecretData } from "models"
 import { createSecret } from "./api.ts"
 
@@ -9,6 +10,13 @@ export interface SecretOptions {
 	burn: boolean
 	slowBurn: boolean
 	rereads: number
+}
+
+const useMsgPack = true
+
+export interface SecretContent {
+	message: string
+	files?: File[]
 }
 
 /**
@@ -34,15 +42,19 @@ export async function submitSecret(
 		attachments: await Promise.all(files.map(async (x) => ({
 			name: x.name,
 			contentType: x.type,
-			data: await x.arrayBuffer().then((x) => new Uint8Array(x)).then(encodeBase64),
+			data: await (useMsgPack ? x.bytes() : x.bytes().then(encodeBase64)),
 		} satisfies SecretAttachment))),
 	} satisfies SecretData
 
-	const enc = await encrypt(passphrase, JSON.stringify(content), algorithm)
+	const enc =
+		await (useMsgPack
+			? encrypt(passphrase, MsgPack.encode(content), algorithm) as Promise<[string, Uint8Array]>
+			: encrypt(passphrase, JSON.stringify(content), algorithm) as Promise<string>)
 
 	try {
 		const id = await createSecret({
-			data: enc,
+			data: typeof enc !== "string" ? enc[0] : enc,
+			dataBytes: typeof enc !== "string" ? enc[1] : undefined,
 			expires: opts.expires,
 			burnAfter: !opts.burn ? -1 : opts.slowBurn ? opts.rereads : 1,
 			passwordProtected: password !== "",
@@ -59,9 +71,28 @@ export async function submitSecret(
  * @param password  Encryption password (can be empty)
  * @returns Decrypted Secret
  */
-export async function decryptSecret(secret: Secret, password: string): Promise<SecretData> {
+export async function decryptSecret(secret: Secret, password: string): Promise<SecretContent> {
 	const baseKey = decodeBase58(globalThis.location.hash.slice(1))
 	const passphrase = combineBaseKeyWithPassword(baseKey, password)
-	const msg = await decrypt(passphrase, secret.data)
-	return SecretData.parse(JSON.parse(msg)) as SecretData
+
+	let data: SecretData
+
+	if (secret.dataBytes) {
+		const msg = await decrypt(passphrase, secret.data, secret.dataBytes!)
+		data = SecretData.parse(MsgPack.decode(msg)) as SecretData
+	} else {
+		const msg = await decrypt(passphrase, secret.data)
+		data = SecretData.parse(JSON.parse(msg)) as SecretData
+	}
+
+	return {
+		message: data.message,
+		files: data.attachments?.map((x) =>
+			new File([
+				new Blob([typeof x.data !== "string" ? x.data : decodeBase64(x.data)], {
+					type: x.contentType,
+				}),
+			], x.name)
+		),
+	}
 }

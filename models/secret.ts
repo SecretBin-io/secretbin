@@ -11,13 +11,15 @@ export interface SecretRequest {
 	burnAfter: number
 	passwordProtected: boolean
 	data: string
+	dataBytes?: Uint8Array
 }
 
 export const SecretRequest: ZodType<SecretRequest> = z.strictObject({
 	expires: z.string().check(z.regex(/^(\d+)(min|hr|d|w|m)$/)),
 	burnAfter: z.number().default(-1),
 	passwordProtected: z.boolean().default(false),
-	data: EncryptionString,
+	data: z.string(),
+	dataBytes: z.instanceof(Uint8Array).optional(),
 })
 
 export interface SecretMutableMetadata {
@@ -45,22 +47,24 @@ export const SecretMetadata: ZodType<SecretMetadata> = (SecretMutableMetadata as
 
 export interface Secret extends SecretMetadata {
 	data: string
+	dataBytes?: Uint8Array
 }
 
 export const Secret: ZodType<Secret> = (SecretMetadata as unknown as ZodObject).extend({
-	data: EncryptionString,
+	data: z.string(),
+	dataBytes: z.instanceof(Uint8Array).optional(),
 }) as unknown as ZodType<Secret>
 
 export interface SecretAttachment {
 	name: string
 	contentType: string
-	data: string
+	data: string | Uint8Array
 }
 
 export const SecretAttachment: ZodType<SecretAttachment> = z.strictObject({
 	name: z.string(),
 	contentType: z.string(),
-	data: z.string(),
+	data: z.union([z.string(), z.instanceof(Uint8Array)]),
 })
 
 export interface SecretData {

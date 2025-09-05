@@ -40,11 +40,10 @@ policy:
   denySlowBurn: false # Blocks users from enabling slow burn for new secrets
   encryptionAlgorithm: AES256-GCM # Algorithm used for encrypting new secrets (AES256-GCM, XChaCha20-Poly1305)
 storage:
-  maxSize: 100M # Max size a new secret is allowed to have
+  maxSize: 10000M # Max size a new secret is allowed to have
   garbageCollection: # Config the garbage collector which deletes expired secrets
     cron: "* * * * *" # Configure when the garbage collector should run
   database: # Configure PostgreSQL
-    type: postgres
     host: 127.0.0.1
     port: 5432
     database: secretbin

@@ -1,4 +1,6 @@
 import { EncryptionString, parseModel, Secret, SecretMetadata, SecretMutableMetadata } from "models"
+// deno-lint-ignore no-external-import
+import { Buffer } from "node:buffer"
 import postgres from "postgres"
 import { DatabaseConfig } from "server/config"
 import { logDB } from "server/log"
@@ -23,6 +25,8 @@ interface SecretRow {
 	// deno-lint-ignore camelcase
 	password_protected: boolean
 	data: string
+	// deno-lint-ignore camelcase
+	data_bytes: Buffer | null
 }
 
 /**
@@ -62,6 +66,10 @@ export class Database {
 				data	            text        not null
 			)
 		`
+
+		await this.#sql /*sql*/`
+			alter table secrets add column if not exists data_bytes bytea;
+		`
 	}
 
 	/**
@@ -87,7 +95,11 @@ export class Database {
 		try {
 			const metadata = await this.#metadataFromRow(r)
 			const data = await parseModel(EncryptionString, r.data)
-			return { ...metadata, data: data } satisfies Secret
+			return {
+				...metadata,
+				data: data,
+				dataBytes: r.data_bytes ? new Uint8Array(r.data_bytes) : undefined,
+			} satisfies Secret
 		} catch (err) {
 			throw err
 		}
@@ -179,13 +191,15 @@ export class Database {
                 expires,
                 remaining_reads,
                 password_protected,
-                data
+                data,
+                data_bytes
             ) values (
                 ${secret.id},
                 ${secret.expires},
                 ${secret.remainingReads},
                 ${secret.passwordProtected},
-                ${secret.data}
+                ${secret.data},
+                ${secret.dataBytes ? secret.dataBytes : null}
             )`
 		} catch (err) {
 			logDB.error(`Failed to insert secrets.`, { error: err })

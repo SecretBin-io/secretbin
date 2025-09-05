@@ -1,6 +1,8 @@
+import * as MsgPack from "@std/msgpack"
 import z, { ZodType } from "@zod/zod"
 import { parseModel, Secret, SecretMetadata, SecretRequest } from "models"
-import { decodeError } from "utils/errors"
+import { decodeError, ErrorObject } from "utils/errors"
+import { decodeBody } from "utils/helpers"
 
 interface APICallOptions {
 	/**
@@ -13,6 +15,12 @@ interface APICallOptions {
 	 * Body to send with the API call
 	 */
 	body?: unknown
+
+	/**
+	 * Whether to use MessagePack for the request body
+	 * @default false
+	 */
+	useMsgPack?: boolean
 }
 
 /**
@@ -25,15 +33,19 @@ interface APICallOptions {
 async function apiCall<T>(path: string, model: ZodType<T>, options: APICallOptions = {}): Promise<T> {
 	const res = await fetch(path, {
 		method: options.method || "GET",
-		headers: options.body ? { "Content-Type": "application/json" } : {},
-		body: options.body ? JSON.stringify(options.body) : undefined,
+		headers: options.body
+			? { "Content-Type": options.useMsgPack ? "application/vnd.msgpack" : "application/json" }
+			: undefined,
+		body: options.body
+			? (options.useMsgPack ? MsgPack.encode(options.body as MsgPack.ValueType) : JSON.stringify(options.body))
+			: undefined,
 	})
 
 	if (res.status === 200) {
-		return res.json().then((x) => parseModel(model, x))
+		return decodeBody<T>(res).then((x) => parseModel(model, x))
 	}
 
-	return res.json().then((x) => Promise.reject(decodeError(x)))
+	return decodeBody<ErrorObject>(res).then((x) => Promise.reject(decodeError(x)))
 }
 
 /**
@@ -45,6 +57,7 @@ export function createSecret(secret: SecretRequest): Promise<string> {
 	return apiCall("/api/secret", z.object({ id: z.string() }), {
 		method: "POST",
 		body: secret,
+		useMsgPack: !!secret.dataBytes,
 	}).then((x) => x.id)
 }
 

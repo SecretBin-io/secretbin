@@ -1,8 +1,7 @@
 import { clsx } from "@nick/clsx"
-import { decodeBase64 } from "@std/encoding/base64"
-import { decryptSecret, getSecret } from "client"
+import { decryptSecret, getSecret, SecretContent } from "client"
 import { Button, FileList, Input, Message, Section, Show, Spinner, TextArea } from "components"
-import { Secret, SecretData } from "models"
+import { Secret } from "models"
 import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { LocalizedError } from "utils/errors"
@@ -23,7 +22,7 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 	const [passwordInvalid, setPasswordInvalid] = useState(false)
 	const [error, setError] = useState("")
 	const [secret, setSecret] = useState<Secret | undefined>(undefined)
-	const [secretData, setSecretData] = useState<SecretData | undefined>(undefined)
+	const [secretContent, setSecretContent] = useState<SecretContent | undefined>(undefined)
 	const [loading, setLoading] = useState(false)
 
 	const $ = useTranslation(state.language, "ViewSecret")
@@ -32,7 +31,6 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 		if (requireConfirm || requirePassword) {
 			return
 		}
-
 		read()
 	}, [requireConfirm, requirePassword])
 
@@ -65,7 +63,7 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 			setLoading(true)
 			const data = await decryptSecret(sec, password)
 			setLoading(false)
-			setSecretData(data)
+			setSecretContent(data)
 			return
 		} catch (err) {
 			// If decrypting using the password failed,
@@ -107,16 +105,12 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 					</Section>
 				</Show>
 				<Message type="error" title="Error" message={error} />
-				<Show if={!!secretData}>
-					<TextArea class="resize-none" lines={15} readOnly value={secretData?.message} />
-					<Show if={(secretData?.attachments ?? []).length !== 0}>
+				<Show if={!!secretContent}>
+					<TextArea class="resize-none" lines={15} readOnly value={secretContent?.message} />
+					<Show if={(secretContent?.files ?? []).length !== 0}>
 						<Section title={$("Files.Title")}>
 							<FileList
-								files={secretData?.attachments.map((att) =>
-									new File([
-										new Blob([decodeBase64(att.data).buffer], { type: att.contentType }),
-									], att.name)
-								) ?? []}
+								files={secretContent?.files ?? []}
 								downloadable
 							/>
 						</Section>

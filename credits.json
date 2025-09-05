@@ -221,7 +221,7 @@
   {
     "registry": "jsr",
     "name": "@nihility-io/crypto",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "repository": "https://github.com/Nihility-io/Crypto",
     "authors": [
       "Nihility.io"
@@ -395,6 +395,17 @@
   },
   {
     "registry": "jsr",
+    "name": "@std/bytes",
+    "version": "1.0.6",
+    "repository": "https://github.com/denoland/std",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
     "name": "@std/cli",
     "version": "1.0.22",
     "repository": "https://github.com/denoland/std",
@@ -485,6 +496,17 @@
     "registry": "jsr",
     "name": "@std/media-types",
     "version": "1.1.0",
+    "repository": "https://github.com/denoland/std",
+    "authors": [
+      "Deno"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
+  },
+  {
+    "registry": "jsr",
+    "name": "@std/msgpack",
+    "version": "1.0.3",
     "repository": "https://github.com/denoland/std",
     "authors": [
       "Deno"
