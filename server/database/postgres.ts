@@ -1,6 +1,5 @@
+import { decodeHex, encodeHex } from "@std/encoding/hex"
 import { EncryptionString, parseModel, Secret, SecretMetadata, SecretMutableMetadata } from "models"
-// deno-lint-ignore no-external-import
-import { Buffer } from "node:buffer"
 import postgres from "postgres"
 import { DatabaseConfig } from "server/config"
 import { logDB } from "server/log"
@@ -26,7 +25,7 @@ interface SecretRow {
 	password_protected: boolean
 	data: string
 	// deno-lint-ignore camelcase
-	data_bytes: Buffer | null
+	data_bytes: Uint8Array | null
 }
 
 /**
@@ -49,6 +48,14 @@ export class Database {
 			max: 5,
 			idle_timeout: 30000,
 			ssl: cfg.tls === "off" ? undefined : cfg.tls,
+			types: {
+				bytea: {
+					to: 17,
+					from: [17],
+					serialize: (x: Uint8Array) => "\\x" + encodeHex(x),
+					parse: (x: string) => decodeHex(x.slice(2)),
+				},
+			},
 		})
 	}
 
@@ -98,7 +105,7 @@ export class Database {
 			return {
 				...metadata,
 				data: data,
-				dataBytes: r.data_bytes ? new Uint8Array(r.data_bytes) : undefined,
+				dataBytes: r.data_bytes ? r.data_bytes : undefined,
 			} satisfies Secret
 		} catch (err) {
 			throw err
