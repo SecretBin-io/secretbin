@@ -112,9 +112,6 @@ export interface Logging {
  * Set enforced usage policy for new secrets
  */
 export interface Policy {
-	/** Pre-selects the link in the share view */
-	sharePreselect: boolean
-
 	/** Forces users to enable the burn option for new secrets */
 	requireBurn: boolean
 

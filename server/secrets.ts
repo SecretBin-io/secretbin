@@ -1,4 +1,4 @@
-import { parseModel, Secret, SecretMetadata, SecretMutableMetadata, SecretRequest } from "models"
+import { parseModel, Secret, SecretMetadata, SecretMutableMetadata, SecretSubmission } from "models"
 import { config } from "server/config"
 import { Database } from "server/database"
 import { logCG, logDB, logSecrets } from "server/log"
@@ -40,10 +40,6 @@ export class Secrets {
 	 * Get the singleton instance of the secret manager
 	 */
 	static get shared(): Secrets {
-		if (typeof document !== "undefined") {
-			throw new Error("[BUG]: The secrets class is not meant to be called by the browser.")
-		}
-
 		if (!Secrets.#instance) {
 			Secrets.#instance = new Secrets()
 		}
@@ -98,9 +94,9 @@ export class Secrets {
 	 * @param secret Secret
 	 * @returns ID of the created secret
 	 */
-	async createSecret(secret: SecretRequest): Promise<string> {
+	async createSecret(secret: SecretSubmission): Promise<string> {
 		// Validate the secret again the Zod model
-		const m = await parseModel(SecretRequest, secret)
+		const m = await parseModel<SecretSubmission>(SecretSubmission, secret)
 
 		const data = m.dataBytes ? m.dataBytes : m.data
 		if (data.length > config.storage.maxSize) {

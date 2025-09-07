@@ -1,8 +1,12 @@
+import { clsx } from "@nick/clsx"
+import { Signal } from "@preact/signals"
 import { JSX } from "preact"
 import { BaseProps } from "./base.ts"
-import { clsx } from "@nick/clsx"
 
 export interface TextAreaProps extends BaseProps {
+	/** Signal that stores the state. Can be used instead of value and onChange */
+	signal?: Signal<string>
+
 	/** Enable the use of tabs inside the text area */
 	tabs?: boolean
 
@@ -59,8 +63,17 @@ function enableTabs(onChange?: (value: string) => void): (e: JSX.TargetedKeyboar
  * Creates a text field
  */
 export function TextArea(
-	{ value, tabs, lines, placeholder, resizable, readOnly, onChange, ...props }: TextAreaProps,
+	{ signal, value, tabs, lines, placeholder, resizable, readOnly, onChange, ...props }: TextAreaProps,
 ): JSX.Element {
+	const val = signal !== undefined ? signal.value : value
+	const setVal = (v: string) => {
+		if (signal !== undefined) {
+			signal.value = v
+		} else {
+			onChange?.(v)
+		}
+	}
+
 	return (
 		<textarea
 			style={props.style}
@@ -71,12 +84,12 @@ export function TextArea(
 				},
 				props.class,
 			)}
-			value={value}
+			value={val}
 			placeholder={placeholder}
 			rows={lines}
 			readOnly={readOnly}
-			onInput={(e) => onChange?.(e.currentTarget.value)}
-			onKeyDown={tabs ? enableTabs(onChange) : undefined}
+			onInput={(e) => setVal(e.currentTarget.value)}
+			onKeyDown={tabs ? enableTabs(setVal) : undefined}
 		/>
 	)
 }

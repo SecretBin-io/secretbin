@@ -123,25 +123,23 @@ export function Button(
 		</>
 	)
 
+	if (link) {
+		return (
+			<a {...props} class={classes} href={link}>
+				<Label />
+			</a>
+		)
+	}
+
 	return (
-		<>
-			{link
-				? (
-					<a {...props} class={classes} href={link}>
-						<Label />
-					</a>
-				)
-				: (
-					<button
-						type={type}
-						style={props.style}
-						disabled={disabled}
-						class={classes}
-						onClick={(e) => onClick?.(e)}
-					>
-						<Label />
-					</button>
-				)}
-		</>
+		<button
+			type={type}
+			style={props.style}
+			disabled={disabled}
+			class={classes}
+			onClick={(e) => onClick?.(e)}
+		>
+			<Label />
+		</button>
 	)
 }

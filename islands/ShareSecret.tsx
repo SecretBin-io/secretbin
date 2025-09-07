@@ -42,7 +42,7 @@ export function ShareSecret({ id, state }: ShareSecretProps): JSX.Element {
 
 	return (
 		<>
-			<Input readOnly autoPreselect={state.config.policy.sharePreselect} value={link} />
+			<Input readOnly autoPreselect value={link} />
 			<div role="group" class="inline-flex rounded-md py-3">
 				<Button
 					label={$("Actions.New")}

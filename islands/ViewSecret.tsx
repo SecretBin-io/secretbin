@@ -1,5 +1,5 @@
 import { clsx } from "@nick/clsx"
-import { decryptSecret, getSecret, SecretContent } from "client"
+import { decryptSecret, getSecret } from "client"
 import { Button, FileList, Input, Message, Section, Show, Spinner, TextArea } from "components"
 import { Secret } from "models"
 import { JSX } from "preact"
@@ -10,8 +10,21 @@ import { State } from "utils/state"
 
 export interface ViewSecretProps {
 	state: State
+
+	/**
+	 * UUID identifying the secret.
+	 */
 	id: string
+
+	/**
+	 * Number of remain reads after which the secret is deleted.
+	 */
 	remainingReads: number
+
+	/**
+	 * Specifies if the data payload is additionally protected by a password.
+	 * This is used to determine if the password prompt should be shown.
+	 */
 	passwordProtected: boolean
 }
 
@@ -22,7 +35,7 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 	const [passwordInvalid, setPasswordInvalid] = useState(false)
 	const [error, setError] = useState("")
 	const [secret, setSecret] = useState<Secret | undefined>(undefined)
-	const [secretContent, setSecretContent] = useState<SecretContent | undefined>(undefined)
+	const [secretContent, setSecretContent] = useState<[string, File[]] | undefined>(undefined)
 	const [loading, setLoading] = useState(false)
 
 	const $ = useTranslation(state.language, "ViewSecret")
@@ -106,11 +119,11 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 				</Show>
 				<Message type="error" title="Error" message={error} />
 				<Show if={!!secretContent}>
-					<TextArea class="resize-none" lines={15} readOnly value={secretContent?.message} />
-					<Show if={(secretContent?.files ?? []).length !== 0}>
+					<TextArea class="resize-none" lines={15} readOnly value={secretContent?.[0]} />
+					<Show if={(secretContent?.[0] ?? []).length !== 0}>
 						<Section title={$("Files.Title")}>
 							<FileList
-								files={secretContent?.files ?? []}
+								files={secretContent?.[1] ?? []}
 								downloadable
 							/>
 						</Section>

@@ -1,6 +1,6 @@
-import * as MsgPack from "@std/msgpack"
 import z, { ZodType } from "@zod/zod"
-import { parseModel, Secret, SecretMetadata, SecretRequest } from "models"
+import * as CBOR from "cbor2"
+import { parseModel, Secret, SecretMetadata, SecretSubmission } from "models"
 import { decodeError, ErrorObject } from "utils/errors"
 import { decodeBody } from "utils/helpers"
 
@@ -17,10 +17,10 @@ interface APICallOptions {
 	body?: unknown
 
 	/**
-	 * Whether to use MessagePack for the request body
+	 * Whether to use CBOR for the request body
 	 * @default false
 	 */
-	useMsgPack?: boolean
+	useCBOR?: boolean
 }
 
 /**
@@ -34,11 +34,9 @@ async function apiCall<T>(path: string, model: ZodType<T>, options: APICallOptio
 	const res = await fetch(path, {
 		method: options.method || "GET",
 		headers: options.body
-			? { "Content-Type": options.useMsgPack ? "application/vnd.msgpack" : "application/json" }
+			? { "Content-Type": options.useCBOR ? "application/cbor" : "application/json" }
 			: undefined,
-		body: options.body
-			? (options.useMsgPack ? MsgPack.encode(options.body as MsgPack.ValueType) : JSON.stringify(options.body))
-			: undefined,
+		body: options.body ? (options.useCBOR ? CBOR.encode(options.body) : JSON.stringify(options.body)) : undefined,
 	})
 
 	if (res.status === 200) {
@@ -53,11 +51,11 @@ async function apiCall<T>(path: string, model: ZodType<T>, options: APICallOptio
  * @param secret Secret
  * @returns ID of the newly created secret
  */
-export function createSecret(secret: SecretRequest): Promise<string> {
+export function createSecret(secret: SecretSubmission): Promise<string> {
 	return apiCall("/api/secret", z.object({ id: z.string() }), {
 		method: "POST",
 		body: secret,
-		useMsgPack: !!secret.dataBytes,
+		useCBOR: !!secret.dataBytes,
 	}).then((x) => x.id)
 }
 

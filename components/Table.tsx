@@ -1,7 +1,7 @@
+import { clsx } from "@nick/clsx"
 import Record from "@nihility-io/record"
 import { ComponentChild, JSX } from "preact"
 import { BaseProps } from "./base.ts"
-import { clsx } from "@nick/clsx"
 
 interface TableCellProps {
 	/** Cell index in the row  */
@@ -57,10 +57,7 @@ export function Table<T extends string>({ headers, rows, ...props }: TableProps<
 			<tbody>
 				{rows.map((row) => (
 					<tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-						{Record.mapToArray(
-							headers,
-							(key, _value, i) => <TableCell index={i}>{row[key]}</TableCell>,
-						)}
+						{Record.mapToArray(headers, (key, _value, i) => <TableCell index={i}>{row[key]}</TableCell>)}
 					</tr>
 				))}
 			</tbody>

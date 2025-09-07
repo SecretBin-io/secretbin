@@ -1,5 +1,6 @@
 import { decodeHex, encodeHex } from "@std/encoding/hex"
-import { EncryptionString, parseModel, Secret, SecretMetadata, SecretMutableMetadata } from "models"
+import z from "@zod/zod"
+import { parseModel, Secret, SecretMetadata, SecretMutableMetadata } from "models"
 import postgres from "postgres"
 import { DatabaseConfig } from "server/config"
 import { logDB } from "server/log"
@@ -101,7 +102,7 @@ export class Database {
 	static async #secretFromRow(r: SecretRow): Promise<Secret> {
 		try {
 			const metadata = await this.#metadataFromRow(r)
-			const data = await parseModel(EncryptionString, r.data)
+			const data = await parseModel(z.string().startsWith("crypto://"), r.data)
 			return {
 				...metadata,
 				data: data,

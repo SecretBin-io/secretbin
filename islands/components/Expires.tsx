@@ -5,9 +5,16 @@ import { State } from "utils/state"
 
 export interface ExpiresProps {
 	state: State
+
+	/**
+	 * Expiration data
+	 */
 	date: Date
 }
 
+/**
+ * Renders the expiration using the user's preferred date format
+ */
 export function Expires({ state, date }: ExpiresProps): JSX.Element {
 	const [dateString, setDateString] = useState(date.toLocaleString(state.locale))
 	const $ = useTranslation(state.language, "Common")

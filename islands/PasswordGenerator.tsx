@@ -2,7 +2,7 @@ import { generatePassword } from "@nihility-io/crypto"
 import { Button, Input, Modal, NumberInput, Section, Toggle } from "components"
 import { JSX } from "preact"
 import { useState } from "preact/hooks"
-import { useSetting, useTranslation } from "utils/hooks"
+import { useSettingSignal, useTranslation } from "utils/hooks"
 import { State } from "utils/state"
 
 export interface PasswordGeneratorProps {
@@ -21,14 +21,22 @@ export interface PasswordGeneratorProps {
 export function PasswordGenerator({ show, onDismiss, onPassword, state }: PasswordGeneratorProps): JSX.Element {
 	const $ = useTranslation(state.language, "PasswordGenerator")
 	const [password, setPassword] = useState("")
-	const [useUppercase, setUseUppercase] = useSetting("passwords.useUppercase", true, state)
-	const [useLowercase, setUseLowercase] = useSetting("passwords.useLowercase", true, state)
-	const [useDigits, setUseDigits] = useSetting("passwords.useDigits", true, state)
-	const [useSymbols, setUseSymbols] = useSetting("passwords.useSymbols", true, state)
-	const [passwordLength, setPasswordLength] = useSetting("passwords.length", 12, state)
+	const useUppercase = useSettingSignal("passwords.useUppercase", true, state)
+	const useLowercase = useSettingSignal("passwords.useLowercase", true, state)
+	const useDigits = useSettingSignal("passwords.useDigits", true, state)
+	const useSymbols = useSettingSignal("passwords.useSymbols", true, state)
+	const passwordLength = useSettingSignal("passwords.length", 12, state)
 
 	const onGenerate = () => {
-		setPassword(generatePassword({ useUppercase, useLowercase, useDigits, useSymbols, length: passwordLength }))
+		setPassword(
+			generatePassword({
+				useUppercase: useUppercase.value,
+				useLowercase: useLowercase.value,
+				useDigits: useDigits.value,
+				useSymbols: useSymbols.value,
+				length: passwordLength.value,
+			}),
+		)
 	}
 
 	const onInsert = () => {
@@ -51,32 +59,28 @@ export function PasswordGenerator({ show, onDismiss, onPassword, state }: Passwo
 				<Button class="!mb-0 ml-2" label={$("Generate")} onClick={onGenerate} />
 			</div>
 			<Section title={$("Length")}>
-				<NumberInput min={6} max={64} value={passwordLength} onChange={setPasswordLength} />
+				<NumberInput min={6} max={64} signal={passwordLength} />
 			</Section>
 			<Section title={$("Characters.Title")} description={$("Characters.Description")}>
 				<Toggle
 					label={$("Characters.Uppercase.Title")}
 					subLabel={$("Characters.Uppercase.Description")}
-					on={useUppercase}
-					onChange={setUseUppercase}
+					signal={useUppercase}
 				/>
 				<Toggle
 					label={$("Characters.Lowercase.Title")}
 					subLabel={$("Characters.Lowercase.Description")}
-					on={useLowercase}
-					onChange={setUseLowercase}
+					signal={useLowercase}
 				/>
 				<Toggle
 					label={$("Characters.Digits.Title")}
 					subLabel={$("Characters.Digits.Description")}
-					on={useDigits}
-					onChange={setUseDigits}
+					signal={useDigits}
 				/>
 				<Toggle
 					label={$("Characters.Symbols.Title")}
 					subLabel={$("Characters.Symbols.Description")}
-					on={useSymbols}
-					onChange={setUseSymbols}
+					signal={useSymbols}
 				/>
 			</Section>
 		</Modal>

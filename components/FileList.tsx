@@ -12,7 +12,10 @@ interface FileItemProps extends BaseProps {
 	/** Makes the file downloadable by clicking on it  */
 	downloadable?: boolean
 
-	/** Enable the delete icon next to the file if this function is set. Clicking on the icon calls this function  */
+	/**
+	 * Enable the delete icon next to the file if this
+	 * function is set. Clicking on the icon calls this function
+	 */
 	onDelete?: () => void
 }
 
@@ -49,11 +52,27 @@ function FileItem({ file, downloadable, onDelete, ...props }: FileItemProps): JS
 }
 
 export interface FileListProps extends BaseProps {
+	/**
+	 * List of files to show in the list view
+	 */
 	files: File[]
+
+	/**
+	 * Makes each file in the list clickable.
+	 * Clicking on a file initiates a download
+	 */
 	downloadable?: boolean
+
+	/**
+	 * Enable the delete icon next to the file if this
+	 * function is set. Clicking on the icon calls this function
+	 */
 	onDelete?: (f: File) => void
 }
 
+/**
+ * List of files
+ */
 export function FileList({ files, downloadable, onDelete, ...props }: FileListProps): JSX.Element | undefined {
 	if (files.length === 0) {
 		return undefined

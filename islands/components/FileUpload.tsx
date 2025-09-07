@@ -6,7 +6,12 @@ import { State } from "utils/state"
 
 export interface FileUploadProps {
 	state: State
+	/** List of files the user wants the upload */
 	files: File[]
+
+	/**
+	 * Function called when the user adds a file
+	 */
 	setFiles: (files: File[]) => void
 }
 

@@ -63,7 +63,6 @@ export const ConfigModel: ZodType<Config> = z.strictObject({
 		logAccess: z.boolean().default(false),
 	}).prefault({}),
 	policy: z.strictObject({
-		sharePreselect: z.boolean().default(false),
 		requireBurn: z.boolean().default(false),
 		requirePassword: z.boolean().default(false),
 		denySlowBurn: z.boolean().default(false),

@@ -1,4 +1,5 @@
 import Record from "@nihility-io/record"
+import { Signal } from "@preact/signals"
 import { Input, NumberInput, Section, Select, SelectOption, Show, Toggle } from "components"
 import { TranslationKey } from "lang"
 import { JSX } from "preact"
@@ -10,17 +11,25 @@ import { State } from "utils/state"
 export interface OptionsProps {
 	state: State
 
-	expires: string
-	setExpires: (value: string) => void
+	/**
+	 * Specify how long a secret should be valid
+	 */
+	expires: Signal<string>
 
-	burn: boolean
-	setBurn: (value: boolean) => void
+	/**
+	 * Enables burn for secret (delete secret after reading)
+	 */
+	burn: Signal<boolean>
 
-	slowBurn: boolean
-	setSlowBurn: (value: boolean) => void
+	/**
+	 * Enable slow burn for secrets (burns after multiple reads)
+	 */
+	slowBurn: Signal<boolean>
 
-	rereads: number
-	setRereads: (value: number) => void
+	/**
+	 * Number of time a secret that burns can be read
+	 */
+	rereads: Signal<number>
 
 	setPassword: (value: string | undefined) => void
 }
@@ -28,13 +37,9 @@ export interface OptionsProps {
 export function Options({
 	state,
 	expires,
-	setExpires,
 	burn,
-	setBurn,
 	slowBurn,
-	setSlowBurn,
 	rereads,
-	setRereads,
 	setPassword,
 }: OptionsProps): JSX.Element {
 	const $ = useTranslation(state.language, "NewSecret")
@@ -60,7 +65,7 @@ export function Options({
 	return (
 		<>
 			<Section title={$("Expiration.Title")} description={$("Expiration.Description")}>
-				<Select value={expires} onChange={setExpires}>
+				<Select signal={expires}>
 					{Record.mapToArray(state.config.expires, (key, value) => (
 						<SelectOption
 							name={$(
@@ -82,29 +87,22 @@ export function Options({
 					tooltip={state.config.policy.requireBurn
 						? $("RequiredByPolicy", { name: state.config.branding.appName })
 						: undefined}
-					on={state.config.policy.requireBurn || burn}
-					onChange={setBurn}
+					signal={burn}
 				/>
 				<Show if={!state.config.policy.denySlowBurn && burn}>
 					<Toggle
 						label={$("Options.SlowBurn.Title")}
 						subLabel={$("Options.SlowBurn.Description")}
-						on={slowBurn}
-						onChange={setSlowBurn}
+						signal={slowBurn}
 					/>
 
-					<Show if={slowBurn}>
+					<Show if={slowBurn.value}>
 						<div class="mb-3 flex">
 							<div class="flex">
 								<div class="w-11" />
 							</div>
 							<div class="ms-2 text-sm">
-								<NumberInput
-									min={2}
-									max={10}
-									value={rereads}
-									onChange={setRereads}
-								/>
+								<NumberInput min={2} max={10} signal={rereads} />
 							</div>
 							<div class="ms-2 text-sm">
 								<p class="text-gray-500 text-sm dark:text-gray-400">

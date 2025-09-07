@@ -1,4 +1,5 @@
 import { clsx } from "@nick/clsx"
+import { Signal } from "@preact/signals"
 import { JSX } from "preact"
 import { useEffect, useRef } from "preact/hooks"
 import { BaseProps } from "./base.ts"
@@ -25,6 +26,9 @@ export interface InputProps extends BaseProps {
 	/** Focus and select text of this field upon loading */
 	autoPreselect?: boolean
 
+	/** Signal that stores the state. Can be used instead of value and onChange */
+	signal?: Signal<string>
+
 	/** Current text value */
 	value?: string
 
@@ -42,6 +46,7 @@ export function Input(
 	{
 		password,
 		readOnly,
+		signal,
 		value,
 		disabled,
 		invalid,
@@ -54,6 +59,15 @@ export function Input(
 	}: InputProps,
 ): JSX.Element {
 	const ref = useRef<HTMLInputElement | null>(null)
+
+	const val = signal !== undefined ? signal.value : value
+	const setVal = (v: string) => {
+		if (signal !== undefined) {
+			signal.value = v
+		} else {
+			onChange?.(v)
+		}
+	}
 
 	useEffect(() => {
 		if (autoPreselect) {
@@ -70,6 +84,7 @@ export function Input(
 			}, 0)
 		}
 	}, [])
+
 	return (
 		<input
 			ref={ref}
@@ -84,10 +99,10 @@ export function Input(
 			)}
 			type={password ? "password" : "text"}
 			readOnly={readOnly}
-			value={value}
+			value={val}
 			placeholder={placeholder}
 			disabled={disabled}
-			onInput={(e) => onChange?.(e.currentTarget.value)}
+			onInput={(e) => setVal(e.currentTarget.value)}
 			onKeyDown={(e) => e.key === "Enter" && onSubmit?.(e.currentTarget.value)}
 		/>
 	)

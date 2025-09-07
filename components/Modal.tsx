@@ -36,9 +36,7 @@ export function Modal(
 	const [hidden, setHidden] = useState(true)
 	const backdropRef = useRef<HTMLDivElement | null>(null)
 
-	/**
-	 * Dismiss the modal when the user clicks on the backdrop and the `onDismiss` prop is set
-	 */
+	// Dismiss the modal when the user clicks on the backdrop and the `onDismiss` prop is set
 	const onBackdropClicked = !onClose ? undefined : (e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
 		if (e.target === backdropRef.current) {
 			onClose()

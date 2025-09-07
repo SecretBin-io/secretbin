@@ -9,15 +9,15 @@ export const handler = define.handlers({
 	GET({ req, params }): Promise<Response> {
 		return promiseResponse(
 			req,
-			Secrets.shared.getSecretMetadata(params.id).then(expiresToString),
+			Secrets.shared.getSecretMetadata(params.id),
 		)
 	},
 	async POST({ req, params }): Promise<Response> {
 		try {
-			const res = await Secrets.shared.getSecret(params.id).then(expiresToString)
-			// If secret contains raw bytes, force using MsgPack
+			const res = await Secrets.shared.getSecret(params.id)
+			// If secret contains raw bytes, force using CBOR
 			if (res.dataBytes !== undefined) {
-				req.headers.set("Accept", "application/vnd.msgpack")
+				req.headers.set("Accept", "application/cbor")
 			}
 			return successResponse(req, res)
 		} catch (err) {
@@ -28,12 +28,3 @@ export const handler = define.handlers({
 		return promiseResponse(req, Secrets.shared.deleteSecret(params.id).then(() => ({ id: params.id })))
 	},
 })
-
-/**
- * Turns the expires field of the object into a string in order to make it compatible with MsgPack
- * @param obj Source object
- * @returns Object with expired turned into a string
- */
-function expiresToString<T extends { expires: Date }>(obj: T): Omit<T, "expires"> & { expires: string } {
-	return { ...obj, expires: obj.expires.toISOString() }
-}

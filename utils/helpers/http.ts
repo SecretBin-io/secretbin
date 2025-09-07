@@ -1,5 +1,5 @@
 import { STATUS_CODE } from "@std/http/status"
-import * as MsgPack from "@std/msgpack"
+import * as CBOR from "cbor2"
 import { encodeError, LocalizedError } from "utils/errors"
 
 /**
@@ -37,33 +37,33 @@ export function errorResponse(req: Request, err: Error | unknown): Response {
 }
 
 /**
- * Creates a response in either MsgPack or JSON depending on the request's accept header
- * @param req Request which is used to determine if MsgPack or JSON is send
+ * Creates a response in either CBOR or JSON depending on the request's accept header
+ * @param req Request which is used to determine if CBOR or JSON is send
  * @param res Response to encode
  * @param options Specify response headers and status code
  * @returns Response
  */
 function encodeResponse<T>(req: Request, res: T, options?: ResponseInit): Response {
-	const useMsgPack = req.headers.get("Accept")?.includes("application/vnd.msgpack") ?? false
+	const useCBOR = req.headers.get("Accept")?.includes("application/cbor") ?? false
 
-	if (!useMsgPack) {
+	if (!useCBOR) {
 		return Response.json(res, options)
 	}
 
-	return new Response(MsgPack.encode(res as MsgPack.ValueType), {
+	return new Response(CBOR.encode(res), {
 		...options,
-		headers: { ...(options?.headers ?? {}), "Content-Type": "application/vnd.msgpack" },
+		headers: { ...(options?.headers ?? {}), "Content-Type": "application/cbor" },
 	})
 }
 
 /**
- * Decode the request or responses's body content using either MsgPack or JSON
+ * Decode the request or responses's body content using either CBOR or JSON
  * depending on the content type.
  * @param r Request or response
  * @returns Body content
  */
 export function decodeBody<T>(r: Request | Response): Promise<T> {
-	return r.headers.get("Content-Type") === "application/vnd.msgpack"
-		? r.bytes().then(MsgPack.decode) as Promise<T>
+	return r.headers.get("Content-Type") === "application/cbor"
+		? r.bytes().then(CBOR.decode) as Promise<T>
 		: r.json() as Promise<T>
 }

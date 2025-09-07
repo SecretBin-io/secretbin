@@ -1,7 +1,8 @@
+import { clsx } from "@nick/clsx"
+import { Signal } from "@preact/signals"
 import { Show, Tooltip } from "components"
 import { JSX } from "preact"
 import { BaseProps } from "./base.ts"
-import { clsx } from "@nick/clsx"
 
 export interface ToggleProps extends BaseProps {
 	/** Element ID (Default: Random ID) */
@@ -12,6 +13,9 @@ export interface ToggleProps extends BaseProps {
 
 	/** Optional smaller text below the label */
 	subLabel?: string
+
+	/** Signal that stores the toggle state. Can be used instead of on and onChange */
+	signal?: Signal<boolean>
 
 	/** Current toggle state */
 	on?: boolean
@@ -30,8 +34,17 @@ export interface ToggleProps extends BaseProps {
  * Creates a checkable toggle
  */
 export function Toggle(
-	{ id, label, subLabel, on, onChange, tooltip, disabled, ...props }: ToggleProps,
+	{ id, label, subLabel, signal, on, onChange, tooltip, disabled, ...props }: ToggleProps,
 ): JSX.Element {
+	const value = signal !== undefined ? signal.value : on
+	const setValue = (v: boolean) => {
+		if (signal !== undefined) {
+			signal.value = v
+		} else {
+			onChange?.(v)
+		}
+	}
+
 	return (
 		<Tooltip text={tooltip}>
 			<div class="mb-4 flex" style={props.style}>
@@ -41,15 +54,15 @@ export function Toggle(
 					<div
 						{...props}
 						class={clsx("relative inline-flex cursor-pointer items-center", props.class)}
-						onClick={() => !disabled && onChange?.(!on)}
+						onClick={() => !disabled && setValue(!value)}
 					>
 						<input
 							id={id}
 							type="checkbox"
 							disabled={disabled}
-							checked={on}
+							checked={value}
 							class="peer sr-only"
-							onInput={(e) => !disabled && onChange?.(e.currentTarget.checked)}
+							onInput={(e) => !disabled && setValue(e.currentTarget.checked)}
 						/>
 						<div
 							class={clsx(

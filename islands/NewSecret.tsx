@@ -6,7 +6,7 @@ import { PasswordGenerator } from "islands"
 import { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { LocalizedError, SecretSizeLimitError } from "utils/errors"
-import { useSetting, useTranslation } from "utils/hooks"
+import { useSettingSignal, useTranslation } from "utils/hooks"
 import { State } from "../utils/state.ts"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
@@ -20,14 +20,14 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 	const [message, setMessage] = useState("")
 	const [files, setFiles] = useState<File[]>([])
 	const [password, setPassword] = useState<string | undefined>("")
-	const [expires, setExpires] = useSetting("options.expires", state.config.defaults.expires, state)
-	const [burn, setBurn] = useSetting(
+	const expires = useSettingSignal("options.expires", state.config.defaults.expires, state)
+	const burn = useSettingSignal(
 		"options.burn",
 		state.config.policy.requireBurn ? true : state.config.defaults.burn,
 		state,
 	)
-	const [slowBurn, setSlowBurn] = useSetting("options.slowBurn", false, state)
-	const [rereads, setRereads] = useSetting("options.rereads", 2, state)
+	const slowBurn = useSettingSignal("options.slowBurn", false, state)
+	const rereads = useSettingSignal("options.rereads", 2, state)
 	const [error, setError] = useState("")
 	const [showGenerator, setShowGenerator] = useState(false)
 	const [loading, setLoading] = useState(false)
@@ -53,7 +53,7 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 				message,
 				files,
 				password,
-				{ expires, burn, slowBurn, rereads },
+				{ expires: expires.value, burn: burn.value, slowBurn: slowBurn.value, rereads: rereads.value },
 				state.config.policy.encryptionAlgorithm,
 			)
 			setError("")
@@ -91,13 +91,9 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 				<Options
 					state={state}
 					expires={expires}
-					setExpires={setExpires}
 					burn={burn}
-					setBurn={setBurn}
 					slowBurn={slowBurn}
-					setSlowBurn={setSlowBurn}
 					rereads={rereads}
-					setRereads={setRereads}
 					setPassword={setPassword}
 				/>
 				<Message type="error" title="Error" message={error} />

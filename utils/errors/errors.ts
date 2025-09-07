@@ -80,7 +80,7 @@ export class SecretDeleteError extends LocalizedError {
 
 export class SecretParseError extends LocalizedError {
 	public constructor(public issues: z.core.$ZodIssue[]) {
-		super(STATUS_CODE.BadRequest, "SecretParseError", { reasons: issues.map((x) => x.message).join(", ") })
+		super(STATUS_CODE.BadRequest, "SecretParseError", { reason: issues.map((x) => x.message).join(", ") })
 	}
 
 	public static fromObject(_message: string, params: Record<string, unknown>): Error {

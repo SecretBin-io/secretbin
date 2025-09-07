@@ -34,7 +34,6 @@ logging:
   mode: text # Specifies if logs should be rendered as text or JSON (default: text)
   logAccess: true # Enable web access logging (default: false)
 policy:
-  sharePreselect: true # Pre-selects the link in the share view
   requirePassword: false # Forces users to enable the burn option for new secrets
   requireBurn: false # Forces users to specify a password for new secrets
   denySlowBurn: false # Blocks users from enabling slow burn for new secrets
