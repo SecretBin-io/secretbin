@@ -8,7 +8,7 @@ branding:
   appName: SecretBin # Changes the app in all places including but not limited to the title bar
   footer: Nihility.io # Text shown in the footer on the left side e.g. the name of the service hoster
   links: # Custom link shown in the footer on the right 
-  - name: #Localized display text
+  - name: # Localized display text
       en: GitHub
       de: GitHub
     link:
