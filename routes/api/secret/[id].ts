@@ -16,10 +16,8 @@ export const handler = define.handlers({
 		try {
 			const res = await Secrets.shared.getSecret(params.id)
 			// If secret contains raw bytes, force using CBOR
-			if (res.dataBytes !== undefined) {
-				req.headers.set("Accept", "application/cbor")
-			}
-			return successResponse(req, res)
+			const forceCBOR = res.dataBytes !== undefined
+			return successResponse(req, res, forceCBOR)
 		} catch (err) {
 			return errorResponse(req, err)
 		}

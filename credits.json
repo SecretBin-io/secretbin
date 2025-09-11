@@ -1,6 +1,28 @@
 [
   {
     "registry": "npm",
+    "name": "cbor2",
+    "version": "2.0.1",
+    "repository": "https://github.com/hildjj/cbor2",
+    "authors": [
+      "Joe Hildebrand"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/hildjj/cbor2/main/LICENSE.md"
+  },
+  {
+    "registry": "npm",
+    "name": "@cto.af/wtf8",
+    "version": "0.0.2",
+    "repository": "https://github.com/cto-af/wtf8",
+    "authors": [
+      "@cto.af"
+    ],
+    "license": "MIT License",
+    "licenseFile": "https://raw.githubusercontent.com/cto-af/wtf8/main/LICENSE.md"
+  },
+  {
+    "registry": "npm",
     "name": "deepmerge",
     "version": "4.3.1",
     "repository": "https://github.com/TehShrike/deepmerge",
@@ -89,7 +111,7 @@
   {
     "registry": "jsr",
     "name": "@fresh/core",
-    "version": "2.0.0-beta.3",
+    "version": "2.0.0",
     "repository": "https://github.com/denoland/fresh",
     "authors": [
       "Deno"
@@ -166,7 +188,7 @@
   {
     "registry": "jsr",
     "name": "@logtape/logtape",
-    "version": "1.0.4",
+    "version": "1.1.0",
     "repository": "https://github.com/dahlia/logtape",
     "authors": [
       "Hong Minhee (洪 民憙)"
@@ -395,17 +417,6 @@
   },
   {
     "registry": "jsr",
-    "name": "@std/bytes",
-    "version": "1.0.6",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
     "name": "@std/cli",
     "version": "1.0.22",
     "repository": "https://github.com/denoland/std",
@@ -505,17 +516,6 @@
   },
   {
     "registry": "jsr",
-    "name": "@std/msgpack",
-    "version": "1.0.3",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
     "name": "@std/net",
     "version": "1.0.5",
     "repository": "https://github.com/denoland/std",
@@ -571,7 +571,7 @@
   {
     "registry": "jsr",
     "name": "@zod/zod",
-    "version": "4.1.5",
+    "version": "4.1.7",
     "repository": "https://github.com/colinhacks/zod",
     "authors": [
       "Colin McDonnell"

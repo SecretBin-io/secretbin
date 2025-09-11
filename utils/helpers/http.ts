@@ -21,8 +21,8 @@ export async function promiseResponse<T>(req: Request, p: Promise<T>): Promise<R
  * @param err Error
  * @returns Response
  */
-export function successResponse<T>(req: Request, value: T): Response {
-	return encodeResponse(req, value, { status: STATUS_CODE.OK })
+export function successResponse<T>(req: Request, value: T, forceCBOR = false): Response {
+	return encodeResponse(req, value, { status: STATUS_CODE.OK }, forceCBOR)
 }
 
 /**
@@ -43,8 +43,8 @@ export function errorResponse(req: Request, err: Error | unknown): Response {
  * @param options Specify response headers and status code
  * @returns Response
  */
-function encodeResponse<T>(req: Request, res: T, options?: ResponseInit): Response {
-	const useCBOR = req.headers.get("Accept")?.includes("application/cbor") ?? false
+function encodeResponse<T>(req: Request, res: T, options?: ResponseInit, forceCBOR = false): Response {
+	const useCBOR = forceCBOR || (req.headers.get("Accept")?.includes("application/cbor") ?? false)
 
 	if (!useCBOR) {
 		return Response.json(res, options)

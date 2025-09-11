@@ -120,7 +120,7 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 				<Message type="error" title="Error" message={error} />
 				<Show if={!!secretContent}>
 					<TextArea class="resize-none" lines={15} readOnly value={secretContent?.[0]} />
-					<Show if={(secretContent?.[0] ?? []).length !== 0}>
+					<Show if={(secretContent?.[1] ?? []).length !== 0}>
 						<Section title={$("Files.Title")}>
 							<FileList
 								files={secretContent?.[1] ?? []}
