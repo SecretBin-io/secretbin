@@ -41,7 +41,7 @@ policy:
 storage:
   maxSize: 10000M # Max size a new secret is allowed to have
   garbageCollection: # Config the garbage collector which deletes expired secrets
-    cron: "* * * * *" # Configure when the garbage collector should run
+    cron: "0 * * * *" # Configure when the garbage collector should run
   database: # Configure PostgreSQL
     host: 127.0.0.1
     port: 5432
