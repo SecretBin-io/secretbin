@@ -22,7 +22,7 @@ builds:
       - x86_64-unknown-linux-gnu
       - aarch64-unknown-linux-gnu
       - aarch64-apple-darwin
-    main: main.js
+    main: _fresh/compiled-entry.js
     flags:
       - --include=_fresh
       - --include=static

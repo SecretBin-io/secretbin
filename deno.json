@@ -1,5 +1,5 @@
 {
-	"version": "2.1.1",
+	"version": "2.1.2",
 	"tasks": {
 		"check": {
 			"description": "Lints and types check TypeScript files",
@@ -56,7 +56,7 @@
 	},
 	"exclude": ["**/_fresh/*"],
 	"imports": {
-		"@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.0",
+		"@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.2",
 		"@heroicons/react": "npm:@heroicons/react@^2.2.0",
 		"@libs/qrcode": "jsr:@libs/qrcode@^3.0.0",
 		"@logtape/logtape": "jsr:@logtape/logtape@^1.1.0",
@@ -73,18 +73,18 @@
 		"@std/yaml": "jsr:@std/yaml@^1.0.9",
 		"@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.13",
 		"@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.13",
-		"@zod/zod": "jsr:@zod/zod@^4.1.7",
+		"@zod/zod": "jsr:@zod/zod@^4.1.8",
 		"cbor2": "npm:cbor2@^2.0.1",
 		"client": "./client/mod.ts",
 		"components": "./components/mod.ts",
-		"fresh": "jsr:@fresh/core@2.0.0",
+		"fresh": "jsr:@fresh/core@2.0.2",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",
 		"marked": "npm:marked@^16.2.1",
 		"models": "./models/mod.ts",
 		"postcss": "npm:postcss@^8.5.6",
 		"postgres": "npm:postgres@^3.4.7",
-		"preact": "npm:preact@^10.27.1",
+		"preact": "npm:preact@^10.27.2",
 		"sanitize-html": "npm:sanitize-html@^2.17.0",
 		"server": "./server/mod.ts",
 		"server/config": "./server/config/mod.ts",
