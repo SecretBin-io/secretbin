@@ -44,7 +44,7 @@ export default define.page(({ state, Component }) => {
 					 */
 				}
 				<meta name="twitter:card" content="summary" />
-				<meta name="twitter:title" content={`Sends secrets using ${state.config.branding.appName}`} />
+				<meta name="twitter:title" content={`Send secrets using ${state.config.branding.appName}`} />
 				<meta name="twitter:description" content="Visit this link in order to view the secret." />
 				<meta name="twitter:image" content={asset("/images/apple-touch-icon.png")} />
 				<meta property="og:title" content={state.config.branding.appName} />
@@ -89,6 +89,23 @@ export default define.page(({ state, Component }) => {
 												title={state.config.branding.appName}
 												message={state.config.banner.text[state.language] ??
 													state.config.banner.text.en}
+											/>
+										</div>
+									</div>
+								</div>
+							</Show>
+
+							{/* Show warning if browser is not supported */}
+							<Show if={!state.supportedBrowser}>
+								<div class="mx-auto">
+									<div class="mx-auto flex max-w-screen-md flex-col items-center justify-center">
+										<div class="w-full p-4">
+											<Message
+												type="warning"
+												title={state.config.branding.appName}
+												message={$("Common.UnsupportedBrowser", {
+													browsers: state.supportedBrowsers,
+												})}
 											/>
 										</div>
 									</div>

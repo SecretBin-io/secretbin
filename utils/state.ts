@@ -16,5 +16,7 @@ export interface State {
 	locale: string
 	language: Language
 	cookies: Record<string, string>
+	supportedBrowser: boolean
+	supportedBrowsers: string
 	config: StateConfig
 }

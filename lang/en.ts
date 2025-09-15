@@ -7,6 +7,8 @@ export default {
 	Translations: {
 		Common: {
 			Expires: "Expires",
+			UnsupportedBrowser:
+				"The browser you are using is not supported. Please update your browser or use a different one. Supported are: {{browsers}}",
 		},
 		NewSecret: {
 			Title: "Create New Secret",

@@ -9,6 +9,8 @@ export default {
 	Translations: {
 		Common: {
 			Expires: "Verfällt am",
+			UnsupportedBrowser:
+				"Der von dir verwendete Browser wird nicht unterstützt. Bitte aktualisiere deinen Browser oder verwende einen anderen. Unterstützt werden: {{browsers}}",
 		},
 		NewSecret: {
 			Title: "Neues Geheimnis anlegen",

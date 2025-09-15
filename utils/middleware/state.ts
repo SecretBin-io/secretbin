@@ -2,6 +2,7 @@ import { getCookies } from "@std/http"
 import { isLanguageSupported, Language } from "lang"
 import { config } from "server/config"
 import { define } from "utils"
+import { isBrowserSupported, supportedBrowsersText } from "utils/browsers"
 import { Theme } from "utils/state"
 
 /**
@@ -40,6 +41,9 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 	if (ctx.state.cookies["showTerms"] === "false") {
 		ctx.state.config.branding.terms = undefined
 	}
+
+	ctx.state.supportedBrowser = isBrowserSupported(ctx.req.headers.get("User-Agent") ?? "")
+	ctx.state.supportedBrowsers = supportedBrowsersText
 
 	return await ctx.next()
 })

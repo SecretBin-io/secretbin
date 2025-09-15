@@ -1,5 +1,6 @@
 import { fresh } from "@fresh/plugin-vite"
 import tailwindcss from "@tailwindcss/vite"
+import { browserTarget } from "utils/browsers"
 import { defineConfig } from "vite"
 
 export default defineConfig({
@@ -9,7 +10,7 @@ export default defineConfig({
 	build: {
 		minify: true,
 		cssMinify: true,
-		target: "baseline-widely-available",
+		target: browserTarget,
 	},
 	plugins: [
 		fresh(),
