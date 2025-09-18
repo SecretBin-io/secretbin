@@ -5,9 +5,6 @@ import { JSX } from "preact"
 import { BaseProps } from "./base.ts"
 
 export interface ToggleProps extends BaseProps {
-	/** Element ID (Default: Random ID) */
-	id?: string
-
 	/** Text next to the toggle */
 	label: string
 
@@ -34,7 +31,7 @@ export interface ToggleProps extends BaseProps {
  * Creates a checkable toggle
  */
 export function Toggle(
-	{ id, label, subLabel, signal, on, onChange, tooltip, disabled, ...props }: ToggleProps,
+	{ label, subLabel, signal, on, onChange, tooltip, disabled, ...props }: ToggleProps,
 ): JSX.Element {
 	const value = signal !== undefined ? signal.value : on
 	const setValue = (v: boolean) => {
@@ -46,36 +43,17 @@ export function Toggle(
 	}
 
 	return (
-		<Tooltip text={tooltip}>
-			<div class="mb-4 flex" style={props.style}>
-				<div
-					class={clsx("flex-none", { "mt-1": subLabel, "brightness-75": disabled })}
-				>
-					<div
-						{...props}
-						class={clsx("relative inline-flex cursor-pointer items-center", props.class)}
-						onClick={() => !disabled && setValue(!value)}
-					>
-						<input
-							id={id}
-							type="checkbox"
-							disabled={disabled}
-							checked={value}
-							class="peer sr-only"
-							onInput={(e) => !disabled && setValue(e.currentTarget.checked)}
-						/>
-						<div
-							class={clsx(
-								"peer h-6 w-11 rounded-full border-1 border-gray-300 bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800",
-								{
-									"peer-checked:bg-gray-600": disabled,
-								},
-							)}
-						>
-						</div>
-					</div>
-				</div>
-
+		<div class={clsx("mb-2 flex", props.class)}>
+			<label class="label text-wrap">
+				<Tooltip text={tooltip}>
+					<input
+						class="toggle toggle-primary"
+						type="checkbox"
+						disabled={disabled}
+						checked={value}
+						onInput={(e) => !disabled && setValue(e.currentTarget.checked)}
+					/>
+				</Tooltip>
 				<div class="flex-1">
 					<div class="ms-2 text-sm">
 						<label class="font-medium text-gray-900 dark:text-gray-300">
@@ -88,7 +66,7 @@ export function Toggle(
 						</Show>
 					</div>
 				</div>
-			</div>
-		</Tooltip>
+			</label>
+		</div >
 	)
 }

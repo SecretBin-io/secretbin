@@ -28,7 +28,7 @@ export interface SelectProps extends BaseProps {
 	 * @param value Option value
 	 */
 	onChange?: (value: string) => void
-	
+
 	/** List of selectable options */
 	children: VNode<SelectOptionProps>[]
 }
@@ -48,11 +48,7 @@ export function Select({ signal, value, onChange, children, ...props }: SelectPr
 
 	return (
 		<select
-			style={props.style}
-			class={clsx(
-				"block w-full cursor-pointer appearance-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
-				props.class,
-			)}
+			class={clsx("select w-full", props.class)}
 			value={val}
 			onInput={(e) => setVal(e.currentTarget.value)}
 		>

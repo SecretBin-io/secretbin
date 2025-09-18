@@ -19,22 +19,11 @@ function NumberButton({ mode, disabled, onClick }: NumberButtonProps): JSX.Eleme
 	return (
 		<button
 			type="button"
-			class={clsx(
-				"h-11 border border-gray-300 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700",
-				{
-					"rounded-s-lg": mode === "-",
-					"rounded-e-lg": mode === "+",
-					"hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:hover:bg-gray-600 dark:focus:ring-gray-700":
-						!disabled,
-					"bg-white dark:bg-gray-800": disabled,
-				},
-			)}
+			class="btn btn-primary join-item"
 			disabled={disabled}
 			onClick={onClick}
 		>
-			{mode === "+"
-				? <PlusIcon class="h-4 w-4 text-gray-900 dark:text-white" />
-				: <MinusIcon name="Minus" class="h-4 w-4 text-gray-900 dark:text-white" />}
+			{mode === "+" ? <PlusIcon class="h-4 w-4" /> : <MinusIcon class="h-4 w-4" />}
 		</button>
 	)
 }
@@ -78,24 +67,25 @@ export function NumberInput({ signal, value, min, max, step = 1, onChange, ...pr
 		(min === undefined || n >= min) && (max === undefined || n <= max) && (n % step === 0) ? setVal(n) : setVal(val)
 
 	return (
-		<div style={props.style} class={clsx("relative flex max-w-[8rem] items-center", props.class)}>
+		<div class={clsx("join", props.class)}>
 			<NumberButton
 				mode="-"
 				disabled={min !== undefined && val <= min}
 				onClick={() => setNumber(val - 1)}
 			/>
-			<input
-				type="text"
-				data-input-counter
-				aria-describedby="helper-text-explanation"
-				class="block h-11 w-full border-gray-300 border-x-0 border-y-1 bg-gray-50 py-2.5 text-center text-gray-900 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-				required
-				value={"" + val}
-				step={step}
-				min={min}
-				max={max}
-				onInput={(e) => setNumber(+e.currentTarget.value)}
-			/>
+			<label class="input join-item">
+				<input
+					type="text"
+					data-input-counter
+					class="w-10 text-center"
+					required
+					value={"" + val}
+					step={step}
+					min={min}
+					max={max}
+					onInput={(e) => setNumber(+e.currentTarget.value)}
+				/>
+			</label>
 			<NumberButton
 				mode="+"
 				disabled={max !== undefined && val >= max}

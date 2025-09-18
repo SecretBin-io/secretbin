@@ -28,6 +28,10 @@ export default {
 					Year: { Many: "{{count}} years", One: "One year" },
 				},
 			},
+			Message: {
+				Title: "Message",
+				Description: "Enter the secret message you want to share.",
+			},
 			Files: {
 				Title: "Files",
 				Description:
@@ -65,7 +69,10 @@ export default {
 			Description: "Generate a random cryptographic password.",
 			Generate: "Generate",
 			Insert: "Insert",
-			Length: "Password Length",
+			Length: {
+				Title: "Password Length",
+				Description: "Specify the desired length of the generated password.",
+			},
 			Characters: {
 				Title: "Characters",
 				Description: "Specify which characters should be included when the password is generated.",
@@ -134,18 +141,18 @@ export default {
 		Credits: {
 			Title: "Credits",
 			Description:
-				'{{name}} is inspired by <u><a href="https://privatebin.info">PrivateBin</a></u>. PrivateBin is developed by <u><a href="https://github.com/PrivateBin/PrivateBin/graphs/contributors">El RIDO</a></u> among others and released under the <u><a href="https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md">Zlib License</a></u>. <br/> {{name}} has been completely redeveloped and combines the basic functionality of PrivateBin with useful extensions.',
-			BrandedNotice: "{{name}} is based on Nihility.io SecretBin.",
+				'{{name}} is inspired by <a href="https://privatebin.info">PrivateBin</a>, developed by <a href="https://github.com/PrivateBin/PrivateBin/graphs/contributors">El RIDO</a> among others and released under the <a href="https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md">Zlib License</a>.',
+			BrandedNotice: "{{name}} is based on Nihility.io SecretBin, developed by Marvin Peter.",
 			SourceNotice:
-				'Nihility.io SecretBin is open source and licensed under MIT. If you want to host your own version of SecretBin, head over to <u><a href="https://github.com/Nihility-io/SecretBin">GitHub</a></u>.',
+				'Nihility.io SecretBin is open source and available under the MIT license. If you want to host your own version of SecretBin, head over to <a href="https://github.com/Nihility-io/SecretBin">GitHub</a>.',
 			Components: {
 				Title: "Components",
 				Description:
 					"Below you will find a list of all software components used by {{name}}, along with their license.'",
 				Headers: {
-					Author: "Author(s)",
+					Author: "Author",
 					Component: "Component",
-					License: "Licenses",
+					License: "License",
 					Version: "Version",
 				},
 			},

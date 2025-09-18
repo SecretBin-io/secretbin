@@ -19,10 +19,7 @@ function TableCell({ index, children }: TableCellProps): JSX.Element {
 	}
 
 	return (
-		<th
-			scope="row"
-			class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
-		>
+		<th scope="row">
 			{children}
 		</th>
 	)
@@ -41,26 +38,27 @@ export interface TableProps<T extends string> extends BaseProps {
  */
 export function Table<T extends string>({ headers, rows, ...props }: TableProps<T>): JSX.Element {
 	return (
-		<table
-			style={props.style}
-			class={clsx("w-full text-left text-gray-500 text-sm rtl:text-right dark:text-gray-400", props.class)}
-		>
-			<thead class="bg-gray-50 text-gray-700 text-xs uppercase dark:bg-gray-700 dark:text-gray-400">
-				<tr>
-					{Record.mapToArray(headers, (_key, value) => (
-						<th scope="col" class="px-6 py-3">
-							{value}
-						</th>
-					))}
-				</tr>
-			</thead>
-			<tbody>
-				{rows.map((row) => (
-					<tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-						{Record.mapToArray(headers, (key, _value, i) => <TableCell index={i}>{row[key]}</TableCell>)}
+		<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+			<table
+				class={clsx("table", props.class)}
+			>
+				<thead>
+					<tr>
+						{Record.mapToArray(headers, (_key, value) => (
+							<th scope="col" class="px-6 py-3">
+								{value}
+							</th>
+						))}
 					</tr>
-				))}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{rows.map((row) => (
+						<tr>
+							{Record.mapToArray(headers, (key, _value, i) => <TableCell index={i}>{row[key]}</TableCell>)}
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
 	)
 }

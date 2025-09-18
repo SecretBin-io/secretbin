@@ -40,14 +40,13 @@ export function Upload(
 
 	return (
 		<div
-			style={props.style}
 			class={clsx("flex w-full items-center justify-center pb-2.5", props.class)}
 			onDrop={dropHandler}
 			onDragOver={(e) => e.preventDefault()}
 		>
 			<label
 				for="dropzone-file"
-				class="flex h-28 w-full flex-col cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-bray-800 dark:hover:bg-gray-600"
+				class="flex h-28 w-full flex-col cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-gray-300 hover:bg-base-200 dark:border-gray-600 dark:hover:border-gray-500"
 			>
 				<div class="flex flex-col items-center justify-center pt-5 pb-6">
 					<CloudArrowUpIcon class="h-11 w-11 text-gray-500 dark:text-gray-400" />

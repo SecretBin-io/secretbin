@@ -2,580 +2,164 @@
   {
     "registry": "npm",
     "name": "cbor2",
-    "version": "2.0.1",
     "repository": "https://github.com/hildjj/cbor2",
-    "authors": [
-      "Joe Hildebrand"
-    ],
+    "author": "Joe Hildebrand",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/hildjj/cbor2/main/LICENSE.md"
   },
   {
     "registry": "npm",
     "name": "@cto.af/wtf8",
-    "version": "0.0.2",
     "repository": "https://github.com/cto-af/wtf8",
-    "authors": [
-      "@cto.af"
-    ],
+    "author": "@cto.af",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/cto-af/wtf8/main/LICENSE.md"
   },
   {
     "registry": "npm",
-    "name": "deepmerge",
-    "version": "4.3.1",
-    "repository": "https://github.com/TehShrike/deepmerge",
-    "authors": [
-      "Josh Duff"
-    ],
-    "license": "MIT License"
-  },
-  {
-    "registry": "npm",
-    "name": "dom-serializer",
-    "version": "2.0.0",
-    "repository": "https://github.com/cheeriojs/dom-serializer",
-    "authors": [
-      "Cheerio"
-    ],
+    "name": "daisyui",
+    "repository": "https://github.com/saadeghi/daisyui",
+    "author": "Pouya Saadeghi",
     "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/cheeriojs/dom-serializer/master/LICENSE"
+    "licenseFile": "https://raw.githubusercontent.com/saadeghi/daisyui/refs/heads/master/LICENSE"
   },
   {
-    "registry": "npm",
-    "name": "domelementtype",
-    "version": "2.3.0",
-    "repository": "https://github.com/fb55/domelementtype",
-    "authors": [
-      "Felix Boehm"
-    ],
-    "license": "BSD 2-Clause \"Simplified\" License",
-    "licenseFile": "https://raw.githubusercontent.com/fb55/domelementtype/master/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "domhandler",
-    "version": "5.0.3",
-    "repository": "https://github.com/fb55/domhandler",
-    "authors": [
-      "Felix Boehm"
-    ],
-    "license": "BSD 2-Clause \"Simplified\" License",
-    "licenseFile": "https://raw.githubusercontent.com/fb55/domhandler/master/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "domutils",
-    "version": "3.2.2",
-    "repository": "https://github.com/fb55/domutils",
-    "authors": [
-      "Felix Boehm"
-    ],
-    "license": "BSD 2-Clause \"Simplified\" License",
-    "licenseFile": "https://raw.githubusercontent.com/fb55/domutils/master/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "entities",
-    "version": "4.5.0",
-    "repository": "https://github.com/fb55/entities",
-    "authors": [
-      "Felix Boehm"
-    ],
-    "license": "BSD 2-Clause \"Simplified\" License",
-    "licenseFile": "https://raw.githubusercontent.com/fb55/entities/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "escape-string-regexp",
-    "version": "4.0.0",
-    "repository": "https://github.com/sindresorhus/escape-string-regexp",
-    "authors": [
-      "Sindre Sorhus"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/sindresorhus/escape-string-regexp/main/license"
-  },
-  {
-    "registry": "jsr",
-    "name": "@fresh/build-id",
-    "version": "1.0.1",
+    "name": "Deno Fresh",
     "repository": "https://github.com/denoland/fresh",
-    "authors": [
-      "Deno"
-    ],
+    "author": "Deno authors",
     "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/fresh/main/LICENSE"
+    "licenseFile": "https://raw.githubusercontent.com/denoland/fresh/refs/heads/main/LICENSE"
   },
   {
-    "registry": "jsr",
-    "name": "@fresh/core",
-    "version": "2.0.0",
-    "repository": "https://github.com/denoland/fresh",
-    "authors": [
-      "Deno"
-    ],
+    "name": "Deno Standard Library",
+    "repository": "https://github.com/denoland/std",
+    "author": "Deno authors",
     "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/fresh/main/LICENSE"
+    "licenseFile": "https://raw.githubusercontent.com/denoland/std/refs/heads/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@gabriel/ts-pattern",
-    "version": "5.8.0",
     "repository": "https://github.com/gvergnaud/ts-pattern",
-    "authors": [
-      "Gabriel Vergnaud"
-    ],
+    "author": "Gabriel Vergnaud",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/gvergnaud/ts-pattern/main/LICENSE"
   },
   {
     "registry": "npm",
-    "name": "@heroicons/react",
-    "version": "2.2.0",
-    "repository": "https://github.com/tailwindlabs/heroicons",
-    "authors": [
-      "Tailwind Labs"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/master/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "htmlparser2",
-    "version": "8.0.2",
-    "repository": "https://github.com/fb55/htmlparser2",
-    "authors": [
-      "Felix Boehm"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/fb55/htmlparser2/master/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "is-plain-object",
-    "version": "5.0.0",
-    "repository": "https://github.com/jonschlinkert/is-plain-object",
-    "authors": [
-      "Jon Schlinkert"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/jonschlinkert/is-plain-object/master/LICENSE"
-  },
-  {
-    "registry": "npm",
     "name": "js-cookie",
-    "version": "3.0.5",
     "repository": "https://github.com/js-cookie/js-cookie",
-    "authors": [
-      "js-cookie"
-    ],
+    "author": "js-cookie",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/js-cookie/js-cookie/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@libs/qrcode",
-    "version": "3.0.0",
     "repository": "https://github.com/lowlighter/libs",
-    "authors": [
-      "Simon Lecoq"
-    ],
+    "author": "Simon Lecoq",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/lowlighter/libs/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@logtape/logtape",
-    "version": "1.1.0",
     "repository": "https://github.com/dahlia/logtape",
-    "authors": [
-      "Hong Minhee (洪 民憙)"
-    ],
+    "author": "Hong Minhee (洪 民憙)",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/dahlia/logtape/main/LICENSE"
   },
   {
     "registry": "npm",
     "name": "marked",
-    "version": "16.2.1",
     "repository": "https://github.com/markedjs/marked",
-    "authors": [
-      "Marked"
-    ],
-    "license": "Other",
+    "author": "Marked, John Gruber (Markdown author)",
+    "license": "MIT License, 3-Clause BSD License",
     "licenseFile": "https://raw.githubusercontent.com/markedjs/marked/master/LICENSE.md"
-  },
-  {
-    "registry": "npm",
-    "name": "nanoid",
-    "version": "3.3.11",
-    "repository": "https://github.com/ai/nanoid",
-    "authors": [
-      "Andrey Sitnik"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/ai/nanoid/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@nick/clsx",
-    "version": "0.3.1",
     "repository": "https://github.com/nberlette/clsx",
-    "authors": [
-      "Nick Berlette"
-    ],
+    "author": "Nick Berlette",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/nberlette/clsx/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@nihility-io/cookies",
-    "version": "2.0.0",
     "repository": "https://github.com/Nihility-io/Cookies",
-    "authors": [
-      "Nihility.io"
-    ],
+    "author": "Nihility.io",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Cookies/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@nihility-io/crypto",
-    "version": "1.0.1",
     "repository": "https://github.com/Nihility-io/Crypto",
-    "authors": [
-      "Nihility.io"
-    ],
+    "author": "Nihility.io",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Crypto/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@nihility-io/record",
-    "version": "1.0.4",
     "repository": "https://github.com/Nihility-io/Record",
-    "authors": [
-      "Nihility.io"
-    ],
+    "author": "Nihility.io",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/Nihility-io/Record/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@noble/ciphers",
-    "version": "2.0.0",
     "repository": "https://github.com/paulmillr/noble-ciphers",
-    "authors": [
-      "Paul Miller"
-    ],
+    "author": "Paul Miller",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/paulmillr/noble-ciphers/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@noble/hashes",
-    "version": "2.0.0",
     "repository": "https://github.com/paulmillr/noble-hashes",
-    "authors": [
-      "Paul Miller"
-    ],
+    "author": "Paul Miller",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/paulmillr/noble-hashes/main/LICENSE"
   },
   {
     "registry": "npm",
     "name": "@opentelemetry/api",
-    "version": "1.9.0",
     "repository": "https://github.com/open-telemetry/opentelemetry-js",
-    "authors": [
-      "OpenTelemetry - CNCF"
-    ],
+    "author": "OpenTelemetry - CNCF",
     "license": "Apache License 2.0",
     "licenseFile": "https://raw.githubusercontent.com/open-telemetry/opentelemetry-js/main/LICENSE"
   },
   {
     "registry": "npm",
-    "name": "parse-srcset",
-    "version": "1.0.2",
-    "repository": "https://github.com/albell/parse-srcset",
-    "authors": [
-      "Alex Bell"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/albell/parse-srcset/master/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "picocolors",
-    "version": "1.1.1",
-    "repository": "https://github.com/alexeyraspopov/picocolors",
-    "authors": [
-      "Oleksii"
-    ],
-    "license": "ISC License",
-    "licenseFile": "https://raw.githubusercontent.com/alexeyraspopov/picocolors/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "postcss",
-    "version": "8.5.6",
-    "repository": "https://github.com/postcss/postcss",
-    "authors": [
-      "PostCSS"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/postcss/postcss/main/LICENSE"
-  },
-  {
-    "registry": "npm",
     "name": "postgres",
-    "version": "3.4.7",
     "repository": "https://github.com/porsager/postgres",
-    "authors": [
-      "Rasmus Porsager"
-    ],
+    "author": "Rasmus Porsager",
     "license": "The Unlicense"
-  },
-  {
-    "registry": "npm",
-    "name": "preact",
-    "version": "10.27.1",
-    "repository": "https://github.com/preactjs/preact",
-    "authors": [
-      "Preact"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/preactjs/preact/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "preact-render-to-string",
-    "version": "6.6.1",
-    "repository": "https://github.com/preactjs/preact-render-to-string",
-    "authors": [
-      "Preact"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/preactjs/preact-render-to-string/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "@preact/signals",
-    "version": "2.3.1",
-    "repository": "https://github.com/preactjs/signals",
-    "authors": [
-      "Preact"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/preactjs/signals/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "@preact/signals-core",
-    "version": "1.12.1",
-    "repository": "https://github.com/preactjs/signals",
-    "authors": [
-      "Preact"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/preactjs/signals/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "react",
-    "version": "19.1.1",
-    "repository": "https://github.com/facebook/react",
-    "authors": [
-      "Meta"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/facebook/react/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "sanitize-html",
-    "version": "2.17.0",
-    "repository": "https://github.com/apostrophecms/sanitize-html",
-    "authors": [
-      "Apostrophe Technologies"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/apostrophecms/sanitize-html/main/LICENSE"
-  },
-  {
-    "registry": "npm",
-    "name": "source-map-js",
-    "version": "1.2.1",
-    "repository": "https://github.com/7rulnik/source-map-js",
-    "authors": [
-      "Valentin Semirulnik"
-    ],
-    "license": "Other",
-    "licenseFile": "https://raw.githubusercontent.com/7rulnik/source-map-js/patch-0.6.1/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/cli",
-    "version": "1.0.22",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/collections",
-    "version": "1.1.3",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/encoding",
-    "version": "1.0.10",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/fmt",
-    "version": "1.0.8",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/fs",
-    "version": "1.0.19",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/html",
-    "version": "1.0.4",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/http",
-    "version": "1.0.20",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/internal",
-    "version": "1.0.10",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/media-types",
-    "version": "1.1.0",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/net",
-    "version": "1.0.5",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/path",
-    "version": "1.1.2",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/streams",
-    "version": "1.0.11",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
-  },
-  {
-    "registry": "jsr",
-    "name": "@std/yaml",
-    "version": "1.0.9",
-    "repository": "https://github.com/denoland/std",
-    "authors": [
-      "Deno"
-    ],
-    "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/denoland/std/main/LICENSE"
   },
   {
     "name": "tailwindcss",
     "repository": "https://github.com/tailwindlabs/tailwindcss",
-    "version": "4.1.11",
-    "authors": [
-      "Tailwind Labs"
-    ],
+    "author": "Tailwind Labs, Inc.",
     "license": "MIT License",
-    "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/LICENSE"
+    "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
+  },
+  {
+    "registry": "npm",
+    "name": "ultrahtml",
+    "repository": "https://github.com/natemoo-re/ultrahtml",
+    "author": "Nate Moore",
+    "license": "Other",
+    "licenseFile": "https://raw.githubusercontent.com/natemoo-re/ultrahtml/main/LICENSE"
   },
   {
     "registry": "jsr",
     "name": "@zod/zod",
-    "version": "4.1.7",
     "repository": "https://github.com/colinhacks/zod",
-    "authors": [
-      "Colin McDonnell"
-    ],
+    "author": "Colin McDonnell",
     "license": "MIT License",
     "licenseFile": "https://raw.githubusercontent.com/colinhacks/zod/main/LICENSE"
   }

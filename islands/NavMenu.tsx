@@ -1,6 +1,6 @@
 import { LanguageIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline"
 import { Cookies } from "@nihility-io/cookies"
-import { Button, Dropdown, DropdownItem } from "components"
+import { Button } from "components"
 import { Language, supportedLanguages } from "lang"
 import { JSX } from "preact"
 import { useEffect } from "preact/hooks"
@@ -22,11 +22,9 @@ export function NavMenu({ state }: NavMenuProps): JSX.Element {
 
 	useEffect(() => {
 		if (theme === Theme.Dark) {
-			globalThis.document.documentElement.classList.add("dark")
-			globalThis.document.documentElement.classList.remove("light")
+			globalThis.document.documentElement.dataset.theme = "dark"
 		} else {
-			globalThis.document.documentElement.classList.add("light")
-			globalThis.document.documentElement.classList.remove("dark")
+			globalThis.document.documentElement.dataset.theme = "light"
 		}
 	}, [theme])
 
@@ -37,25 +35,31 @@ export function NavMenu({ state }: NavMenuProps): JSX.Element {
 
 	return (
 		<>
-			<Button
-				class="!me-0 !mb-0 justify-center !px-4 !py-2"
-				theme="clear"
-				icon={theme === Theme.Dark ? SunIcon : MoonIcon}
-				onClick={() => setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark)}
-			/>
-			<Dropdown
-				class="!me-0 !mb-0 justify-center !px-4 !py-2"
-				dropdownClass="right-0 w-40"
-				icon={LanguageIcon}
-				label={supportedLanguages.find((x) => x.name === state.language)?.native}
-			>
-				{supportedLanguages.map(({ label, native, name }) => (
-					<DropdownItem
-						label={`${label} (${native})`}
-						onClick={() => setLanguage(name)}
+			<ul class="menu menu-horizontal px-1">
+				<li>
+					<Button
+						class="!me-0 !mb-0 justify-center !px-4 !py-2"
+						theme="clear"
+						icon={theme === Theme.Dark ? SunIcon : MoonIcon}
+						onClick={() => setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark)}
 					/>
-				))}
-			</Dropdown>
+				</li>
+				<li>
+					<details>
+						<summary>
+							<LanguageIcon class="me-2 h-6 w-6" />
+							{supportedLanguages.find((x) => x.name === state.language)?.native ?? "Language"}
+						</summary>
+						<ul class="right-0 w-40 rounded-t-none bg-base-100 p-2">
+							{supportedLanguages.map(({ label, native, name }) => (
+								<li>
+									<a onClick={() => setLanguage(name)}>{label} ({native})</a>
+								</li>
+							))}
+						</ul>
+					</details>
+				</li>
+			</ul>
 		</>
 	)
 }

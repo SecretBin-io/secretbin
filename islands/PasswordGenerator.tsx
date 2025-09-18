@@ -1,15 +1,15 @@
 import { generatePassword } from "@nihility-io/crypto"
 import { Button, Input, Modal, NumberInput, Section, Toggle } from "components"
 import { JSX } from "preact"
-import { useState } from "preact/hooks"
+import { MutableRef, useState } from "preact/hooks"
 import { useSettingSignal, useTranslation } from "utils/hooks"
 import { State } from "utils/state"
 
 export interface PasswordGeneratorProps {
 	state: State
 
-	/** Set the visibility state of the modal */
-	show?: boolean
+	/** Reference to the dialog. Use it to show and close the modal */
+	dialogRef?: MutableRef<HTMLDialogElement | null>
 
 	/** Function called when the modal is closed */
 	onDismiss?: () => void
@@ -18,7 +18,7 @@ export interface PasswordGeneratorProps {
 	onPassword: (password: string) => void
 }
 
-export function PasswordGenerator({ show, onDismiss, onPassword, state }: PasswordGeneratorProps): JSX.Element {
+export function PasswordGenerator({ dialogRef, onDismiss, onPassword, state }: PasswordGeneratorProps): JSX.Element {
 	const $ = useTranslation(state.language, "PasswordGenerator")
 	const [password, setPassword] = useState("")
 	const useUppercase = useSettingSignal("passwords.useUppercase", true, state)
@@ -47,18 +47,20 @@ export function PasswordGenerator({ show, onDismiss, onPassword, state }: Passwo
 	return (
 		<Modal
 			title={$("Title")}
-			show={show}
+			dialogRef={dialogRef}
 			onClose={onDismiss}
+			closable
 			actions={[
 				{ label: $("Insert"), disabled: password === "", onClick: onInsert },
 			]}
 		>
-			<p>{$("Description")}</p>
-			<div class="flex">
-				<Input readOnly value={password} />
-				<Button class="!mb-0 ml-2" label={$("Generate")} onClick={onGenerate} />
-			</div>
-			<Section title={$("Length")}>
+			<Section title={$("Title")} description={$("Description")}>
+				<div class="join w-full">
+					<Input class="join-item" readOnly value={password} />
+					<Button class="join-item !mb-0" label={$("Generate")} onClick={onGenerate} />
+				</div>
+			</Section>
+			<Section title={$("Length.Title")} description={$("Length.Description")}>
 				<NumberInput min={6} max={64} signal={passwordLength} />
 			</Section>
 			<Section title={$("Characters.Title")} description={$("Characters.Description")}>

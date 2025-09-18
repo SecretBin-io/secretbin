@@ -1,5 +1,5 @@
 {
-	"version": "2.1.2",
+	"version": "2.2.0",
 	"tasks": {
 		"check": {
 			"description": "Lints and types check TypeScript files",
@@ -23,7 +23,7 @@
 		},
 		"deps": {
 			"description": "Updates the credits.json file",
-			"command": "deno run -A jsr:@nihility-io/deno-deps@1.3.0"
+			"command": "deno run -A jsr:@nihility-io/deno-deps@1.3.2"
 		}
 	},
 	"lock": false,
@@ -56,7 +56,7 @@
 	},
 	"exclude": ["**/_fresh/*"],
 	"imports": {
-		"@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.2",
+		"@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.3",
 		"@heroicons/react": "npm:@heroicons/react@^2.2.0",
 		"@libs/qrcode": "jsr:@libs/qrcode@^3.0.0",
 		"@logtape/logtape": "jsr:@logtape/logtape@^1.1.0",
@@ -71,13 +71,13 @@
 		"@std/fs": "jsr:@std/fs@^1.0.19",
 		"@std/http": "jsr:@std/http@^1.0.20",
 		"@std/yaml": "jsr:@std/yaml@^1.0.9",
-		"@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.13",
 		"@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.13",
-		"@zod/zod": "jsr:@zod/zod@^4.1.8",
+		"@zod/zod": "jsr:@zod/zod@^4.1.9",
 		"cbor2": "npm:cbor2@^2.0.1",
 		"client": "./client/mod.ts",
 		"components": "./components/mod.ts",
-		"fresh": "jsr:@fresh/core@2.0.2",
+		"daisyui": "npm:daisyui@^5.1.13",
+		"fresh": "jsr:@fresh/core@2.1.0",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",
 		"marked": "npm:marked@^16.3.0",
@@ -85,13 +85,13 @@
 		"postcss": "npm:postcss@^8.5.6",
 		"postgres": "npm:postgres@^3.4.7",
 		"preact": "npm:preact@^10.27.2",
-		"sanitize-html": "npm:sanitize-html@^2.17.0",
 		"server": "./server/mod.ts",
 		"server/config": "./server/config/mod.ts",
 		"server/database": "./server/database/mod.ts",
 		"server/log": "./server/log/mod.ts",
 		"tailwindcss": "npm:tailwindcss@^4.1.13",
 		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.8.0",
+		"ultrahtml": "npm:ultrahtml@^1.6.0",
 		"utils": "./utils/mod.ts",
 		"utils/browsers": "./utils/browsers.ts",
 		"utils/errors": "./utils/errors/mod.ts",
@@ -100,7 +100,7 @@
 		"utils/hooks": "./utils/hooks/mod.ts",
 		"utils/middleware": "./utils/middleware/mod.ts",
 		"utils/state": "./utils/state.ts",
-		"vite": "npm:vite@^7.1.5"
+		"vite": "npm:vite@^7.1.6"
 	},
 	"compilerOptions": {
 		"lib": [
@@ -141,25 +141,104 @@
 		"include": ["./config", "./helpers", "./lang", "./log", "./secret"]
 	},
 	"denoDeps": {
-		"entrypoints": ["main.ts", "components/mod.ts", "islands/mod.ts"],
+		"entrypoints": [
+			"main.ts",
+			"client/mod.ts",
+			"components/mod.ts",
+			"islands/mod.ts",
+			"models/mod.ts",
+			"server/mod.ts",
+			"server/config/mod.ts",
+			"server/database/mod.ts",
+			"server/log/mod.ts",
+			"utils/mod.ts",
+			"utils/errors/mod.ts",
+			"utils/helpers/mod.ts",
+			"utils/hooks/mod.ts",
+			"utils/middleware/mod.ts"
+		],
 		"output": "credits.json",
 		"jsonMode": false,
+		"omitVersions": true,
 		"dependencies": [
 			{
 				"name": "tailwindcss",
 				"repository": "https://github.com/tailwindlabs/tailwindcss",
-				"version": "4.1.11",
-				"authors": ["Tailwind Labs, Inc."],
+				"author": "Tailwind Labs, Inc.",
 				"license": "MIT License",
 				"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/refs/heads/main/LICENSE"
+			},
+			{
+				"name": "source-map-js",
+				"repository": "https://github.com/7rulnik/source-map-js",
+				"author": "Valentin Semirulnik",
+				"license": "3-Clause BSD License",
+				"licenseFile": "https://raw.githubusercontent.com/7rulnik/source-map-js/patch-0.6.1/LICENSE"
+			},
+			{
+				"registry": "npm",
+				"name": "marked",
+				"repository": "https://github.com/markedjs/marked",
+				"author": "Marked, John Gruber (Markdown author)",
+				"license": "MIT License, 3-Clause BSD License",
+				"licenseFile": "https://raw.githubusercontent.com/markedjs/marked/master/LICENSE.md"
+			},
+			{
+				"name": "Deno Standard Library",
+				"repository": "https://github.com/denoland/std",
+				"author": "Deno authors",
+				"license": "MIT License",
+				"licenseFile": "https://raw.githubusercontent.com/denoland/std/refs/heads/main/LICENSE"
+			},
+			{
+				"name": "Deno Fresh",
+				"repository": "https://github.com/denoland/fresh",
+				"author": "Deno authors",
+				"license": "MIT License",
+				"licenseFile": "https://raw.githubusercontent.com/denoland/fresh/refs/heads/main/LICENSE"
+			},
+			{
+				"registry": "npm",
+				"name": "preact",
+				"repository": "https://github.com/preactjs/preact",
+				"author": "Preact",
+				"license": "MIT License",
+				"licenseFile": "https://raw.githubusercontent.com/preactjs/preact/main/LICENSE"
+			},
+			{
+				"registry": "npm",
+				"name": "daisyui",
+				"repository": "https://github.com/saadeghi/daisyui",
+				"author": "Pouya Saadeghi",
+				"license": "MIT License",
+				"licenseFile": "https://raw.githubusercontent.com/saadeghi/daisyui/refs/heads/master/LICENSE"
 			}
 		],
 		"excludeDependencies": [
-			"@esbuild/.*",
-			"esbuild-wasm",
-			"@tailwindcss/.*",
-			"lightningcss-.*",
-			"@types/.*"
+			{
+				"pattern": "@std/.*",
+				"reason": "Unified as Deno Standard Library"
+			},
+			{
+				"pattern": "@fresh/.*",
+				"reason": "Unified as Deno Fresh"
+			},
+			{
+				"pattern": ["@preact/.*", "preact-render-to-string"],
+				"reason": "Unified as preact"
+			},
+			{
+				"pattern": ["react"],
+				"reason": "Not actually used and replaced by preact"
+			},
+			{
+				"pattern": ["@types/.*"],
+				"reason": "Only used for types and not shipped"
+			},
+			{
+				"pattern": ["source-map-js"],
+				"reason": "Dev dependency that is not shipped"
+			}
 		]
 	}
 }

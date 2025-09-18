@@ -1,7 +1,7 @@
+import { clsx } from "@nick/clsx"
 import { Show } from "components"
 import { JSX, VNode } from "preact"
 import { BaseProps } from "./base.ts"
-import { clsx } from "@nick/clsx"
 
 export interface SectionProps extends BaseProps {
 	/** Title shown above the section */
@@ -18,10 +18,7 @@ export interface SectionProps extends BaseProps {
  */
 export function Section({ title, description, children, ...props }: SectionProps): JSX.Element {
 	return (
-		<div
-			style={props.style}
-			class={clsx("mx-auto py-2", props.class)}
-		>
+		<div class={clsx("mx-auto py-2", props.class)}>
 			<label
 				for={Array.isArray(children) ? undefined : children.props.id}
 				class="font-medium text-gray-900 dark:text-gray-300"

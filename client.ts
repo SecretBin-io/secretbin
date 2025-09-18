@@ -1,4 +1,4 @@
-import "./static/styles.css"
+import "./styles/styles.css"
 
 // Polyfill for Blob.bytes() in browsers that don't support it yet
 // https://developer.mozilla.org/en-US/docs/Web/API/Blob/bytes

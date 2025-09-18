@@ -22,31 +22,19 @@ interface FileItemProps extends BaseProps {
 /**
  * File list entry which represents a file
  */
-function FileItem({ file, downloadable, onDelete, ...props }: FileItemProps): JSX.Element {
+function FileItem({ file, downloadable, onDelete }: FileItemProps): JSX.Element {
 	return (
 		<li
-			{...props}
-			class={clsx("p-2.5 px-2.5", { "cursor-pointer": downloadable }, props.class)}
-			onClick={downloadable ? () => downloadFile(file) : undefined}
-		>
-			<div class="flex items-center space-x-4 rtl:space-x-reverse">
-				<div class="flex-shrink-0">
-					<DocumentIcon className="h-6 w-6 text-gray-800 dark:text-white" />
-				</div>
-				<div class="min-w-0 flex-1">
-					<p class="truncate font-medium text-gray-900 text-sm dark:text-white">
-						{file.name}
-					</p>
-					<p class="truncate text-gray-500 text-sm dark:text-gray-400">
-						{humanReadableSize(file.size)}
-					</p>
-				</div>
-				<Show if={onDelete}>
-					<div class="inline-flex items-center font-semibold text-base text-gray-900 dark:text-white">
-						<Button theme="plainDanger" icon={TrashIcon} onClick={onDelete} />
-					</div>
-				</Show>
+			class={clsx("list-row", { "cursor-pointer": downloadable })}
+			onClick={downloadable ? () => downloadFile(file) : undefined}>
+			<div>
+				<DocumentIcon className="size-10" />
 			</div>
+			<div>
+				<div>{file.name}</div>
+				<div class="font-semibold text-xs uppercase opacity-60">{humanReadableSize(file.size)}</div>
+			</div>
+			<Button class="btn-error btn-square size-[1.2em] cursor-pointer" theme="dock" icon={TrashIcon} onClick={onDelete} />
 		</li>
 	)
 }
@@ -79,14 +67,9 @@ export function FileList({ files, downloadable, onDelete, ...props }: FileListPr
 	}
 
 	return (
-		<div
-			{...props}
-			class={clsx(
-				"rounded-lg border border-gray-200 bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-700",
-				props.class,
-			)}
-		>
-			<ul class="divide-y divide-gray-200 dark:divide-gray-700">
+		<>
+			<ul class={clsx("list rounded-box bg-base-100 shadow-md", props.class)}>
+				<li class="p-4 pb-2 text-xs tracking-wide opacity-60">File List</li>
 				{files.map((x, i) => (
 					<>
 						<Show if={i > 0}>
@@ -100,6 +83,6 @@ export function FileList({ files, downloadable, onDelete, ...props }: FileListPr
 					</>
 				))}
 			</ul>
-		</div>
+		</>
 	)
 }

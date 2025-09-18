@@ -6,8 +6,6 @@ You can use SecretBin to create encrypted secrets and share them with as many pe
 
 SecretBin was inspired by [PrivateBin](https://privatebin.info), which is developed by [El RIDO](https://github.com/PrivateBin/PrivateBin/graphs/contributors) among others and released under the [Zlib License](https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md).
 
-SecretBin has been completely redeveloped and combines the basic functionality of PrivateBin with useful extensions.
-
 ## How Does It Work?
 
 When you open SecretBin you are presented with form that allows you to submit a new secret. Any text and or file can make up a secret. Just add the text and or files and change the security options if you like.
@@ -60,8 +58,8 @@ SecretBin current support two encryption algorithms; AES256-GCM with PBKDF2 and 
 Unfortunately, I only develop the app. I do not host it myself. Why? I am a developer and not a lawyer. Since I operate from the EU, SecretBin would need a privacy policy in order to operate it. I don't know how to write one and I can't be bothered to pay someone to do it.
 
 That being said, it you want to host SecretBin yourself, you can. You have to options to host SecretBin yourself:
+- [Download](https://github.com/Nihility-io/SecretBin/releases) and run SecretBin pre-compiled.
 - Pull the source code and run it using Deno (see [Build from Source](#build-from-source)).
-- Use the SecretBin container images (see [Run using Docker](#run-using-docker)).
 
 You can even easily brand SecretBin with a new name if you want. SecretBin is licensed under the (MIT License)[https://www.tldrlegal.com/license/mit-license], so do it what you want. You might as well sell it if you want. I don't care, as long as it is within the license.
 

@@ -88,12 +88,11 @@ export function Input(
 	return (
 		<input
 			ref={ref}
-			style={props.style}
 			class={clsx(
-				"block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
+				"input w-full",
 				{
-					"border-red-500 dark:border-red-500": invalid,
-					"border-green-500": valid,
+					"input-error": invalid,
+					"input-success": valid,
 				},
 				props.class,
 			)}

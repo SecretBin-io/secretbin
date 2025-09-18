@@ -49,6 +49,13 @@ export function Options({
 	const [passInvalid, setPassInvalid] = useState(false)
 	const [usePass, setUsePass] = useState(state.config.defaults.showPassword)
 
+	if (state.config.policy.requireBurn) {
+		burn.value = true
+	}
+	if (state.config.policy.requirePassword) {
+		setUsePass(true)
+	}
+
 	useEffect(() => {
 		if (!usePass) {
 			setPassword("")
@@ -119,10 +126,10 @@ export function Options({
 					tooltip={state.config.policy.requirePassword
 						? $("RequiredByPolicy", { name: state.config.branding.appName })
 						: undefined}
-					on={state.config.policy.requirePassword || usePass}
+					on={usePass}
 					onChange={setUsePass}
 				/>
-				<Show if={state.config.policy.requirePassword || usePass}>
+				<Show if={usePass}>
 					<div class="flex">
 						<div class="flex h-5">
 							<div class="w-11" />

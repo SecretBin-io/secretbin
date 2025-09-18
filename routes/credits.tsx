@@ -1,15 +1,7 @@
 import { PageContent, Table } from "components"
 import { define } from "utils"
-import credits from "../credits.json" with { type: "json" }
 import { useTranslation } from "utils/hooks"
-
-/**
- * Removes a given prefix from a string if the string has it
- * @param s String
- * @param prefix Prefix to remove
- * @returns String without the prefix
- */
-export const trimPrefix = (s: string, prefix: string): string => s.startsWith(prefix) ? s.slice(prefix.length) : s
+import credits from "../credits.json" with { type: "json" }
 
 /**
  * Page for show copyright and credit information
@@ -28,6 +20,7 @@ export default define.page(({ state }) => {
 						$("Credits.SourceNotice"),
 				}}
 			/>
+			<br />
 			<p
 				// deno-lint-ignore react-no-danger
 				dangerouslySetInnerHTML={{
@@ -41,7 +34,7 @@ export default define.page(({ state }) => {
 				<h5 class="mb-2 font-bold text-gray-900 text-xl dark:text-white">
 					{$("Credits.Components.Title")}
 				</h5>
-				<div
+				<p
 					// deno-lint-ignore react-no-danger
 					dangerouslySetInnerHTML={{
 						__html: $("Credits.Components.Description", { name: state.config.branding.appName }),
@@ -51,17 +44,15 @@ export default define.page(({ state }) => {
 				<Table
 					headers={{
 						component: $("Credits.Components.Headers.Component"),
-						version: $("Credits.Components.Headers.Version"),
-						license: $("Credits.Components.Headers.License"),
 						author: $("Credits.Components.Headers.Author"),
+						license: $("Credits.Components.Headers.License"),
 					}}
 					rows={credits.map((d) => ({
 						component: d.repository ? <a href={d.repository} target="_blank">{d.name}</a> : <>{d.name}</>,
-						version: d.version,
+						author: (d.author ?? "").split(", ").map((x, i) => i === 0 ? x : <>,<br />{x}</>),
 						license: d.licenseFile
 							? <a href={d.licenseFile} target="_blank">{d.license}</a>
 							: <>{d.license}</>,
-						author: d.authors?.join(", ") ?? "",
 					}))}
 				/>
 			</div>

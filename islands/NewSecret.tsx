@@ -1,7 +1,7 @@
 import { KeyIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
 import { submitSecret } from "client"
-import { Button, Message, Spinner, TextArea } from "components"
+import { Button, Message, Section, Spinner, TextArea } from "components"
 import { PasswordGenerator } from "islands"
 import { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
@@ -29,9 +29,10 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 	const slowBurn = useSettingSignal("options.slowBurn", false, state)
 	const rereads = useSettingSignal("options.rereads", 2, state)
 	const [error, setError] = useState("")
-	const [showGenerator, setShowGenerator] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const aRef = useRef<HTMLAnchorElement | null>(null)
+	const dialogRef = useRef<HTMLDialogElement | null>(null)
+
 	const $ = useTranslation(state.language, "NewSecret")
 
 	const submit = async () => {
@@ -69,24 +70,30 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 		<>
 			<Spinner label={$("Encrypting")} hidden={!loading} />
 			<div class={clsx({ "hidden": loading })}>
-				<TextArea tabs lines={10} resizable placeholder="" value={message} onChange={setMessage} />
-				<Button
-					label={$("Options.GeneratePassword")}
-					icon={KeyIcon}
-					theme="plainAlternative"
-					class="mt-2"
-					onClick={() => setShowGenerator(true)}
-				/>
+				<Section
+					title={$("Message.Title")}
+					description={$("Message.Description")}
+				>
+					<TextArea tabs lines={10} resizable placeholder="" value={message} onChange={setMessage} />
+					<div class="-mb-8 w-full text-right">
+						<Button
+							class="mt-2"
+							label={$("Options.GeneratePassword")}
+							icon={KeyIcon}
+							theme="plainPrimary"
+							onClick={() => dialogRef.current?.show()}
+						/>
+					</div>
+				</Section>
 				<PasswordGenerator
 					state={state}
-					show={showGenerator}
+					dialogRef={dialogRef}
 					onPassword={(x) => {
 						setMessage(message + x)
-						setShowGenerator(false)
+						dialogRef.current?.showModal()
 					}}
-					onDismiss={() => setShowGenerator(false)}
+					onDismiss={() => dialogRef.current?.close()}
 				/>
-				<br />
 				<FilesUpload state={state} files={files} setFiles={setFiles} />
 				<Options
 					state={state}
