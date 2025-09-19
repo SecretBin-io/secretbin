@@ -1,8 +1,8 @@
 import { clsx } from "@nick/clsx"
 import { Signal } from "@preact/signals"
-import { JSX } from "preact"
 import { useEffect, useRef } from "preact/hooks"
 import { BaseProps } from "./base.ts"
+import { ComponentChild } from "preact"
 
 export interface InputProps extends BaseProps {
 	/** Hides input text for e.g. passwords */
@@ -57,7 +57,7 @@ export function Input(
 		onSubmit,
 		...props
 	}: InputProps,
-): JSX.Element {
+): ComponentChild {
 	const ref = useRef<HTMLInputElement | null>(null)
 
 	const val = signal !== undefined ? signal.value : value

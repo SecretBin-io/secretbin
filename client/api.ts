@@ -1,6 +1,6 @@
 import z, { ZodType } from "@zod/zod"
 import * as CBOR from "cbor2"
-import { parseModel, Secret, SecretMetadata, SecretSubmission } from "models"
+import { parseModel, Secret, SecretSubmission } from "models"
 import { decodeError, ErrorObject } from "utils/errors"
 import { decodeBody } from "utils/helpers"
 
@@ -32,11 +32,13 @@ interface APICallOptions {
  */
 async function apiCall<T>(path: string, model: ZodType<T>, options: APICallOptions = {}): Promise<T> {
 	const res = await fetch(path, {
-		method: options.method || "GET",
+		method: options.method ?? "GET",
 		headers: options.body
 			? { "Content-Type": options.useCBOR ? "application/cbor" : "application/json" }
 			: undefined,
-		body: options.body ? (options.useCBOR ? CBOR.encode(options.body) : JSON.stringify(options.body)) : undefined,
+		body: options.body
+			? (options.useCBOR ? CBOR.encode(options.body) as unknown as ArrayBuffer : JSON.stringify(options.body))
+			: undefined,
 	})
 
 	if (res.status === 200) {
@@ -60,16 +62,6 @@ export function createSecret(secret: SecretSubmission): Promise<string> {
 }
 
 /**
- * Fetches metadata for the secret (excluding the encrypted data).
- * Fetching the metadata does not decrease the remaining reads counter.
- * @param id Secret ID
- * @returns Secret metadata
- */
-export function getSecretMetadata(id: string): Promise<SecretMetadata> {
-	return apiCall(`/api/secret/${id}`, SecretMetadata)
-}
-
-/**
  * Fetches the secret (including the encrypted data).
  * Fetching the secret decreases the remaining reads counter and deletes
  * the secret if burn is enabled.
@@ -77,17 +69,5 @@ export function getSecretMetadata(id: string): Promise<SecretMetadata> {
  * @returns Secret metadata
  */
 export function getSecret(id: string): Promise<Secret> {
-	return apiCall(`/api/secret/${id}`, Secret, {
-		method: "POST",
-	})
-}
-
-/**
- * Deletes the secret from the backend
- * @param id Secret ID
- */
-export function deleteSecret(id: string): Promise<void> {
-	return apiCall(`/api/secret/${id}`, z.string(), {
-		method: "DELETE",
-	}).then(() => {})
+	return apiCall(`/api/secret/${id}`, Secret, { method: "POST" })
 }

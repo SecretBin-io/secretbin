@@ -1,9 +1,9 @@
 import { generatePassword } from "@nihility-io/crypto"
 import { Button, Input, Modal, NumberInput, Section, Toggle } from "components"
-import { JSX } from "preact"
 import { MutableRef, useState } from "preact/hooks"
 import { useSettingSignal, useTranslation } from "utils/hooks"
 import { State } from "utils/state"
+import { ComponentChild } from "preact"
 
 export interface PasswordGeneratorProps {
 	state: State
@@ -18,7 +18,7 @@ export interface PasswordGeneratorProps {
 	onPassword: (password: string) => void
 }
 
-export function PasswordGenerator({ dialogRef, onDismiss, onPassword, state }: PasswordGeneratorProps): JSX.Element {
+export function PasswordGenerator({ dialogRef, onDismiss, onPassword, state }: PasswordGeneratorProps): ComponentChild {
 	const $ = useTranslation(state.language, "PasswordGenerator")
 	const [password, setPassword] = useState("")
 	const useUppercase = useSettingSignal("passwords.useUppercase", true, state)

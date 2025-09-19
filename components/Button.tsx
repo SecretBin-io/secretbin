@@ -1,36 +1,17 @@
 import { clsx } from "@nick/clsx"
-import { JSX } from "preact"
+import { ComponentChild, ComponentChildren, TargetedMouseEvent } from "preact"
 import { jsx } from "preact/jsx-runtime"
 import { BaseProps, SVGIcon } from "./base.ts"
-
-/**
- * Button themes
- */
-export type ButtonTheme = keyof typeof buttonThemes
-
-const buttonThemes = {
-	dock: "",
-	clear: clsx("btn btn-ghost"),
-	primary: clsx("btn btn-primary"),
-	alternative: clsx("btn btn-neutral"),
-	success: clsx("btn btn-success"),
-	danger: clsx("btn btn-error"),
-	warning: clsx("btn btn-warning"),
-	info: clsx("btn btn-info"),
-	plainPrimary: clsx("btn btn-outline btn-primary"),
-	plainAlternative: clsx("btn btn-outline btn-secondary"),
-	plainSuccess: clsx("btn btn-outline btn-success"),
-	plainDanger: clsx("btn btn-error btn-outline"),
-	plainWarning: clsx("btn btn-outline btn-warning"),
-	plainInfo: clsx("btn btn-info btn-outline"),
-}
 
 export interface ButtonProps extends BaseProps {
 	/** Text displayed on the button */
 	label?: string
 
 	/** Button style (Default: default) */
-	theme?: ButtonTheme
+	theme?: "clear" | "primary" | "neutral" | "success" | "error" | "warning" | "info" | "dock"
+
+	/** Makes the button clear */
+	outline?: boolean
 
 	/** Optional button icon */
 	icon?: SVGIcon
@@ -51,21 +32,17 @@ export interface ButtonProps extends BaseProps {
 	 * Function which will be called when button is press
 	 * (Note: you can only set either `link` or `onSubmit` and not both)
 	 */
-	onClick?: (e: JSX.TargetedMouseEvent<HTMLButtonElement>) => void
+	onClick?: (e: TargetedMouseEvent<HTMLButtonElement>) => void
+
+	children?: ComponentChildren
 }
 
-interface ButtonLabelProps extends BaseProps {
-	/** Text displayed on the button */
-	label?: string
-
-	/** Optional button icon */
-	icon?: SVGIcon
-
+interface ButtonLabelProps extends Pick<ButtonProps, "label" | "icon" | "children"> {
 	/** Wether the button theme is dock */
 	isDock?: boolean
 }
 
-function ButtonLabel({ label, icon, isDock }: ButtonLabelProps): JSX.Element {
+function ButtonLabel({ label, icon, isDock, children }: ButtonLabelProps): ComponentChild {
 	return (
 		<>
 			{icon
@@ -77,10 +54,12 @@ function ButtonLabel({ label, icon, isDock }: ButtonLabelProps): JSX.Element {
 					}),
 				})
 				: null}
-			<div class={clsx({ "dock-label": isDock })}>{label}</div>
+			{label ? <div class={clsx({ "dock-label": isDock })}>{label}</div> : null}
+			{children}
 		</>
 	)
 }
+
 
 /**
  * Creates a clickable button
@@ -90,31 +69,47 @@ export function Button(
 		label,
 		icon,
 		theme = "primary",
+		outline,
 		type = "button",
 		disabled,
 		link,
 		onClick,
+		children,
 		...props
 	}: ButtonProps,
-): JSX.Element {
-	const classes = clsx(buttonThemes[theme], props.class)
+): ComponentChild {
+	const classes = clsx({
+		"btn": theme !== "dock",
+		"btn-ghost": theme === "clear",
+		"btn-primary": theme === "primary",
+		"btn-neutral": theme === "neutral",
+		"btn-success": theme === "success",
+		"btn-error": theme === "error",
+		"btn-warning": theme === "warning",
+		"btn-info": theme === "info",
+		"btn-outline": outline,
+	}, props.class)
 
 	if (link) {
 		return (
 			<a class={classes} href={link}>
-				<ButtonLabel label={label} icon={icon} isDock={theme === "dock"} />
+				<ButtonLabel label={label} icon={icon} isDock={theme === "dock"} >
+					{children}
+				</ButtonLabel>
 			</a>
 		)
 	}
 
 	return (
 		<button
+			class={classes}
 			type={type}
 			disabled={disabled}
-			class={classes}
 			onClick={(e) => onClick?.(e)}
 		>
-			<ButtonLabel label={label} icon={icon} isDock={theme === "dock"} />
+			<ButtonLabel label={label} icon={icon} isDock={theme === "dock"} >
+				{children}
+			</ButtonLabel>
 		</button>
 	)
 }

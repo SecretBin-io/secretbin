@@ -1,6 +1,6 @@
 import { clsx } from "@nick/clsx"
 import { Show } from "components"
-import { ComponentChildren, JSX } from "preact"
+import { ComponentChild, ComponentChildren } from "preact"
 import { BaseProps } from "./base.ts"
 
 export interface PageContentProps extends BaseProps {
@@ -16,7 +16,7 @@ export interface PageContentProps extends BaseProps {
 /**
  * Displays a given text above the wrapped component
  */
-export function PageContent({ title, description, children, ...props }: PageContentProps): JSX.Element {
+export function PageContent({ title, description, children, ...props }: PageContentProps): ComponentChild {
 	return (
 		<div class={clsx("mx-auto flex max-w-screen-md flex-col items-center justify-center", props.class)}>
 			<div class="w-full p-4">

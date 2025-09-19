@@ -120,7 +120,7 @@ export interface SecretAttachment {
 	/**
 	 * Base64 encoded or binary data of the file content
 	 */
-	data: string | Uint8Array
+	data: string | Uint8Array<ArrayBuffer>
 }
 
 export const SecretAttachment = z.strictObject({

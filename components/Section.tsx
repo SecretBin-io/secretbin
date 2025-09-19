@@ -1,6 +1,6 @@
 import { clsx } from "@nick/clsx"
 import { Show } from "components"
-import { JSX, VNode } from "preact"
+import { ComponentChild, ComponentChildren } from "preact"
 import { BaseProps } from "./base.ts"
 
 export interface SectionProps extends BaseProps {
@@ -10,19 +10,16 @@ export interface SectionProps extends BaseProps {
 	/** Optional smaller text below the title */
 	description?: string
 
-	children: VNode<JSX.HTMLAttributes> | VNode<JSX.HTMLAttributes>[]
+	children: ComponentChildren
 }
 
 /**
  * Displays a given text above the wrapped component
  */
-export function Section({ title, description, children, ...props }: SectionProps): JSX.Element {
+export function Section({ title, description, children, ...props }: SectionProps): ComponentChild {
 	return (
 		<div class={clsx("mx-auto py-2", props.class)}>
-			<label
-				for={Array.isArray(children) ? undefined : children.props.id}
-				class="font-medium text-gray-900 dark:text-gray-300"
-			>
+			<label class="font-medium text-gray-900 dark:text-gray-300">
 				{title}
 			</label>
 			<Show if={description}>

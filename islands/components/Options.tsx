@@ -1,12 +1,12 @@
 import Record from "@nihility-io/record"
 import { Signal } from "@preact/signals"
-import { Input, NumberInput, Section, Select, SelectOption, Show, Toggle } from "components"
+import { Input, NumberInput, Section, Select, Show, Toggle } from "components"
 import { TranslationKey } from "lang"
-import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { TrimPrefix } from "utils/helpers"
 import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
+import { ComponentChild } from "preact"
 
 export interface OptionsProps {
 	state: State
@@ -41,7 +41,7 @@ export function Options({
 	slowBurn,
 	rereads,
 	setPassword,
-}: OptionsProps): JSX.Element {
+}: OptionsProps): ComponentChild {
 	const $ = useTranslation(state.language, "NewSecret")
 
 	const [pass1, setPass1] = useState("")
@@ -72,19 +72,14 @@ export function Options({
 	return (
 		<>
 			<Section title={$("Expiration.Title")} description={$("Expiration.Description")}>
-				<Select signal={expires}>
-					{Record.mapToArray(state.config.expires, (key, value) => (
-						<SelectOption
-							name={$(
-								`Expiration.Expire.${value.unit as string}.${
-									value.count === 1 ? "One" : "Many"
-								}` as unknown as TrimPrefix<"NewSecret", TranslationKey>,
-								{ count: "" + value.count },
-							)}
-							value={key}
-						/>
-					))}
-				</Select>
+				<Select signal={expires} options={Record.mapToArray(state.config.expires, (key, value) => ({
+					label: $(
+						`Expiration.Expire.${value.unit as string}.${value.count === 1 ? "One" : "Many"
+						}` as TrimPrefix<"NewSecret", TranslationKey>,
+						{ count: "" + value.count },
+					),
+					value: key
+				}))} />
 			</Section>
 			<Section title={$("Options.Title")} description={$("Options.Description")}>
 				<Toggle

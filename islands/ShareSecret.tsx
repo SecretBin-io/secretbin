@@ -9,19 +9,19 @@ import {
 } from "@heroicons/react/24/outline"
 import { qrcode } from "@libs/qrcode"
 import { Button, Input, Modal, Section, Show, TextArea } from "components"
-import { JSX } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
 import { downloadDataURL, imageDataURL } from "utils/helpers"
 import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
 import { MessagePreview, setMessagePreview } from "./preview.ts"
+import { ComponentChild } from "preact"
 
 export interface ShareSecretProps {
 	state: State
 	id: string
 }
 
-export function ShareSecret({ id, state }: ShareSecretProps): JSX.Element {
+export function ShareSecret({ id, state }: ShareSecretProps): ComponentChild {
 	const [qrCode, setQrCode] = useState("")
 	const [link, setLink] = useState("")
 	const [preview, setPreview] = useState("")

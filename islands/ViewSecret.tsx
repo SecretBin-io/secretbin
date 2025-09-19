@@ -2,7 +2,7 @@ import { clsx } from "@nick/clsx"
 import { decryptSecret, getSecret } from "client"
 import { Button, FileList, Input, Message, Section, Show, Spinner, TextArea } from "components"
 import { Secret } from "models"
-import { JSX } from "preact"
+import { ComponentChild } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { LocalizedError } from "utils/errors"
 import { useTranslation } from "utils/hooks"
@@ -28,7 +28,7 @@ export interface ViewSecretProps {
 	passwordProtected: boolean
 }
 
-export function ViewSecret({ id, state, remainingReads, passwordProtected }: ViewSecretProps): JSX.Element {
+export function ViewSecret({ id, state, remainingReads, passwordProtected }: ViewSecretProps): ComponentChild {
 	const [requirePassword, setRequirePassword] = useState(passwordProtected)
 	const [requireConfirm, setRequireConfirm] = useState(remainingReads !== -1)
 	const [password, setPassword] = useState("")
@@ -119,14 +119,13 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 				</Show>
 				<Message type="error" title="Error" message={error} />
 				<Show if={!!secretContent}>
-					<TextArea class="resize-none" lines={15} readOnly value={secretContent?.[0]} />
+					<TextArea class="mb-2 resize-none" lines={15} readOnly value={secretContent?.[0]} />
 					<Show if={(secretContent?.[1] ?? []).length !== 0}>
-						<Section title={$("Files.Title")}>
-							<FileList
-								files={secretContent?.[1] ?? []}
-								downloadable
-							/>
-						</Section>
+						<FileList
+							title={$("Files.Title")}
+							files={secretContent?.[1] ?? []}
+							downloadable
+						/>
 					</Show>
 				</Show>
 			</div>

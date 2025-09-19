@@ -35,7 +35,7 @@ export default define.page(({ state, error }) => {
 
 	return (
 		<PageContent title={title}>
-			<Message type="error" largeText>
+			<Message class="my-2" type="error" largeText>
 				{message}
 			</Message>
 			<Button label={$("GoHome")} link="/" />

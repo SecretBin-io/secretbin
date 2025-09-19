@@ -1,6 +1,6 @@
 import { CloudArrowUpIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
-import { JSX } from "preact"
+import { ComponentChild, TargetedDragEvent } from "preact"
 import { BaseProps } from "./base.ts"
 
 export interface UploadProps extends BaseProps {
@@ -22,8 +22,8 @@ export interface UploadProps extends BaseProps {
  */
 export function Upload(
 	{ text = "Click to upload or drag and drop", multiple, onFileAdded, ...props }: UploadProps,
-): JSX.Element {
-	const dropHandler = (ev: JSX.TargetedDragEvent<HTMLDivElement>) => {
+): ComponentChild {
+	const dropHandler = (ev: TargetedDragEvent<HTMLDivElement>) => {
 		ev.preventDefault()
 
 		Array.from(ev.dataTransfer?.items ?? []).forEach((item) => {

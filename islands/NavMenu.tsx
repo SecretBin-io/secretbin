@@ -2,7 +2,7 @@ import { LanguageIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline"
 import { Cookies } from "@nihility-io/cookies"
 import { Button } from "components"
 import { Language, supportedLanguages } from "lang"
-import { JSX } from "preact"
+import { ComponentChild } from "preact"
 import { useEffect } from "preact/hooks"
 import { useSetting } from "utils/hooks"
 import { State, Theme } from "utils/state"
@@ -11,7 +11,7 @@ export interface NavMenuProps {
 	state: State
 }
 
-export function NavMenu({ state }: NavMenuProps): JSX.Element {
+export function NavMenu({ state }: NavMenuProps): ComponentChild {
 	const [theme, setTheme] = useSetting(
 		"theme",
 		typeof document !== "undefined"

@@ -49,7 +49,7 @@ export default define.page(({ state }) => {
 					}}
 					rows={credits.map((d) => ({
 						component: d.repository ? <a href={d.repository} target="_blank">{d.name}</a> : <>{d.name}</>,
-						author: (d.author ?? "").split(", ").map((x, i) => i === 0 ? x : <>,<br />{x}</>),
+						author: (d.author ?? "").split(", ").map((x, i) => i === 0 ? x : <span key={i}>,<br />{x}</span>),
 						license: d.licenseFile
 							? <a href={d.licenseFile} target="_blank">{d.license}</a>
 							: <>{d.license}</>,

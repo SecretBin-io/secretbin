@@ -1,5 +1,5 @@
 import { FileList, Section, Upload } from "components"
-import { JSX } from "preact"
+import { ComponentChild } from "preact"
 import { humanReadableSize } from "utils/helpers"
 import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
@@ -15,7 +15,7 @@ export interface FileUploadProps {
 	setFiles: (files: File[]) => void
 }
 
-export function FilesUpload({ state, files, setFiles }: FileUploadProps): JSX.Element {
+export function FilesUpload({ state, files, setFiles }: FileUploadProps): ComponentChild {
 	const $ = useTranslation(state.language, "NewSecret")
 
 	return (
@@ -28,7 +28,11 @@ export function FilesUpload({ state, files, setFiles }: FileUploadProps): JSX.El
 				text={$("Files.DragAndDrop")}
 				onFileAdded={(x) => setFiles([...files, x])}
 			/>
-			<FileList files={files} onDelete={(x) => setFiles(files.filter((y) => y !== x))} />
+			<FileList
+				title={$("Files.Title")}
+				files={files}
+				onDelete={(x) => setFiles(files.filter((y) => y !== x))}
+			/>
 		</Section>
 	)
 }

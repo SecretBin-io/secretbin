@@ -1,5 +1,5 @@
 import { clsx } from "@nick/clsx"
-import { JSX } from "preact"
+import { ComponentChild } from "preact"
 import { BaseProps } from "./base.ts"
 
 export interface SpinnerProps extends BaseProps {
@@ -13,7 +13,7 @@ export interface SpinnerProps extends BaseProps {
 /**
  * Creates a message with a title wrapped in a colored box
  */
-export function Spinner({ label, hidden, ...props }: SpinnerProps): JSX.Element | undefined {
+export function Spinner({ label, hidden, ...props }: SpinnerProps): ComponentChild {
 	if (hidden) {
 		return undefined
 	}

@@ -1,7 +1,7 @@
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
 import { Button, ButtonProps, Show } from "components"
-import { ComponentChildren, JSX } from "preact"
+import { ComponentChild, ComponentChildren } from "preact"
 import { MutableRef } from "preact/hooks"
 import { BaseProps } from "./base.ts"
 
@@ -37,7 +37,7 @@ export interface ModalProps extends BaseProps {
  */
 export function Modal(
 	{ title, description, actions, dialogRef, closable, onClose, children, ...props }: ModalProps,
-): JSX.Element | undefined {
+): ComponentChild {
 	return (
 		<dialog
 			ref={dialogRef}

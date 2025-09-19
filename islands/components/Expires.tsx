@@ -1,7 +1,7 @@
-import { JSX } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
+import { ComponentChild } from "preact"
 
 export interface ExpiresProps {
 	state: State
@@ -15,7 +15,7 @@ export interface ExpiresProps {
 /**
  * Renders the expiration using the user's preferred date format
  */
-export function Expires({ state, date }: ExpiresProps): JSX.Element {
+export function Expires({ state, date }: ExpiresProps): ComponentChild {
 	const [dateString, setDateString] = useState(date.toLocaleString(state.locale))
 	const $ = useTranslation(state.language, "Common")
 

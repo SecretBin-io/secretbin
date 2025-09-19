@@ -1,7 +1,7 @@
 import { clsx } from "@nick/clsx"
 import { Signal } from "@preact/signals"
 import { Show, Tooltip } from "components"
-import { JSX } from "preact"
+import { ComponentChild } from "preact"
 import { BaseProps } from "./base.ts"
 
 export interface ToggleProps extends BaseProps {
@@ -32,7 +32,7 @@ export interface ToggleProps extends BaseProps {
  */
 export function Toggle(
 	{ label, subLabel, signal, on, onChange, tooltip, disabled, ...props }: ToggleProps,
-): JSX.Element {
+): ComponentChild {
 	const value = signal !== undefined ? signal.value : on
 	const setValue = (v: boolean) => {
 		if (signal !== undefined) {

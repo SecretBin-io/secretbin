@@ -17,10 +17,6 @@
 			"description": "Builds SecretBin for production.",
 			"command": "deno run -A --unstable-cron vite build"
 		},
-		"start": {
-			"description": "Starts SecretBin",
-			"command": "deno serve -A _fresh/server.js"
-		},
 		"deps": {
 			"description": "Updates the credits.json file",
 			"command": "deno run -A jsr:@nihility-io/deno-deps@1.3.2"

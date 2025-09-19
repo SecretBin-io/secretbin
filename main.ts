@@ -15,8 +15,7 @@ if (config.logging.logAccess) {
 	app.use(loggingMiddleware)
 }
 
-const isBuildMode = Deno.args.includes("build") || Deno.args.includes("freshBuild")
-if (!isBuildMode) {
+if (!Deno.args.includes("build")) {
 	// Trigger the secret provider on startup but not when building
 	if (!(await Secrets.shared.init())) {
 		Deno.exit(-1)

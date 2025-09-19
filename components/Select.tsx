@@ -1,19 +1,18 @@
-import { clsx } from "@nick/clsx"
-import { Signal } from "@preact/signals"
-import { VNode } from "preact"
-import { JSX } from "preact/jsx-runtime"
-import { BaseProps } from "./base.ts"
+import { clsx } from "@nick/clsx";
+import { Signal } from "@preact/signals";
+import { ComponentChild } from "preact";
+import { BaseProps } from "./base.ts";
 
-export interface SelectOptionProps {
-	/** Option display name */
-	name: string
+export interface SelectOption {
+	/**
+	 * Option label as displayed to the user
+	 */
+	label: string
 
-	/** Option value */
+	/**
+	 * Option value as used in the code
+	 */
 	value: string
-}
-
-export function SelectOption({ name, value }: SelectOptionProps): JSX.Element {
-	return <option key={name} value={value}>{name}</option>
 }
 
 export interface SelectProps extends BaseProps {
@@ -29,14 +28,16 @@ export interface SelectProps extends BaseProps {
 	 */
 	onChange?: (value: string) => void
 
-	/** List of selectable options */
-	children: VNode<SelectOptionProps>[]
+	/**
+	 * Map of selectable options (key = option value, value = option display name)
+	 */
+	options: SelectOption[]
 }
 
 /**
  * Creates an drop down field with defined selectable options
  */
-export function Select({ signal, value, onChange, children, ...props }: SelectProps): JSX.Element {
+export function Select({ signal, value, onChange, options, ...props }: SelectProps): ComponentChild {
 	const val = signal !== undefined ? signal.value : value
 	const setVal = (v: string) => {
 		if (signal !== undefined) {
@@ -52,7 +53,9 @@ export function Select({ signal, value, onChange, children, ...props }: SelectPr
 			value={val}
 			onInput={(e) => setVal(e.currentTarget.value)}
 		>
-			{children}
+			{options.map(({ label, value }) => (
+				<option key={value} value={value}>{label}</option>
+			))}
 		</select>
 	)
 }

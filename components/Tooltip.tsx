@@ -1,4 +1,4 @@
-import { ComponentChildren, JSX } from "preact"
+import { ComponentChildren } from "preact"
 import { BaseProps } from "./base.ts"
 
 export interface TooltipProps extends BaseProps {
@@ -8,7 +8,7 @@ export interface TooltipProps extends BaseProps {
 	children?: ComponentChildren
 }
 
-export function Tooltip({ text, children, ...props }: TooltipProps): JSX.Element | ComponentChildren {
+export function Tooltip({ text, children, ...props }: TooltipProps): ComponentChildren {
 	if (!text) {
 		return children
 	}

@@ -1,32 +1,8 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
 import { Signal } from "@preact/signals"
-import { JSX } from "preact"
+import { ComponentChild } from "preact"
 import { BaseProps } from "./base.ts"
-
-interface NumberButtonProps {
-	/** Button mode */
-	mode: "+" | "-"
-
-	/** Disables the button */
-	disabled?: boolean
-
-	/** Function called when the button is clicked */
-	onClick: () => void
-}
-/** Helper element for incrementing or decrementing the number */
-function NumberButton({ mode, disabled, onClick }: NumberButtonProps): JSX.Element {
-	return (
-		<button
-			type="button"
-			class="btn btn-primary join-item"
-			disabled={disabled}
-			onClick={onClick}
-		>
-			{mode === "+" ? <PlusIcon class="h-4 w-4" /> : <MinusIcon class="h-4 w-4" />}
-		</button>
-	)
-}
 
 export interface NumberInputProps extends BaseProps {
 	/** Optional minimum value */
@@ -50,10 +26,35 @@ export interface NumberInputProps extends BaseProps {
 	onChange?: (value: number) => void
 }
 
+interface NumberButtonProps {
+	/** Button mode */
+	mode: "+" | "-"
+
+	/** Disables the button */
+	disabled?: boolean
+
+	/** Function called when the button is clicked */
+	onClick: () => void
+}
+
+/** Helper element for incrementing or decrementing the number */
+function NumberButton({ mode, disabled, onClick }: NumberButtonProps): ComponentChild {
+	return (
+		<button
+			type="button"
+			class="btn btn-primary join-item"
+			disabled={disabled}
+			onClick={onClick}
+		>
+			{mode === "+" ? <PlusIcon class="h-4 w-4" /> : <MinusIcon class="h-4 w-4" />}
+		</button>
+	)
+}
+
 /**
  * Creates a number input field with increment and decrement buttons
  */
-export function NumberInput({ signal, value, min, max, step = 1, onChange, ...props }: NumberInputProps): JSX.Element {
+export function NumberInput({ signal, value, min, max, step = 1, onChange, ...props }: NumberInputProps): ComponentChild {
 	const val = signal !== undefined ? signal.value : value!
 	const setVal = (v: number) => {
 		if (signal !== undefined) {

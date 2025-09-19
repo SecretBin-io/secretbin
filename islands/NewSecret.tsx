@@ -3,7 +3,6 @@ import { clsx } from "@nick/clsx"
 import { submitSecret } from "client"
 import { Button, Message, Section, Spinner, TextArea } from "components"
 import { PasswordGenerator } from "islands"
-import { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { LocalizedError, SecretSizeLimitError } from "utils/errors"
 import { useSettingSignal, useTranslation } from "utils/hooks"
@@ -11,12 +10,13 @@ import { State } from "../utils/state.ts"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
 import { setMessagePreview } from "./preview.ts"
+import { ComponentChild } from "preact"
 
 export interface NewSecretProps {
 	state: State
 }
 
-export function NewSecret({ state }: NewSecretProps): JSX.Element {
+export function NewSecret({ state }: NewSecretProps): ComponentChild {
 	const [message, setMessage] = useState("")
 	const [files, setFiles] = useState<File[]>([])
 	const [password, setPassword] = useState<string | undefined>("")
@@ -80,7 +80,8 @@ export function NewSecret({ state }: NewSecretProps): JSX.Element {
 							class="mt-2"
 							label={$("Options.GeneratePassword")}
 							icon={KeyIcon}
-							theme="plainPrimary"
+							theme="primary"
+							outline
 							onClick={() => dialogRef.current?.show()}
 						/>
 					</div>

@@ -1,6 +1,6 @@
 import { clsx } from "@nick/clsx"
 import { Signal } from "@preact/signals"
-import { JSX } from "preact"
+import { ComponentChild, TargetedKeyboardEvent } from "preact"
 import { BaseProps } from "./base.ts"
 
 export interface TextAreaProps extends BaseProps {
@@ -34,7 +34,7 @@ export interface TextAreaProps extends BaseProps {
  * By default pressing tab will not insert a tab but shift focus to the next input.
  * @param onChange Optional value change handler
  */
-function enableTabs(onChange?: (value: string) => void): (e: JSX.TargetedKeyboardEvent<HTMLTextAreaElement>) => void {
+function enableTabs(onChange?: (value: string) => void): (e: TargetedKeyboardEvent<HTMLTextAreaElement>) => void {
 	return (e) => {
 		// Only handle the tab key
 		if (e.key !== "Tab") {
@@ -64,7 +64,7 @@ function enableTabs(onChange?: (value: string) => void): (e: JSX.TargetedKeyboar
  */
 export function TextArea(
 	{ signal, value, tabs, lines, placeholder, resizable, readOnly, onChange, ...props }: TextAreaProps,
-): JSX.Element {
+): ComponentChild {
 	const val = signal !== undefined ? signal.value : value
 	const setVal = (v: string) => {
 		if (signal !== undefined) {
