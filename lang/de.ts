@@ -171,6 +171,10 @@ export default {
 				Title: "Seite nicht gefunden",
 				Message: "Die gesuchte Seite konnte nicht gefunden werden.",
 			},
+			EventListError: {
+				Title: "EventListError",
+				Message: "Es ist ein Fehler beim Laden der Ereignisse aufgetreten.",
+			},
 			SecretNotFoundError: {
 				Title: "SecretNotFoundError",
 				Message: "Ein Geheimnis mit der ID {{id}} wurde nicht gefunden.",

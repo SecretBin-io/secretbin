@@ -28,6 +28,16 @@ export class SecretAlreadyExistsError extends LocalizedError {
 	}
 }
 
+export class EventListError extends LocalizedError {
+	public constructor() {
+		super(STATUS_CODE.InternalServerError, "EventListError")
+	}
+
+	public static fromObject(_message: string, _params: Record<string, unknown>): Error {
+		return new EventListError()
+	}
+}
+
 export class SecretListError extends LocalizedError {
 	public constructor() {
 		super(STATUS_CODE.InternalServerError, "SecretListError")

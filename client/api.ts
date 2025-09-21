@@ -1,6 +1,5 @@
-import z, { ZodType } from "@zod/zod"
 import * as CBOR from "cbor2"
-import { parseModel, Secret, SecretSubmission } from "models"
+import { Secret, SecretSubmission } from "models"
 import { decodeError, ErrorObject } from "utils/errors"
 import { decodeBody } from "utils/helpers"
 
@@ -30,7 +29,7 @@ interface APICallOptions {
  * @param options Options for the API call
  * @returns Parsed response
  */
-async function apiCall<T>(path: string, model: ZodType<T>, options: APICallOptions = {}): Promise<T> {
+async function apiCall<T>(path: string, options: APICallOptions = {}): Promise<T> {
 	const res = await fetch(path, {
 		method: options.method ?? "GET",
 		headers: options.body
@@ -42,7 +41,7 @@ async function apiCall<T>(path: string, model: ZodType<T>, options: APICallOptio
 	})
 
 	if (res.status === 200) {
-		return decodeBody<T>(res).then((x) => parseModel(model, x))
+		return decodeBody<T>(res)
 	}
 
 	return decodeBody<ErrorObject>(res).then((x) => Promise.reject(decodeError(x)))
@@ -54,7 +53,7 @@ async function apiCall<T>(path: string, model: ZodType<T>, options: APICallOptio
  * @returns ID of the newly created secret
  */
 export function createSecret(secret: SecretSubmission): Promise<string> {
-	return apiCall("/api/secret", z.object({ id: z.string() }), {
+	return apiCall<{ id: string }>("/api/secret", {
 		method: "POST",
 		body: secret,
 		useCBOR: !!secret.dataBytes,
@@ -69,5 +68,5 @@ export function createSecret(secret: SecretSubmission): Promise<string> {
  * @returns Secret metadata
  */
 export function getSecret(id: string): Promise<Secret> {
-	return apiCall(`/api/secret/${id}`, Secret, { method: "POST" })
+	return apiCall<Secret>(`/api/secret/${id}`, { method: "POST" })
 }

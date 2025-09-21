@@ -67,6 +67,7 @@ export const ConfigModel: ZodType<Config> = z.strictObject({
 		requirePassword: z.boolean().default(false),
 		denySlowBurn: z.boolean().default(false),
 		encryptionAlgorithm: z.enum(EncryptionAlgorithm).default(EncryptionAlgorithm.AES256GCM),
+		recordEvents: z.boolean().default(true),
 	}).prefault({}),
 	storage: z.strictObject({
 		maxSize: Size.transform(sizeToBytes).or(z.uint32()).default(sizeToBytes("10Mi")),

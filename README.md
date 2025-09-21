@@ -126,6 +126,7 @@ policy:
   requireBurn: false # Forces users to specify a password for new secrets
   denySlowBurn: false # Blocks users from enabling slow burn for new secrets
   encryptionAlgorithm: AES256-GCM # Algorithm used for encrypting new secrets (AES256-GCM, XChaCha20-Poly1305)
+  recordEvents: true # Whether to record events such as reads, deletions, and expirations
 storage:
   maxSize: 10Mi # Max size a new secret is allowed to have
   gcInterval: 5 # Interval in seconds in which the garbage collector should run

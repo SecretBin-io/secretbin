@@ -49,11 +49,12 @@ export function Message({ title, type = "info", largeText, children, message, ..
 			"alert-error": type === "error",
 		}, props.class)}>
 			<MessageIcon type={type} />
-			<Show if={title}>
-				<span class="font-medium">{title}</span>
-				{" "}
-			</Show>
-			<span class={clsx({ "text-base": largeText })}>{children ?? message}</span>
+			<div>
+				<Show if={title}>
+					<h3 class="font-bold">{title}</h3>
+				</Show>
+				<span class={clsx({ "text-base": largeText })}>{children ?? message}</span>
+			</div>
 		</div>
 	)
 }

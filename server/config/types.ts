@@ -123,6 +123,9 @@ export interface Policy {
 
 	/** Algorithm used for encrypting new secrets */
 	encryptionAlgorithm: EncryptionAlgorithm
+
+	/** Whether to record events such as reads, deletions, and expirations */
+	recordEvents: boolean
 }
 
 /**

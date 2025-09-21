@@ -1,10 +1,10 @@
 import { decodeHex, encodeHex } from "@std/encoding/hex"
-import z from "@zod/zod"
-import { parseModel, Secret, SecretMetadata, SecretMutableMetadata } from "models"
+import { Event, EventType, Secret, SecretMetadata, SecretMutableMetadata } from "models"
 import postgres from "postgres"
 import { DatabaseConfig } from "server/config"
 import { logDB } from "server/log"
 import {
+	EventListError,
 	LocalizedError,
 	SecretAlreadyExistsError,
 	SecretCreateError,
@@ -14,20 +14,7 @@ import {
 	SecretReadError,
 	SecretUpdateError,
 } from "utils/errors"
-
-interface SecretRow {
-	id: string
-	// deno-lint-ignore camelcase
-	created_at: Date
-	expires: Date
-	// deno-lint-ignore camelcase
-	remaining_reads: number
-	// deno-lint-ignore camelcase
-	password_protected: boolean
-	data: string
-	// deno-lint-ignore camelcase
-	data_bytes: Uint8Array | null
-}
+import { eventFromRow, EventRow, metadataFromRow, secretFromRow, SecretRow } from "./row.ts"
 
 /**
  * Secret storage implementation which stores secrets in PostgreSQL
@@ -75,38 +62,75 @@ export class Database {
 				data_bytes			bytea
 			)
 		`
+
+		await this.#sql /*sql*/`
+			create table if not exists events (
+				id                  uuid        not null primary key,
+				timestamp		   timestamp   not null default now(),
+				type			   text        not null,
+				secret_id          uuid        not null
+			)
+		`
 	}
 
 	/**
-	 * Creates a secret metadata object from a Postgres row
-	 * @param r Postgres row
-	 * @returns Secret
+	 * Writes an event to the database
+	 * @param secretId Secret ID
+	 * @param type Event type
 	 */
-	static #metadataFromRow(r: SecretRow): Promise<SecretMetadata> {
-		return parseModel(SecretMetadata, {
-			id: r.id,
-			expires: r.expires,
-			remainingReads: r.remaining_reads,
-			passwordProtected: r.password_protected,
-		})
-	}
-
-	/**
-	 * Creates a secret object from a Postgres row
-	 * @param r Postgres row
-	 * @returns Secret
-	 */
-	static async #secretFromRow(r: SecretRow): Promise<Secret> {
+	async emitEvent(secretId: string, type: EventType): Promise<void> {
 		try {
-			const metadata = await this.#metadataFromRow(r)
-			const data = await parseModel(z.string().startsWith("crypto://"), r.data)
-			return {
-				...metadata,
-				data: data,
-				dataBytes: r.data_bytes ? r.data_bytes : undefined,
-			} satisfies Secret
+			await this.#sql /*sql*/`insert into events (
+				id,
+				type,
+				secret_id
+			) values (
+				gen_random_uuid(),
+				${type},
+				${secretId}
+			)`
 		} catch (err) {
-			throw err
+			logDB.error(`Failed to emit event.`, { error: err })
+		}
+	}
+
+	/**
+	 * Gets all events
+	 */
+	async *getEvents(): AsyncGenerator<Event> {
+		try {
+			const res = await this.#sql /*sql*/`select
+				id, timestamp, type, secret_id
+			from events
+			order by timestamp desc`
+
+			for (const e of res.values()) {
+				yield eventFromRow(e as EventRow)
+			}
+		} catch (err) {
+			logDB.error(`Failed to list events.`, { error: err })
+			throw err instanceof LocalizedError ? err : new EventListError()
+		}
+	}
+
+	/**
+	 * Gets all events for the specified secret
+	 * @param secretId Secret ID
+	 */
+	async *getEventsForSecret(secretId: string): AsyncGenerator<Event> {
+		try {
+			const res = await this.#sql /*sql*/`select
+				id, timestamp, type, secret_id
+			from events
+			where secret_id = ${secretId}
+			order by timestamp desc`
+
+			for (const e of res.values()) {
+				yield eventFromRow(e as EventRow)
+			}
+		} catch (err) {
+			logDB.error(`Failed to list events.`, { error: err })
+			throw err instanceof LocalizedError ? err : new EventListError()
 		}
 	}
 
@@ -120,7 +144,7 @@ export class Database {
 			from secrets`
 
 			for (const e of res.values()) {
-				yield await Database.#metadataFromRow(e as SecretRow)
+				yield metadataFromRow(e as SecretRow)
 			}
 		} catch (err) {
 			logDB.error(`Failed to list secrets.`, { error: err })
@@ -147,12 +171,14 @@ export class Database {
 	 */
 	async getSecret(id: string): Promise<Secret> {
 		try {
-			const res = await this.#sql /*sql*/`select * from secrets where id = ${id}`
+			const res = await this.#sql /*sql*/`select
+				id, expires, remaining_reads, password_protected, data, data_bytes
+			from secrets where id = ${id}`
 			if (res.count === 0) {
 				throw new SecretNotFoundError(id)
 			}
 
-			return await Database.#secretFromRow([...res.values()][0] as SecretRow)
+			return await secretFromRow([...res.values()][0] as SecretRow)
 		} catch (err) {
 			logDB.error(`Failed to read secrets.`, { error: err })
 			throw err instanceof LocalizedError ? err : new SecretReadError(id)
@@ -173,7 +199,7 @@ export class Database {
 				throw new SecretNotFoundError(id)
 			}
 
-			return await Database.#metadataFromRow([...res.values()][0] as SecretRow)
+			return await metadataFromRow([...res.values()][0] as SecretRow)
 		} catch (err) {
 			logDB.error(`Failed to read secrets.`, { error: err })
 			throw err instanceof LocalizedError ? err : new SecretReadError(id)

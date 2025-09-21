@@ -167,6 +167,10 @@ export default {
 				Title: "Page Not Found",
 				Message: "The page you were looking for doesn't exist.",
 			},
+			EventListError: {
+				Title: "EventListError",
+				Message: "Failed to get events.",
+			},
 			SecretNotFoundError: {
 				Title: "SecretNotFoundError",
 				Message: "A secret with the ID {{id}} does not exist.",
