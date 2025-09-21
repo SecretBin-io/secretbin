@@ -12,6 +12,7 @@ const sanitizeConfig: SanitizeOptions = {
 		["h2", "h3", "h4", "h5", "h6", "span", "q"],
 		["cite", "time", "table", "thead", "tbody"],
 		["tfoot", "tr", "th", "td", "caption", "div"],
+		["a", "img"],
 	].flat(),
 
 	// Allowed attributes per tag
@@ -24,6 +25,8 @@ const sanitizeConfig: SanitizeOptions = {
 		colspan: ["td", "th"],
 		rowspan: ["td", "th"],
 		scope: ["th"],
+		href: ["a"],
+		src: ["img"],
 	},
 
 	// explicitly drop common event-handler attributes from all allowed elements

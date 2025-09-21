@@ -71,12 +71,9 @@ export class Database {
 				expires             timestamp   not null,
 				remaining_reads     integer     not null,
 				password_protected  boolean     not null,
-				data	            text        not null
+				data	            text        not null,
+				data_bytes			bytea
 			)
-		`
-
-		await this.#sql /*sql*/`
-			alter table secrets add column if not exists data_bytes bytea;
 		`
 	}
 
