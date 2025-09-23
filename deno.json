@@ -72,7 +72,7 @@
 		"cbor2": "npm:cbor2@^2.0.1",
 		"client": "./client/mod.ts",
 		"components": "./components/mod.ts",
-		"daisyui": "npm:daisyui@^5.1.13",
+		"daisyui": "npm:daisyui@^5.1.14",
 		"fresh": "jsr:@fresh/core@2.1.1",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",
@@ -84,6 +84,8 @@
 		"server": "./server/mod.ts",
 		"server/config": "./server/config/mod.ts",
 		"server/database": "./server/database/mod.ts",
+		"server/database/models": "./server/database/models/mod.ts",
+		"server/models": "./server/models/mod.ts",
 		"server/log": "./server/log/mod.ts",
 		"tailwindcss": "npm:tailwindcss@^4.1.13",
 		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.8.0",
@@ -96,7 +98,7 @@
 		"utils/hooks": "./utils/hooks/mod.ts",
 		"utils/middleware": "./utils/middleware/mod.ts",
 		"utils/state": "./utils/state.ts",
-		"vite": "npm:vite@^7.1.6"
+		"vite": "npm:vite@^7.1.7"
 	},
 	"compilerOptions": {
 		"lib": [

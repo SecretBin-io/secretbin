@@ -3,14 +3,14 @@ import { clsx } from "@nick/clsx"
 import { submitSecret } from "client"
 import { Button, Message, Section, Spinner, TextArea } from "components"
 import { PasswordGenerator } from "islands"
+import { ComponentChild } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { LocalizedError, SecretSizeLimitError } from "utils/errors"
 import { useSettingSignal, useTranslation } from "utils/hooks"
-import { State } from "../utils/state.ts"
+import { State } from "utils/state"
 import { FilesUpload } from "./components/FileUpload.tsx"
 import { Options } from "./components/Options.tsx"
 import { setMessagePreview } from "./preview.ts"
-import { ComponentChild } from "preact"
 
 export interface NewSecretProps {
 	state: State

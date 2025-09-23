@@ -1,9 +1,9 @@
 import { generatePassword } from "@nihility-io/crypto"
 import { Button, Input, Modal, NumberInput, Section, Toggle } from "components"
+import { ComponentChild } from "preact"
 import { MutableRef, useState } from "preact/hooks"
 import { useSettingSignal, useTranslation } from "utils/hooks"
 import { State } from "utils/state"
-import { ComponentChild } from "preact"
 
 export interface PasswordGeneratorProps {
 	state: State
@@ -51,7 +51,7 @@ export function PasswordGenerator({ dialogRef, onDismiss, onPassword, state }: P
 			onClose={onDismiss}
 			closable
 			actions={[
-				{ label: $("Insert"), disabled: password === "", onClick: onInsert },
+				{ label: $("Insert"), disabled: password === "", close: true, onClick: onInsert },
 			]}
 		>
 			<Section title={$("Title")} description={$("Description")}>

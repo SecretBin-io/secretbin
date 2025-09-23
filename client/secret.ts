@@ -77,9 +77,9 @@ export async function decryptSecret(secret: Secret, password: string): Promise<[
 
 	const { message, attachments }: SecretContent = secret.dataBytes
 		? await decrypt(passphrase, secret.data, secret.dataBytes)
-			.then((x) => SecretContent.parse(CBOR.decode(x)))
+			.then((x) => CBOR.decode(x) as SecretContent)
 		: await decrypt(passphrase, secret.data)
-			.then((x) => SecretContent.parse(JSON.parse(x)))
+			.then((x) => JSON.parse(x) as SecretContent)
 
 	return [message, attachments?.map(attachmentToFile) ?? []]
 }

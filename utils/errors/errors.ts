@@ -1,7 +1,7 @@
 import Record from "@nihility-io/record"
 import { STATUS_CODE } from "@std/http/status"
 import z from "@zod/zod"
-import { humanReadableSize } from "../helpers/sizes.ts"
+import { humanReadableSize } from "utils/helpers"
 import { registerErrorTypes } from "./coding.ts"
 import { LocalizedError } from "./localized.ts"
 

@@ -9,6 +9,7 @@ import { SecretNotFoundError, SecretParseError, SecretPolicyError, SecretSizeLim
  */
 export class Secrets {
 	#db: Database
+
 	static #instance?: Secrets = undefined
 
 	constructor() {
@@ -30,9 +31,9 @@ export class Secrets {
 		// Schedule the garbage collector to run every hour in the background.
 		// The garbage collector deletes expired secrets
 		Deno.cron("GarbageCollector", config.storage.garbageCollection.cron, () => {
-			this.garbageCollection()
+			this.#garbageCollection()
 		})
-		
+
 		return true
 	}
 
@@ -40,10 +41,7 @@ export class Secrets {
 	 * Get the singleton instance of the secret manager
 	 */
 	static get shared(): Secrets {
-		if (!Secrets.#instance) {
-			Secrets.#instance = new Secrets()
-		}
-
+		Secrets.#instance ??= new Secrets()
 		return Secrets.#instance
 	}
 
@@ -51,16 +49,16 @@ export class Secrets {
 	 * Deletes expired secrets. The garbage collector is schedule to run
 	 * every hour in the background but it can also be called manually.
 	 */
-	async garbageCollection(): Promise<void> {
+	async #garbageCollection(): Promise<void> {
 		logCG.info(`Running garbage collector...`)
 		try {
 			// Go through all secrets
-			for await (const s of Secrets.#instance!.#db.getSecrets()) {
+			for await (const s of Secrets.#instance!.#db.secrets.getAll()) {
 				// Check if the secret has expired or is burned
 				if (s.expires < new Date() || s.remainingReads === 0) {
 					try {
-						await this.#deleteSecret(s.id)
-						await this.#db.emitEvent(s.id, EventType.Expired)
+						await this.#db.events.emit(s.id, EventType.Expired)
+						await this.deleteSecret(s.id)
 						logCG.info(`Deleted secret #${s.id}.`, { id: s.id })
 					} catch (err) {
 						logCG.error(`Unable to delete secret #${s.id}.`, { id: s.id, error: err })
@@ -74,16 +72,40 @@ export class Secrets {
 	}
 
 	/**
-	 * Converts a duration into an expiration date
+	 * Removes the secret if it is invalid (expired or burned)
+	 * @returns A function that removes the secret if it is invalid (expired or burned)
+	 */
+	#removeIfInvalid<T extends SecretMetadata>(): (secret: T) => T {
+		return (secret: T): T => {
+			if (secret.expires < new Date() || secret.remainingReads === 0) {
+				// Deletion can be done in the background. No reason to wait.
+				this.deleteSecret(secret.id)
+					.then(() => this.#db.events.emit(secret.id, EventType.Expired))
+				throw new SecretNotFoundError(secret.id)
+			}
+			return secret
+		}
+	}
+
+	/**
+	 * Converts a duration into an expiration date.
+	 * If the duration is invalid, throws an error.
 	 * @param duration Duration e.g. 5min
 	 * @returns Expiration date
 	 */
-	static getExpireDate(duration: string): Date | undefined {
+	static #getExpireDate(duration: string): Date {
 		// Check if the duration is an configured duration and
 		// converts the duration into seconds
 		const s = config.expires[duration].seconds
 		if (!s) {
-			return undefined
+			throw new SecretParseError([{
+				code: "custom",
+				input: duration,
+				path: ["expires"],
+				message: `${duration} is not a valid value. Use one of the following: ${
+					Object.keys(config.expires).join(", ")
+				}`,
+			}])
 		}
 
 		// Add the duration to the current time
@@ -91,11 +113,11 @@ export class Secrets {
 	}
 
 	/**
-	 * Parses and stores the provided secret
-	 * @param secret Secret
-	 * @returns ID of the created secret
+	 * Ensures that the provided secret meets the configured policies.
+	 * If not, an error is thrown.
+	 * @param secret Secret to check
 	 */
-	async createSecret(secret: SecretSubmission): Promise<string> {
+	#assertMeetsPolicy(secret: SecretSubmission): void {
 		const data = secret.dataBytes ? secret.dataBytes : secret.data
 		if (data.length > config.storage.maxSize) {
 			throw new SecretSizeLimitError(data.length, config.storage.maxSize)
@@ -113,25 +135,65 @@ export class Secrets {
 		if (config.policy.requirePassword && !secret.passwordProtected) {
 			throw new SecretPolicyError(`Password is required.`)
 		}
+	}
 
-		// Validate the expires duration and turn it into an expiration date
-		const expires = Secrets.getExpireDate(secret.expires)
-		if (!expires) {
-			throw new SecretParseError([{
-				code: "custom",
-				input: secret.expires,
-				path: ["expires"],
-				message: `${secret.expires} is not a valid value. Use one of the following: ${
-					Object.keys(config.expires).join(", ")
-				}`,
-			}])
+	/**
+	 * Checks if a secret with the provided ID exists
+	 * @param id Secret ID
+	 */
+	secretExists(id: string): Promise<boolean> {
+		return this.#db.secrets.exists(id)
+	}
+
+	/**
+	 * Loads the secret (including the encrypted data). It also deletes the
+	 * secret if it is burned.
+	 * @param id Secret ID
+	 * @returns Secret metadata
+	 */
+	async getSecret(id: string): Promise<Secret> {
+		const s = await this.#db.secrets.get(id)
+			.then(this.#removeIfInvalid())
+
+		logSecrets.info(`Secret #${id} was opened.`, { action: "get", id })
+		await this.#db.events.emit(id, EventType.Read)
+
+		if (s.remainingReads === 1) {
+			await this.deleteSecret(id)
+			await this.#db.events.emit(id, EventType.Burned)
+		} else if (s.remainingReads !== -1) {
+			await this.updateSecretMetadata(id, { remainingReads: s.remainingReads - 1 })
 		}
 
-		const id: string = crypto.randomUUID()
+		return s
+	}
+
+	/**
+	 * Loads metadata for the secret (excluding the encrypted data).
+	 * @param id Secret ID
+	 * @returns Secret metadata
+	 */
+	getSecretMetadata(id: string): Promise<SecretMetadata> {
+		return this.#db.secrets.getMetadata(id).then(this.#removeIfInvalid())
+	}
+
+	/**
+	 * Parses and stores the provided secret
+	 * @param secret Secret
+	 * @returns ID of the created secret
+	 */
+	async createSecret(secret: SecretSubmission): Promise<string> {
+		// Ensure that the secrets fulfills the configured policies
+		this.#assertMeetsPolicy(secret)
+
+		// Validate the expires duration and turn it into an expiration date
+		const expires = Secrets.#getExpireDate(secret.expires)
+
+		const id = crypto.randomUUID()
 
 		try {
 			// Store the secret
-			await this.#db.insertSecret({
+			await this.#db.secrets.insert({
 				id,
 				data: secret.data,
 				dataBytes: secret.dataBytes,
@@ -139,7 +201,7 @@ export class Secrets {
 				remainingReads: secret.burnAfter,
 				passwordProtected: secret.passwordProtected,
 			})
-			await this.#db.emitEvent(id, EventType.Created)
+			await this.#db.events.emit(id, EventType.Created)
 			logSecrets.info(
 				`Create a new secret #${id} that expires ${expires.toISOString()}`,
 				{ id, expires, action: "create" },
@@ -152,77 +214,6 @@ export class Secrets {
 		return id
 	}
 
-	removeIfInvalid<T extends SecretMetadata>(): (secret: T) => T {
-		return (secret: T): T => {
-			if (secret.expires < new Date() || secret.remainingReads === 0) {
-				// Deletion can be done in the background. No reason to wait.
-				this.#deleteSecret(secret.id)
-					.then(() => this.#db.emitEvent(secret.id, EventType.Expired))
-				throw new SecretNotFoundError(secret.id)
-			}
-			return secret
-		}
-	}
-
-	/**
-	 * Loads the given secret if it's still valid. If not delete it
-	 * immediately.
-	 * @param id Secret ID
-	 * @returns Result with secret
-	 */
-	getSecretIfValid(id: string): Promise<Secret> {
-		return this.#db.getSecret(id).then(this.removeIfInvalid())
-	}
-
-	/**
-	 * Loads the given secret metadata if it's still valid. If not delete it
-	 * immediately.
-	 * @param id Secret ID
-	 * @returns Result with secret
-	 */
-	getSecretMetadataIfValid(id: string): Promise<SecretMetadata> {
-		return this.#db.getSecretMetadata(id).then(this.removeIfInvalid())
-	}
-
-	/**
-	 * Loads metadata for the secret (excluding the encrypted data).
-	 * @param id Secret ID
-	 * @returns Secret metadata
-	 */
-	async getSecretMetadata(id: string): Promise<SecretMetadata> {
-		return await this.getSecretMetadataIfValid(id)
-	}
-
-	/**
-	 * Checks if a secret with the provided ID exists
-	 * @param id Secret ID
-	 */
-	secretExists(id: string): Promise<boolean> {
-		return this.#db.secretExists(id)
-	}
-
-	/**
-	 * Loads the secret (including the encrypted data). It also deletes the
-	 * secret if it is burned.
-	 * @param id Secret ID
-	 * @returns Secret metadata
-	 */
-	async getSecret(id: string): Promise<Secret> {
-		const s = await this.getSecretIfValid(id)
-
-		logSecrets.info(`Secret #${id} was opened.`, { action: "get", id })
-		await this.#db.emitEvent(id, EventType.Read)
-
-		if (s.remainingReads === 1) {
-			await this.#deleteSecret(id)
-			await this.#db.emitEvent(id, EventType.Burned)
-		} else if (s.remainingReads !== -1) {
-			await this.updateSecretMetadata(id, { remainingReads: s.remainingReads - 1 })
-		}
-
-		return s
-	}
-
 	/**
 	 * Updates the pre-existing secret's metadata with the given ID
 	 * @param id Secret ID
@@ -230,7 +221,7 @@ export class Secrets {
 	 */
 	async updateSecretMetadata(id: string, secret: Partial<SecretMutableMetadata>): Promise<void> {
 		try {
-			await this.#db.updateSecretMetadata(id, secret)
+			await this.#db.secrets.updateMetadata(id, secret)
 		} catch (err) {
 			logSecrets.error(`Failed to update secret #${id}.`, { id, action: "delete", error: err })
 			throw err
@@ -241,23 +232,10 @@ export class Secrets {
 	 * Deletes the secret from the backend
 	 * @param id Secret ID
 	 */
-	async #deleteSecret(id: string): Promise<void> {
-		try {
-			await this.#db.deleteSecret(id)
-		} catch (err) {
-			logSecrets.error(`Failed to delete secret #${id}.`, { id, error: err })
-			throw err
-		}
-	}
-
-	/**
-	 * Deletes the secret from the backend
-	 * @param id Secret ID
-	 */
 	async deleteSecret(id: string): Promise<void> {
 		try {
-			await this.#deleteSecret(id)
-			await this.#db.emitEvent(id, EventType.Deleted)
+			await this.#db.secrets.delete(id)
+			await this.#db.events.emit(id, EventType.Deleted)
 			logSecrets.info(`Deleted secret #${id}.`, { id, action: "delete" })
 		} catch (err) {
 			throw err

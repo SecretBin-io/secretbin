@@ -1,10 +1,4 @@
 /**
- * This file defines all the models used by SecretBin. Models are validated using Zod
- */
-
-import z from "@zod/zod"
-
-/**
  * Encrypted parts of the secret.
  */
 export interface SecretData {
@@ -20,11 +14,6 @@ export interface SecretData {
 	 */
 	dataBytes?: Uint8Array | null
 }
-
-const SecretData = z.strictObject({
-	data: z.string().startsWith("crypto://"),
-	dataBytes: z.instanceof(Uint8Array).optional().or(z.null()),
-})
 
 /**
  * Payload for uploading a new secret
@@ -47,13 +36,6 @@ export interface SecretSubmission extends SecretData {
 	passwordProtected: boolean
 }
 
-export const SecretSubmission = z.strictObject({
-	...SecretData.shape,
-	expires: z.string().check(z.regex(/^(\d+)(min|hr|d|w|m)$/)),
-	burnAfter: z.number().default(-1),
-	passwordProtected: z.boolean().default(false),
-})
-
 /**
  * Parts of the secret metadata that are mutable.
  */
@@ -68,14 +50,6 @@ export interface SecretMutableMetadata {
 	 */
 	remainingReads: number
 }
-
-export const SecretMutableMetadata = z.strictObject({
-	expires: z.union([
-		z.string().transform((str) => new Date(str)),
-		z.date(),
-	]),
-	remainingReads: z.number(),
-})
 
 /**
  * Secret metadata data without the encrypted data
@@ -93,18 +67,7 @@ export interface SecretMetadata extends SecretMutableMetadata {
 	passwordProtected: boolean
 }
 
-export const SecretMetadata = z.strictObject({
-	...SecretMutableMetadata.shape,
-	id: z.string(),
-	passwordProtected: z.boolean().default(false),
-})
-
 export interface Secret extends SecretMetadata, SecretData {}
-
-export const Secret = z.strictObject({
-	...SecretMetadata.shape,
-	...SecretData.shape,
-})
 
 export interface SecretAttachment {
 	/**
@@ -123,12 +86,6 @@ export interface SecretAttachment {
 	data: string | Uint8Array<ArrayBuffer>
 }
 
-export const SecretAttachment = z.strictObject({
-	name: z.string(),
-	contentType: z.string(),
-	data: z.union([z.string(), z.instanceof(Uint8Array)]),
-})
-
 export interface SecretContent {
 	/**
 	 * Secret text
@@ -140,8 +97,3 @@ export interface SecretContent {
 	 */
 	attachments: SecretAttachment[]
 }
-
-export const SecretContent = z.strictObject({
-	message: z.string(),
-	attachments: z.array(SecretAttachment),
-})

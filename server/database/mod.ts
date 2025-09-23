@@ -1,1 +1,1 @@
-export * from "./postgres.ts"
+export * from "./database.ts"
