@@ -1,6 +1,7 @@
-import Cookies, { CookieOptions, PrimitiveType, useCookie } from "@nihility-io/cookies"
 import { Signal, signal } from "@preact/signals"
+import { CookieOptions, Cookies, PrimitiveType } from "lib/cookies"
 import { Dispatch, useEffect, useState } from "preact/hooks"
+import { useCookie } from "utils/hooks"
 import { State } from "utils/state"
 
 /**

@@ -1,12 +1,11 @@
-import Record from "@nihility-io/record"
 import { Signal } from "@preact/signals"
 import { Input, NumberInput, Section, Select, Show, Toggle } from "components"
 import { TranslationKey } from "lang"
+import { ComponentChild } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import { TrimPrefix } from "utils/helpers"
 import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
-import { ComponentChild } from "preact"
 
 export interface OptionsProps {
 	state: State
@@ -72,7 +71,7 @@ export function Options({
 	return (
 		<>
 			<Section title={$("Expiration.Title")} description={$("Expiration.Description")}>
-				<Select signal={expires} options={Record.mapToArray(state.config.expires, (key, value) => ({
+				<Select signal={expires} options={Object.entries(state.config.expires).map(([key, value]) => ({
 					label: $(
 						`Expiration.Expire.${value.unit as string}.${value.count === 1 ? "One" : "Many"
 						}` as TrimPrefix<"NewSecret", TranslationKey>,

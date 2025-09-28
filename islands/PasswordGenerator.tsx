@@ -1,5 +1,5 @@
-import { generatePassword } from "@nihility-io/crypto"
 import { Button, Input, Modal, NumberInput, Section, Toggle } from "components"
+import { generatePassword } from "lib/crypto"
 import { ComponentChild } from "preact"
 import { MutableRef, useState } from "preact/hooks"
 import { useSettingSignal, useTranslation } from "utils/hooks"

@@ -1,5 +1,4 @@
 import { clsx } from "@nick/clsx"
-import Record from "@nihility-io/record"
 import { ComponentChild } from "preact"
 import { BaseProps } from "./base.ts"
 
@@ -23,7 +22,7 @@ export function Table<T extends string>({ headers, rows, ...props }: TableProps<
 			>
 				<thead>
 					<tr>
-						{Record.mapToArray(headers, (_key, value) => (
+						{Object.entries<string>(headers).map(([_key, value]) => (
 							<th scope="col" class="px-6 py-3">{value}</th>
 						))}
 					</tr>
@@ -31,8 +30,10 @@ export function Table<T extends string>({ headers, rows, ...props }: TableProps<
 				<tbody>
 					{rows.map((row) => (
 						<tr>
-							{Record.mapToArray(headers, (key, _value, i) => i > 0
-								? <td class="px-6 py-4">{row[key]}</td> : <th scope="row">{row[key]}</th>)}
+							{Object.entries<string>(headers).map(([key, _value], i) => (
+								i > 0
+									? <td class="px-6 py-4">{row[key as T]}</td> : <th scope="row">{row[key as T]}</th>)
+							)}
 						</tr>
 					))}
 				</tbody>

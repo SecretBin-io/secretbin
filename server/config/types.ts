@@ -1,4 +1,4 @@
-import type { EncryptionAlgorithm } from "@nihility-io/crypto"
+import type { EncryptionAlgorithm } from "lib/crypto"
 
 /**
  * Record where the keys are the languages codes and the value are the

@@ -1,5 +1,5 @@
-import { EncryptionAlgorithm } from "@nihility-io/crypto"
 import z, { ZodType } from "@zod/zod"
+import { EncryptionAlgorithm } from "lib/crypto"
 import { parseDuration, sizeToBytes } from "utils/helpers"
 import { renderMarkdown } from "./markdown.ts"
 import { Config } from "./types.ts"

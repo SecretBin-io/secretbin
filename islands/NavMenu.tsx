@@ -1,7 +1,7 @@
 import { LanguageIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline"
-import { Cookies } from "@nihility-io/cookies"
 import { Button } from "components"
 import { Language, supportedLanguages } from "lang"
+import { Cookies } from "lib/cookies"
 import { ComponentChild } from "preact"
 import { useEffect } from "preact/hooks"
 import { useSetting } from "utils/hooks"

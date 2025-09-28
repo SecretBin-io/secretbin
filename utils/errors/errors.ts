@@ -1,4 +1,3 @@
-import Record from "@nihility-io/record"
 import { STATUS_CODE } from "@std/http/status"
 import z from "@zod/zod"
 import { humanReadableSize } from "utils/helpers"

@@ -28,7 +28,7 @@ Temporary Items
 *.icloud
 
 ### Deno ###
-/node_modules
+node_modules
 /_fresh
 
 .env

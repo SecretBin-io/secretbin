@@ -1,7 +1,7 @@
-import { combineBaseKeyWithPassword, decrypt, encrypt, EncryptionAlgorithm, randomBytes } from "@nihility-io/crypto"
 import { decodeBase58, encodeBase58 } from "@std/encoding/base58"
 import { decodeBase64 } from "@std/encoding/base64"
 import * as CBOR from "cbor2"
+import { combineBaseKeyWithPassword, decrypt, encrypt, EncryptionAlgorithm, randomBytes } from "lib/crypto"
 import { Secret, SecretAttachment, SecretContent } from "models"
 import { createSecret } from "./api.ts"
 
