@@ -74,7 +74,6 @@
 		"daisyui": "npm:daisyui@^5.1.24",
 		"fresh": "jsr:@fresh/core@2.1.1",
 		"islands": "./islands/mod.ts",
-		"js-cookie": "npm:js-cookie@^3.0.5",
 		"lang": "./lang/mod.ts",
 		"lib/crypto": "./lib/crypto/mod.ts",
 		"lib/cookies": "./lib/cookies/mod.ts",

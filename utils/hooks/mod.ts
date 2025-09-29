@@ -1,3 +1,3 @@
-export * from "./cookies.ts"
-export * from "./settings.ts"
-export * from "./translations.ts"
+export * from "./useCookie.ts"
+export * from "./useSetting.ts"
+export * from "./useTranslation.ts"

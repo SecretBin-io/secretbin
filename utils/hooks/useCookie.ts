@@ -1,4 +1,4 @@
-import { CookieOptions, Cookies, PrimitiveType } from "lib/cookies"
+import Cookies, { CookieOptions, PrimitiveType } from "lib/cookies"
 import { Dispatch, useEffect, useState } from "preact/hooks"
 
 /**
@@ -38,7 +38,7 @@ export function useCookie<T extends PrimitiveType>(
 		return () => {
 			unsubscribe()
 		}
-	}, [typeof defaultValue === "object" ? JSON.stringify(defaultValue) : defaultValue])
+	}, [defaultValue])
 
 	// Cookie setter
 	const setter = (newValue: T) => {
