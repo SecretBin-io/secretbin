@@ -1,6 +1,5 @@
-import { asset } from "fresh/runtime"
-import { Theme } from "utils/state"
 import { define } from "utils"
+import { Theme } from "utils/state"
 
 /**
  * Renders the branded manifest.json for PWA usage
@@ -18,12 +17,12 @@ export const handler = define.handlers({
 			orientation: "portrait-primary",
 			icons: [
 				{
-					src: asset("/images/android-chrome-192x192.png"),
+					src: assetPath("/images/android-chrome-192x192.png"),
 					sizes: "192x192",
 					type: "image/png",
 				},
 				{
-					src: asset("/images/android-chrome-512x512.png"),
+					src: assetPath("/images/android-chrome-512x512.png"),
 					sizes: "512x512",
 					type: "image/png",
 				},

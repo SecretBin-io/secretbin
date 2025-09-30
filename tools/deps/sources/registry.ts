@@ -1,6 +1,6 @@
 import * as npm from "@nodesecure/npm-registry-sdk"
 import { z } from "@zod/zod"
-import { replacePrefix, trimPrefix, trimSuffix } from "../helpers.ts"
+import { strings } from "../../../utils/helpers/mod.ts"
 
 export interface PackageInfo {
 	registry: string
@@ -62,10 +62,10 @@ async function getNpmPackage(pkgName: string, isJsr?: boolean): Promise<Partial<
 
 	let repo = info.repository?.url ?? r.repository?.url
 	if (repo) {
-		repo = trimPrefix(repo, "git+")
-		repo = replacePrefix(repo, "ssh://git@", "https://")
-		repo = replacePrefix(repo, "git://", "https://")
-		repo = trimSuffix(repo, ".git")
+		repo = strings.trimPrefix(repo, "git+")
+		repo = strings.replacePrefix(repo, "ssh://git@", "https://")
+		repo = strings.replacePrefix(repo, "git://", "https://")
+		repo = strings.trimSuffix(repo, ".git")
 	}
 
 	return {

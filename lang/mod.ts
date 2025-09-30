@@ -1,6 +1,11 @@
-import { FlattenObjectKeys, formatString } from "utils/helpers"
+import { strings } from "utils/helpers"
 import de from "./de.ts"
 import en from "./en.ts"
+
+export type FlattenObjectKeys<T extends Record<string, unknown>, Key = keyof T> = Key extends string
+	? T[Key] extends Record<string, unknown> ? `${Key}.${FlattenObjectKeys<T[Key]>}`
+	: `${Key}`
+	: never
 
 /**
  * Currently supported languages
@@ -76,5 +81,5 @@ export function getTranslation(lang: Language, key: TranslationKey, params?: Rec
 		return o
 	}
 
-	return formatString(o, params)
+	return strings.format(o, params)
 }

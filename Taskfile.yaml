@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+vars:
+  IMG_PATH: static/images
+
+tasks:
+  icons:generate:
+    desc: Generate all necessary icons based on logo.png
+    vars:
+      IMAGES: 
+        - name: android-chrome-192x192.png
+          size: 192x192
+        - name: android-chrome-512x512.png
+          size: 512x512
+        - name: apple-touch-icon.png
+          size: 180x180
+        - name: favicon-16x16.png
+          size: 16x16
+        - name: favicon-32x32.png
+          size: 32x32
+    cmds:
+      - for: { var: IMAGES }
+        cmd: magick {{.IMG_PATH}}/logo.png -resize {{.ITEM.size}} {{.IMG_PATH}}/{{.ITEM.name}}
+      - magick {{.IMG_PATH}}/logo.png -define icon:auto-resize=16,32,48 {{.IMG_PATH}}/favicon.ico
+      - magick {{.IMG_PATH}}/logo.png -define icon:auto-resize=16,24,32,48,64,72,96,128,256 resources/icon.ico
+  release:
+    desc: "Build and publish release using GoReleaser"
+    cmd: goreleaser release --clean
+  snapshot:
+    desc: "Build but not release using GoReleaser"
+    cmd: goreleaser release --clean --snapshot

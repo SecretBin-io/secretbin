@@ -12,8 +12,8 @@ project_name: SecretBin
 
 before:
   hooks:
+    - deno task icons:generate
     - deno task build
-    - magick static/images/Icon.png -define icon:auto-resize=16,24,32,48,64,72,96,128,256 resources/Icon.ico
   
 builds:
   - builder: deno

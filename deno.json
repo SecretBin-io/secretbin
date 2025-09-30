@@ -20,6 +20,10 @@
 		"deps": {
 			"description": "Updates the credits.json file",
 			"command": "deno run -A ./tools/deps/main.ts"
+		},
+		"icons:generate": {
+			"description": "Convert the main logo (static/images/logo.png) to all the needed sizes.",
+			"command": "task icons:generate"
 		}
 	},
 	"lock": false,
@@ -65,6 +69,8 @@
 		"@std/encoding": "jsr:@std/encoding@^1.0.10",
 		"@std/fs": "jsr:@std/fs@^1.0.19",
 		"@std/http": "jsr:@std/http@^1.0.20",
+		"@std/media-types": "jsr:@std/media-types@^1.1.0",
+		"@std/path": "jsr:@std/path@^1.1.2",
 		"@std/yaml": "jsr:@std/yaml@^1.0.9",
 		"@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.13",
 		"@zod/zod": "jsr:@zod/zod@^4.1.11",
@@ -92,6 +98,7 @@
 		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.8.0",
 		"ultrahtml": "npm:ultrahtml@^1.6.0",
 		"utils": "./utils/mod.ts",
+		"utils/assets": "./utils/assets/mod.ts",
 		"utils/browsers": "./utils/browsers.ts",
 		"utils/errors": "./utils/errors/mod.ts",
 		"utils/errors/patch": "./utils/errors/patch.ts",

@@ -3,6 +3,7 @@ import { Message, Show } from "components"
 import { Partial } from "fresh/runtime"
 import { NavMenu, Terms } from "islands"
 import { define } from "utils"
+import { assetPath } from "utils/assets"
 import { useTranslation } from "utils/hooks"
 
 export default define.layout(({ state, Component }) => {
@@ -18,7 +19,7 @@ export default define.layout(({ state, Component }) => {
 						<Show if={state.config.branding.showLogo}>
 							<img
 								class={clsx("h-8", { "dark:invert": state.config.branding.invertLogo })}
-								src="/images/Icon.png"
+								src={assetPath("/images/logo.png")}
 							/>
 						</Show>
 						<span class="self-center whitespace-nowrap font-semibold text-2xl dark:text-white">

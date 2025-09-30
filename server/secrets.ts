@@ -41,8 +41,7 @@ export class Secrets {
 	 * Get the singleton instance of the secret manager
 	 */
 	static get shared(): Secrets {
-		Secrets.#instance ??= new Secrets()
-		return Secrets.#instance
+		return Secrets.#instance ??= new Secrets()
 	}
 
 	/**

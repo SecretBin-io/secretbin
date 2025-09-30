@@ -1,4 +1,5 @@
 import { define } from "utils"
+import { assetPath } from "utils/assets"
 import { Theme } from "utils/state"
 /**
  * Wrapper for all pages. Providers header info and navigation
@@ -17,14 +18,14 @@ export default define.page(({ state, Component }) => {
 					 */
 				}
 				<link crossorigin="use-credentials" rel="manifest" href="/manifest.json" />
-				<link rel="shortcut icon" href="/images/favicon.ico" />
-				<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
-				<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-				<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+				<link rel="shortcut icon" href={assetPath("/images/favicon.ico")} />
+				<link rel="apple-touch-icon" href={assetPath("/images/apple-touch-icon.png")} />
+				<link rel="icon" type="image/png" sizes="32x32" href={assetPath("/images/favicon-32x32.png")} />
+				<link rel="icon" type="image/png" sizes="16x16" href={assetPath("/images/favicon-16x16.png")} />
 				<link rel="manifest" href="/manifest.json" />
 				<link
 					rel="mask-icon"
-					href="/images/safari-pinned-tab.svg"
+					href={assetPath("/images/safari-pinned-tab.svg")}
 					{...{ color: state.theme === Theme.Dark ? "#121826" : "#ffffff" }}
 				/>
 				<meta name="msapplication-TileColor" content={state.theme === Theme.Dark ? "#121826" : "#ffffff"} />
@@ -39,11 +40,11 @@ export default define.page(({ state, Component }) => {
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:title" content={`Send secrets using ${state.config.branding.appName}`} />
 				<meta name="twitter:description" content="Visit this link in order to view the secret." />
-				<meta name="twitter:image" content="/images/apple-touch-icon.png" />
+				<meta name="twitter:image" content={assetPath("/images/apple-touch-icon.png")} />
 				<meta property="og:title" content={state.config.branding.appName} />
 				<meta property="og:site_name" content={state.config.branding.appName} />
 				<meta property="og:description" content="Visit this link in order to view the secret." />
-				<meta property="og:image" content="/images/apple-touch-icon.png" />
+				<meta property="og:image" content={assetPath("/images/apple-touch-icon.png")} />
 				<meta property="og:image:type" content="image/png" />
 				<meta property="og:image:width" content="180" />
 			</head>

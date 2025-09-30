@@ -73,4 +73,10 @@ dist/
 
 # Generated files
 resources/Icon.ico
-temp
+static/images/android-chrome-192x192.png
+static/images/android-chrome-512x512.png
+static/images/apple-touch-icon.png
+static/images/favicon-16x16.png
+static/images/favicon-32x32.png
+static/images/favicon.ico
+public/

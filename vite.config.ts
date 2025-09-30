@@ -12,6 +12,7 @@ export default defineConfig({
 		cssMinify: true,
 		target: browserTarget,
 	},
+	publicDir: "public",
 	plugins: [
 		fresh(),
 		tailwindcss(),

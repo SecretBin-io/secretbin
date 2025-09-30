@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-console
 import denoConfig from "../../deno.json" with { type: "json" }
-import { trimPrefix } from "./helpers.ts"
+import { strings } from "../../utils/helpers/mod.ts"
 import { getGitHubInfo } from "./sources/mod.ts"
 import { getRegistryPackage } from "./sources/registry.ts"
 
@@ -107,7 +107,7 @@ Deno.writeTextFileSync(
 	"credits.json",
 	JSON.stringify(
 		Object.values(dependencies).toSorted((a, b) =>
-			trimPrefix(a.name.toLowerCase(), "@") < trimPrefix(b.name.toLowerCase(), "@") ? -1 : 1
+			strings.trimPrefix(a.name.toLowerCase(), "@") < strings.trimPrefix(b.name.toLowerCase(), "@") ? -1 : 1
 		),
 		null,
 		2,
