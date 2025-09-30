@@ -14,7 +14,7 @@ export default define.page(({ state }) => {
 			<p
 				// deno-lint-ignore react-no-danger
 				dangerouslySetInnerHTML={{
-					__html: (state.config.branding.footer !== "Nihility.io"
+					__html: (state.config.branding.footer !== "SecretBin"
 						? $("Credits.BrandedNotice", { name: state.config.branding.appName }) + " "
 						: "") +
 						$("Credits.SourceNotice"),

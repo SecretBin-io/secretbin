@@ -146,9 +146,9 @@ export default {
 			Title: "Credits",
 			Description:
 				'{{name}} ist von <a href="https://privatebin.info">PrivateBin</a> inspiriert. PrivateBin wurde unter anderem von <a href="https://github.com/PrivateBin/PrivateBin/graphs/contributors">El RIDO</a> entwickelt entwickelt und unter der <a href="https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md">Zlib Lizenz</a> veröffentlicht.',
-			BrandedNotice: "{{name}} basiert auf Nihility.io SecretBin, das von Marvin Peter entwickelt wird.",
+			BrandedNotice: "{{name}} basiert auf SecretBin, das von Marvin Peter entwickelt wird.",
 			SourceNotice:
-				'Nihility.io SecretBin ist Open Source und steht unter MIT-Lizenz zur Verfügung. Wenn du deine eigene Version von SecretBin hosten möchtest, findest du den Quellcode auf <a href="https://github.com/Nihility-io/SecretBin">GitHub</a>.',
+				'SecretBin ist Open Source und steht unter MIT-Lizenz zur Verfügung. Wenn du deine eigene Version von SecretBin hosten möchtest, findest du den Quellcode auf <a href="https://github.com/SecretBin-io/secretbin">GitHub</a>.',
 			Components: {
 				Title: "Komponenten",
 				Description:

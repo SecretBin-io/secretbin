@@ -58,7 +58,7 @@ SecretBin current support two encryption algorithms; AES256-GCM with PBKDF2 and 
 Unfortunately, I only develop the app. I do not host it myself. Why? I am a developer and not a lawyer. Since I operate from the EU, SecretBin would need a privacy policy in order to operate it. I don't know how to write one and I can't be bothered to pay someone to do it.
 
 That being said, it you want to host SecretBin yourself, you can. You have to options to host SecretBin yourself:
-- [Download](https://github.com/Nihility-io/SecretBin/releases) and run SecretBin pre-compiled.
+- [Download](https://github.com/SecretBin-io/secretbin/releases) and run SecretBin pre-compiled.
 - Pull the source code and run it using Deno (see [Build from Source](#build-from-source)).
 
 You can even easily brand SecretBin with a new name if you want. SecretBin is licensed under the (MIT License)[https://www.tldrlegal.com/license/mit-license], so do it what you want. You might as well sell it if you want. I don't care, as long as it is within the license.
@@ -74,7 +74,7 @@ You can even easily brand SecretBin with a new name if you want. SecretBin is li
    ```
 3. Clone the repository using:
    ```bash
-   git clone https://github.com/Nihility-io/SecretBin.git
+   git clone https://github.com/SecretBin-io/secretbin.git
    ```
 4. Change into the cloned repository (`cd SecretBin`) and build SecretBin using:
    ```bash
@@ -96,13 +96,13 @@ banner: # Banner shown at the top of the app. You may use this option for e.g. a
     de: Hallo Welt!
 branding:
   appName: SecretBin # Changes the app in all places including but not limited to the title bar
-  footer: Nihility.io # Text shown in the footer on the left side e.g. the name of the service hoster
+  footer: SecretBin # Text shown in the footer on the left side e.g. the name of the service hoster
   links: # Custom link shown in the footer on the right 
   - name: #Localized display text
       en: GitHub
       de: GitHub
     link:
-      en: https://github.com/Nihility-io/SecretBin # URL
+      en: https://github.com/SecretBin-io/secretbin # URL
   showLogo: true # If set the true, the app logo is shown before the app name in the navigation bar
   invertLogo: false # Invert the colors of the app logo in dark mode
   terms: # ToS Dialog show when the user first visits the app (if terms is not specified no dialog is shown)
@@ -141,9 +141,9 @@ storage:
 
 ## Automation
 SecretBin offers modules for Python and Golang as well as a CLI for creating secrets.
-- [SecretBin-CLI](https://github.com/Nihility-io/SecretBin-CLI)
-- [SecretBin-Go](https://github.com/Nihility-io/SecretBin-Go)
-- [SecretBin-Python](https://github.com/Nihility-io/SecretBin-Python)
+- [SecretBin-CLI](https://github.com/SecretBin-io/secretbin-CLI)
+- [SecretBin-Go](https://github.com/SecretBin-io/secretbin-Go)
+- [SecretBin-Python](https://github.com/SecretBin-io/secretbin-Python)
 
 ## Screenshots
 

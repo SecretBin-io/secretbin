@@ -33,7 +33,7 @@ export const ConfigModel: ZodType<Config> = z.strictObject({
 	}).prefault({}),
 	branding: z.object({
 		appName: z.string().default("SecretBin"),
-		footer: z.string().default("Nihility.io"),
+		footer: z.string().default("SecretBin"),
 		terms: z.strictObject({
 			title: TranslatedString,
 			content: TranslatedString,
@@ -43,7 +43,7 @@ export const ConfigModel: ZodType<Config> = z.strictObject({
 			link: TranslatedString,
 		}).array().default([{
 			name: { en: "GitHub" },
-			link: { en: "https://github.com/Nihility-io/SecretBin" },
+			link: { en: "https://github.com/SecretBin-io/secretbin" },
 		}]),
 		showLogo: z.boolean().default(true),
 		invertLogo: z.boolean().default(false),
