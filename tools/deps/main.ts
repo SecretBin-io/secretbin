@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-console
 import denoConfig from "../../deno.json" with { type: "json" }
-import { strings } from "../../utils/helpers/mod.ts"
+import * as strings from "../../utils/helpers/strings.ts"
 import { getGitHubInfo } from "./sources/mod.ts"
 import { getRegistryPackage } from "./sources/registry.ts"
 
@@ -52,7 +52,12 @@ while (true) {
 	const [registry, packageName] = item.split(":", 2)
 
 	// Ignore dependencies which have either already been processed or are ignored
-	if (dependencies[packageName] || excludedDependencies.some((r) => r.test(packageName))) {
+	if (dependencies[packageName]) {
+		continue
+	}
+
+	if (excludedDependencies.some((r) => r.test(packageName))) {
+		console.log(`[SKIP] ${packageName}`)
 		continue
 	}
 
@@ -61,8 +66,10 @@ while (true) {
 	// Fetch dependency information from the registry
 	const r = await getRegistryPackage(registry, packageName)
 
-	// Add nested dependencies to the queue
-	dependencyQueue.push(...r.dependencies)
+	// Add nested dependencies to the queue if the package is not marked as noExpand
+	if (!(denoConfig.credits.noExpand ?? []).some((x) => x === packageName)) {
+		dependencyQueue.push(...r.dependencies)
+	}
 
 	const d: Dependency = {
 		registry,

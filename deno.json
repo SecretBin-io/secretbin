@@ -72,12 +72,12 @@
 		"@std/media-types": "jsr:@std/media-types@^1.1.0",
 		"@std/path": "jsr:@std/path@^1.1.2",
 		"@std/yaml": "jsr:@std/yaml@^1.0.9",
-		"@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.13",
+		"@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.14",
 		"@zod/zod": "jsr:@zod/zod@^4.1.11",
 		"cbor2": "npm:cbor2@^2.0.1",
 		"client": "./client/mod.ts",
 		"components": "./components/mod.ts",
-		"daisyui": "npm:daisyui@^5.1.24",
+		"daisyui": "npm:daisyui@^5.1.26",
 		"fresh": "jsr:@fresh/core@2.1.1",
 		"islands": "./islands/mod.ts",
 		"lang": "./lang/mod.ts",
@@ -85,7 +85,6 @@
 		"lib/cookies": "./lib/cookies/mod.ts",
 		"marked": "npm:marked@^16.3.0",
 		"models": "./models/mod.ts",
-		"postcss": "npm:postcss@^8.5.6",
 		"postgres": "npm:postgres@^3.4.7",
 		"preact": "npm:preact@^10.27.2",
 		"server": "./server/mod.ts",
@@ -94,7 +93,7 @@
 		"server/database/models": "./server/database/models/mod.ts",
 		"server/models": "./server/models/mod.ts",
 		"server/log": "./server/log/mod.ts",
-		"tailwindcss": "npm:tailwindcss@^4.1.13",
+		"tailwindcss": "npm:tailwindcss@^4.1.14",
 		"ts-pattern": "jsr:@gabriel/ts-pattern@^5.8.0",
 		"ultrahtml": "npm:ultrahtml@^1.6.0",
 		"utils": "./utils/mod.ts",
@@ -205,29 +204,34 @@
 				"licenseFile": "https://raw.githubusercontent.com/saadeghi/daisyui/refs/heads/master/LICENSE"
 			}
 		],
+		"noExpand": ["vite"],
 		"excludeDependencies": [
 			{
-				"pattern": "@std/.*",
+				"pattern": "^@std/.*$",
 				"reason": "Unified as Deno Standard Library"
 			},
 			{
-				"pattern": "@fresh/.*",
+				"pattern": "^@fresh/.*$",
 				"reason": "Unified as Deno Fresh"
 			},
 			{
-				"pattern": ["@preact/.*", "preact-render-to-string"],
+				"pattern": "^@tailwindcss/.*$",
+				"reason": "Unified as tailwindcss"
+			},
+			{
+				"pattern": ["^@preact/.*$", "^preact-render-to-string$"],
 				"reason": "Unified as preact"
 			},
 			{
-				"pattern": ["react"],
+				"pattern": "^react$",
 				"reason": "Not actually used and replaced by preact"
 			},
 			{
-				"pattern": ["@types/.*"],
+				"pattern": "^@types/.*$",
 				"reason": "Only used for types and not shipped"
 			},
 			{
-				"pattern": ["source-map-js"],
+				"pattern": "^source-map-js$",
 				"reason": "Dev dependency that is not shipped"
 			}
 		]

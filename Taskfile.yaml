@@ -31,3 +31,9 @@ tasks:
   snapshot:
     desc: "Build but not release using GoReleaser"
     cmd: goreleaser release --clean --snapshot
+  container:run:
+    desc: Run the application using docker-compose
+    deps: [snapshot]
+    dir: container
+    cmds:
+      - docker-compose up

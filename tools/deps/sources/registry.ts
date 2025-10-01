@@ -1,6 +1,6 @@
 import * as npm from "@nodesecure/npm-registry-sdk"
 import { z } from "@zod/zod"
-import { strings } from "../../../utils/helpers/mod.ts"
+import * as strings from "../../../utils/helpers/strings.ts"
 
 export interface PackageInfo {
 	registry: string

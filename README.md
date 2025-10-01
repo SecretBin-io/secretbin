@@ -118,9 +118,9 @@ defaults: # Just customizable defaults
   showPassword: false # Show password box by default
 expires: [5min, 1hr, 1d, 1w, 2w, 1m] # Expire options for new secrets
 logging:
-  level: info # Logging level (default: info)
-  mode: text # Specifies if logs should be rendered as text or JSON (default: text)
-  logAccess: false # Enable web access logging (default: false)
+  level: info # Logging level (default: info) [Overridable using SB_LOG_LEVEL]
+  mode: text # Specifies if logs should be rendered as text or JSON (default: text) [Overridable using SB_LOG_MODE]
+  logAccess: false # Enable web access logging (default: false) [Overridable using SB_LOG_ACCESS]
 policy:
   requirePassword: false # Forces users to enable the burn option for new secrets
   requireBurn: false # Forces users to specify a password for new secrets
@@ -131,12 +131,12 @@ storage:
   maxSize: 10Mi # Max size a new secret is allowed to have
   gcInterval: 5 # Interval in seconds in which the garbage collector should run
   database: # Configure PostgreSQL
-    host: 127.0.0.1
-    port: 5432
-    database: secretbin
-    username: secretbin
-    password: abc123
-    tls: prefer
+    host: 127.0.0.1 # [Overridable using SB_DATABASE_HOST]
+    port: 5432 # [Overridable using SB_DATABASE_PORT]
+    database: secretbin # [Overridable using SB_DATABASE_DATABASE]
+    username: secretbin # [Overridable using SB_DATABASE_USERNAME]
+    password: abc123 # [Overridable using SB_DATABASE_PASSWORD]
+    tls: prefer # [Overridable using SB_DATABASE_TLS]
 ```
 
 ## Automation

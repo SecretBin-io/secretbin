@@ -28,11 +28,19 @@ export class Secrets {
 			return false
 		}
 
-		// Schedule the garbage collector to run every hour in the background.
-		// The garbage collector deletes expired secrets
-		Deno.cron("GarbageCollector", config.storage.garbageCollection.cron, () => {
-			this.#garbageCollection()
-		})
+		try {
+			// Schedule the garbage collector to run every hour in the background.
+			// The garbage collector deletes expired secrets
+			Deno.cron("GarbageCollector", config.storage.garbageCollection.cron, () => {
+				this.#garbageCollection()
+			})
+		} catch (err) {
+			// Ignore double registration of Cron has it can happen during hot reload
+			if (!(err instanceof TypeError && err.message === "Cron with this name already exists")) {
+				logCG.error(`Failed to schedule garbage collector.`, { error: err })
+				return false
+			}
+		}
 
 		return true
 	}
