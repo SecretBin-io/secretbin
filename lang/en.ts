@@ -144,7 +144,7 @@ export default {
 				'{{name}} is inspired by <a href="https://privatebin.info">PrivateBin</a>, developed by <a href="https://github.com/PrivateBin/PrivateBin/graphs/contributors">El RIDO</a> among others and released under the <a href="https://github.com/PrivateBin/PrivateBin/blob/master/LICENSE.md">Zlib License</a>.',
 			BrandedNotice: "{{name}} is based on SecretBin, developed by Marvin Peter.",
 			SourceNotice:
-				'SecretBin is open source and available under the MIT license. If you want to host your own version of SecretBin, head over to <a href="https://github.com/SecretBin-io/secretbin">GitHub</a>.',
+				'SecretBin is open source and available under the MIT license. If you want to host your own version of SecretBin, head over to <a href="https://github.com/aecretbin-io/secretbin">GitHub</a>.',
 			Components: {
 				Title: "Components",
 				Description:

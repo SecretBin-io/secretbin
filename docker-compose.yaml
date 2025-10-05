@@ -11,16 +11,16 @@ services:
       - "8000:8000"
     volumes:
       - type: bind
-        source: ../config.yaml
+        source: ./config.yaml
         target: /app/config.yaml
       - type: bind
         source: "$PGPATH/tls"
         target: /app/certs
       - type: bind
-        source: ../resources
+        source: ./resources
         target: /app/resources
       - type: bind
-        source: ../public
+        source: ./public
         target: /app/public
     extra_hosts:
       - postgres:host-gateway

@@ -57,8 +57,9 @@ SecretBin current support two encryption algorithms; AES256-GCM with PBKDF2 and 
 ## How Can I Use This App?
 Unfortunately, I only develop the app. I do not host it myself. Why? I am a developer and not a lawyer. Since I operate from the EU, SecretBin would need a privacy policy in order to operate it. I don't know how to write one and I can't be bothered to pay someone to do it.
 
-That being said, it you want to host SecretBin yourself, you can. You have to options to host SecretBin yourself:
-- [Download](https://github.com/SecretBin-io/secretbin/releases) and run SecretBin pre-compiled.
+That being said, it you want to host SecretBin yourself, you can. You have three options to host SecretBin yourself:
+- [Download](https://github.com/secretbin-io/secretbin/releases) and run SecretBin pre-compiled.
+- Run the Docker image ghcr.io/secretbin-io/secretbin:latest
 - Pull the source code and run it using Deno (see [Build from Source](#build-from-source)).
 
 You can even easily brand SecretBin with a new name if you want. SecretBin is licensed under the (MIT License)[https://www.tldrlegal.com/license/mit-license], so do it what you want. You might as well sell it if you want. I don't care, as long as it is within the license.
@@ -74,14 +75,40 @@ You can even easily brand SecretBin with a new name if you want. SecretBin is li
    ```
 3. Clone the repository using:
    ```bash
-   git clone https://github.com/SecretBin-io/secretbin.git
+   git clone https://github.com/secretbin-io/secretbin.git
    ```
-4. Change into the cloned repository (`cd SecretBin`) and build SecretBin using:
+4. Change into the cloned repository (`cd secretbin`) and build SecretBin using:
    ```bash
    goreleaser release --snapshot --clean
    ```
 5. Extract the archived build for your platform e.g. dist/SecretBin_macOS_arm64.tar.gz
 6. Run the SecretBin executable
+
+### Running using Docker Compose
+```yaml
+name: secretbin
+services:
+  secretbin:
+    image: ghcr.io/secretbin-io/secretbin:latest
+    container_name: secretbin
+    read_only: true
+    ports:
+      - "8000:8000"
+    volumes:
+      - type: bind # See [Configuration] for more info
+        source: ./config.yaml
+        target: /app/config.yaml
+      - type: bind # Optional: Files placed under ./public will be served on /
+        source: ./public
+        target: /app/public
+    extra_hosts:
+      - postgres:host-gateway
+    networks:
+      - secretbin
+
+networks:
+  secretbin:
+```
 
 ### Configuration
 
@@ -102,7 +129,7 @@ branding:
       en: GitHub
       de: GitHub
     link:
-      en: https://github.com/SecretBin-io/secretbin # URL
+      en: https://github.com/secretbin-io/secretbin # URL
   showLogo: true # If set the true, the app logo is shown before the app name in the navigation bar
   invertLogo: false # Invert the colors of the app logo in dark mode
   terms: # ToS Dialog show when the user first visits the app (if terms is not specified no dialog is shown)
@@ -139,11 +166,21 @@ storage:
     tls: prefer # [Overridable using SB_DATABASE_TLS]
 ```
 
+### Override Logos
+You can also run SecretBin with our own logos if you want. In order to achieve this, create the following files:
+- ./public/branding/images/android-chrome-192x192.png
+- ./public/branding/images/android-chrome-512x512.png
+- ./public/branding/images/apple-touch-icon.png
+- ./public/branding/images/favicon-16x16.png
+- ./public/branding/images/favicon-32x32.png
+- ./public/branding/images/favicon.ico
+- ./public/branding/images/logo.png
+
 ## Automation
 SecretBin offers modules for Python and Golang as well as a CLI for creating secrets.
-- [SecretBin-CLI](https://github.com/SecretBin-io/secretbin-CLI)
-- [SecretBin-Go](https://github.com/SecretBin-io/secretbin-Go)
-- [SecretBin-Python](https://github.com/SecretBin-io/secretbin-Python)
+- [SecretBin-CLI](https://github.com/secretbin-io/secretbin-CLI)
+- [SecretBin-Go](https://github.com/secretbin-io/secretbin-Go)
+- [SecretBin-Python](https://github.com/secretbin-io/secretbin-Python)
 
 ## Screenshots
 

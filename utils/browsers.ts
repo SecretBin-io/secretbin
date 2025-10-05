@@ -11,7 +11,7 @@ const browserRegex = {
 	Chrome: /(?<browser>Chrom(?:ium|e))\/(?<version>\d+)/,
 	Edge: /(?<browser>Edge?)\/(?<version>\d+)/,
 	Firefox: /(?<browser>Firefox)\/(?<version>\d+)/,
-	Safari: /(?<version>\d+)(?:[,.]\d+|)(?: \(\w+\)|)(?: Mobile\/\w+|) (?<browser>Safari)\//,
+	Safari: /(?<version>\d+)(?:[,.\d]+|)(?: \(\w+\)|)(?: Mobile\/\w+|) (?<browser>Safari)\//,
 }
 
 // Combine individual regex patterns into one

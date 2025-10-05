@@ -43,7 +43,7 @@ export const ConfigModel: ZodType<Config> = z.strictObject({
 			link: TranslatedString,
 		}).array().default([{
 			name: { en: "GitHub" },
-			link: { en: "https://github.com/SecretBin-io/secretbin" },
+			link: { en: "https://github.com/secretbin-io/secretbin" },
 		}]),
 		showLogo: z.boolean().default(true),
 		invertLogo: z.boolean().default(false),

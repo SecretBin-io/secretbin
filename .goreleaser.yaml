@@ -46,7 +46,7 @@ archives:
 
 dockers_v2:
   - id: secretbin
-    dockerfile: container/Dockerfile
+    dockerfile: Dockerfile
     images: ["ghcr.io/secretbin-io/secretbin"]
     tags:
       - "{{ .Version }}"
