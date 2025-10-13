@@ -91,7 +91,7 @@ export function NewSecret({ state }: NewSecretProps): ComponentChild {
 					dialogRef={dialogRef}
 					onPassword={(x) => {
 						setMessage(message + x)
-						dialogRef.current?.showModal()
+						dialogRef.current?.close()
 					}}
 					onDismiss={() => dialogRef.current?.close()}
 				/>
