@@ -4,9 +4,6 @@ services:
     image: ghcr.io/secretbin-io/secretbin:latest-arm64
     container_name: secretbin
     read_only: true
-    environment:
-      DENO_CERT: /app/certs/ca.crt
-      SB_DATABASE_HOST: "postgres"
     ports:
       - "8000:8000"
     volumes:
@@ -14,16 +11,14 @@ services:
         source: ./config.yaml
         target: /app/config.yaml
       - type: bind
-        source: "$PGPATH/tls"
-        target: /app/certs
+        source: ./config.db.yaml
+        target: /app/config.db.yaml
       - type: bind
         source: ./resources
         target: /app/resources
       - type: bind
         source: ./public
         target: /app/public
-    extra_hosts:
-      - postgres:host-gateway
     networks:
       - secretbin
 
