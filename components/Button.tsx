@@ -60,7 +60,6 @@ function ButtonLabel({ label, icon, isDock, children }: ButtonLabelProps): Compo
 	)
 }
 
-
 /**
  * Creates a clickable button
  */
@@ -93,7 +92,7 @@ export function Button(
 	if (link) {
 		return (
 			<a class={classes} href={link}>
-				<ButtonLabel label={label} icon={icon} isDock={theme === "dock"} >
+				<ButtonLabel label={label} icon={icon} isDock={theme === "dock"}>
 					{children}
 				</ButtonLabel>
 			</a>
@@ -107,7 +106,7 @@ export function Button(
 			disabled={disabled}
 			onClick={(e) => onClick?.(e)}
 		>
-			<ButtonLabel label={label} icon={icon} isDock={theme === "dock"} >
+			<ButtonLabel label={label} icon={icon} isDock={theme === "dock"}>
 				{children}
 			</ButtonLabel>
 		</button>

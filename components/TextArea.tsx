@@ -51,7 +51,7 @@ function enableTabs(onChange?: (value: string) => void): (e: TargetedKeyboardEve
 		// Set textarea value to: text before caret + tab + text after caret
 		onChange?.(
 			e.currentTarget.value.substring(0, start) +
-			"\t" + e.currentTarget.value.substring(end),
+				"\t" + e.currentTarget.value.substring(end),
 		)
 
 		// Put caret at right position again

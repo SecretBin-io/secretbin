@@ -32,7 +32,8 @@ export const config = await (async function (): Promise<Config> {
 		raw.storage.database ??= {} as DatabaseConfig
 
 		if (Deno.env.get("SB_LOG_LEVEL")) {
-			raw.logging.level = Deno.env.get("SB_LOG_LEVEL") as "debug" | "info" | "warning" | "error" | "fatal" ?? raw.logging.level
+			raw.logging.level = Deno.env.get("SB_LOG_LEVEL") as "debug" | "info" | "warning" | "error" | "fatal" ??
+				raw.logging.level
 		}
 		if (Deno.env.get("SB_LOG_MODE")) {
 			raw.logging.mode = Deno.env.get("SB_LOG_MODE") as "text" | "json"

@@ -27,7 +27,12 @@ export function useCookie<T extends PrimitiveType>(
 
 	useEffect(() => {
 		// Read the current cookie value
-		setResult(Cookies.get(name, defaultValue))
+		const value = Cookies.get(name) as T | undefined
+		// Write the default value to the cookie is no value was set
+		if (!value) {
+			setter(defaultValue)
+		}
+		setResult(value ?? defaultValue)
 
 		// Subscribe to changes to the cookie and update the state if changes are detected
 		const unsubscribe = Cookies.subscribe(name, (newValue) => {

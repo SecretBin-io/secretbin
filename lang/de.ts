@@ -108,7 +108,7 @@ export default {
 			},
 			Actions: {
 				New: "Neu",
-				Open: "Open Link",
+				Open: "Link öffnen",
 				CopyLink: "Link kopieren",
 				GenerateQR: "QR-Code generieren",
 				Email: "Link per E-Mail senden",

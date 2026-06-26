@@ -1,4 +1,5 @@
 import { define } from "utils"
+import { assetPath } from "utils/assets"
 import { Theme } from "utils/state"
 
 /**

@@ -30,8 +30,8 @@ export function Terms({ state }: TermsProps): ComponentChild {
 			dialogRef={modalRef}
 			title={
 				state.config.branding.terms?.title[state.language] ?? // Get title from config in the desired language
-				state.config.branding.terms?.title.en ?? // If not found try to get title from config in English
-				$("Title") // If not found either use default from translation files
+					state.config.branding.terms?.title.en ?? // If not found try to get title from config in English
+					$("Title") // If not found either use default from translation files
 			}
 			actions={[
 				{

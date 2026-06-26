@@ -41,7 +41,8 @@ export function Modal(
 	return (
 		<dialog
 			ref={dialogRef}
-			class={clsx("modal", props.class)}>
+			class={clsx("modal", props.class)}
+		>
 			<div class="modal-box">
 				<div class="flex items-center justify-between pb-4 md:pb-5 dark:border-gray-600">
 					<h3 class="font-semibold text-gray-900 text-xl dark:text-white">
@@ -67,9 +68,11 @@ export function Modal(
 					</Show>
 				</div>
 				{children}
-				<div class={clsx("modal-action", {
-					"flex items-center justify-center": actions.length > 1
-				})}>
+				<div
+					class={clsx("modal-action", {
+						"flex items-center justify-center": actions.length > 1,
+					})}
+				>
 					{actions.map(({ onClick, close, ...props }, i) => (
 						<Button
 							key={i}

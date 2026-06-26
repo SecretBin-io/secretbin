@@ -93,7 +93,7 @@ export function useSettingSignal<T extends PrimitiveType>(
 	name: string,
 	defaultValue: T,
 	state?: State,
-	options?: CookieOptions,
+	options: CookieOptions = { expires: 3650 },
 ): Signal<T> {
 	// Create a preact state with the default value
 	const stateCookieValue = (() => {

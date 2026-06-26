@@ -67,6 +67,6 @@ export function Toggle(
 					</div>
 				</div>
 			</label>
-		</div >
+		</div>
 	)
 }

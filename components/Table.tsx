@@ -2,7 +2,6 @@ import { clsx } from "@nick/clsx"
 import { ComponentChild } from "preact"
 import { BaseProps } from "./base.ts"
 
-
 export interface TableProps<T extends string> extends BaseProps {
 	/** Header where the keys are used to map rows to the headers and the values are the header display names */
 	headers: Record<T, string>
@@ -32,8 +31,9 @@ export function Table<T extends string>({ headers, rows, ...props }: TableProps<
 						<tr>
 							{Object.entries<string>(headers).map(([key, _value], i) => (
 								i > 0
-									? <td class="px-6 py-4">{row[key as T]}</td> : <th scope="row">{row[key as T]}</th>)
-							)}
+									? <td class="px-6 py-4">{row[key as T]}</td>
+									: <th scope="row">{row[key as T]}</th>
+							))}
 						</tr>
 					))}
 				</tbody>

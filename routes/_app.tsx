@@ -1,6 +1,7 @@
 import { define } from "utils"
 import { assetPath } from "utils/assets"
 import { Theme } from "utils/state"
+
 /**
  * Wrapper for all pages. Providers header info and navigation
  */

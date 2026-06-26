@@ -44,7 +44,8 @@ export function FileList({ title, files, downloadable, onDelete, ...props }: Fil
 				{files.map((file) => (
 					<li
 						class={clsx("list-row", { "cursor-pointer": downloadable })}
-						onClick={downloadable ? () => downloadFile(file) : undefined}>
+						onClick={downloadable ? () => downloadFile(file) : undefined}
+					>
 						<div>
 							<DocumentIcon className="size-10" />
 						</div>

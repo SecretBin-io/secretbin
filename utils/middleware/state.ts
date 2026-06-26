@@ -31,7 +31,7 @@ export const stateMiddleware = define.middleware(async (ctx) => {
 
 	const locales = detectBrowserLocales(ctx.req.headers)
 	ctx.state.locale = locales.find(() => true) ?? "en-US"
-	ctx.state.language = [ctx.state.cookies["language"], ...locales]
+	ctx.state.language = [ctx.state.cookies["language"] as string, ...locales]
 		.find(isLanguageSupported) as Language ?? Language.English
 
 	ctx.state.theme = ctx.state.cookies["theme"] === "light" ? Theme.Light : Theme.Dark

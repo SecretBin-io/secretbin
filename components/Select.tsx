@@ -1,7 +1,7 @@
-import { clsx } from "@nick/clsx";
-import { Signal } from "@preact/signals";
-import { ComponentChild } from "preact";
-import { BaseProps } from "./base.ts";
+import { clsx } from "@nick/clsx"
+import { Signal } from "@preact/signals"
+import { ComponentChild } from "preact"
+import { BaseProps } from "./base.ts"
 
 export interface SelectOption {
 	/**
@@ -53,9 +53,7 @@ export function Select({ signal, value, onChange, options, ...props }: SelectPro
 			value={val}
 			onInput={(e) => setVal(e.currentTarget.value)}
 		>
-			{options.map(({ label, value }) => (
-				<option key={value} value={value}>{label}</option>
-			))}
+			{options.map(({ label, value }) => <option key={value} value={value}>{label}</option>)}
 		</select>
 	)
 }

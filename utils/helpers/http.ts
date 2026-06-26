@@ -50,7 +50,7 @@ function encodeResponse<T>(req: Request, res: T, options?: ResponseInit, forceCB
 		return Response.json(res, options)
 	}
 
-	return new Response(CBOR.encode(res), {
+	return new Response(CBOR.encode(res) as unknown as ArrayBuffer, {
 		...options,
 		headers: { ...(options?.headers ?? {}), "Content-Type": "application/cbor" },
 	})

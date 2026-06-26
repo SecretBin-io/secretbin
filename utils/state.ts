@@ -15,7 +15,7 @@ export interface State {
 	theme: Theme
 	locale: string
 	language: Language
-	cookies: Record<string, string>
+	cookies: Partial<Record<string, string>>
 	supportedBrowser: boolean
 	supportedBrowsers: string
 	config: StateConfig

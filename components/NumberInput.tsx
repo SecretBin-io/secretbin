@@ -54,7 +54,9 @@ function NumberButton({ mode, disabled, onClick }: NumberButtonProps): Component
 /**
  * Creates a number input field with increment and decrement buttons
  */
-export function NumberInput({ signal, value, min, max, step = 1, onChange, ...props }: NumberInputProps): ComponentChild {
+export function NumberInput(
+	{ signal, value, min, max, step = 1, onChange, ...props }: NumberInputProps,
+): ComponentChild {
 	const val = signal !== undefined ? signal.value : value!
 	const setVal = (v: number) => {
 		if (signal !== undefined) {

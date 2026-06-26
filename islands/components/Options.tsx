@@ -71,14 +71,18 @@ export function Options({
 	return (
 		<>
 			<Section title={$("Expiration.Title")} description={$("Expiration.Description")}>
-				<Select signal={expires} options={Object.entries(state.config.expires).map(([key, value]) => ({
-					label: $(
-						`Expiration.Expire.${value.unit as string}.${value.count === 1 ? "One" : "Many"
-						}` as TrimPrefix<"NewSecret", TranslationKey>,
-						{ count: "" + value.count },
-					),
-					value: key
-				}))} />
+				<Select
+					signal={expires}
+					options={Object.entries(state.config.expires).map(([key, value]) => ({
+						label: $(
+							`Expiration.Expire.${value.unit as string}.${
+								value.count === 1 ? "One" : "Many"
+							}` as TrimPrefix<"NewSecret", TranslationKey>,
+							{ count: "" + value.count },
+						),
+						value: key,
+					}))}
+				/>
 			</Section>
 			<Section title={$("Options.Title")} description={$("Options.Description")}>
 				<Toggle
