@@ -9,15 +9,9 @@ services:
       - POSTGRES_USER=secretbin
       - POSTGRES_DB=secretbin
     volumes:
-      - type: bind
-        source: ./postgres/tls/ca.crt
-        target: /etc/postgresql/ca.crt
-      - type: bind
-        source: ./postgres/tls/server.crt
-        target: /etc/postgresql/server.crt
-      - type: bind
-        source: ./postgres/tls/server.key
-        target: /etc/postgresql/server.key
+      - ./postgres/tls/ca.crt:/etc/postgresql/ca.crt
+      - ./postgres/tls/server.crt:/etc/postgresql/server.crt
+      - ./postgres/tls/server.key:/etc/postgresql/server.key
       - pgdata:/var/lib/postgresql
     command:
       - postgres
@@ -29,60 +23,41 @@ services:
       - ssl_cert_file=/etc/postgresql/server.crt
       - -c
       - ssl_key_file=/etc/postgresql/server.key
+    networks:
+      - secretbin
 
-  secretbin:
-    image: ghcr.io/secretbin-io/secretbin:latest-arm64
+  secretbin_arm64:
+    image: ghcr.io/secretbin-io/secretbin:latest_arm64
     container_name: secretbin
     read_only: true
     platform: linux/arm64
+    environment:
+      - SB_DATABASE_HOST=10.0.5.5
     ports:
       - "8001:8000"
     command: ["-unsafely-ignore-certificate-errors"]
     volumes:
-      - type: bind
-        source: ../config.yaml
-        target: /app/config.yaml
-      - type: bind
-        source: ../config.db.yaml
-        target: /app/config.db.yaml
-      - type: bind
-        source: ../resources
-        target: /app/resources
-      - type: bind
-        source: ../public
-        target: /app/public
-    extra_hosts:
-      - "postgres:host-gateway"
+      - ../config.yaml:/app/config.yaml
+      - ../resources:/app/resources
+      - ../public:/app/public
     networks:
       - secretbin
 
   secretbin_amd64:
-    image: ghcr.io/secretbin-io/secretbin:latest-amd64
+    image: ghcr.io/secretbin-io/secretbin:latest_amd64
     container_name: secretbin_amd64
     read_only: true
     platform: linux/amd64
+    environment:
+      - SB_DATABASE_HOST=10.0.5.5
     ports:
       - "8001:8000"
     volumes:
-      - type: bind
-        source: ../config.yaml
-        target: /app/config.yaml
-      - type: bind
-        source: ../config.db.yaml
-        target: /app/config.db.yaml
-      - type: bind
-        source: ../resources
-        target: /app/resources
-      - type: bind
-        source: ../public
-        target: /app/public
-    extra_hosts:
-      - "postgres:host-gateway"
+      - ../config.yaml:/app/config.yaml
+      - ../resources:/app/resources
+      - ../public:/app/public
     networks:
       - secretbin
 
 volumes:
   pgdata:
-
-networks:
-  secretbin:

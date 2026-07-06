@@ -1,10 +1,8 @@
 // deno-lint-ignore-file no-console
-import { deepMerge } from "@std/collections"
 import * as YAML from "@std/yaml"
 import { z } from "@zod/zod"
 import { ConfigModel } from "./parser.ts"
 import { Config, DatabaseConfig, Logging, Storage } from "./types.ts"
-
 export * from "./types.ts"
 
 /*
@@ -12,19 +10,12 @@ export * from "./types.ts"
  * Application configuration (config.yaml). This config is available to the server and client
  */
 export const config = await (async function (): Promise<Config> {
-	const configs = await Promise.all(
-		(await Array.fromAsync(Deno.readDir(".")))
-			.filter((x) => /^config(?:\.[^\.]+)?\.ya?ml$/.test(x.name))
-			.toSorted((a, b) => /^config\.ya?ml$/.test(a.name) ? -1 : a.name.localeCompare(b.name)) // Order configs by name but always evaluate config.yaml first
-			.map((x) => Deno.readTextFile(x.name).then((x) => YAML.parse(x) as Record<string, unknown>)),
-	)
-
-	if (configs.length === 0) {
-		return ConfigModel.parseAsync({})
-	}
-
 	try {
-		const raw = configs.reduce((p, c) => deepMerge(p, c), {}) as unknown as Config
+		// Find either config.yaml or config.yml
+		const configFile = (await Array.fromAsync(Deno.readDir(".")))
+			.find((x) => /^config(?:\.[^\.]+)?\.ya?ml$/.test(x.name))
+
+		const raw = (configFile ? await Deno.readTextFile(configFile.name).then((x) => YAML.parse(x)) : {}) as Config
 
 		// Override config using environment variables
 		raw.logging ??= {} as Logging

@@ -7,7 +7,7 @@ FROM gcr.io/distroless/cc as cc
 
 # Inherit from this image
 FROM scratch
-ARG TARGETPLATFORM
+ARG TARGETARCH
 
 # Copy root CAs into scratch image
 USER root
@@ -22,10 +22,10 @@ ENV LD_LIBRARY_PATH="/usr/local/lib"
 # Use an unprivileged user.
 USER 1001:1001
 
-# Copy your static executable.
-COPY $TARGETPLATFORM/SecretBin /app/
+# Copy static executable.
+ADD SecretBin_Linux_${TARGETARCH}.tar.gz /app/
 
-# Set your working directory.
+# Set working directory.
 WORKDIR /app
 
 # Run binary.

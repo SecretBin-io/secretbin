@@ -4,6 +4,8 @@ version: "3"
 
 vars:
   IMG_PATH: static/images
+  SOURCE_URL: https://github.com/secretbin-io/secretbin
+  IMG_REPO: ghcr.io/secretbin-io/secretbin
 
 tasks:
   icons:generate:
@@ -34,22 +36,53 @@ tasks:
   db:start:
     desc: Start the database using docker-compose
     dir: container
-    cmds:
-      - docker compose up -d postgres
+    cmd: container-compose up -d postgres
   db:stop:
     desc: Stop the database using docker-compose
     dir: container
     cmds:
-      - docker compose stop postgres
-  container:run:
+      - container-compose down postgres
+      - container rm secretbin-postgres
+  container:run:*:
     desc: Run the application using docker-compose
-    deps: [snapshot]
     dir: container
+    vars:
+      ARCH: "{{index .MATCH 0}}"
+      CONTAINER: "secretbin_{{.ARCH}}"
     cmds:
-      - docker compose up secretbin
-  container:run_x64:
-    desc: Run the application using docker-compose
-    deps: [snapshot]
+      - container build --arch {{.ARCH}} --file Dockerfile --tag {{.IMG_REPO}}:latest_{{.ARCH}} ../dist
+      - sh -c 'container-compose up {{.CONTAINER}} &'
+      - read
+      - pkill -f "container-compose up {{.CONTAINER}}"
+      - container-compose down {{.CONTAINER}}
+      - container rm {{.CONTAINER}}
+  container:release:
+    desc: Build and push container image to GitHub Registry
     dir: container
+    vars:
+      METADATA_JSON: { sh: cat ../dist/metadata.json }
+      METADATA: { ref: "fromJson .METADATA_JSON" }
+    preconditions:
+      - sh: '{{ not (contains "SNAPSHOT" .METADATA.version) }}'
+        msg: Cannot release snapshot build. Please run `task release` first
     cmds:
-      - docker compose up secretbin_amd64
+      - |
+        container build \
+          --arch amd64 \
+          --arch arm64 \
+          --file Dockerfile \
+          --tag {{.IMG_REPO}}:latest \
+          --label "org.opencontainers.image.name=secretbin" \
+          --label "org.opencontainers.image.title=SecretBin" \
+          --label "org.opencontainers.image.authors=Marvin Peter" \
+          --label "org.opencontainers.image.documentation={{.SOURCE_URL}}" \
+          --label "org.opencontainers.image.source={{.SOURCE_URL}}" \
+          --label "org.opencontainers.image.created={{.METADATA.date}}" \
+          --label "org.opencontainers.image.revision={{.METADATA.commit}}" \
+          --label "org.opencontainers.image.version={{.METADATA.version}}" \
+          --label "org.opencontainers.image.licenses=MIT" \
+          --label "org.opencontainers.image.description=SecretBin is a web app for sharing secrets like tokens and passwords." \
+          ../dist
+      - container image tag {{.IMG_REPO}}:latest {{.IMG_REPO}}:{{.METADATA.version}}
+      - container image push {{.IMG_REPO}}:latest
+      - container image push {{.IMG_REPO}}:{{.METADATA.version}}

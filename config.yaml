@@ -5,26 +5,26 @@ banner: # Banner shown at the top of the app. You may use this option for e.g. a
     en: This is a preview version. Do not use in production!
     de: Dies ist eine Vorabversion. Keine produktive Nutzung!
 branding:
-  appName: SecretBin # Changes the app in all places including but not limited to the title bar
+  appName: SecretBin2 # Changes the app in all places including but not limited to the title bar
   footer: SecretBin # Text shown in the footer on the left side e.g. the name of the service hoster
-  links: # Custom link shown in the footer on the right 
-  - name: # Localized display text
-      en: GitHub
-      de: GitHub
-    link:
-      en: https://github.com/secretbin-io/secretbin # URL
+  links: # Custom link shown in the footer on the right
+    - name: # Localized display text
+        en: GitHub
+        de: GitHub
+      link:
+        en: https://github.com/secretbin-io/secretbin # URL
   showLogo: true # If set the true, the app logo is shown before the app name in the navigation bar
   invertLogo: false # Invert the colors of the app logo in dark mode
   terms: # ToS Dialog show when the user first visits the app (if terms is not specified no dialog is shown)
     title:
       en: Terms of Service
       de: Nutzungsbedingungen
-    content: # Text that may contain HTML 
+    content: # Text that may contain HTML
       en:
         file: resources/terms_en.md
       de:
         file: resources/terms_de.md
-defaults: # Just customizable defaults 
+defaults: # Just customizable defaults
   expires: 2w # Default expire time when creating a new secret
   burn: true # Default burn selection
   showPassword: false # Show password box by default
