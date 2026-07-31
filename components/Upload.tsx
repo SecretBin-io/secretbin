@@ -1,6 +1,6 @@
 import { CloudArrowUpIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
-import { ComponentChild, TargetedDragEvent } from "preact"
+import { ComponentChild, TargetedDragEvent, TargetedInputEvent } from "preact"
 import { BaseProps } from "./base.ts"
 
 export interface UploadProps extends BaseProps {
@@ -14,7 +14,7 @@ export interface UploadProps extends BaseProps {
 	 * Function called when a file was added
 	 * @param f File that was added
 	 */
-	onFileAdded: (f: File) => void
+	onFileAdded: (f: File[]) => void
 }
 
 /**
@@ -23,19 +23,43 @@ export interface UploadProps extends BaseProps {
 export function Upload(
 	{ text = "Click to upload or drag and drop", multiple, onFileAdded, ...props }: UploadProps,
 ): ComponentChild {
-	const dropHandler = (ev: TargetedDragEvent<HTMLDivElement>) => {
-		ev.preventDefault()
+	const clickHandler = (ev: TargetedInputEvent<HTMLInputElement>) => {
+		const files: File[] = []
 
-		Array.from(ev.dataTransfer?.items ?? []).forEach((item) => {
-			if (item.kind === "file") {
-				const file = item.getAsFile()
-				if (file) {
-					onFileAdded(file)
-				}
-			}
+		Array.from(ev.currentTarget.files ?? []).forEach((item) => {
+			files.push(item)
 		})
 
-		Array.from(ev.dataTransfer?.files ?? []).forEach(onFileAdded)
+		if (files.length > 0) {
+			onFileAdded(files)
+		}
+	}
+
+	const dropHandler = async (ev: TargetedDragEvent<HTMLDivElement>) => {
+		ev.stopPropagation()
+		ev.preventDefault()
+
+		const files: File[] = []
+
+		if (ev.dataTransfer?.items) {
+			for await (const item of ev.dataTransfer.items) {
+				if (item.kind === "file" && (item.getAsEntry?.() ?? item.webkitGetAsEntry())?.isDirectory !== true) {
+					const file = item.getAsFile()
+					if (file) {
+						files.push(file)
+					}
+				}
+			}
+		} else {
+			// Fallback
+			for (const item of ev.dataTransfer?.files ?? []) {
+				files.push(item)
+			}
+		}
+
+		if (files.length > 0) {
+			onFileAdded(files)
+		}
 	}
 
 	return (
@@ -59,7 +83,7 @@ export function Upload(
 					type="file"
 					class="hidden"
 					multiple={multiple}
-					onInput={(x) => Array.from(x.currentTarget.files ?? []).forEach(onFileAdded)}
+					onInput={clickHandler}
 				/>
 			</label>
 		</div>

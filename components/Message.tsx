@@ -1,6 +1,5 @@
 import { ExclamationTriangleIcon, InformationCircleIcon, XCircleIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
-import { Show } from "components"
 import { ComponentChild, ComponentChildren } from "preact"
 import { BaseProps } from "./base.ts"
 
@@ -55,9 +54,11 @@ export function Message(
 		>
 			<MessageIcon type={type} />
 			<div>
-				<Show if={title}>
-					<h3 class="font-bold">{title}</h3>
-				</Show>
+				{title && (
+					<h3 class="font-bold">
+						{title}
+					</h3>
+				)}
 				<span class={clsx({ "text-base": largeText })}>{children ?? message}</span>
 			</div>
 		</div>

@@ -1,5 +1,5 @@
 import { Signal } from "@preact/signals"
-import { Input, NumberInput, Section, Select, Show, Toggle } from "components"
+import { Input, NumberInput, Section, Select, Toggle } from "components"
 import { TranslationKey } from "lang"
 import { ComponentChild } from "preact"
 import { useEffect, useState } from "preact/hooks"
@@ -94,29 +94,31 @@ export function Options({
 						: undefined}
 					signal={burn}
 				/>
-				<Show if={!state.config.policy.denySlowBurn && burn}>
-					<Toggle
-						label={$("Options.SlowBurn.Title")}
-						subLabel={$("Options.SlowBurn.Description")}
-						signal={slowBurn}
-					/>
+				{(!state.config.policy.denySlowBurn && burn) && (
+					<>
+						<Toggle
+							label={$("Options.SlowBurn.Title")}
+							subLabel={$("Options.SlowBurn.Description")}
+							signal={slowBurn}
+						/>
 
-					<Show if={slowBurn.value}>
-						<div class="mb-3 flex">
-							<div class="flex">
-								<div class="w-11" />
+						{slowBurn.value && (
+							<div class="mb-3 flex">
+								<div class="flex">
+									<div class="w-11" />
+								</div>
+								<div class="ms-2 text-sm">
+									<NumberInput min={2} max={10} signal={rereads} />
+								</div>
+								<div class="ms-2 text-sm">
+									<p class="text-gray-500 text-sm dark:text-gray-400">
+										{$("Options.SlowBurn.Status", { count: `${rereads}` })}
+									</p>
+								</div>
 							</div>
-							<div class="ms-2 text-sm">
-								<NumberInput min={2} max={10} signal={rereads} />
-							</div>
-							<div class="ms-2 text-sm">
-								<p class="text-gray-500 text-sm dark:text-gray-400">
-									{$("Options.SlowBurn.Status", { count: `${rereads}` })}
-								</p>
-							</div>
-						</div>
-					</Show>
-				</Show>
+						)}
+					</>
+				)}
 				<Toggle
 					label={$("Options.Password.Title")}
 					subLabel={$("Options.Password.Description")}
@@ -127,39 +129,41 @@ export function Options({
 					on={usePass}
 					onChange={setUsePass}
 				/>
-				<Show if={usePass}>
-					<div class="flex">
-						<div class="flex h-5">
-							<div class="w-11" />
-						</div>
-						<Input
-							class="ms-2"
-							password
-							value={pass1}
-							invalid={passInvalid}
-							placeholder={$("Options.Password.Placeholder")}
-							onChange={setPass1}
-						/>
-						<Input
-							class="ms-2 ml-2"
-							password
-							value={pass2}
-							invalid={passInvalid}
-							placeholder={$("Options.Password.RepeatPlaceholder")}
-							onChange={setPass2}
-						/>
-					</div>
-					<Show if={passInvalid}>
+				{usePass && (
+					<>
 						<div class="flex">
 							<div class="flex h-5">
 								<div class="w-11" />
 							</div>
-							<p class="mt-2 mb-2 ml-2 text-red-600 text-sm dark:text-red-500">
-								{$("Options.Password.Mismatch")}
-							</p>
+							<Input
+								class="ms-2"
+								password
+								value={pass1}
+								invalid={passInvalid}
+								placeholder={$("Options.Password.Placeholder")}
+								onChange={setPass1}
+							/>
+							<Input
+								class="ms-2 ml-2"
+								password
+								value={pass2}
+								invalid={passInvalid}
+								placeholder={$("Options.Password.RepeatPlaceholder")}
+								onChange={setPass2}
+							/>
 						</div>
-					</Show>
-				</Show>
+						{passInvalid && (
+							<div class="flex">
+								<div class="flex h-5">
+									<div class="w-11" />
+								</div>
+								<p class="mt-2 mb-2 ml-2 text-red-600 text-sm dark:text-red-500">
+									{$("Options.Password.Mismatch")}
+								</p>
+							</div>
+						)}
+					</>
+				)}
 			</Section>
 		</>
 	)

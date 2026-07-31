@@ -1,6 +1,6 @@
 import { clsx } from "@nick/clsx"
 import { Signal } from "@preact/signals"
-import { Show, Tooltip } from "components"
+import { Tooltip } from "components"
 import { ComponentChild } from "preact"
 import { BaseProps } from "./base.ts"
 
@@ -59,11 +59,11 @@ export function Toggle(
 						<label class="font-medium text-gray-900 dark:text-gray-300">
 							{label}
 						</label>
-						<Show if={subLabel}>
+						{subLabel && (
 							<p class="font-normal text-gray-500 text-xs dark:text-gray-400">
 								{subLabel}
 							</p>
-						</Show>
+						)}
 					</div>
 				</div>
 			</label>

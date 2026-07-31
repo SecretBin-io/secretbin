@@ -1,5 +1,5 @@
 import { clsx } from "@nick/clsx"
-import { Message, Show } from "components"
+import { Message } from "components"
 import { Partial } from "fresh/runtime"
 import { NavMenu, Terms } from "islands"
 import { define } from "utils"
@@ -16,12 +16,12 @@ export default define.layout(({ state, Component }) => {
 			<nav class="navbar fixed top-0 z-100 bg-base-200/75 backdrop-blur-sm">
 				<div class="flex-1 md:ms-6">
 					<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-						<Show if={state.config.branding.showLogo}>
+						{state.config.branding.showLogo && (
 							<img
 								class={clsx("h-8", { "dark:invert": state.config.branding.invertLogo })}
 								src={assetPath("/images/logo.png")}
 							/>
-						</Show>
+						)}
 						<span class="self-center whitespace-nowrap font-semibold text-2xl dark:text-white">
 							{state.config.branding.appName}
 						</span>
@@ -34,7 +34,7 @@ export default define.layout(({ state, Component }) => {
 
 			<main class="mx-auto my-20">
 				{/* Show banner e.g. for planned maintenance message if configured */}
-				<Show if={state.config.banner.enabled}>
+				{state.config.banner.enabled && (
 					<div class="mx-auto">
 						<div class="mx-auto flex max-w-screen-md flex-col items-center justify-center">
 							<div class="w-full p-4">
@@ -47,10 +47,10 @@ export default define.layout(({ state, Component }) => {
 							</div>
 						</div>
 					</div>
-				</Show>
+				)}
 
 				{/* Show warning if browser is not supported */}
-				<Show if={!state.supportedBrowser}>
+				{!state.supportedBrowser && (
 					<div class="mx-auto">
 						<div class="mx-auto flex max-w-screen-md flex-col items-center justify-center">
 							<div class="w-full p-4">
@@ -64,7 +64,7 @@ export default define.layout(({ state, Component }) => {
 							</div>
 						</div>
 					</div>
-				</Show>
+				)}
 
 				<Partial name="content">
 					<Component />

@@ -1,6 +1,6 @@
 import { clsx } from "@nick/clsx"
 import { decryptSecret, getSecret } from "client"
-import { Button, FileList, Input, Message, Section, Show, Spinner, TextArea } from "components"
+import { Button, FileList, Input, Message, Section, Spinner, TextArea } from "components"
 import { Secret } from "models"
 import { ComponentChild } from "preact"
 import { useEffect, useState } from "preact/hooks"
@@ -94,12 +94,14 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 		<>
 			<Spinner label={$("Decrypting")} hidden={!loading} />
 			<div class={clsx({ "hidden": loading })}>
-				<Show if={requireConfirm}>
-					<p>{$("ReadConfirm")}</p>
-					<br />
-					<Button class="float-right" label={$("Read")} onClick={() => setRequireConfirm(false)} />
-				</Show>
-				<Show if={!requireConfirm && requirePassword}>
+				{requireConfirm && (
+					<>
+						<p>{$("ReadConfirm")}</p>
+						<br />
+						<Button class="float-right" label={$("Read")} onClick={() => setRequireConfirm(false)} />
+					</>
+				)}
+				{(!requireConfirm && requirePassword) && (
 					<Section title={$("Password.Title")} description={$("Password.Description")}>
 						<Input
 							class="mb-2"
@@ -107,27 +109,35 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 							invalid={passwordInvalid}
 							value={password}
 							onChange={setPassword}
-							onSubmit={() => setRequirePassword(false)}
+							onSubmit={() =>
+								setRequirePassword(false)}
 						/>
-						<Button class="float-right" label={$("Decrypt")} onClick={() => setRequirePassword(false)} />
-						<Show if={passwordInvalid}>
+						<Button
+							class="float-right"
+							label={$("Decrypt")}
+							onClick={() =>
+								setRequirePassword(false)}
+						/>
+						{passwordInvalid && (
 							<p class="text-red-600 dark:text-red-500">
 								{$("DecryptionError")}
 							</p>
-						</Show>
+						)}
 					</Section>
-				</Show>
+				)}
 				<Message type="error" title="Error" message={error} />
-				<Show if={!!secretContent}>
-					<TextArea class="mb-2 resize-none" lines={15} readOnly value={secretContent?.[0]} />
-					<Show if={(secretContent?.[1] ?? []).length !== 0}>
-						<FileList
-							title={$("Files.Title")}
-							files={secretContent?.[1] ?? []}
-							downloadable
-						/>
-					</Show>
-				</Show>
+				{!!secretContent && (
+					<>
+						<TextArea class="mb-2 resize-none" lines={15} readOnly value={secretContent?.[0]} />
+						{((secretContent?.[1] ?? []).length !== 0) && (
+							<FileList
+								title={$("Files.Title")}
+								files={secretContent?.[1] ?? []}
+								downloadable
+							/>
+						)}
+					</>
+				)}
 			</div>
 		</>
 	)

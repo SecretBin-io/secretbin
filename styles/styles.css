@@ -3,7 +3,6 @@
 @plugin "daisyui" {
 	themes: light --default, dark --prefersdark;
 	root: ":root";
-  	exclude: rootcolor;
 	logs: false;
 }
 @import "./themes/light.css";

@@ -8,13 +8,13 @@ import {
 	TrashIcon,
 } from "@heroicons/react/24/outline"
 import { qrcode } from "@libs/qrcode"
-import { Button, Input, Modal, Section, Show, TextArea } from "components"
+import { Button, Input, Modal, Section, TextArea } from "components"
+import { ComponentChild } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
 import { downloadDataURL, imageDataURL } from "utils/helpers"
 import { useTranslation } from "utils/hooks"
 import { State } from "utils/state"
 import { MessagePreview, setMessagePreview } from "./preview.ts"
-import { ComponentChild } from "preact"
 
 export interface ShareSecretProps {
 	state: State
@@ -121,11 +121,11 @@ export function ShareSecret({ id, state }: ShareSecretProps): ComponentChild {
 					<img class="border-10" ref={imgRef} width="256" src={qrCode} />
 				</div>
 			</Modal>
-			<Show if={preview !== ""}>
+			{preview !== "" && (
 				<Section title={$("Preview.Title")} description={$("Preview.Description")}>
 					<TextArea readOnly lines={10} value={preview} />
 				</Section>
-			</Show>
+			)}
 		</>
 	)
 }

@@ -1,4 +1,4 @@
-import { Button, Message, PageContent, Show } from "components"
+import { Button, Message, PageContent } from "components"
 import { HttpError } from "fresh"
 import { define } from "utils"
 import { LocalizedError } from "utils/errors"
@@ -39,9 +39,11 @@ export default define.page(({ state, error }) => {
 		<PageContent title={title}>
 			<Message class="my-2" type="error" largeText>
 				<h3 class="font-bold">{message}</h3>
-				<Show if={reason}>
-					<div class="text-s">{$("Reason", { reason })}</div>
-				</Show>
+				{reason && (
+					<div class="text-s">
+						{$("Reason", { reason })}
+					</div>
+				)}
 			</Message>
 			<Button label={$("GoHome")} link="/" />
 		</PageContent>

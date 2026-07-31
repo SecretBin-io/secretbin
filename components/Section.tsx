@@ -1,5 +1,4 @@
 import { clsx } from "@nick/clsx"
-import { Show } from "components"
 import { ComponentChild, ComponentChildren } from "preact"
 import { BaseProps } from "./base.ts"
 
@@ -22,11 +21,11 @@ export function Section({ title, description, children, ...props }: SectionProps
 			<label class="font-medium text-gray-900 dark:text-gray-300">
 				{title}
 			</label>
-			<Show if={description}>
+			{description && (
 				<p class="font-normal text-gray-500 text-xs dark:text-gray-400">
 					{description}
 				</p>
-			</Show>
+			)}
 			<div class="py-2">
 				{children}
 			</div>

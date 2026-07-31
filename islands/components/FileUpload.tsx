@@ -26,7 +26,7 @@ export function FilesUpload({ state, files, setFiles }: FileUploadProps): Compon
 			<Upload
 				multiple
 				text={$("Files.DragAndDrop")}
-				onFileAdded={(x) => setFiles([...files, x])}
+				onFileAdded={(x) => setFiles([...files, ...x])}
 			/>
 			<FileList
 				title={$("Files.Title")}

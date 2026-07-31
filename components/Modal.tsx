@@ -1,6 +1,6 @@
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
-import { Button, ButtonProps, Show } from "components"
+import { Button, ButtonProps } from "components"
 import { ComponentChild, ComponentChildren } from "preact"
 import { MutableRef } from "preact/hooks"
 import { BaseProps } from "./base.ts"
@@ -49,13 +49,13 @@ export function Modal(
 						<label class="font-medium text-gray-900 dark:text-gray-300">
 							{title}
 						</label>
-						<Show if={description}>
+						{description && (
 							<p class="font-normal text-gray-500 text-xs dark:text-gray-400">
 								{description}
 							</p>
-						</Show>
+						)}
 					</h3>
-					<Show if={closable}>
+					{closable && (
 						<Button
 							icon={XMarkIcon}
 							theme="dock"
@@ -65,7 +65,7 @@ export function Modal(
 								onClose?.()
 							}}
 						/>
-					</Show>
+					)}
 				</div>
 				{children}
 				<div

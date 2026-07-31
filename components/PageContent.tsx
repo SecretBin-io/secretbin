@@ -1,5 +1,4 @@
 import { clsx } from "@nick/clsx"
-import { Show } from "components"
 import { ComponentChild, ComponentChildren } from "preact"
 import { BaseProps } from "./base.ts"
 
@@ -23,11 +22,11 @@ export function PageContent({ title, description, children, ...props }: PageCont
 				<h5 class="mb-2 font-bold text-3xl">
 					{title}
 				</h5>
-				<Show if={description}>
+				{description && (
 					<p class="mb-5 text-base">
 						{description}
 					</p>
-				</Show>
+				)}
 				{children}
 			</div>
 		</div>

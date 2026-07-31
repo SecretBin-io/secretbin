@@ -53,12 +53,14 @@ export function FileList({ title, files, downloadable, onDelete, ...props }: Fil
 							<div>{file.name}</div>
 							<div class="font-semibold text-xs uppercase opacity-60">{humanReadableSize(file.size)}</div>
 						</div>
-						<Button
-							class="btn-error btn-square size-[1.2em] cursor-pointer"
-							theme="dock"
-							icon={TrashIcon}
-							onClick={onDelete ? () => onDelete(file) : undefined}
-						/>
+						{onDelete && (
+							<Button
+								class="btn-error btn-square size-[1.2em] cursor-pointer"
+								theme="dock"
+								icon={TrashIcon}
+								onClick={onDelete ? () => onDelete(file) : undefined}
+							/>
+						)}
 					</li>
 				))}
 			</ul>
