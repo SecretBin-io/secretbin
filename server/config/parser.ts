@@ -25,9 +25,18 @@ const Size = z.stringFormat("size", /^(\d+)(Ki|Mi|Gi|K|M|G)$/, {
 	error: "Invalid size. Expected: positive integer or string with format <num>(Ki|Mi|Gi|K|M|G) e.g 10Gi",
 })
 
+/**
+ * Automatically converts strings and numbers into booleans
+ */
+const BooleanLike = z.union([
+	z.boolean(),
+	z.number().transform((x) => x === 1),
+	z.string().transform((x) => x.toLowerCase() === "true" || x.toLowerCase() === "yes" || x === "1"),
+])
+
 export const ConfigModel: ZodType<Config> = z.strictObject({
 	banner: z.strictObject({
-		enabled: z.boolean().default(false),
+		enabled: BooleanLike.default(false),
 		type: z.enum(["info", "warning", "error"]).default("info"),
 		text: TranslatedString.default({ en: "Hello World!" }),
 	}).prefault({}),
@@ -45,38 +54,47 @@ export const ConfigModel: ZodType<Config> = z.strictObject({
 			name: { en: "GitHub" },
 			link: { en: "https://github.com/secretbin-io/secretbin" },
 		}]),
-		showLogo: z.boolean().default(true),
-		invertLogo: z.boolean().default(false),
-		showTerms: z.boolean().default(true),
+		showLogo: BooleanLike.default(true),
+		invertLogo: BooleanLike.default(false),
+		showTerms: BooleanLike.default(true),
 	}).prefault({}),
 	defaults: z.strictObject({
 		expires: Duration.default("2w"),
-		burn: z.boolean().default(true),
+		burn: BooleanLike.default(true),
 		showPassword: z.boolean().default(false),
 	}).prefault({}),
-	expires: Duration.array().transform((keys) =>
-		keys.reduce((res, name) => ({ ...res, [name]: parseDuration(name) }), {})
-	).prefault(["5min", "1hr", "1d", "1w", "2w", "1m"]),
+	expires: z.union([
+		Duration.array()
+			.transform((keys) => keys.reduce((res, name) => ({ ...res, [name]: parseDuration(name) }), {})),
+		z.record(
+			z.string(),
+			z.strictObject({
+				count: z.number(),
+				unit: z.enum(["Minute", "Hour", "Day", "Week", "Month", "Year"]),
+				seconds: z.number(),
+			}),
+		),
+	]).prefault(["5min", "1hr", "1d", "1w", "2w", "1m"]),
 	logging: z.strictObject({
 		level: z.enum(["debug", "info", "warning", "error", "fatal"]).default("info"),
 		mode: z.enum(["text", "json"]).default("text"),
-		logAccess: z.boolean().default(false),
+		logAccess: BooleanLike.default(false),
 	}).prefault({}),
 	policy: z.strictObject({
-		requireBurn: z.boolean().default(false),
-		requirePassword: z.boolean().default(false),
-		denySlowBurn: z.boolean().default(false),
+		requireBurn: BooleanLike.default(false),
+		requirePassword: BooleanLike.default(false),
+		denySlowBurn: BooleanLike.default(false),
 		encryptionAlgorithm: z.enum(EncryptionAlgorithm).default(EncryptionAlgorithm.AES256GCM),
-		recordEvents: z.boolean().default(true),
+		recordEvents: BooleanLike.default(true),
 	}).prefault({}),
 	storage: z.strictObject({
-		maxSize: Size.transform(sizeToBytes).or(z.uint32()).default(sizeToBytes("10Mi")),
+		maxSize: Size.transform(sizeToBytes).default(sizeToBytes("10Mi")).or(z.coerce.number()),
 		garbageCollection: z.strictObject({
 			cron: z.string().default("* * * * *"),
 		}).prefault({}),
 		database: z.strictObject({
 			host: z.string().default(""),
-			port: z.number().default(5432),
+			port: z.coerce.number().default(5432),
 			database: z.string().default(""),
 			username: z.string().default(""),
 			password: z.string().default(""),

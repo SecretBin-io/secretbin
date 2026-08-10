@@ -158,13 +158,19 @@ storage:
   maxSize: 10Mi # Max size a new secret is allowed to have
   gcInterval: 5 # Interval in seconds in which the garbage collector should run
   database: # Configure PostgreSQL
-    host: 127.0.0.1 # [Overridable using SB_DATABASE_HOST]
-    port: 5432 # [Overridable using SB_DATABASE_PORT]
-    database: secretbin # [Overridable using SB_DATABASE_DATABASE]
-    username: secretbin # [Overridable using SB_DATABASE_USERNAME]
-    password: abc123 # [Overridable using SB_DATABASE_PASSWORD]
-    tls: prefer # [Overridable using SB_DATABASE_TLS]
+    host: 127.0.0.1 
+    port: 5432 
+    database: secretbin
+    username: secretbin 
+    password: abc123 
+    tls: prefer
 ```
+
+All settings can be overridden using environment variables which are prefixed by SB_ followed by the path in the config in upper case and separated by underscores.
+
+Examples:
+- SB_STORAGE_DATABASE_PASSWORD
+- SB_BRANDING_LINKS_0_NAME_DE
 
 ### Override Logos
 You can also run SecretBin with our own logos if you want. In order to achieve this, create the following files:
