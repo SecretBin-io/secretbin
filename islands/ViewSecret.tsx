@@ -1,3 +1,4 @@
+import { TrashIcon } from "@heroicons/react/24/outline"
 import { clsx } from "@nick/clsx"
 import { decryptSecret, getSecret } from "client"
 import { Button, FileList, Input, Message, Section, Spinner, TextArea } from "components"
@@ -37,6 +38,7 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 	const [secret, setSecret] = useState<Secret | undefined>(undefined)
 	const [secretContent, setSecretContent] = useState<[string, File[]] | undefined>(undefined)
 	const [loading, setLoading] = useState(false)
+	const [showDelete, setShowDelete] = useState(false)
 
 	const $ = useTranslation(state.language, "ViewSecret")
 
@@ -77,6 +79,7 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 			const data = await decryptSecret(sec, password.trim())
 			setLoading(false)
 			setSecretContent(data)
+			setShowDelete(sec.remainingReads === 1)
 			return
 		} catch (err) {
 			// If decrypting using the password failed,
@@ -129,6 +132,14 @@ export function ViewSecret({ id, state, remainingReads, passwordProtected }: Vie
 				{!!secretContent && (
 					<>
 						<TextArea class="mb-2 resize-none" lines={15} readOnly value={secretContent?.[0]} />
+						{!showDelete && (
+							<Button
+								class="float-right"
+								label={$("Delete")}
+								icon={TrashIcon}
+								link={`/secret/${id}/delete`}
+							/>
+						)}
 						{((secretContent?.[1] ?? []).length !== 0) && (
 							<FileList
 								title={$("Files.Title")}

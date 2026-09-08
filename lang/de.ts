@@ -135,6 +135,7 @@ export default {
 			DecryptionError:
 				"Das Geheimnis konnte nicht entschlüsselt werden. Dies kann z.B. an einem falschen Passwort liegen. Bitte versuche es erneut.\n",
 			Decrypting: "Geheimnis wird entschlüsselt",
+			Delete: "Geheimnis löschen",
 		},
 		DeleteSecret: {
 			Title: "Geheimnis löschen",
